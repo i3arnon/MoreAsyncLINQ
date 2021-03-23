@@ -37,7 +37,7 @@ namespace MoreAsyncLinq
                 Func<int, int, Exception> errorSelector,
                 [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                var collectionCount = await source.TryGetCollectionCountAsync().ConfigureAwait(false);
+                var collectionCount = await source.TryGetCollectionCountAsync(cancellationToken).ConfigureAwait(false);
                 if (collectionCount is null)
                 {
                     var currentCount = 0;
@@ -88,7 +88,7 @@ namespace MoreAsyncLinq
                 Func<int, int, ValueTask<Exception>> errorSelector,
                 [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                var collectionCount = await source.TryGetCollectionCountAsync().ConfigureAwait(false);
+                var collectionCount = await source.TryGetCollectionCountAsync(cancellationToken).ConfigureAwait(false);
                 if (collectionCount is null)
                 {
                     var currentCount = 0;

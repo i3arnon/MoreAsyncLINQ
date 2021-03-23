@@ -19,7 +19,7 @@ namespace MoreAsyncLinq
                 IAsyncEnumerable<TSource> source,
                 CancellationToken cancellationToken)
             {
-                var collectionCount = await source.TryGetCollectionCountAsync().ConfigureAwait(false);
+                var collectionCount = await source.TryGetCollectionCountAsync(cancellationToken).ConfigureAwait(false);
                 var elements = new List<TSource>(collectionCount ?? 0);
 
                 try

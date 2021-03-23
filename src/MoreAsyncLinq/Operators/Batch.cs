@@ -28,7 +28,7 @@ namespace MoreAsyncLinq
                 Func<TSource[], TResult> resultSelector,
                 [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                var count = await source.TryGetCollectionCountAsync().ConfigureAwait(false);
+                var count = await source.TryGetCollectionCountAsync(cancellationToken).ConfigureAwait(false);
                 switch (count)
                 {
                     case 0:
@@ -83,7 +83,7 @@ namespace MoreAsyncLinq
                 Func<TSource[], ValueTask<TResult>> resultSelector,
                 [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                var count = await source.TryGetCollectionCountAsync().ConfigureAwait(false);
+                var count = await source.TryGetCollectionCountAsync(cancellationToken).ConfigureAwait(false);
                 switch (count)
                 {
                     case 0:

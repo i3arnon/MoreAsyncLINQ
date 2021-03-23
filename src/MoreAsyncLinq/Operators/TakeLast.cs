@@ -25,7 +25,7 @@ namespace MoreAsyncLinq
                 int count,
                 [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                var collectionCount = await source.TryGetCollectionCountAsync().ConfigureAwait(false);
+                var collectionCount = await source.TryGetCollectionCountAsync(cancellationToken).ConfigureAwait(false);
                 var result =
                     collectionCount is null
                         ? source.

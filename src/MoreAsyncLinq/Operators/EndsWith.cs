@@ -36,7 +36,7 @@ namespace MoreAsyncLinq
                 IEqualityComparer<TSource>? comparer,
                 CancellationToken cancellationToken)
             {
-                var secondCollectionCount = await second.TryGetCollectionCountAsync().ConfigureAwait(false);
+                var secondCollectionCount = await second.TryGetCollectionCountAsync(cancellationToken).ConfigureAwait(false);
                 if (secondCollectionCount is null)
                 {
                     var secondList = await second.ToListAsync(cancellationToken).ConfigureAwait(false);
@@ -44,7 +44,7 @@ namespace MoreAsyncLinq
                     second = secondList.ToAsyncEnumerable();
                 }
 
-                var firstCollectionCount = await first.TryGetCollectionCountAsync().ConfigureAwait(false);
+                var firstCollectionCount = await first.TryGetCollectionCountAsync(cancellationToken).ConfigureAwait(false);
                 if (firstCollectionCount is not null &&
                     firstCollectionCount < secondCollectionCount.Value)
                 {
