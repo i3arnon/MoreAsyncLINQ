@@ -43,6 +43,7 @@ namespace MoreAsyncLinq
                     await foreach (var element in source.WithCancellation(cancellationToken).ConfigureAwait(false))
                     {
                         yield return resultSelector(element, collectionCount <= count ? collectionCount : null);
+
                         collectionCount--;
                     }
                 }
@@ -91,6 +92,7 @@ namespace MoreAsyncLinq
                     await foreach (var element in source.WithCancellation(cancellationToken).ConfigureAwait(false))
                     {
                         yield return await resultSelector(element, collectionCount <= count ? collectionCount : null).ConfigureAwait(false);
+
                         collectionCount--;
                     }
                 }

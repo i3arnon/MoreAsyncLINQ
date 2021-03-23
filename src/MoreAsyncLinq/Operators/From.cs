@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace MoreAsyncLinq
@@ -15,9 +13,7 @@ namespace MoreAsyncLinq
 
             return Core(function);
 
-            static async IAsyncEnumerable<TResult> Core(
-                Func<ValueTask<TResult>> function,
-                [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            static async IAsyncEnumerable<TResult> Core(Func<ValueTask<TResult>> function)
             {
                 yield return await function().ConfigureAwait(false);
             }
@@ -34,12 +30,9 @@ namespace MoreAsyncLinq
 
             static async IAsyncEnumerable<TResult> Core(
                 Func<ValueTask<TResult>> function1,
-                Func<ValueTask<TResult>> function2,
-                [EnumeratorCancellation] CancellationToken cancellationToken = default)
+                Func<ValueTask<TResult>> function2)
             {
                 yield return await function1().ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
-                
                 yield return await function2().ConfigureAwait(false);
             }
         }
@@ -58,15 +51,10 @@ namespace MoreAsyncLinq
             static async IAsyncEnumerable<TResult> Core(
                 Func<ValueTask<TResult>> function1,
                 Func<ValueTask<TResult>> function2,
-                Func<ValueTask<TResult>> function3,
-                [EnumeratorCancellation] CancellationToken cancellationToken = default)
+                Func<ValueTask<TResult>> function3)
             {
                 yield return await function1().ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
-                
                 yield return await function2().ConfigureAwait(false);
-                cancellationToken.ThrowIfCancellationRequested();
-                
                 yield return await function3().ConfigureAwait(false);
             }
         }

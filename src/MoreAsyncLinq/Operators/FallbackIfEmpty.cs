@@ -157,21 +157,25 @@ namespace MoreAsyncLinq
                     {
                         case 1:
                             yield return fallback1;
+
                             break;
                         case 2:
                             yield return fallback1;
                             yield return fallback2;
+
                             break;
                         case 3:
                             yield return fallback1;
                             yield return fallback2;
                             yield return fallback3;
+
                             break;
                         case 4:
                             yield return fallback1;
                             yield return fallback2;
                             yield return fallback3;
                             yield return fallback4;
+
                             break;
                         default:
                             Debug.Fail(count.ToString());

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace MoreAsyncLinq
@@ -18,15 +16,14 @@ namespace MoreAsyncLinq
 
             static async IAsyncEnumerable<TResult> Core(
                 TResult initial,
-                Func<TResult, ValueTask<TResult>> generator,
-                [EnumeratorCancellation] CancellationToken cancellationToken = default)
+                Func<TResult, ValueTask<TResult>> generator)
             {
                 var current = initial;
                 while (true)
                 {
                     yield return current;
+
                     current = await generator(current).ConfigureAwait(false);
-                    cancellationToken.ThrowIfCancellationRequested();
                 }
             }
         }
