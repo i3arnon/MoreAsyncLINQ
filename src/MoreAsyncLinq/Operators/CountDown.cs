@@ -9,6 +9,15 @@ namespace MoreAsyncLinq
 {
     static partial class MoreAsyncEnumerable
     {
+        public static IAsyncEnumerable<(int? Countdown, TSource Element)> CountDown<TSource>(
+            this IAsyncEnumerable<TSource> source,
+            int count)
+        {
+            if (source is null) throw new ArgumentNullException(nameof(source));
+
+            return source.CountDown(count, static(element, count) => (count, element));
+        }
+
         public static IAsyncEnumerable<TResult> CountDown<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             int count,
