@@ -1,8 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Authors>i3arnon</Authors>
+    <Authors>Bar Arnon</Authors>
+    <ContinuousIntegrationBuild>True</ContinuousIntegrationBuild>
+    <Description>Additional async LINQ to objects operators for IAsyncEnumerable&lt;T&gt;</Description>
+    <Deterministic>true</Deterministic>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeSource>true</IncludeSource>
+    <IncludeSymbols>true</IncludeSymbols>
+    <PackageId>MoreAsyncLinq</PackageId>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <PackageTags>linq;async</PackageTags>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <TargetFrameworks>net461;netcoreapp3.1;netstandard2.0;netstandard2.1</TargetFrameworks>
     <Version>0.1.0</Version>
   </PropertyGroup>
@@ -12,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
     <PackageReference Include="System.Linq.Async" Version="5.0.0" />
   </ItemGroup>
 
