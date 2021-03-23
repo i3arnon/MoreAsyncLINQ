@@ -1,7 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <Authors>i3arnon</Authors>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <Version>0.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
