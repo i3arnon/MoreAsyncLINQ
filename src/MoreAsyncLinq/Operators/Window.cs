@@ -8,7 +8,7 @@ namespace MoreAsyncLinq
 {
     static partial class MoreAsyncEnumerable
     {
-        public static IAsyncEnumerable<TSource[]> Window<TSource>(
+        public static IAsyncEnumerable<IList<TSource>> Window<TSource>(
             this IAsyncEnumerable<TSource> source,
             int size)
         {
