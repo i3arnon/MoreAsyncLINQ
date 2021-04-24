@@ -16,13 +16,13 @@ namespace MoreAsyncLinq
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
 
-            return source.FallbackIfEmpty(
+            return source.FallbackIfEmpty<TSource>(
                 count: 1,
                 fallback,
                 default!,
                 default!,
                 default!,
-                fallback: null)!;
+                fallback: null);
         }
 
         public static IAsyncEnumerable<TSource> FallbackIfEmpty<TSource>(
@@ -32,13 +32,13 @@ namespace MoreAsyncLinq
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
 
-            return source.FallbackIfEmpty(
+            return source.FallbackIfEmpty<TSource>(
                 count: 2,
                 fallback1,
                 fallback2,
                 default!,
                 default!,
-                fallback: null)!;
+                fallback: null);
         }
 
         public static IAsyncEnumerable<TSource> FallbackIfEmpty<TSource>(
@@ -49,13 +49,13 @@ namespace MoreAsyncLinq
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
 
-            return source.FallbackIfEmpty(
+            return source.FallbackIfEmpty<TSource>(
                 count: 3,
                 fallback1,
                 fallback2,
                 fallback3,
                 default!,
-                fallback: null)!;
+                fallback: null);
         }
 
         public static IAsyncEnumerable<TSource> FallbackIfEmpty<TSource>(
@@ -93,13 +93,13 @@ namespace MoreAsyncLinq
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (fallback is null) throw new ArgumentNullException(nameof(fallback));
 
-            return source.FallbackIfEmpty(
+            return source.FallbackIfEmpty<TSource>(
                 count: null,
                 default!,
                 default!,
                 default!,
                 default!,
-                fallback)!;
+                fallback);
         }
 
         private static async IAsyncEnumerable<TSource> FallbackIfEmpty<TSource>(
