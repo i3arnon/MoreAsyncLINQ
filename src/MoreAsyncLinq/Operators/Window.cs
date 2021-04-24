@@ -22,7 +22,7 @@ namespace MoreAsyncLinq
                 int size,
                 [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                var enumerator = source.WithCancellation(cancellationToken).ConfigureAwait(false).GetAsyncEnumerator();
+                await using var enumerator = source.WithCancellation(cancellationToken).ConfigureAwait(false).GetAsyncEnumerator();
 
                 var window = new TSource[size];
                 int index;

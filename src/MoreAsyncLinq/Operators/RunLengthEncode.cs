@@ -28,7 +28,7 @@ namespace MoreAsyncLinq
                 IEqualityComparer<TSource> comparer,
                 [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                var enumerator = source.WithCancellation(cancellationToken).ConfigureAwait(false).GetAsyncEnumerator();
+                await using var enumerator = source.WithCancellation(cancellationToken).ConfigureAwait(false).GetAsyncEnumerator();
 
                 if (!await enumerator.MoveNextAsync())
                 {
