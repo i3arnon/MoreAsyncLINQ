@@ -21,7 +21,7 @@ namespace MoreAsyncLinq
                 CancellationToken cancellationToken)
             {
                 var count = await asyncIListProvider.GetCountAsync(onlyIfCheap: true, cancellationToken).ConfigureAwait(false);
-                return count == -1 ? (int?) null : count;
+                return count == -1 ? null : count;
             }
         }
     }
