@@ -8,7 +8,7 @@ namespace MoreAsyncLinq
 {
     static partial class MoreAsyncEnumerable
     {
-        internal static async IAsyncEnumerable<TResult> Zip<T1, T2, T3, T4, TResult>(
+        private static async IAsyncEnumerable<TResult> Zip<T1, T2, T3, T4, TResult>(
             this IAsyncEnumerable<T1> first,
             IAsyncEnumerable<T2> second,
             IAsyncEnumerable<T3>? third,
@@ -139,7 +139,7 @@ namespace MoreAsyncLinq
             }
         }
 
-        internal static async IAsyncEnumerable<TResult> ZipAwait<T1, T2, T3, T4, TResult>(
+        private static async IAsyncEnumerable<TResult> ZipAwait<T1, T2, T3, T4, TResult>(
             this IAsyncEnumerable<T1> first,
             IAsyncEnumerable<T2> second,
             IAsyncEnumerable<T3>? third,
