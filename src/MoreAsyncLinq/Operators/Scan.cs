@@ -22,7 +22,7 @@ namespace MoreAsyncLinq
                 Func<TSource, TSource, TSource> transformation,
                 [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                var enumerator = source.WithCancellation(cancellationToken).ConfigureAwait(false).GetAsyncEnumerator();
+                await using var enumerator = source.WithCancellation(cancellationToken).ConfigureAwait(false).GetAsyncEnumerator();
 
                 if (!await enumerator.MoveNextAsync())
                 {
@@ -80,7 +80,7 @@ namespace MoreAsyncLinq
                 Func<TSource, TSource, ValueTask<TSource>> transformation,
                 [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                var enumerator = source.WithCancellation(cancellationToken).ConfigureAwait(false).GetAsyncEnumerator();
+                await using var enumerator = source.WithCancellation(cancellationToken).ConfigureAwait(false).GetAsyncEnumerator();
 
                 if (!await enumerator.MoveNextAsync())
                 {
