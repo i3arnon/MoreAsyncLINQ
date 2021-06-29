@@ -8,12 +8,12 @@ namespace MoreAsyncLinq
 {
     static partial class MoreAsyncEnumerable
     {
-        public static IAsyncEnumerable<TSource> AssertAsync<TSource>(
+        public static IAsyncEnumerable<TSource> Assert<TSource>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, bool> predicate) =>
-            source.AssertAsync(predicate, errorSelector: null);
+            source.Assert(predicate, errorSelector: null);
 
-        public static IAsyncEnumerable<TSource> AssertAsync<TSource>(
+        public static IAsyncEnumerable<TSource> Assert<TSource>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, bool> predicate,
             Func<TSource, Exception>? errorSelector)
@@ -41,12 +41,12 @@ namespace MoreAsyncLinq
             }
         }
 
-        public static IAsyncEnumerable<TSource> AssertAwaitAsync<TSource>(
+        public static IAsyncEnumerable<TSource> AssertAwait<TSource>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, ValueTask<bool>> predicate) =>
-            source.AssertAwaitAsync(predicate, errorSelector: null);
+            source.AssertAwait(predicate, errorSelector: null);
 
-        public static IAsyncEnumerable<TSource> AssertAwaitAsync<TSource>(
+        public static IAsyncEnumerable<TSource> AssertAwait<TSource>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, ValueTask<bool>> predicate,
             Func<TSource, ValueTask<Exception>>? errorSelector)
