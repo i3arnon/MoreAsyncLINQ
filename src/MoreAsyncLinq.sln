@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoreAsyncLinq", "MoreAsyncLinq\MoreAsyncLinq.csproj", "{E6419347-B6BB-431D-B18B-EC1BB471D75C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoreAsyncLinq", "MoreAsyncLinq\MoreAsyncLinq.csproj", "{E6419347-B6BB-431D-B18B-EC1BB471D75C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
