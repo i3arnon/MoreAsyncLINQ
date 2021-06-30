@@ -56,6 +56,10 @@
 
 ### Interleave
 
+### MaxBy
+
+### MinBy
+
 ### OrderBy
 
 ### OrderedMerge
