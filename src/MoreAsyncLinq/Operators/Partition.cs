@@ -242,7 +242,7 @@ namespace MoreAsyncLinq
 
             return source.PartitionAwaitAsync(
                 predicate,
-                static (grouping1, grouping2) => new ValueTask<(IAsyncEnumerable<TSource> True, IAsyncEnumerable<TSource> False)>((grouping1, grouping2)),
+                static (grouping1, grouping2) => ValueTasks.FromResult((grouping1, grouping2)),
                 cancellationToken);
         }
 

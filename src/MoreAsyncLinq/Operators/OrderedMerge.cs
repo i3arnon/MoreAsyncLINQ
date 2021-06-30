@@ -248,9 +248,9 @@ namespace MoreAsyncLinq
                 second,
                 keySelector,
                 keySelector,
-                element => new ValueTask<TSource>(element),
-                element => new ValueTask<TSource>(element),
-                (firstElement, _) => new ValueTask<TSource>(firstElement),
+                ValueTasks.FromResult,
+                ValueTasks.FromResult,
+                (firstElement, _) => ValueTasks.FromResult(firstElement),
                 comparer: null);
         }
 

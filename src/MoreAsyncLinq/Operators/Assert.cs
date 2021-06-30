@@ -57,7 +57,7 @@ namespace MoreAsyncLinq
             return Core(
                 source,
                 predicate,
-                errorSelector ?? (static _ => new ValueTask<Exception>(new InvalidOperationException("Sequence contains an invalid item."))));
+                errorSelector ?? (static _ => ValueTasks.FromResult<Exception>(new InvalidOperationException("Sequence contains an invalid item."))));
 
             static async IAsyncEnumerable<TSource> Core(
                 IAsyncEnumerable<TSource> source,

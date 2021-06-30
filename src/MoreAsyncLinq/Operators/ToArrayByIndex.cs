@@ -171,7 +171,7 @@ namespace MoreAsyncLinq
 
             return source.ToArrayByIndexAwaitAsync(
                 indexSelector,
-                static (element, _) => new ValueTask<TSource>(element),
+                static (element, _) => ValueTasks.FromResult(element),
                 cancellationToken);
         }
 
@@ -234,7 +234,7 @@ namespace MoreAsyncLinq
                     ToAsyncEnumerable().
                     ToArrayByIndexAwaitAsync(
                         maxIndex + 1,
-                        tuple => new ValueTask<int>(tuple.index),
+                        tuple => ValueTasks.FromResult(tuple.index),
                         tuple => resultSelector(tuple.element, tuple.index),
                         cancellationToken).
                     ConfigureAwait(false);
@@ -254,7 +254,7 @@ namespace MoreAsyncLinq
             return source.ToArrayByIndexAwaitAsync(
                 length,
                 indexSelector,
-                static (element, _) => new ValueTask<TSource>(element),
+                static (element, _) => ValueTasks.FromResult(element),
                 cancellationToken);
         }
 

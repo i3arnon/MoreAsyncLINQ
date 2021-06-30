@@ -55,8 +55,8 @@ namespace MoreAsyncLinq
             return source.
                 ScanByAwait<TSource, TKey, (int index, TSource element)>(
                     keySelector,
-                    _ => ValueTask.FromResult((-1, default(TSource)!)),
-                    (state, _, element) => ValueTask.FromResult((state.index + 1, element)),
+                    _ => ValueTasks.FromResult((-1, default(TSource)!)),
+                    (state, _, element) => ValueTasks.FromResult((state.index + 1, element)),
                     comparer).
                 Select(tuple => (tuple.State.index, tuple.State.element));
         }

@@ -14,7 +14,7 @@ namespace MoreAsyncLinq
         {
             return source is IAsyncIListProvider<TSource> asyncIListProvider
                 ? Core(asyncIListProvider, cancellationToken)
-                : new ValueTask<int?>((int?) null);
+                : ValueTasks.FromResult((int?) null);
 
             static async ValueTask<int?> Core(
                 IAsyncIListProvider<TSource> asyncIListProvider,

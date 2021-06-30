@@ -56,7 +56,7 @@ namespace MoreAsyncLinq
                 var stateMap = new NullableKeyDictionary<TKey, TState>(comparer);
 
                 (TKey, TState)? previous = null;
-                await foreach (var element in source.WithCancellation(cancellationToken))
+                await foreach (var element in source.WithCancellation(cancellationToken).ConfigureAwait(false))
                 {
                     var key = keySelector(element);
 
@@ -133,7 +133,7 @@ namespace MoreAsyncLinq
                 var stateMap = new NullableKeyDictionary<TKey, TState>(comparer);
 
                 (TKey, TState)? previous = null;
-                await foreach (var element in source.WithCancellation(cancellationToken))
+                await foreach (var element in source.WithCancellation(cancellationToken).ConfigureAwait(false))
                 {
                     var key = await keySelector(element).ConfigureAwait(false);
 
