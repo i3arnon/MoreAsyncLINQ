@@ -52,6 +52,8 @@
 
 ### Index
 
+### IndexBy
+
 ### Insert
 
 ### Interleave
