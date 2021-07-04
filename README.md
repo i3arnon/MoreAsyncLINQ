@@ -28,6 +28,8 @@
 
 ### CountBetween
 
+### CountBy
+
 ### CountDown
 
 ### DistinctBy
