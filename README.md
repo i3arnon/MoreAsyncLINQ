@@ -82,6 +82,8 @@
 
 ### Rank
 
+### Repeat
+
 ### RunLengthEncode
 
 ### Scan
