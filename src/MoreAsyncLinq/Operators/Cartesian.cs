@@ -27,8 +27,7 @@ namespace MoreAsyncLinq
             {
                 var secondMemo = second.Memoize();
 
-                await using (secondMemo as IAsyncDisposable)
-                await using (secondMemo as IAsyncDisposable)
+                await using ((secondMemo as IAsyncDisposable).ConfigureAwait(false))
                 {
                     await foreach (var firstElement in first.WithCancellation(cancellationToken).ConfigureAwait(false))
                     await foreach (var secondElement in secondMemo.WithCancellation(cancellationToken).ConfigureAwait(false))
@@ -64,9 +63,8 @@ namespace MoreAsyncLinq
                 var secondMemo = second.Memoize();
                 var thirdMemo = third.Memoize();
 
-                await using (secondMemo as IAsyncDisposable)
-                await using (secondMemo as IAsyncDisposable)
-                await using (thirdMemo as IAsyncDisposable)
+                await using ((secondMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((thirdMemo as IAsyncDisposable).ConfigureAwait(false))
                 {
                     await foreach (var firstElement in first.WithCancellation(cancellationToken).ConfigureAwait(false))
                     await foreach (var secondElement in secondMemo.WithCancellation(cancellationToken).ConfigureAwait(false))
@@ -108,10 +106,9 @@ namespace MoreAsyncLinq
                 var thirdMemo = third.Memoize();
                 var fourthMemo = fourth.Memoize();
 
-                await using (secondMemo as IAsyncDisposable)
-                await using (secondMemo as IAsyncDisposable)
-                await using (thirdMemo as IAsyncDisposable)
-                await using (fourthMemo as IAsyncDisposable)
+                await using ((secondMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((thirdMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((fourthMemo as IAsyncDisposable).ConfigureAwait(false))
                 {
                     await foreach (var firstElement in first.WithCancellation(cancellationToken).ConfigureAwait(false))
                     await foreach (var secondElement in secondMemo.WithCancellation(cancellationToken).ConfigureAwait(false))
@@ -159,11 +156,10 @@ namespace MoreAsyncLinq
                 var fourthMemo = fourth.Memoize();
                 var fifthMemo = fifth.Memoize();
 
-                await using (secondMemo as IAsyncDisposable)
-                await using (secondMemo as IAsyncDisposable)
-                await using (thirdMemo as IAsyncDisposable)
-                await using (fourthMemo as IAsyncDisposable)
-                await using (fifthMemo as IAsyncDisposable)
+                await using ((secondMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((thirdMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((fourthMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((fifthMemo as IAsyncDisposable).ConfigureAwait(false))
                 {
                     await foreach (var firstElement in first.WithCancellation(cancellationToken).ConfigureAwait(false))
                     await foreach (var secondElement in secondMemo.WithCancellation(cancellationToken).ConfigureAwait(false))
@@ -217,12 +213,11 @@ namespace MoreAsyncLinq
                 var fifthMemo = fifth.Memoize();
                 var sixthMemo = sixth.Memoize();
 
-                await using (secondMemo as IAsyncDisposable)
-                await using (secondMemo as IAsyncDisposable)
-                await using (thirdMemo as IAsyncDisposable)
-                await using (fourthMemo as IAsyncDisposable)
-                await using (fifthMemo as IAsyncDisposable)
-                await using (sixthMemo as IAsyncDisposable)
+                await using ((secondMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((thirdMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((fourthMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((fifthMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((sixthMemo as IAsyncDisposable).ConfigureAwait(false))
                 {
                     await foreach (var firstElement in first.WithCancellation(cancellationToken).ConfigureAwait(false))
                     await foreach (var secondElement in secondMemo.WithCancellation(cancellationToken).ConfigureAwait(false))
@@ -282,13 +277,12 @@ namespace MoreAsyncLinq
                 var sixthMemo = sixth.Memoize();
                 var seventhMemo = seventh.Memoize();
 
-                await using (secondMemo as IAsyncDisposable)
-                await using (secondMemo as IAsyncDisposable)
-                await using (thirdMemo as IAsyncDisposable)
-                await using (fourthMemo as IAsyncDisposable)
-                await using (fifthMemo as IAsyncDisposable)
-                await using (sixthMemo as IAsyncDisposable)
-                await using (seventhMemo as IAsyncDisposable)
+                await using ((secondMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((thirdMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((fourthMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((fifthMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((sixthMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((seventhMemo as IAsyncDisposable).ConfigureAwait(false))
                 {
                     await foreach (var firstElement in first.WithCancellation(cancellationToken).ConfigureAwait(false))
                     await foreach (var secondElement in secondMemo.WithCancellation(cancellationToken).ConfigureAwait(false))
@@ -354,14 +348,13 @@ namespace MoreAsyncLinq
                 var seventhMemo = seventh.Memoize();
                 var eighthMemo = eighth.Memoize();
 
-                await using (secondMemo as IAsyncDisposable)
-                await using (secondMemo as IAsyncDisposable)
-                await using (thirdMemo as IAsyncDisposable)
-                await using (fourthMemo as IAsyncDisposable)
-                await using (fifthMemo as IAsyncDisposable)
-                await using (sixthMemo as IAsyncDisposable)
-                await using (seventhMemo as IAsyncDisposable)
-                await using (eighthMemo as IAsyncDisposable)
+                await using ((secondMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((thirdMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((fourthMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((fifthMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((sixthMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((seventhMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((eighthMemo as IAsyncDisposable).ConfigureAwait(false))
                 {
                     await foreach (var firstElement in first.WithCancellation(cancellationToken).ConfigureAwait(false))
                     await foreach (var secondElement in secondMemo.WithCancellation(cancellationToken).ConfigureAwait(false))
@@ -405,8 +398,7 @@ namespace MoreAsyncLinq
             {
                 var secondMemo = second.Memoize();
 
-                await using (secondMemo as IAsyncDisposable)
-                await using (secondMemo as IAsyncDisposable)
+                await using ((secondMemo as IAsyncDisposable).ConfigureAwait(false))
                 {
                     await foreach (var firstElement in first.WithCancellation(cancellationToken).ConfigureAwait(false))
                     await foreach (var secondElement in secondMemo.WithCancellation(cancellationToken).ConfigureAwait(false))
@@ -443,9 +435,8 @@ namespace MoreAsyncLinq
                 var secondMemo = second.Memoize();
                 var thirdMemo = third.Memoize();
 
-                await using (secondMemo as IAsyncDisposable)
-                await using (secondMemo as IAsyncDisposable)
-                await using (thirdMemo as IAsyncDisposable)
+                await using ((secondMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((thirdMemo as IAsyncDisposable).ConfigureAwait(false))
                 {
                     await foreach (var firstElement in first.WithCancellation(cancellationToken).ConfigureAwait(false))
                     await foreach (var secondElement in secondMemo.WithCancellation(cancellationToken).ConfigureAwait(false))
@@ -488,10 +479,9 @@ namespace MoreAsyncLinq
                 var thirdMemo = third.Memoize();
                 var fourthMemo = fourth.Memoize();
 
-                await using (secondMemo as IAsyncDisposable)
-                await using (secondMemo as IAsyncDisposable)
-                await using (thirdMemo as IAsyncDisposable)
-                await using (fourthMemo as IAsyncDisposable)
+                await using ((secondMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((thirdMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((fourthMemo as IAsyncDisposable).ConfigureAwait(false))
                 {
                     await foreach (var firstElement in first.WithCancellation(cancellationToken).ConfigureAwait(false))
                     await foreach (var secondElement in secondMemo.WithCancellation(cancellationToken).ConfigureAwait(false))
@@ -540,11 +530,10 @@ namespace MoreAsyncLinq
                 var fourthMemo = fourth.Memoize();
                 var fifthMemo = fifth.Memoize();
 
-                await using (secondMemo as IAsyncDisposable)
-                await using (secondMemo as IAsyncDisposable)
-                await using (thirdMemo as IAsyncDisposable)
-                await using (fourthMemo as IAsyncDisposable)
-                await using (fifthMemo as IAsyncDisposable)
+                await using ((secondMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((thirdMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((fourthMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((fifthMemo as IAsyncDisposable).ConfigureAwait(false))
                 {
                     await foreach (var firstElement in first.WithCancellation(cancellationToken).ConfigureAwait(false))
                     await foreach (var secondElement in secondMemo.WithCancellation(cancellationToken).ConfigureAwait(false))
@@ -599,12 +588,11 @@ namespace MoreAsyncLinq
                 var fifthMemo = fifth.Memoize();
                 var sixthMemo = sixth.Memoize();
 
-                await using (secondMemo as IAsyncDisposable)
-                await using (secondMemo as IAsyncDisposable)
-                await using (thirdMemo as IAsyncDisposable)
-                await using (fourthMemo as IAsyncDisposable)
-                await using (fifthMemo as IAsyncDisposable)
-                await using (sixthMemo as IAsyncDisposable)
+                await using ((secondMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((thirdMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((fourthMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((fifthMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((sixthMemo as IAsyncDisposable).ConfigureAwait(false))
                 {
                     await foreach (var firstElement in first.WithCancellation(cancellationToken).ConfigureAwait(false))
                     await foreach (var secondElement in secondMemo.WithCancellation(cancellationToken).ConfigureAwait(false))
@@ -665,13 +653,12 @@ namespace MoreAsyncLinq
                 var sixthMemo = sixth.Memoize();
                 var seventhMemo = seventh.Memoize();
 
-                await using (secondMemo as IAsyncDisposable)
-                await using (secondMemo as IAsyncDisposable)
-                await using (thirdMemo as IAsyncDisposable)
-                await using (fourthMemo as IAsyncDisposable)
-                await using (fifthMemo as IAsyncDisposable)
-                await using (sixthMemo as IAsyncDisposable)
-                await using (seventhMemo as IAsyncDisposable)
+                await using ((secondMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((thirdMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((fourthMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((fifthMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((sixthMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((seventhMemo as IAsyncDisposable).ConfigureAwait(false))
                 {
                     await foreach (var firstElement in first.WithCancellation(cancellationToken).ConfigureAwait(false))
                     await foreach (var secondElement in secondMemo.WithCancellation(cancellationToken).ConfigureAwait(false))
@@ -738,14 +725,13 @@ namespace MoreAsyncLinq
                 var seventhMemo = seventh.Memoize();
                 var eighthMemo = eighth.Memoize();
 
-                await using (secondMemo as IAsyncDisposable)
-                await using (secondMemo as IAsyncDisposable)
-                await using (thirdMemo as IAsyncDisposable)
-                await using (fourthMemo as IAsyncDisposable)
-                await using (fifthMemo as IAsyncDisposable)
-                await using (sixthMemo as IAsyncDisposable)
-                await using (seventhMemo as IAsyncDisposable)
-                await using (eighthMemo as IAsyncDisposable)
+                await using ((secondMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((thirdMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((fourthMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((fifthMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((sixthMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((seventhMemo as IAsyncDisposable).ConfigureAwait(false))
+                await using ((eighthMemo as IAsyncDisposable).ConfigureAwait(false))
                 {
                     await foreach (var firstElement in first.WithCancellation(cancellationToken).ConfigureAwait(false))
                     await foreach (var secondElement in secondMemo.WithCancellation(cancellationToken).ConfigureAwait(false))

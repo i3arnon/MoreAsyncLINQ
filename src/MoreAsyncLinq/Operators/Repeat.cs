@@ -29,7 +29,7 @@ namespace MoreAsyncLinq
             [EnumeratorCancellation] CancellationToken cancellationToken = default)
         {
             var memo = source.Memoize();
-            await using (memo as IAsyncDisposable)
+            await using ((memo as IAsyncDisposable).ConfigureAwait(false))
             {
                 while (true)
                 {

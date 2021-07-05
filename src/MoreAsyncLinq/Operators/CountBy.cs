@@ -37,7 +37,7 @@ namespace MoreAsyncLinq
                 IEqualityComparer<TKey> comparer,
                 [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                var (keys, counts) = await CountAsync();
+                var (keys, counts) = await CountAsync().ConfigureAwait(false);
                 for (var index = 0; index < keys.Count; index++)
                 {
                     yield return (keys[index], counts[index]);
@@ -112,7 +112,7 @@ namespace MoreAsyncLinq
                 IEqualityComparer<TKey> comparer,
                 [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                var (keys, counts) = await CountAsync();
+                var (keys, counts) = await CountAsync().ConfigureAwait(false);
                 for (var index = 0; index < keys.Count; index++)
                 {
                     yield return (keys[index], counts[index]);
