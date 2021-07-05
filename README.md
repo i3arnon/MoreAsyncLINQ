@@ -94,6 +94,8 @@
 
 ### ScanRight
 
+### Segment
+
 ### SkipLast
 
 ### SkipUntil
