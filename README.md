@@ -62,6 +62,8 @@
 
 ### Interleave
 
+### Lag
+
 ### Lead
 
 ### MaxBy
