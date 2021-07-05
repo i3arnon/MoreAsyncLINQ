@@ -92,6 +92,8 @@
 
 ### ScanBy
 
+### ScanRight
+
 ### SkipLast
 
 ### SkipUntil
