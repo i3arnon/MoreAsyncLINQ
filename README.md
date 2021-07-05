@@ -66,6 +66,8 @@
 
 ### MinBy
 
+### Move
+
 ### OrderBy
 
 ### OrderedMerge
