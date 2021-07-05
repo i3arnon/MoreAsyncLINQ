@@ -62,6 +62,8 @@
 
 ### Interleave
 
+### Lead
+
 ### MaxBy
 
 ### MinBy
