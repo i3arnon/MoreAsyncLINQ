@@ -6,6 +6,8 @@
 
 ### AggregateRight
 
+### Append
+
 ### Assert
 
 ### AssertCount
@@ -87,6 +89,8 @@
 ### Partition
 
 ### Pipe
+
+### Prepend
 
 ### PreScan
 
