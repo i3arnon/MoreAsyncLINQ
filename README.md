@@ -70,6 +70,8 @@
 
 ### Lead
 
+### LeftJoin
+
 ### MaxBy
 
 ### MinBy
