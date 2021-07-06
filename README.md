@@ -116,6 +116,8 @@
 
 ### Slice
 
+### SortedMerge
+
 ### Split
 
 ### StartsWith
