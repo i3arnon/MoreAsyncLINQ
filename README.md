@@ -100,6 +100,8 @@
 
 ### Repeat
 
+### RightJoin
+
 ### RunLengthEncode
 
 ### Scan
