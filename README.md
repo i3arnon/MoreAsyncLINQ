@@ -1,3 +1,7 @@
+# MoreAsyncLINQ
+
+Additional `async` `LINQ` to objects operators for `IAsyncEnumerable<T>`
+
 ## Operators
 
 ### Acquire
