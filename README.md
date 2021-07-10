@@ -1,4 +1,7 @@
 # MoreAsyncLINQ
+[![NuGet](https://img.shields.io/nuget/dt/MoreAsyncLINQ.svg)](https://www.nuget.org/packages/MoreAsyncLINQ)
+[![NuGet](https://img.shields.io/nuget/v/MoreAsyncLINQ.svg)](https://www.nuget.org/packages/MoreAsyncLINQ)
+[![license](https://img.shields.io/github/license/i3arnon/MoreAsyncLINQ.svg)](LICENSE)
 
 Additional `async` `LINQ` to objects operators for `IAsyncEnumerable<T>`
 
