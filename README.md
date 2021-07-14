@@ -61,6 +61,8 @@ Additional `async` `LINQ` to objects operators for `IAsyncEnumerable<T>`
 
 ### FillForward
 
+### Fold
+
 ### From
 
 ### FullJoin

@@ -17,7 +17,7 @@ namespace MoreAsyncLINQ
 
             return source.AssertCount(
                 count,
-                static (comparison, count) => new InvalidOperationException($"Sequence contains too {(comparison < 0 ? "few" : "many")} elements when exactly {count:N0} were expected."));
+                static (comparison, count) => new InvalidOperationException($"Sequence contains too {(comparison < 0 ? "few" : "many")} elements when exactly {count:N0} {(count == 1 ? "was" : "were")} expected."));
         }
 
         public static IAsyncEnumerable<TSource> AssertCount<TSource>(
