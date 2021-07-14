@@ -99,6 +99,10 @@ Additional `async` `LINQ` to objects operators for `IAsyncEnumerable<T>`
 
 ### Pairwise
 
+### PartialSort
+
+### PartialSortBy
+
 ### Partition
 
 ### Pipe
