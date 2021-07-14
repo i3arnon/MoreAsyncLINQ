@@ -57,6 +57,10 @@ Additional `async` `LINQ` to objects operators for `IAsyncEnumerable<T>`
 
 ### FallbackIfEmpty
 
+### FillBackward
+
+### FillForward
+
 ### From
 
 ### FullJoin
