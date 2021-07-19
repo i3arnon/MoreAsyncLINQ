@@ -8,16 +8,16 @@ namespace MoreAsyncLINQ
 {
     static partial class MoreAsyncEnumerable
     {
-        public static IAsyncEnumerable<TSource> Pad<TSource>(
+        public static IAsyncEnumerable<TSource?> Pad<TSource>(
             this IAsyncEnumerable<TSource> source,
             int width)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (width < 0) throw new ArgumentOutOfRangeException(nameof(width));
 
-            return source.Pad<TSource>(
+            return source.Pad(
                 width,
-                default!,
+                padding: default,
                 paddingSelector: null);
         }
 
@@ -30,7 +30,7 @@ namespace MoreAsyncLINQ
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (width < 0) throw new ArgumentOutOfRangeException(nameof(width));
 
-            return source.Pad<TSource>(
+            return source.Pad(
                 width,
                 padding,
                 paddingSelector: null);
@@ -39,22 +39,22 @@ namespace MoreAsyncLINQ
         public static IAsyncEnumerable<TSource> Pad<TSource>(
             this IAsyncEnumerable<TSource> source,
             int width,
-            Func<int, TSource>? paddingSelector)
+            Func<int, TSource> paddingSelector)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (width < 0) throw new ArgumentOutOfRangeException(nameof(width));
             if (paddingSelector is null) throw new ArgumentNullException(nameof(paddingSelector));
 
-            return source.Pad<TSource>(
+            return source.Pad(
                 width,
-                default!,
+                padding: default,
                 paddingSelector);
         }
 
         private static async IAsyncEnumerable<TSource> Pad<TSource>(
             this IAsyncEnumerable<TSource> source,
             int width,
-            TSource padding,
+            TSource? padding,
             Func<int, TSource>? paddingSelector,
             [EnumeratorCancellation] CancellationToken cancellationToken = default)
         {
@@ -69,7 +69,7 @@ namespace MoreAsyncLINQ
             while (count < width)
             {
                 yield return paddingSelector is null
-                    ? padding
+                    ? padding!
                     : paddingSelector(count);
 
                 count++;
@@ -79,22 +79,22 @@ namespace MoreAsyncLINQ
         public static IAsyncEnumerable<TSource> PadAwait<TSource>(
             this IAsyncEnumerable<TSource> source,
             int width,
-            Func<int, ValueTask<TSource>>? paddingSelector)
+            Func<int, ValueTask<TSource>> paddingSelector)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (width < 0) throw new ArgumentOutOfRangeException(nameof(width));
             if (paddingSelector is null) throw new ArgumentNullException(nameof(paddingSelector));
 
-            return source.PadAwait<TSource>(
+            return source.PadAwait(
                 width,
-                default!,
+                padding: default,
                 paddingSelector);
         }
 
         private static async IAsyncEnumerable<TSource> PadAwait<TSource>(
             this IAsyncEnumerable<TSource> source,
             int width,
-            TSource padding,
+            TSource? padding,
             Func<int, ValueTask<TSource>>? paddingSelector,
             [EnumeratorCancellation] CancellationToken cancellationToken = default)
         {
@@ -109,7 +109,7 @@ namespace MoreAsyncLINQ
             while (count < width)
             {
                 yield return paddingSelector is null
-                    ? padding
+                    ? padding!
                     : await paddingSelector(count).ConfigureAwait(false);
 
                 count++;

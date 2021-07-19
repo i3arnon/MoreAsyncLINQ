@@ -16,12 +16,12 @@ namespace MoreAsyncLINQ
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
 
-            return source.FallbackIfEmpty<TSource>(
+            return source.FallbackIfEmpty(
                 count: 1,
                 fallback,
-                default!,
-                default!,
-                default!,
+                fallback2: default,
+                fallback3: default,
+                fallback4: default,
                 fallback: null);
         }
 
@@ -32,12 +32,12 @@ namespace MoreAsyncLINQ
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
 
-            return source.FallbackIfEmpty<TSource>(
+            return source.FallbackIfEmpty(
                 count: 2,
                 fallback1,
                 fallback2,
-                default!,
-                default!,
+                fallback3: default,
+                fallback4: default,
                 fallback: null);
         }
 
@@ -49,12 +49,12 @@ namespace MoreAsyncLINQ
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
 
-            return source.FallbackIfEmpty<TSource>(
+            return source.FallbackIfEmpty(
                 count: 3,
                 fallback1,
                 fallback2,
                 fallback3,
-                default!,
+                fallback4: default,
                 fallback: null);
         }
 
@@ -82,7 +82,7 @@ namespace MoreAsyncLINQ
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (fallback is null) throw new ArgumentNullException(nameof(fallback));
-            
+
             return source.FallbackIfEmpty(fallback.ToAsyncEnumerable());
         }
 
@@ -93,22 +93,22 @@ namespace MoreAsyncLINQ
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (fallback is null) throw new ArgumentNullException(nameof(fallback));
 
-            return source.FallbackIfEmpty<TSource>(
+            return source.FallbackIfEmpty(
                 count: null,
-                default!,
-                default!,
-                default!,
-                default!,
+                fallback1: default,
+                fallback2: default,
+                fallback3: default,
+                fallback4: default,
                 fallback);
         }
 
         private static async IAsyncEnumerable<TSource> FallbackIfEmpty<TSource>(
             this IAsyncEnumerable<TSource> source,
             int? count,
-            TSource fallback1,
-            TSource fallback2,
-            TSource fallback3,
-            TSource fallback4,
+            TSource? fallback1,
+            TSource? fallback2,
+            TSource? fallback3,
+            TSource? fallback4,
             IAsyncEnumerable<TSource>? fallback,
             [EnumeratorCancellation] CancellationToken cancellationToken = default)
         {
@@ -153,33 +153,23 @@ namespace MoreAsyncLINQ
 
                 IEnumerable<TSource> FallbackArguments()
                 {
-                    switch (count)
+                    Debug.Assert(count is >= 1 and <= 4);
+
+                    yield return fallback1!;
+
+                    if (count >= 2)
                     {
-                        case 1:
-                            yield return fallback1;
+                        yield return fallback2!;
+                    }
 
-                            break;
-                        case 2:
-                            yield return fallback1;
-                            yield return fallback2;
+                    if (count >= 3)
+                    {
+                        yield return fallback3!;
+                    }
 
-                            break;
-                        case 3:
-                            yield return fallback1;
-                            yield return fallback2;
-                            yield return fallback3;
-
-                            break;
-                        case 4:
-                            yield return fallback1;
-                            yield return fallback2;
-                            yield return fallback3;
-                            yield return fallback4;
-
-                            break;
-                        default:
-                            Debug.Fail(count.ToString());
-                            break;
+                    if (count == 4)
+                    {
+                        yield return fallback4!;
                     }
                 }
             }
