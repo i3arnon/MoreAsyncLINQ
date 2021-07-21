@@ -6,6 +6,7 @@
     <Description>Additional async LINQ to objects operators for IAsyncEnumerable&lt;T&gt;</Description>
     <Deterministic>true</Deterministic>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IncludeSource>true</IncludeSource>
     <IncludeSymbols>true</IncludeSymbols>

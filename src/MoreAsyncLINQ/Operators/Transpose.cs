@@ -8,7 +8,23 @@ namespace MoreAsyncLINQ
 {
     static partial class MoreAsyncEnumerable
     {
-        public static IAsyncEnumerable<TSource[]> Transpose<TSource>(IAsyncEnumerable<IAsyncEnumerable<TSource>> source)
+        /// <summary>
+        /// Transposes a sequence of rows into a sequence of columns.
+        /// </summary>
+        /// <typeparam name="TSource">Type of source sequence elements.</typeparam>
+        /// <param name="source">Source sequence to transpose.</param>
+        /// <returns>
+        /// Returns a sequence of columns in the source swapped into rows.
+        /// </returns>
+        /// <remarks>
+        /// If a rows is shorter than a follow it then the shorter row's
+        /// elements are skipped in the corresponding column sequences.
+        /// This operator uses deferred execution and streams its results.
+        /// Source sequence is consumed greedily when an iteration begins.
+        /// The inner sequences representing rows are consumed lazily and
+        /// resulting sequences of columns are streamed.
+        /// </remarks>
+        public static IAsyncEnumerable<TSource[]> Transpose<TSource>(this IAsyncEnumerable<IAsyncEnumerable<TSource>> source)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
 

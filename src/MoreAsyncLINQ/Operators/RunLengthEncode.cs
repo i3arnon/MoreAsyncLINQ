@@ -8,6 +8,14 @@ namespace MoreAsyncLINQ
 {
     static partial class MoreAsyncEnumerable
     {
+        /// <summary>
+        /// Run-length encodes a sequence by converting consecutive instances of the same element into
+        /// a tuple representing the item and its occurrence count. This overload
+        /// uses a custom equality comparer to identify equivalent items.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements in the sequence</typeparam>
+        /// <param name="source">The sequence to run length encode</param>
+        /// <returns>A sequence of <see cref="ValueTuple{T1,T2}"/> of the element and the occurrence count</returns>
         public static IAsyncEnumerable<(TSource Element, int RunCount)> RunLengthEncode<TSource>(this IAsyncEnumerable<TSource> source)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
@@ -15,6 +23,15 @@ namespace MoreAsyncLINQ
             return source.RunLengthEncode(comparer: null);
         }
 
+        /// <summary>
+        /// Run-length encodes a sequence by converting consecutive instances of the same element into
+        /// a tuple representing the item and its occurrence count. This overload
+        /// uses a custom equality comparer to identify equivalent items.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements in the sequence</typeparam>
+        /// <param name="source">The sequence to run length encode</param>
+        /// <param name="comparer">The comparer used to identify equivalent items</param>
+        /// <returns>A sequence of <see cref="ValueTuple{T1,T2}"/> of the element and the occurrence count</returns>
         public static IAsyncEnumerable<(TSource Element, int RunCount)> RunLengthEncode<TSource>(
             this IAsyncEnumerable<TSource> source,
             IEqualityComparer<TSource>? comparer)

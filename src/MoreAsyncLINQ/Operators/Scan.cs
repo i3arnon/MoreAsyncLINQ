@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,6 +9,21 @@ namespace MoreAsyncLINQ
 {
     static partial class MoreAsyncEnumerable
     {
+        /// <summary>
+        /// Performs a scan (inclusive prefix sum) on a sequence of elements.
+        /// </summary>
+        /// <remarks>
+        /// An inclusive prefix sum returns an equal-length sequence where the
+        /// N-th element is the sum of the first N input elements. More
+        /// generally, the scan allows any commutative binary operation, not
+        /// just a sum.
+        /// The exclusive version of Scan is <see cref="MoreAsyncEnumerable.PreScan{TSource}"/>.
+        /// This operator uses deferred execution and streams its result.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of elements in source sequence</typeparam>
+        /// <param name="source">Source sequence</param>
+        /// <param name="transformation">Transformation operation</param>
+        /// <returns>The scanned sequence</returns>
         public static IAsyncEnumerable<TSource> Scan<TSource>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource> transformation)
@@ -40,6 +56,20 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Like <see cref="AsyncEnumerable.AggregateAsync{TSource}"/> except returns
+        /// the sequence of intermediate results as well as the final one.
+        /// An additional parameter specifies a seed.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses deferred execution and streams its result.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of elements in source sequence</typeparam>
+        /// <typeparam name="TState">Type of state</typeparam>
+        /// <param name="source">Source sequence</param>
+        /// <param name="seed">Initial state to seed</param>
+        /// <param name="transformation">Transformation operation</param>
+        /// <returns>The scanned sequence</returns>
         public static IAsyncEnumerable<TState> Scan<TSource, TState>(
             this IAsyncEnumerable<TSource> source,
             TState seed,
@@ -66,6 +96,21 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Performs a scan (inclusive prefix sum) on a sequence of elements.
+        /// </summary>
+        /// <remarks>
+        /// An inclusive prefix sum returns an equal-length sequence where the
+        /// N-th element is the sum of the first N input elements. More
+        /// generally, the scan allows any commutative binary operation, not
+        /// just a sum.
+        /// The exclusive version of Scan is <see cref="MoreAsyncEnumerable.PreScan{TSource}"/>.
+        /// This operator uses deferred execution and streams its result.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of elements in source sequence</typeparam>
+        /// <param name="source">Source sequence</param>
+        /// <param name="transformation">Transformation operation</param>
+        /// <returns>The scanned sequence</returns>
         public static IAsyncEnumerable<TSource> ScanAwait<TSource>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, ValueTask<TSource>> transformation)
@@ -98,6 +143,20 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Like <see cref="AsyncEnumerable.AggregateAsync{TSource}"/> except returns
+        /// the sequence of intermediate results as well as the final one.
+        /// An additional parameter specifies a seed.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses deferred execution and streams its result.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of elements in source sequence</typeparam>
+        /// <typeparam name="TState">Type of state</typeparam>
+        /// <param name="source">Source sequence</param>
+        /// <param name="seed">Initial state to seed</param>
+        /// <param name="transformation">Transformation operation</param>
+        /// <returns>The scanned sequence</returns>
         public static IAsyncEnumerable<TState> ScanAwait<TSource, TState>(
             this IAsyncEnumerable<TSource> source,
             TState seed,

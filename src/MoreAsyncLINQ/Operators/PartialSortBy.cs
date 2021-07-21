@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,6 +9,20 @@ namespace MoreAsyncLINQ
 {
     static partial class MoreAsyncEnumerable
     {
+        /// <summary>
+        /// Combines <see cref="AsyncEnumerable.OrderBy{TSource,TKey}(IAsyncEnumerable{TSource},Func{TSource,TKey},IComparer{TKey})"/>,
+        /// and <see cref="AsyncEnumerable.Take{TSource}"/> in a single operation.
+        /// </summary>
+        /// <typeparam name="TSource">Type of elements in the sequence.</typeparam>
+        /// <typeparam name="TKey">Type of keys.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="keySelector">A function to extract a key from an element.</param>
+        /// <param name="count">Number of (maximum) elements to return.</param>
+        /// <returns>A sequence containing at most top <paramref name="count"/>
+        /// elements from source, in ascending order of their keys.</returns>
+        /// <remarks>
+        /// This operator uses deferred execution and streams it results.
+        /// </remarks>
         public static IAsyncEnumerable<TSource> PartialSortBy<TSource, TKey>(
             this IAsyncEnumerable<TSource> source,
             int count,
@@ -19,6 +34,22 @@ namespace MoreAsyncLINQ
             return source.PartialSortBy(count, keySelector, comparer: null);
         }
 
+        /// <summary>
+        /// Combines <see cref="MoreAsyncEnumerable.OrderBy{TSource, TKey}(IAsyncEnumerable{TSource}, Func{TSource, TKey}, OrderByDirection)"/>,
+        /// and <see cref="AsyncEnumerable.Take{TSource}"/> in a single operation.
+        /// An additional parameter specifies the direction of the sort
+        /// </summary>
+        /// <typeparam name="TSource">Type of elements in the sequence.</typeparam>
+        /// <typeparam name="TKey">Type of keys.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="keySelector">A function to extract a key from an element.</param>
+        /// <param name="count">Number of (maximum) elements to return.</param>
+        /// <param name="direction">The direction in which to sort the elements</param>
+        /// <returns>A sequence containing at most top <paramref name="count"/>
+        /// elements from source, in the specified order of their keys.</returns>
+        /// <remarks>
+        /// This operator uses deferred execution and streams it results.
+        /// </remarks>
         public static IAsyncEnumerable<TSource> PartialSortBy<TSource, TKey>(
             this IAsyncEnumerable<TSource> source,
             int count,
@@ -31,6 +62,24 @@ namespace MoreAsyncLINQ
             return source.PartialSortBy(count, keySelector, comparer: null, direction);
         }
 
+        /// <summary>
+        /// Combines <see cref="MoreAsyncEnumerable.OrderBy{TSource, TKey}(IAsyncEnumerable{TSource}, Func{TSource, TKey}, OrderByDirection)"/>,
+        /// and <see cref="AsyncEnumerable.Take{TSource}"/> in a single operation.
+        /// Additional parameters specify how the elements compare to each other and
+        /// the direction of the sort.
+        /// </summary>
+        /// <typeparam name="TSource">Type of elements in the sequence.</typeparam>
+        /// <typeparam name="TKey">Type of keys.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="keySelector">A function to extract a key from an element.</param>
+        /// <param name="count">Number of (maximum) elements to return.</param>
+        /// <param name="comparer">A <see cref="IComparer{T}"/> to compare elements.</param>
+        /// <param name="direction">The direction in which to sort the elements</param>
+        /// <returns>A sequence containing at most top <paramref name="count"/>
+        /// elements from source, in the specified order of their keys.</returns>
+        /// <remarks>
+        /// This operator uses deferred execution and streams it results.
+        /// </remarks>
         public static IAsyncEnumerable<TSource> PartialSortBy<TSource, TKey>(
             this IAsyncEnumerable<TSource> source,
             int count,
@@ -44,6 +93,22 @@ namespace MoreAsyncLINQ
             return source.PartialSortBy(count, keySelector, Comparers.Get(comparer, direction));
         }
 
+        /// <summary>
+        /// Combines <see cref="AsyncEnumerable.OrderBy{TSource,TKey}(IAsyncEnumerable{TSource},Func{TSource,TKey},IComparer{TKey})"/>,
+        /// and <see cref="AsyncEnumerable.Take{TSource}"/> in a single operation.
+        /// An additional parameter specifies how the keys compare to each other.
+        /// </summary>
+        /// <typeparam name="TSource">Type of elements in the sequence.</typeparam>
+        /// <typeparam name="TKey">Type of keys.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="keySelector">A function to extract a key from an element.</param>
+        /// <param name="count">Number of (maximum) elements to return.</param>
+        /// <param name="comparer">A <see cref="IComparer{T}"/> to compare elements.</param>
+        /// <returns>A sequence containing at most top <paramref name="count"/>
+        /// elements from source, in ascending order of their keys.</returns>
+        /// <remarks>
+        /// This operator uses deferred execution and streams it results.
+        /// </remarks>
         public static IAsyncEnumerable<TSource> PartialSortBy<TSource, TKey>(
             this IAsyncEnumerable<TSource> source,
             int count,
@@ -118,6 +183,20 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Combines <see cref="AsyncEnumerable.OrderByAwait{TSource,TKey}(IAsyncEnumerable{TSource},Func{TSource,ValueTask{TKey}},IComparer{TKey})"/>,
+        /// and <see cref="AsyncEnumerable.Take{TSource}"/> in a single operation.
+        /// </summary>
+        /// <typeparam name="TSource">Type of elements in the sequence.</typeparam>
+        /// <typeparam name="TKey">Type of keys.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="keySelector">A function to extract a key from an element.</param>
+        /// <param name="count">Number of (maximum) elements to return.</param>
+        /// <returns>A sequence containing at most top <paramref name="count"/>
+        /// elements from source, in ascending order of their keys.</returns>
+        /// <remarks>
+        /// This operator uses deferred execution and streams it results.
+        /// </remarks>
         public static IAsyncEnumerable<TSource> PartialSortByAwait<TSource, TKey>(
             this IAsyncEnumerable<TSource> source,
             int count,
@@ -129,6 +208,22 @@ namespace MoreAsyncLINQ
             return source.PartialSortByAwait(count, keySelector, comparer: null);
         }
 
+        /// <summary>
+        /// Combines <see cref="MoreAsyncEnumerable.OrderByAwait{TSource, TKey}(IAsyncEnumerable{TSource}, Func{TSource, ValueTask{TKey}}, OrderByDirection)"/>,
+        /// and <see cref="AsyncEnumerable.Take{TSource}"/> in a single operation.
+        /// An additional parameter specifies the direction of the sort
+        /// </summary>
+        /// <typeparam name="TSource">Type of elements in the sequence.</typeparam>
+        /// <typeparam name="TKey">Type of keys.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="keySelector">A function to extract a key from an element.</param>
+        /// <param name="count">Number of (maximum) elements to return.</param>
+        /// <param name="direction">The direction in which to sort the elements</param>
+        /// <returns>A sequence containing at most top <paramref name="count"/>
+        /// elements from source, in the specified order of their keys.</returns>
+        /// <remarks>
+        /// This operator uses deferred execution and streams it results.
+        /// </remarks>
         public static IAsyncEnumerable<TSource> PartialSortByAwait<TSource, TKey>(
             this IAsyncEnumerable<TSource> source,
             int count,
@@ -141,6 +236,24 @@ namespace MoreAsyncLINQ
             return source.PartialSortByAwait(count, keySelector, comparer: null, direction);
         }
 
+        /// <summary>
+        /// Combines <see cref="MoreAsyncEnumerable.OrderByAwait{TSource, TKey}(IAsyncEnumerable{TSource}, Func{TSource, ValueTask{TKey}}, OrderByDirection)"/>,
+        /// and <see cref="AsyncEnumerable.Take{TSource}"/> in a single operation.
+        /// Additional parameters specify how the elements compare to each other and
+        /// the direction of the sort.
+        /// </summary>
+        /// <typeparam name="TSource">Type of elements in the sequence.</typeparam>
+        /// <typeparam name="TKey">Type of keys.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="keySelector">A function to extract a key from an element.</param>
+        /// <param name="count">Number of (maximum) elements to return.</param>
+        /// <param name="comparer">A <see cref="IComparer{T}"/> to compare elements.</param>
+        /// <param name="direction">The direction in which to sort the elements</param>
+        /// <returns>A sequence containing at most top <paramref name="count"/>
+        /// elements from source, in the specified order of their keys.</returns>
+        /// <remarks>
+        /// This operator uses deferred execution and streams it results.
+        /// </remarks>
         public static IAsyncEnumerable<TSource> PartialSortByAwait<TSource, TKey>(
             this IAsyncEnumerable<TSource> source,
             int count,
@@ -154,6 +267,22 @@ namespace MoreAsyncLINQ
             return source.PartialSortByAwait(count, keySelector, Comparers.Get(comparer, direction));
         }
 
+        /// <summary>
+        /// Combines <see cref="AsyncEnumerable.OrderByAwait{TSource,TKey}(IAsyncEnumerable{TSource},Func{TSource,ValueTask{TKey}},IComparer{TKey})"/>,
+        /// and <see cref="AsyncEnumerable.Take{TSource}"/> in a single operation.
+        /// An additional parameter specifies how the keys compare to each other.
+        /// </summary>
+        /// <typeparam name="TSource">Type of elements in the sequence.</typeparam>
+        /// <typeparam name="TKey">Type of keys.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="keySelector">A function to extract a key from an element.</param>
+        /// <param name="count">Number of (maximum) elements to return.</param>
+        /// <param name="comparer">A <see cref="IComparer{T}"/> to compare elements.</param>
+        /// <returns>A sequence containing at most top <paramref name="count"/>
+        /// elements from source, in ascending order of their keys.</returns>
+        /// <remarks>
+        /// This operator uses deferred execution and streams it results.
+        /// </remarks>
         public static IAsyncEnumerable<TSource> PartialSortByAwait<TSource, TKey>(
             this IAsyncEnumerable<TSource> source,
             int count,

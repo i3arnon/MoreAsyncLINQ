@@ -7,6 +7,23 @@ namespace MoreAsyncLINQ
 {
     static partial class MoreAsyncEnumerable
     {
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 1 element.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 1 element</exception>
         public static ValueTask<TResult> FoldAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TResult> folder,
@@ -27,6 +44,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 2 elements.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 2 elements</exception>
         public static ValueTask<TResult> FoldAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TResult> folder,
@@ -49,6 +83,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 3 elements.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 3 elements</exception>
         public static ValueTask<TResult> FoldAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource, TResult> folder,
@@ -72,6 +123,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 4 elements.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 4 elements</exception>
         public static ValueTask<TResult> FoldAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource, TSource, TResult> folder,
@@ -96,6 +164,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 5 elements.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 5 elements</exception>
         public static ValueTask<TResult> FoldAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource, TSource, TSource, TResult> folder,
@@ -121,6 +206,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 6 elements.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 6 elements</exception>
         public static ValueTask<TResult> FoldAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TResult> folder,
@@ -147,6 +249,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 7 elements.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 7 elements</exception>
         public static ValueTask<TResult> FoldAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TResult> folder,
@@ -174,6 +293,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 8 elements.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 8 elements</exception>
         public static ValueTask<TResult> FoldAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TResult> folder,
@@ -202,6 +338,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 9 elements.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 9 elements</exception>
         public static ValueTask<TResult> FoldAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TResult> folder,
@@ -231,6 +384,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 10 elements.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 10 elements</exception>
         public static ValueTask<TResult> FoldAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TResult> folder,
@@ -261,6 +431,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 11 elements.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 11 elements</exception>
         public static ValueTask<TResult> FoldAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TResult> folder,
@@ -292,6 +479,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 12 elements.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 12 elements</exception>
         public static ValueTask<TResult> FoldAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TResult> folder,
@@ -324,6 +528,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 13 elements.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 13 elements</exception>
         public static ValueTask<TResult> FoldAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TResult> folder,
@@ -357,6 +578,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 14 elements.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 14 elements</exception>
         public static ValueTask<TResult> FoldAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TResult> folder,
@@ -391,6 +629,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 15 elements.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 15 elements</exception>
         public static ValueTask<TResult> FoldAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TResult> folder,
@@ -426,6 +681,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 16 elements.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 16 elements</exception>
         public static ValueTask<TResult> FoldAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TResult> folder,
@@ -462,6 +734,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 1 element.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 1 element</exception>
         public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, ValueTask<TResult>> folder,
@@ -482,6 +771,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 2 elements.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 2 elements</exception>
         public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, ValueTask<TResult>> folder,
@@ -504,6 +810,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 3 elements.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 3 elements</exception>
         public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource, ValueTask<TResult>> folder,
@@ -527,6 +850,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 4 elements.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 4 elements</exception>
         public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource, TSource, ValueTask<TResult>> folder,
@@ -551,6 +891,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 5 elements.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 5 elements</exception>
         public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource, TSource, TSource, ValueTask<TResult>> folder,
@@ -576,6 +933,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 6 elements.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 6 elements</exception>
         public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource, TSource, TSource, TSource, ValueTask<TResult>> folder,
@@ -602,6 +976,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 7 elements.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 7 elements</exception>
         public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, ValueTask<TResult>> folder,
@@ -629,6 +1020,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 8 elements.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 8 elements</exception>
         public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, ValueTask<TResult>> folder,
@@ -657,6 +1065,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 9 elements.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 9 elements</exception>
         public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, ValueTask<TResult>> folder,
@@ -686,6 +1111,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 10 elements.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 10 elements</exception>
         public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, ValueTask<TResult>> folder,
@@ -716,6 +1158,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 11 elements.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 11 elements</exception>
         public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, ValueTask<TResult>> folder,
@@ -747,6 +1206,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 12 elements.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 12 elements</exception>
         public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, ValueTask<TResult>> folder,
@@ -779,6 +1255,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 13 elements.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 13 elements</exception>
         public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, ValueTask<TResult>> folder,
@@ -812,6 +1305,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 14 elements.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 14 elements</exception>
         public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, ValueTask<TResult>> folder,
@@ -846,6 +1356,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 15 elements.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 15 elements</exception>
         public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, ValueTask<TResult>> folder,
@@ -881,6 +1408,23 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Returns the result of applying a function to a sequence of
+        /// 16 elements.
+        /// </summary>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers
+        /// as many items of the source sequence as necessary.
+        /// </remarks>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <typeparam name="TResult">Type of the result</typeparam>
+        /// <param name="source">The sequence of items to fold.</param>
+        /// <param name="folder">Function to apply to the elements in the sequence.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 16 elements</exception>
         public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, ValueTask<TResult>> folder,

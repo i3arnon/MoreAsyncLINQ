@@ -9,6 +9,23 @@ namespace MoreAsyncLINQ
 {
     static partial class MoreAsyncEnumerable
     {
+        /// <summary>
+        /// Creates a right-aligned sliding window over the source sequence
+        /// of a given size.
+        /// </summary>
+        /// <typeparam name="TSource">
+        /// The type of the elements of <paramref name="source"/>.</typeparam>
+        /// <param name="source">
+        /// The sequence over which to create the sliding window.</param>
+        /// <param name="size">Size of the sliding window.</param>
+        /// <returns>A sequence representing each sliding window.</returns>
+        /// <remarks>
+        /// <para>
+        /// A window can contain fewer elements than <paramref name="size"/>,
+        /// especially as it slides over the start of the sequence.</para>
+        /// <para>
+        /// This operator uses deferred execution and streams its results.</para>
+        /// </remarks>
         public static IAsyncEnumerable<IList<TSource>> WindowRight<TSource>(
             this IAsyncEnumerable<TSource> source,
             int size)

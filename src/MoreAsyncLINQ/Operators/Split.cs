@@ -9,6 +9,13 @@ namespace MoreAsyncLINQ
 {
     static partial class MoreAsyncEnumerable
     {
+        /// <summary>
+        /// Splits the source sequence by a separator.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in the source sequence.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="separator">Separator element.</param>
+        /// <returns>A sequence of splits of elements.</returns>
         public static IAsyncEnumerable<IAsyncEnumerable<TSource>> Split<TSource>(
             this IAsyncEnumerable<TSource> source,
             TSource separator)
@@ -18,6 +25,14 @@ namespace MoreAsyncLINQ
             return source.Split(separator, int.MaxValue);
         }
 
+        /// <summary>
+        /// Splits the source sequence by a separator given a maximum count of splits.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in the source sequence.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="separator">Separator element.</param>
+        /// <param name="count">Maximum number of splits.</param>
+        /// <returns>A sequence of splits of elements.</returns>
         public static IAsyncEnumerable<IAsyncEnumerable<TSource>> Split<TSource>(
             this IAsyncEnumerable<TSource> source,
             TSource separator,
@@ -29,6 +44,19 @@ namespace MoreAsyncLINQ
             return source.Split(separator, count, static enumerable => enumerable);
         }
 
+        /// <summary>
+        /// Splits the source sequence by a separator and then transforms
+        /// the splits into results.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in the source sequence.</typeparam>
+        /// <typeparam name="TResult">Type of the result sequence elements.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="separator">Separator element.</param>
+        /// <param name="resultSelector">Function used to project splits
+        /// of source elements into elements of the resulting sequence.</param>
+        /// <returns>
+        /// A sequence of values typed as <typeparamref name="TResult"/>.
+        /// </returns>
         public static IAsyncEnumerable<TResult> Split<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             TSource separator,
@@ -40,6 +68,20 @@ namespace MoreAsyncLINQ
             return source.Split(separator, int.MaxValue, resultSelector);
         }
 
+        /// <summary>
+        /// Splits the source sequence by a separator, given a maximum count
+        /// of splits, and then transforms the splits into results.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in the source sequence.</typeparam>
+        /// <typeparam name="TResult">Type of the result sequence elements.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="separator">Separator element.</param>
+        /// <param name="count">Maximum number of splits.</param>
+        /// <param name="resultSelector">Function used to project splits
+        /// of source elements into elements of the resulting sequence.</param>
+        /// <returns>
+        /// A sequence of values typed as <typeparamref name="TResult"/>.
+        /// </returns>
         public static IAsyncEnumerable<TResult> Split<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             TSource separator,
@@ -53,6 +95,16 @@ namespace MoreAsyncLINQ
             return source.Split(separator, comparer: null, count, resultSelector);
         }
 
+        /// <summary>
+        /// Splits the source sequence by a separator and then transforms the
+        /// splits into results.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in the source sequence.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="separator">Separator element.</param>
+        /// <param name="comparer">Comparer used to determine separator
+        /// element equality.</param>
+        /// <returns>A sequence of splits of elements.</returns>
         public static IAsyncEnumerable<IAsyncEnumerable<TSource>> Split<TSource>(
             this IAsyncEnumerable<TSource> source,
             TSource separator,
@@ -63,6 +115,18 @@ namespace MoreAsyncLINQ
             return source.Split(separator, comparer, int.MaxValue);
         }
 
+        /// <summary>
+        /// Splits the source sequence by a separator, given a maximum count
+        /// of splits. A parameter specifies how the separator is compared
+        /// for equality.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in the source sequence.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="separator">Separator element.</param>
+        /// <param name="comparer">Comparer used to determine separator
+        /// element equality.</param>
+        /// <param name="count">Maximum number of splits.</param>
+        /// <returns>A sequence of splits of elements.</returns>
         public static IAsyncEnumerable<IAsyncEnumerable<TSource>> Split<TSource>(
             this IAsyncEnumerable<TSource> source,
             TSource separator,
@@ -75,6 +139,22 @@ namespace MoreAsyncLINQ
             return source.Split(separator, comparer, count, static enumerable => enumerable);
         }
 
+        /// <summary>
+        /// Splits the source sequence by a separator and then transforms the
+        /// splits into results. A parameter specifies how the separator is
+        /// compared for equality.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in the source sequence.</typeparam>
+        /// <typeparam name="TResult">Type of the result sequence elements.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="separator">Separator element.</param>
+        /// <param name="comparer">Comparer used to determine separator
+        /// element equality.</param>
+        /// <param name="resultSelector">Function used to project splits
+        /// of source elements into elements of the resulting sequence.</param>
+        /// <returns>
+        /// A sequence of values typed as <typeparamref name="TResult"/>.
+        /// </returns>
         public static IAsyncEnumerable<TResult> Split<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             TSource separator,
@@ -88,6 +168,23 @@ namespace MoreAsyncLINQ
             return source.Split(separator, comparer, int.MaxValue, resultSelector);
         }
 
+        /// <summary>
+        /// Splits the source sequence by a separator, given a maximum count
+        /// of splits, and then transforms the splits into results. A
+        /// parameter specifies how the separator is compared for equality.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in the source sequence.</typeparam>
+        /// <typeparam name="TResult">Type of the result sequence elements.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="separator">Separator element.</param>
+        /// <param name="comparer">Comparer used to determine separator
+        /// element equality.</param>
+        /// <param name="count">Maximum number of splits.</param>
+        /// <param name="resultSelector">Function used to project splits
+        /// of source elements into elements of the resulting sequence.</param>
+        /// <returns>
+        /// A sequence of values typed as <typeparamref name="TResult"/>.
+        /// </returns>
         public static IAsyncEnumerable<TResult> Split<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             TSource separator,
@@ -106,6 +203,15 @@ namespace MoreAsyncLINQ
                 resultSelector);
         }
 
+        /// <summary>
+        /// Splits the source sequence by separator elements identified by a
+        /// function.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in the source sequence.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="separatorFunc">Predicate function used to determine
+        /// the splitter elements in the source sequence.</param>
+        /// <returns>A sequence of splits of elements.</returns>
         public static IAsyncEnumerable<IAsyncEnumerable<TSource>> Split<TSource>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, bool> separatorFunc)
@@ -116,6 +222,16 @@ namespace MoreAsyncLINQ
             return source.Split(separatorFunc, int.MaxValue);
         }
 
+        /// <summary>
+        /// Splits the source sequence by separator elements identified by a
+        /// function, given a maximum count of splits.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in the source sequence.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="separatorFunc">Predicate function used to determine
+        /// the splitter elements in the source sequence.</param>
+        /// <param name="count">Maximum number of splits.</param>
+        /// <returns>A sequence of splits of elements.</returns>
         public static IAsyncEnumerable<IAsyncEnumerable<TSource>> Split<TSource>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, bool> separatorFunc,
@@ -128,6 +244,20 @@ namespace MoreAsyncLINQ
             return source.Split(separatorFunc, count, static enumerable => enumerable);
         }
 
+        /// <summary>
+        /// Splits the source sequence by separator elements identified by
+        /// a function and then transforms the splits into results.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in the source sequence.</typeparam>
+        /// <typeparam name="TResult">Type of the result sequence elements.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="separatorFunc">Predicate function used to determine
+        /// the splitter elements in the source sequence.</param>
+        /// <param name="resultSelector">Function used to project splits
+        /// of source elements into elements of the resulting sequence.</param>
+        /// <returns>
+        /// A sequence of values typed as <typeparamref name="TResult"/>.
+        /// </returns>
         public static IAsyncEnumerable<TResult> Split<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, bool> separatorFunc,
@@ -140,6 +270,22 @@ namespace MoreAsyncLINQ
             return source.Split(separatorFunc, int.MaxValue, resultSelector);
         }
 
+        /// <summary>
+        /// Splits the source sequence by separator elements identified by
+        /// a function, given a maximum count of splits, and then transforms
+        /// the splits into results.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in the source sequence.</typeparam>
+        /// <typeparam name="TResult">Type of the result sequence elements.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="separatorFunc">Predicate function used to determine
+        /// the splitter elements in the source sequence.</param>
+        /// <param name="count">Maximum number of splits.</param>
+        /// <param name="resultSelector">Function used to project a split
+        /// group of source elements into an element of the resulting sequence.</param>
+        /// <returns>
+        /// A sequence of values typed as <typeparamref name="TResult"/>.
+        /// </returns>
         public static IAsyncEnumerable<TResult> Split<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, bool> separatorFunc,
@@ -191,6 +337,13 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Splits the source sequence by a separator.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in the source sequence.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="separator">Separator element.</param>
+        /// <returns>A sequence of splits of elements.</returns>
         public static IAsyncEnumerable<IAsyncEnumerable<TSource>> SplitAwait<TSource>(
             this IAsyncEnumerable<TSource> source,
             TSource separator)
@@ -200,6 +353,14 @@ namespace MoreAsyncLINQ
             return source.SplitAwait(separator, int.MaxValue);
         }
 
+        /// <summary>
+        /// Splits the source sequence by a separator given a maximum count of splits.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in the source sequence.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="separator">Separator element.</param>
+        /// <param name="count">Maximum number of splits.</param>
+        /// <returns>A sequence of splits of elements.</returns>
         public static IAsyncEnumerable<IAsyncEnumerable<TSource>> SplitAwait<TSource>(
             this IAsyncEnumerable<TSource> source,
             TSource separator,
@@ -211,6 +372,19 @@ namespace MoreAsyncLINQ
             return source.SplitAwait(separator, count, ValueTasks.FromResult);
         }
 
+        /// <summary>
+        /// Splits the source sequence by a separator and then transforms
+        /// the splits into results.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in the source sequence.</typeparam>
+        /// <typeparam name="TResult">Type of the result sequence elements.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="separator">Separator element.</param>
+        /// <param name="resultSelector">Function used to project splits
+        /// of source elements into elements of the resulting sequence.</param>
+        /// <returns>
+        /// A sequence of values typed as <typeparamref name="TResult"/>.
+        /// </returns>
         public static IAsyncEnumerable<TResult> SplitAwait<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             TSource separator,
@@ -222,6 +396,20 @@ namespace MoreAsyncLINQ
             return source.SplitAwait(separator, int.MaxValue, resultSelector);
         }
 
+        /// <summary>
+        /// Splits the source sequence by a separator, given a maximum count
+        /// of splits, and then transforms the splits into results.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in the source sequence.</typeparam>
+        /// <typeparam name="TResult">Type of the result sequence elements.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="separator">Separator element.</param>
+        /// <param name="count">Maximum number of splits.</param>
+        /// <param name="resultSelector">Function used to project splits
+        /// of source elements into elements of the resulting sequence.</param>
+        /// <returns>
+        /// A sequence of values typed as <typeparamref name="TResult"/>.
+        /// </returns>
         public static IAsyncEnumerable<TResult> SplitAwait<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             TSource separator,
@@ -235,6 +423,16 @@ namespace MoreAsyncLINQ
             return source.SplitAwait(separator, comparer: null, count, resultSelector);
         }
 
+        /// <summary>
+        /// Splits the source sequence by a separator and then transforms the
+        /// splits into results.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in the source sequence.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="separator">Separator element.</param>
+        /// <param name="comparer">Comparer used to determine separator
+        /// element equality.</param>
+        /// <returns>A sequence of splits of elements.</returns>
         public static IAsyncEnumerable<IAsyncEnumerable<TSource>> SplitAwait<TSource>(
             this IAsyncEnumerable<TSource> source,
             TSource separator,
@@ -245,6 +443,18 @@ namespace MoreAsyncLINQ
             return source.SplitAwait(separator, comparer, int.MaxValue);
         }
 
+        /// <summary>
+        /// Splits the source sequence by a separator, given a maximum count
+        /// of splits. A parameter specifies how the separator is compared
+        /// for equality.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in the source sequence.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="separator">Separator element.</param>
+        /// <param name="comparer">Comparer used to determine separator
+        /// element equality.</param>
+        /// <param name="count">Maximum number of splits.</param>
+        /// <returns>A sequence of splits of elements.</returns>
         public static IAsyncEnumerable<IAsyncEnumerable<TSource>> SplitAwait<TSource>(
             this IAsyncEnumerable<TSource> source,
             TSource separator,
@@ -257,6 +467,22 @@ namespace MoreAsyncLINQ
             return source.SplitAwait(separator, comparer, count, ValueTasks.FromResult);
         }
 
+        /// <summary>
+        /// Splits the source sequence by a separator and then transforms the
+        /// splits into results. A parameter specifies how the separator is
+        /// compared for equality.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in the source sequence.</typeparam>
+        /// <typeparam name="TResult">Type of the result sequence elements.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="separator">Separator element.</param>
+        /// <param name="comparer">Comparer used to determine separator
+        /// element equality.</param>
+        /// <param name="resultSelector">Function used to project splits
+        /// of source elements into elements of the resulting sequence.</param>
+        /// <returns>
+        /// A sequence of values typed as <typeparamref name="TResult"/>.
+        /// </returns>
         public static IAsyncEnumerable<TResult> SplitAwait<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             TSource separator,
@@ -270,6 +496,23 @@ namespace MoreAsyncLINQ
             return source.SplitAwait(separator, comparer, int.MaxValue, resultSelector);
         }
 
+        /// <summary>
+        /// Splits the source sequence by a separator, given a maximum count
+        /// of splits, and then transforms the splits into results. A
+        /// parameter specifies how the separator is compared for equality.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in the source sequence.</typeparam>
+        /// <typeparam name="TResult">Type of the result sequence elements.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="separator">Separator element.</param>
+        /// <param name="comparer">Comparer used to determine separator
+        /// element equality.</param>
+        /// <param name="count">Maximum number of splits.</param>
+        /// <param name="resultSelector">Function used to project splits
+        /// of source elements into elements of the resulting sequence.</param>
+        /// <returns>
+        /// A sequence of values typed as <typeparamref name="TResult"/>.
+        /// </returns>
         public static IAsyncEnumerable<TResult> SplitAwait<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             TSource separator,
@@ -288,6 +531,15 @@ namespace MoreAsyncLINQ
                 resultSelector);
         }
 
+        /// <summary>
+        /// Splits the source sequence by separator elements identified by a
+        /// function.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in the source sequence.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="separatorFunc">Predicate function used to determine
+        /// the splitter elements in the source sequence.</param>
+        /// <returns>A sequence of splits of elements.</returns>
         public static IAsyncEnumerable<IAsyncEnumerable<TSource>> SplitAwait<TSource>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, ValueTask<bool>> separatorFunc)
@@ -298,6 +550,16 @@ namespace MoreAsyncLINQ
             return source.SplitAwait(separatorFunc, int.MaxValue);
         }
 
+        /// <summary>
+        /// Splits the source sequence by separator elements identified by a
+        /// function, given a maximum count of splits.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in the source sequence.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="separatorFunc">Predicate function used to determine
+        /// the splitter elements in the source sequence.</param>
+        /// <param name="count">Maximum number of splits.</param>
+        /// <returns>A sequence of splits of elements.</returns>
         public static IAsyncEnumerable<IAsyncEnumerable<TSource>> SplitAwait<TSource>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, ValueTask<bool>> separatorFunc,
@@ -310,6 +572,20 @@ namespace MoreAsyncLINQ
             return source.SplitAwait(separatorFunc, count, ValueTasks.FromResult);
         }
 
+        /// <summary>
+        /// Splits the source sequence by separator elements identified by
+        /// a function and then transforms the splits into results.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in the source sequence.</typeparam>
+        /// <typeparam name="TResult">Type of the result sequence elements.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="separatorFunc">Predicate function used to determine
+        /// the splitter elements in the source sequence.</param>
+        /// <param name="resultSelector">Function used to project splits
+        /// of source elements into elements of the resulting sequence.</param>
+        /// <returns>
+        /// A sequence of values typed as <typeparamref name="TResult"/>.
+        /// </returns>
         public static IAsyncEnumerable<TResult> SplitAwait<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, ValueTask<bool>> separatorFunc,
@@ -322,6 +598,22 @@ namespace MoreAsyncLINQ
             return source.SplitAwait(separatorFunc, int.MaxValue, resultSelector);
         }
 
+        /// <summary>
+        /// Splits the source sequence by separator elements identified by
+        /// a function, given a maximum count of splits, and then transforms
+        /// the splits into results.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in the source sequence.</typeparam>
+        /// <typeparam name="TResult">Type of the result sequence elements.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="separatorFunc">Predicate function used to determine
+        /// the splitter elements in the source sequence.</param>
+        /// <param name="count">Maximum number of splits.</param>
+        /// <param name="resultSelector">Function used to project a split
+        /// group of source elements into an element of the resulting sequence.</param>
+        /// <returns>
+        /// A sequence of values typed as <typeparamref name="TResult"/>.
+        /// </returns>
         public static IAsyncEnumerable<TResult> SplitAwait<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, ValueTask<bool>> separatorFunc,

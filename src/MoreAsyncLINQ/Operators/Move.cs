@@ -8,6 +8,24 @@ namespace MoreAsyncLINQ
 {
     static partial class MoreAsyncEnumerable
     {
+        /// <summary>
+        /// Returns a sequence with a range of elements in the source sequence
+        /// moved to a new offset.
+        /// </summary>
+        /// <typeparam name="TSource">Type of the source sequence.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="fromIndex">
+        /// The zero-based index identifying the first element in the range of
+        /// elements to move.</param>
+        /// <param name="count">The count of items to move.</param>
+        /// <param name="toIndex">
+        /// The index where the specified range will be moved.</param>
+        /// <returns>
+        /// A sequence with the specified range moved to the new position.
+        /// </returns>
+        /// <remarks>
+        /// This operator uses deferred execution and streams its results.
+        /// </remarks>
         public static IAsyncEnumerable<TSource> Move<TSource>(
             this IAsyncEnumerable<TSource> source,
             int fromIndex,

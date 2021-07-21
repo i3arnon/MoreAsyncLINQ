@@ -6,6 +6,27 @@ namespace MoreAsyncLINQ
 {
     static partial class MoreAsyncEnumerable
     {
+        /// <summary>
+        /// Returns a projection of tuples, where each tuple contains the N-th
+        /// element from each of the argument sequences. The resulting sequence
+        /// will always be as long as the longest of input sequences where the
+        /// default value of each of the shorter sequence element types is used
+        /// for padding.
+        /// </summary>
+        /// <typeparam name="T1">Type of elements in first sequence.</typeparam>
+        /// <typeparam name="T2">Type of elements in second sequence.</typeparam>
+        /// <typeparam name="TResult">Type of elements in result sequence.</typeparam>
+        /// <param name="first">The first sequence.</param>
+        /// <param name="second">The second sequence.</param>
+        /// <param name="resultSelector">
+        /// Function to apply to each pair of elements.</param>
+        /// <returns>
+        /// A sequence that contains elements of the two input sequences,
+        /// combined by <paramref name="resultSelector"/>.
+        /// </returns>
+        /// <remarks>
+        /// This operator uses deferred execution and streams its results.
+        /// </remarks>
         public static IAsyncEnumerable<TResult> ZipLongest<T1, T2, TResult>(
             this IAsyncEnumerable<T1> first,
             IAsyncEnumerable<T2> second,
@@ -23,6 +44,29 @@ namespace MoreAsyncLINQ
                 limit: 1);
         }
 
+        /// <summary>
+        /// Returns a projection of tuples, where each tuple contains the N-th
+        /// element from each of the argument sequences. The resulting sequence
+        /// will always be as long as the longest of input sequences where the
+        /// default value of each of the shorter sequence element types is used
+        /// for padding.
+        /// </summary>
+        /// <typeparam name="T1">Type of elements in first sequence</typeparam>
+        /// <typeparam name="T2">Type of elements in second sequence</typeparam>
+        /// <typeparam name="T3">Type of elements in third sequence</typeparam>
+        /// <typeparam name="TResult">Type of elements in result sequence</typeparam>
+        /// <param name="first">The first sequence.</param>
+        /// <param name="second">The second sequence.</param>
+        /// <param name="third">The third sequence.</param>
+        /// <param name="resultSelector">
+        /// Function to apply to each quadruplet of elements.</param>
+        /// <returns>
+        /// A sequence that contains elements of the four input sequences,
+        /// combined by <paramref name="resultSelector"/>.
+        /// </returns>
+        /// <remarks>
+        /// This operator uses deferred execution and streams its results.
+        /// </remarks>
         public static IAsyncEnumerable<TResult> ZipLongest<T1, T2, T3, TResult>(
             this IAsyncEnumerable<T1> first,
             IAsyncEnumerable<T2> second,
@@ -42,6 +86,31 @@ namespace MoreAsyncLINQ
                 limit: 2);
         }
 
+        /// <summary>
+        /// Returns a projection of tuples, where each tuple contains the N-th
+        /// element from each of the argument sequences. The resulting sequence
+        /// will always be as long as the longest of input sequences where the
+        /// default value of each of the shorter sequence element types is used
+        /// for padding.
+        /// </summary>
+        /// <typeparam name="T1">Type of elements in first sequence</typeparam>
+        /// <typeparam name="T2">Type of elements in second sequence</typeparam>
+        /// <typeparam name="T3">Type of elements in third sequence</typeparam>
+        /// <typeparam name="T4">Type of elements in fourth sequence</typeparam>
+        /// <typeparam name="TResult">Type of elements in result sequence</typeparam>
+        /// <param name="first">The first sequence.</param>
+        /// <param name="second">The second sequence.</param>
+        /// <param name="third">The third sequence.</param>
+        /// <param name="fourth">The fourth sequence.</param>
+        /// <param name="resultSelector">
+        /// Function to apply to each quadruplet of elements.</param>
+        /// <returns>
+        /// A sequence that contains elements of the four input sequences,
+        /// combined by <paramref name="resultSelector"/>.
+        /// </returns>
+        /// <remarks>
+        /// This operator uses deferred execution and streams its results.
+        /// </remarks>
         public static IAsyncEnumerable<TResult> ZipLongest<T1, T2, T3, T4, TResult>(
             this IAsyncEnumerable<T1> first,
             IAsyncEnumerable<T2> second,
@@ -58,6 +127,27 @@ namespace MoreAsyncLINQ
             return first.Zip(second, third, fourth, resultSelector, limit: 3);
         }
 
+        /// <summary>
+        /// Returns a projection of tuples, where each tuple contains the N-th
+        /// element from each of the argument sequences. The resulting sequence
+        /// will always be as long as the longest of input sequences where the
+        /// default value of each of the shorter sequence element types is used
+        /// for padding.
+        /// </summary>
+        /// <typeparam name="T1">Type of elements in first sequence</typeparam>
+        /// <typeparam name="T2">Type of elements in second sequence</typeparam>
+        /// <typeparam name="TResult">Type of elements in result sequence</typeparam>
+        /// <param name="first">The first sequence.</param>
+        /// <param name="second">The second sequence.</param>
+        /// <param name="resultSelector">
+        /// Function to apply to each quadruplet of elements.</param>
+        /// <returns>
+        /// A sequence that contains elements of the four input sequences,
+        /// combined by <paramref name="resultSelector"/>.
+        /// </returns>
+        /// <remarks>
+        /// This operator uses deferred execution and streams its results.
+        /// </remarks>
         public static IAsyncEnumerable<TResult> ZipLongestAwait<T1, T2, TResult>(
             this IAsyncEnumerable<T1> first,
             IAsyncEnumerable<T2> second,
@@ -75,6 +165,29 @@ namespace MoreAsyncLINQ
                 limit: 1);
         }
 
+        /// <summary>
+        /// Returns a projection of tuples, where each tuple contains the N-th
+        /// element from each of the argument sequences. The resulting sequence
+        /// will always be as long as the longest of input sequences where the
+        /// default value of each of the shorter sequence element types is used
+        /// for padding.
+        /// </summary>
+        /// <typeparam name="T1">Type of elements in first sequence</typeparam>
+        /// <typeparam name="T2">Type of elements in second sequence</typeparam>
+        /// <typeparam name="T3">Type of elements in third sequence</typeparam>
+        /// <typeparam name="TResult">Type of elements in result sequence</typeparam>
+        /// <param name="first">The first sequence.</param>
+        /// <param name="second">The second sequence.</param>
+        /// <param name="third">The third sequence.</param>
+        /// <param name="resultSelector">
+        /// Function to apply to each quadruplet of elements.</param>
+        /// <returns>
+        /// A sequence that contains elements of the four input sequences,
+        /// combined by <paramref name="resultSelector"/>.
+        /// </returns>
+        /// <remarks>
+        /// This operator uses deferred execution and streams its results.
+        /// </remarks>
         public static IAsyncEnumerable<TResult> ZipLongestAwait<T1, T2, T3, TResult>(
             this IAsyncEnumerable<T1> first,
             IAsyncEnumerable<T2> second,
@@ -94,6 +207,31 @@ namespace MoreAsyncLINQ
                 limit: 2);
         }
 
+        /// <summary>
+        /// Returns a projection of tuples, where each tuple contains the N-th
+        /// element from each of the argument sequences. The resulting sequence
+        /// will always be as long as the longest of input sequences where the
+        /// default value of each of the shorter sequence element types is used
+        /// for padding.
+        /// </summary>
+        /// <typeparam name="T1">Type of elements in first sequence</typeparam>
+        /// <typeparam name="T2">Type of elements in second sequence</typeparam>
+        /// <typeparam name="T3">Type of elements in third sequence</typeparam>
+        /// <typeparam name="T4">Type of elements in fourth sequence</typeparam>
+        /// <typeparam name="TResult">Type of elements in result sequence</typeparam>
+        /// <param name="first">The first sequence.</param>
+        /// <param name="second">The second sequence.</param>
+        /// <param name="third">The third sequence.</param>
+        /// <param name="fourth">The fourth sequence.</param>
+        /// <param name="resultSelector">
+        /// Function to apply to each quadruplet of elements.</param>
+        /// <returns>
+        /// A sequence that contains elements of the four input sequences,
+        /// combined by <paramref name="resultSelector"/>.
+        /// </returns>
+        /// <remarks>
+        /// This operator uses deferred execution and streams its results.
+        /// </remarks>
         public static IAsyncEnumerable<TResult> ZipLongestAwait<T1, T2, T3, T4, TResult>(
             this IAsyncEnumerable<T1> first,
             IAsyncEnumerable<T2> second,

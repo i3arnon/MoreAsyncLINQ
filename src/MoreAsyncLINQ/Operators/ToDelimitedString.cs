@@ -8,6 +8,25 @@ namespace MoreAsyncLINQ
 {
     static partial class MoreAsyncEnumerable
     {
+        /// <summary>
+        /// Creates a delimited string from a sequence of values and
+        /// a given delimiter.
+        /// </summary>
+        /// <param name="source">The sequence of items to delimit. Each is converted to a string using the
+        /// simple ToString() conversion.</param>
+        /// <param name="delimiter">The delimiter to inject between elements.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>
+        /// A string that consists of the elements in <paramref name="source"/>
+        /// delimited by <paramref name="delimiter"/>. If the source sequence
+        /// is empty, the method returns an empty string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="source"/> or <paramref name="delimiter"/> is <c>null</c>.
+        /// </exception>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers the sequence.
+        /// </remarks>
         public static ValueTask<string> ToDelimitedStringAsync(
             this IAsyncEnumerable<bool> source,
             string delimiter,
@@ -22,6 +41,25 @@ namespace MoreAsyncLINQ
                 cancellationToken);
         }
 
+        /// <summary>
+        /// Creates a delimited string from a sequence of values and
+        /// a given delimiter.
+        /// </summary>
+        /// <param name="source">The sequence of items to delimit. Each is converted to a string using the
+        /// simple ToString() conversion.</param>
+        /// <param name="delimiter">The delimiter to inject between elements.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>
+        /// A string that consists of the elements in <paramref name="source"/>
+        /// delimited by <paramref name="delimiter"/>. If the source sequence
+        /// is empty, the method returns an empty string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="source"/> or <paramref name="delimiter"/> is <c>null</c>.
+        /// </exception>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers the sequence.
+        /// </remarks>
         public static ValueTask<string> ToDelimitedStringAsync(
             this IAsyncEnumerable<byte> source,
             string delimiter,
@@ -36,6 +74,25 @@ namespace MoreAsyncLINQ
                 cancellationToken);
         }
 
+        /// <summary>
+        /// Creates a delimited string from a sequence of values and
+        /// a given delimiter.
+        /// </summary>
+        /// <param name="source">The sequence of items to delimit. Each is converted to a string using the
+        /// simple ToString() conversion.</param>
+        /// <param name="delimiter">The delimiter to inject between elements.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>
+        /// A string that consists of the elements in <paramref name="source"/>
+        /// delimited by <paramref name="delimiter"/>. If the source sequence
+        /// is empty, the method returns an empty string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="source"/> or <paramref name="delimiter"/> is <c>null</c>.
+        /// </exception>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers the sequence.
+        /// </remarks>
         public static ValueTask<string> ToDelimitedStringAsync(
             this IAsyncEnumerable<char> source,
             string delimiter,
@@ -50,6 +107,25 @@ namespace MoreAsyncLINQ
                 cancellationToken);
         }
 
+        /// <summary>
+        /// Creates a delimited string from a sequence of values and
+        /// a given delimiter.
+        /// </summary>
+        /// <param name="source">The sequence of items to delimit. Each is converted to a string using the
+        /// simple ToString() conversion.</param>
+        /// <param name="delimiter">The delimiter to inject between elements.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>
+        /// A string that consists of the elements in <paramref name="source"/>
+        /// delimited by <paramref name="delimiter"/>. If the source sequence
+        /// is empty, the method returns an empty string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="source"/> or <paramref name="delimiter"/> is <c>null</c>.
+        /// </exception>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers the sequence.
+        /// </remarks>
         public static ValueTask<string> ToDelimitedStringAsync(
             this IAsyncEnumerable<decimal> source,
             string delimiter,
@@ -64,6 +140,25 @@ namespace MoreAsyncLINQ
                 cancellationToken);
         }
 
+        /// <summary>
+        /// Creates a delimited string from a sequence of values and
+        /// a given delimiter.
+        /// </summary>
+        /// <param name="source">The sequence of items to delimit. Each is converted to a string using the
+        /// simple ToString() conversion.</param>
+        /// <param name="delimiter">The delimiter to inject between elements.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>
+        /// A string that consists of the elements in <paramref name="source"/>
+        /// delimited by <paramref name="delimiter"/>. If the source sequence
+        /// is empty, the method returns an empty string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="source"/> or <paramref name="delimiter"/> is <c>null</c>.
+        /// </exception>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers the sequence.
+        /// </remarks>
         public static ValueTask<string> ToDelimitedStringAsync(
             this IAsyncEnumerable<double> source,
             string delimiter,
@@ -78,6 +173,25 @@ namespace MoreAsyncLINQ
                 cancellationToken);
         }
 
+        /// <summary>
+        /// Creates a delimited string from a sequence of values and
+        /// a given delimiter.
+        /// </summary>
+        /// <param name="source">The sequence of items to delimit. Each is converted to a string using the
+        /// simple ToString() conversion.</param>
+        /// <param name="delimiter">The delimiter to inject between elements.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>
+        /// A string that consists of the elements in <paramref name="source"/>
+        /// delimited by <paramref name="delimiter"/>. If the source sequence
+        /// is empty, the method returns an empty string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="source"/> or <paramref name="delimiter"/> is <c>null</c>.
+        /// </exception>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers the sequence.
+        /// </remarks>
         public static ValueTask<string> ToDelimitedStringAsync(
             this IAsyncEnumerable<float> source,
             string delimiter,
@@ -92,6 +206,25 @@ namespace MoreAsyncLINQ
                 cancellationToken);
         }
 
+        /// <summary>
+        /// Creates a delimited string from a sequence of values and
+        /// a given delimiter.
+        /// </summary>
+        /// <param name="source">The sequence of items to delimit. Each is converted to a string using the
+        /// simple ToString() conversion.</param>
+        /// <param name="delimiter">The delimiter to inject between elements.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>
+        /// A string that consists of the elements in <paramref name="source"/>
+        /// delimited by <paramref name="delimiter"/>. If the source sequence
+        /// is empty, the method returns an empty string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="source"/> or <paramref name="delimiter"/> is <c>null</c>.
+        /// </exception>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers the sequence.
+        /// </remarks>
         public static ValueTask<string> ToDelimitedStringAsync(
             this IAsyncEnumerable<int> source,
             string delimiter,
@@ -106,6 +239,25 @@ namespace MoreAsyncLINQ
                 cancellationToken);
         }
 
+        /// <summary>
+        /// Creates a delimited string from a sequence of values and
+        /// a given delimiter.
+        /// </summary>
+        /// <param name="source">The sequence of items to delimit. Each is converted to a string using the
+        /// simple ToString() conversion.</param>
+        /// <param name="delimiter">The delimiter to inject between elements.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>
+        /// A string that consists of the elements in <paramref name="source"/>
+        /// delimited by <paramref name="delimiter"/>. If the source sequence
+        /// is empty, the method returns an empty string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="source"/> or <paramref name="delimiter"/> is <c>null</c>.
+        /// </exception>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers the sequence.
+        /// </remarks>
         public static ValueTask<string> ToDelimitedStringAsync(
             this IAsyncEnumerable<long> source,
             string delimiter,
@@ -120,6 +272,25 @@ namespace MoreAsyncLINQ
                 cancellationToken);
         }
 
+        /// <summary>
+        /// Creates a delimited string from a sequence of values and
+        /// a given delimiter.
+        /// </summary>
+        /// <param name="source">The sequence of items to delimit. Each is converted to a string using the
+        /// simple ToString() conversion.</param>
+        /// <param name="delimiter">The delimiter to inject between elements.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>
+        /// A string that consists of the elements in <paramref name="source"/>
+        /// delimited by <paramref name="delimiter"/>. If the source sequence
+        /// is empty, the method returns an empty string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="source"/> or <paramref name="delimiter"/> is <c>null</c>.
+        /// </exception>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers the sequence.
+        /// </remarks>
         public static ValueTask<string> ToDelimitedStringAsync(
             this IAsyncEnumerable<sbyte> source,
             string delimiter,
@@ -134,6 +305,25 @@ namespace MoreAsyncLINQ
                 cancellationToken);
         }
 
+        /// <summary>
+        /// Creates a delimited string from a sequence of values and
+        /// a given delimiter.
+        /// </summary>
+        /// <param name="source">The sequence of items to delimit. Each is converted to a string using the
+        /// simple ToString() conversion.</param>
+        /// <param name="delimiter">The delimiter to inject between elements.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>
+        /// A string that consists of the elements in <paramref name="source"/>
+        /// delimited by <paramref name="delimiter"/>. If the source sequence
+        /// is empty, the method returns an empty string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="source"/> or <paramref name="delimiter"/> is <c>null</c>.
+        /// </exception>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers the sequence.
+        /// </remarks>
         public static ValueTask<string> ToDelimitedStringAsync(
             this IAsyncEnumerable<short> source,
             string delimiter,
@@ -148,6 +338,25 @@ namespace MoreAsyncLINQ
                 cancellationToken);
         }
 
+        /// <summary>
+        /// Creates a delimited string from a sequence of values and
+        /// a given delimiter.
+        /// </summary>
+        /// <param name="source">The sequence of items to delimit. Each is converted to a string using the
+        /// simple ToString() conversion.</param>
+        /// <param name="delimiter">The delimiter to inject between elements.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>
+        /// A string that consists of the elements in <paramref name="source"/>
+        /// delimited by <paramref name="delimiter"/>. If the source sequence
+        /// is empty, the method returns an empty string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="source"/> or <paramref name="delimiter"/> is <c>null</c>.
+        /// </exception>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers the sequence.
+        /// </remarks>
         public static ValueTask<string> ToDelimitedStringAsync(
             this IAsyncEnumerable<string> source,
             string delimiter,
@@ -162,6 +371,25 @@ namespace MoreAsyncLINQ
                 cancellationToken);
         }
 
+        /// <summary>
+        /// Creates a delimited string from a sequence of values and
+        /// a given delimiter.
+        /// </summary>
+        /// <param name="source">The sequence of items to delimit. Each is converted to a string using the
+        /// simple ToString() conversion.</param>
+        /// <param name="delimiter">The delimiter to inject between elements.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>
+        /// A string that consists of the elements in <paramref name="source"/>
+        /// delimited by <paramref name="delimiter"/>. If the source sequence
+        /// is empty, the method returns an empty string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="source"/> or <paramref name="delimiter"/> is <c>null</c>.
+        /// </exception>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers the sequence.
+        /// </remarks>
         public static ValueTask<string> ToDelimitedStringAsync(
             this IAsyncEnumerable<uint> source,
             string delimiter,
@@ -176,6 +404,25 @@ namespace MoreAsyncLINQ
                 cancellationToken);
         }
 
+        /// <summary>
+        /// Creates a delimited string from a sequence of values and
+        /// a given delimiter.
+        /// </summary>
+        /// <param name="source">The sequence of items to delimit. Each is converted to a string using the
+        /// simple ToString() conversion.</param>
+        /// <param name="delimiter">The delimiter to inject between elements.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>
+        /// A string that consists of the elements in <paramref name="source"/>
+        /// delimited by <paramref name="delimiter"/>. If the source sequence
+        /// is empty, the method returns an empty string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="source"/> or <paramref name="delimiter"/> is <c>null</c>.
+        /// </exception>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers the sequence.
+        /// </remarks>
         public static ValueTask<string> ToDelimitedStringAsync(
             this IAsyncEnumerable<ulong> source,
             string delimiter,
@@ -190,6 +437,25 @@ namespace MoreAsyncLINQ
                 cancellationToken);
         }
 
+        /// <summary>
+        /// Creates a delimited string from a sequence of values and
+        /// a given delimiter.
+        /// </summary>
+        /// <param name="source">The sequence of items to delimit. Each is converted to a string using the
+        /// simple ToString() conversion.</param>
+        /// <param name="delimiter">The delimiter to inject between elements.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>
+        /// A string that consists of the elements in <paramref name="source"/>
+        /// delimited by <paramref name="delimiter"/>. If the source sequence
+        /// is empty, the method returns an empty string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="source"/> or <paramref name="delimiter"/> is <c>null</c>.
+        /// </exception>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers the sequence.
+        /// </remarks>
         public static ValueTask<string> ToDelimitedStringAsync(
             this IAsyncEnumerable<ushort> source,
             string delimiter,
@@ -204,6 +470,26 @@ namespace MoreAsyncLINQ
                 cancellationToken);
         }
 
+        /// <summary>
+        /// Creates a delimited string from a sequence of values and
+        /// a given delimiter.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <param name="source">The sequence of items to delimit. Each is converted to a string using the
+        /// simple ToString() conversion.</param>
+        /// <param name="delimiter">The delimiter to inject between elements.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>
+        /// A string that consists of the elements in <paramref name="source"/>
+        /// delimited by <paramref name="delimiter"/>. If the source sequence
+        /// is empty, the method returns an empty string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="source"/> or <paramref name="delimiter"/> is <c>null</c>.
+        /// </exception>
+        /// <remarks>
+        /// This operator uses immediate execution and effectively buffers the sequence.
+        /// </remarks>
         public static ValueTask<string> ToDelimitedStringAsync<TSource>(
             this IAsyncEnumerable<TSource> source,
             string delimiter,

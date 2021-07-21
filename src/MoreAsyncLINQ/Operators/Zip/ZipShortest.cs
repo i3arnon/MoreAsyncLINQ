@@ -6,6 +6,30 @@ namespace MoreAsyncLINQ
 {
     static partial class MoreAsyncEnumerable
     {
+        /// <summary>
+        /// Returns a projection of tuples, where each tuple contains the N-th
+        /// element from each of the argument sequences. The resulting sequence
+        /// is as short as the shortest input sequence.
+        /// </summary>
+        /// <typeparam name="T1">Type of elements in first sequence.</typeparam>
+        /// <typeparam name="T2">Type of elements in second sequence.</typeparam>
+        /// <typeparam name="TResult">Type of elements in result sequence.</typeparam>
+        /// <param name="first">The first sequence.</param>
+        /// <param name="second">The second sequence.</param>
+        /// <param name="resultSelector">
+        /// Function to apply to each quadruplet of elements.</param>
+        /// <returns>
+        /// A projection of tuples, where each tuple contains the N-th element
+        /// from each of the argument sequences.</returns>
+        /// <remarks>
+        /// <para>
+        /// If the input sequences are of different lengths, the result sequence
+        /// is terminated as soon as the shortest input sequence is exhausted
+        /// and remainder elements from the longer sequences are never consumed.
+        /// </para>
+        /// <para>
+        /// This operator uses deferred execution and streams its results.</para>
+        /// </remarks>
         public static IAsyncEnumerable<TResult> ZipShortest<T1, T2, TResult>(
             this IAsyncEnumerable<T1> first,
             IAsyncEnumerable<T2> second,
@@ -23,6 +47,32 @@ namespace MoreAsyncLINQ
                 limit: 0);
         }
 
+        /// <summary>
+        /// Returns a projection of tuples, where each tuple contains the N-th
+        /// element from each of the argument sequences. The resulting sequence
+        /// is as short as the shortest input sequence.
+        /// </summary>
+        /// <typeparam name="T1">Type of elements in first sequence.</typeparam>
+        /// <typeparam name="T2">Type of elements in second sequence.</typeparam>
+        /// <typeparam name="T3">Type of elements in third sequence.</typeparam>
+        /// <typeparam name="TResult">Type of elements in result sequence.</typeparam>
+        /// <param name="first">The first sequence.</param>
+        /// <param name="second">The second sequence.</param>
+        /// <param name="third">The third sequence.</param>
+        /// <param name="resultSelector">
+        /// Function to apply to each quadruplet of elements.</param>
+        /// <returns>
+        /// A projection of tuples, where each tuple contains the N-th element
+        /// from each of the argument sequences.</returns>
+        /// <remarks>
+        /// <para>
+        /// If the input sequences are of different lengths, the result sequence
+        /// is terminated as soon as the shortest input sequence is exhausted
+        /// and remainder elements from the longer sequences are never consumed.
+        /// </para>
+        /// <para>
+        /// This operator uses deferred execution and streams its results.</para>
+        /// </remarks>
         public static IAsyncEnumerable<TResult> ZipShortest<T1, T2, T3, TResult>(
             this IAsyncEnumerable<T1> first,
             IAsyncEnumerable<T2> second,
@@ -42,6 +92,34 @@ namespace MoreAsyncLINQ
                 limit: 0);
         }
 
+        /// <summary>
+        /// Returns a projection of tuples, where each tuple contains the N-th
+        /// element from each of the argument sequences. The resulting sequence
+        /// is as short as the shortest input sequence.
+        /// </summary>
+        /// <typeparam name="T1">Type of elements in first sequence.</typeparam>
+        /// <typeparam name="T2">Type of elements in second sequence.</typeparam>
+        /// <typeparam name="T3">Type of elements in third sequence.</typeparam>
+        /// <typeparam name="T4">Type of elements in fourth sequence.</typeparam>
+        /// <typeparam name="TResult">Type of elements in result sequence.</typeparam>
+        /// <param name="first">The first sequence.</param>
+        /// <param name="second">The second sequence.</param>
+        /// <param name="third">The third sequence.</param>
+        /// <param name="fourth">The fourth sequence.</param>
+        /// <param name="resultSelector">
+        /// Function to apply to each quadruplet of elements.</param>
+        /// <returns>
+        /// A projection of tuples, where each tuple contains the N-th element
+        /// from each of the argument sequences.</returns>
+        /// <remarks>
+        /// <para>
+        /// If the input sequences are of different lengths, the result sequence
+        /// is terminated as soon as the shortest input sequence is exhausted
+        /// and remainder elements from the longer sequences are never consumed.
+        /// </para>
+        /// <para>
+        /// This operator uses deferred execution and streams its results.</para>
+        /// </remarks>
         public static IAsyncEnumerable<TResult> ZipShortest<T1, T2, T3, T4, TResult>(
             this IAsyncEnumerable<T1> first,
             IAsyncEnumerable<T2> second,
@@ -58,6 +136,30 @@ namespace MoreAsyncLINQ
             return first.Zip(second, third, fourth, resultSelector, limit: 0);
         }
 
+        /// <summary>
+        /// Returns a projection of tuples, where each tuple contains the N-th
+        /// element from each of the argument sequences. The resulting sequence
+        /// is as short as the shortest input sequence.
+        /// </summary>
+        /// <typeparam name="T1">Type of elements in first sequence.</typeparam>
+        /// <typeparam name="T2">Type of elements in second sequence.</typeparam>
+        /// <typeparam name="TResult">Type of elements in result sequence.</typeparam>
+        /// <param name="first">The first sequence.</param>
+        /// <param name="second">The second sequence.</param>
+        /// <param name="resultSelector">
+        /// Function to apply to each quadruplet of elements.</param>
+        /// <returns>
+        /// A projection of tuples, where each tuple contains the N-th element
+        /// from each of the argument sequences.</returns>
+        /// <remarks>
+        /// <para>
+        /// If the input sequences are of different lengths, the result sequence
+        /// is terminated as soon as the shortest input sequence is exhausted
+        /// and remainder elements from the longer sequences are never consumed.
+        /// </para>
+        /// <para>
+        /// This operator uses deferred execution and streams its results.</para>
+        /// </remarks>
         public static IAsyncEnumerable<TResult> ZipShortestAwait<T1, T2, TResult>(
             this IAsyncEnumerable<T1> first,
             IAsyncEnumerable<T2> second,
@@ -75,6 +177,32 @@ namespace MoreAsyncLINQ
                 limit: 0);
         }
 
+        /// <summary>
+        /// Returns a projection of tuples, where each tuple contains the N-th
+        /// element from each of the argument sequences. The resulting sequence
+        /// is as short as the shortest input sequence.
+        /// </summary>
+        /// <typeparam name="T1">Type of elements in first sequence.</typeparam>
+        /// <typeparam name="T2">Type of elements in second sequence.</typeparam>
+        /// <typeparam name="T3">Type of elements in third sequence.</typeparam>
+        /// <typeparam name="TResult">Type of elements in result sequence.</typeparam>
+        /// <param name="first">The first sequence.</param>
+        /// <param name="second">The second sequence.</param>
+        /// <param name="third">The third sequence.</param>
+        /// <param name="resultSelector">
+        /// Function to apply to each quadruplet of elements.</param>
+        /// <returns>
+        /// A projection of tuples, where each tuple contains the N-th element
+        /// from each of the argument sequences.</returns>
+        /// <remarks>
+        /// <para>
+        /// If the input sequences are of different lengths, the result sequence
+        /// is terminated as soon as the shortest input sequence is exhausted
+        /// and remainder elements from the longer sequences are never consumed.
+        /// </para>
+        /// <para>
+        /// This operator uses deferred execution and streams its results.</para>
+        /// </remarks>
         public static IAsyncEnumerable<TResult> ZipShortestAwait<T1, T2, T3, TResult>(
             this IAsyncEnumerable<T1> first,
             IAsyncEnumerable<T2> second,
@@ -94,6 +222,34 @@ namespace MoreAsyncLINQ
                 limit: 0);
         }
 
+        /// <summary>
+        /// Returns a projection of tuples, where each tuple contains the N-th
+        /// element from each of the argument sequences. The resulting sequence
+        /// is as short as the shortest input sequence.
+        /// </summary>
+        /// <typeparam name="T1">Type of elements in first sequence.</typeparam>
+        /// <typeparam name="T2">Type of elements in second sequence.</typeparam>
+        /// <typeparam name="T3">Type of elements in third sequence.</typeparam>
+        /// <typeparam name="T4">Type of elements in fourth sequence.</typeparam>
+        /// <typeparam name="TResult">Type of elements in result sequence.</typeparam>
+        /// <param name="first">The first sequence.</param>
+        /// <param name="second">The second sequence.</param>
+        /// <param name="third">The third sequence.</param>
+        /// <param name="fourth">The fourth sequence.</param>
+        /// <param name="resultSelector">
+        /// Function to apply to each quadruplet of elements.</param>
+        /// <returns>
+        /// A projection of tuples, where each tuple contains the N-th element
+        /// from each of the argument sequences.</returns>
+        /// <remarks>
+        /// <para>
+        /// If the input sequences are of different lengths, the result sequence
+        /// is terminated as soon as the shortest input sequence is exhausted
+        /// and remainder elements from the longer sequences are never consumed.
+        /// </para>
+        /// <para>
+        /// This operator uses deferred execution and streams its results.</para>
+        /// </remarks>
         public static IAsyncEnumerable<TResult> ZipShortestAwait<T1, T2, T3, T4, TResult>(
             this IAsyncEnumerable<T1> first,
             IAsyncEnumerable<T2> second,

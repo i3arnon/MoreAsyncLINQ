@@ -8,6 +8,20 @@ namespace MoreAsyncLINQ
 {
     static partial class MoreAsyncEnumerable
     {
+        /// <summary>
+        /// Pads a sequence with default values if it is narrower (shorter
+        /// in length) than a given width.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
+        /// <param name="source">The sequence to pad.</param>
+        /// <param name="width">The width/length below which to pad.</param>
+        /// <returns>
+        /// Returns a sequence that is at least as wide/long as the width/length
+        /// specified by the <paramref name="width"/> parameter.
+        /// </returns>
+        /// <remarks>
+        /// This operator uses deferred execution and streams its results.
+        /// </remarks>
         public static IAsyncEnumerable<TSource?> Pad<TSource>(
             this IAsyncEnumerable<TSource> source,
             int width)
@@ -21,7 +35,21 @@ namespace MoreAsyncLINQ
                 paddingSelector: null);
         }
 
-
+        /// <summary>
+        /// Pads a sequence with a given filler value if it is narrower (shorter
+        /// in length) than a given width.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
+        /// <param name="source">The sequence to pad.</param>
+        /// <param name="width">The width/length below which to pad.</param>
+        /// <param name="padding">The value to use for padding.</param>
+        /// <returns>
+        /// Returns a sequence that is at least as wide/long as the width/length
+        /// specified by the <paramref name="width"/> parameter.
+        /// </returns>
+        /// <remarks>
+        /// This operator uses deferred execution and streams its results.
+        /// </remarks>
         public static IAsyncEnumerable<TSource> Pad<TSource>(
             this IAsyncEnumerable<TSource> source,
             int width,
@@ -36,6 +64,21 @@ namespace MoreAsyncLINQ
                 paddingSelector: null);
         }
 
+        /// <summary>
+        /// Pads a sequence with a dynamic filler value if it is narrower (shorter
+        /// in length) than a given width.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
+        /// <param name="source">The sequence to pad.</param>
+        /// <param name="width">The width/length below which to pad.</param>
+        /// <param name="paddingSelector">Function to calculate padding.</param>
+        /// <returns>
+        /// Returns a sequence that is at least as wide/long as the width/length
+        /// specified by the <paramref name="width"/> parameter.
+        /// </returns>
+        /// <remarks>
+        /// This operator uses deferred execution and streams its results.
+        /// </remarks>
         public static IAsyncEnumerable<TSource> Pad<TSource>(
             this IAsyncEnumerable<TSource> source,
             int width,
@@ -76,6 +119,21 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Pads a sequence with a dynamic filler value if it is narrower (shorter
+        /// in length) than a given width.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
+        /// <param name="source">The sequence to pad.</param>
+        /// <param name="width">The width/length below which to pad.</param>
+        /// <param name="paddingSelector">Function to calculate padding.</param>
+        /// <returns>
+        /// Returns a sequence that is at least as wide/long as the width/length
+        /// specified by the <paramref name="width"/> parameter.
+        /// </returns>
+        /// <remarks>
+        /// This operator uses deferred execution and streams its results.
+        /// </remarks>
         public static IAsyncEnumerable<TSource> PadAwait<TSource>(
             this IAsyncEnumerable<TSource> source,
             int width,

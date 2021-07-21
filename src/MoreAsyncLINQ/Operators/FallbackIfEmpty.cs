@@ -10,6 +10,18 @@ namespace MoreAsyncLINQ
 {
     static partial class MoreAsyncEnumerable
     {
+        /// <summary>
+        /// Returns the elements of the specified sequence or the specified
+        /// value in a singleton collection if the sequence is empty.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements in the sequences.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="fallback">The value to return in a singleton
+        /// collection if <paramref name="source"/> is empty.</param>
+        /// <returns>
+        /// An <see cref="IAsyncEnumerable{T}"/> that contains <paramref name="fallback"/>
+        /// if <paramref name="source"/> is empty; otherwise, <paramref name="source"/>.
+        /// </returns>
         public static IAsyncEnumerable<TSource> FallbackIfEmpty<TSource>(
             this IAsyncEnumerable<TSource> source,
             TSource fallback)
@@ -25,6 +37,20 @@ namespace MoreAsyncLINQ
                 fallback: null);
         }
 
+        /// <summary>
+        /// Returns the elements of a sequence, but if it is empty then
+        /// returns an alternate sequence of values.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements in the sequences.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="fallback1">First value of the alternate sequence that
+        /// is returned if <paramref name="source"/> is empty.</param>
+        /// <param name="fallback2">Second value of the alternate sequence that
+        /// is returned if <paramref name="source"/> is empty.</param>
+        /// <returns>
+        /// An <see cref="IAsyncEnumerable{T}"/> that containing fallback values
+        /// if <paramref name="source"/> is empty; otherwise, <paramref name="source"/>.
+        /// </returns>
         public static IAsyncEnumerable<TSource> FallbackIfEmpty<TSource>(
             this IAsyncEnumerable<TSource> source,
             TSource fallback1,
@@ -41,6 +67,22 @@ namespace MoreAsyncLINQ
                 fallback: null);
         }
 
+        /// <summary>
+        /// Returns the elements of a sequence, but if it is empty then
+        /// returns an alternate sequence of values.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements in the sequences.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="fallback1">First value of the alternate sequence that
+        /// is returned if <paramref name="source"/> is empty.</param>
+        /// <param name="fallback2">Second value of the alternate sequence that
+        /// is returned if <paramref name="source"/> is empty.</param>
+        /// <param name="fallback3">Third value of the alternate sequence that
+        /// is returned if <paramref name="source"/> is empty.</param>
+        /// <returns>
+        /// An <see cref="IAsyncEnumerable{T}"/> that containing fallback values
+        /// if <paramref name="source"/> is empty; otherwise, <paramref name="source"/>.
+        /// </returns>
         public static IAsyncEnumerable<TSource> FallbackIfEmpty<TSource>(
             this IAsyncEnumerable<TSource> source,
             TSource fallback1,
@@ -58,6 +100,24 @@ namespace MoreAsyncLINQ
                 fallback: null);
         }
 
+        /// <summary>
+        /// Returns the elements of a sequence, but if it is empty then
+        /// returns an alternate sequence of values.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements in the sequences.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="fallback1">First value of the alternate sequence that
+        /// is returned if <paramref name="source"/> is empty.</param>
+        /// <param name="fallback2">Second value of the alternate sequence that
+        /// is returned if <paramref name="source"/> is empty.</param>
+        /// <param name="fallback3">Third value of the alternate sequence that
+        /// is returned if <paramref name="source"/> is empty.</param>
+        /// <param name="fallback4">Fourth value of the alternate sequence that
+        /// is returned if <paramref name="source"/> is empty.</param>
+        /// <returns>
+        /// An <see cref="IAsyncEnumerable{T}"/> that containing fallback values
+        /// if <paramref name="source"/> is empty; otherwise, <paramref name="source"/>.
+        /// </returns>
         public static IAsyncEnumerable<TSource> FallbackIfEmpty<TSource>(
             this IAsyncEnumerable<TSource> source,
             TSource fallback1,
@@ -76,6 +136,18 @@ namespace MoreAsyncLINQ
                 fallback: null);
         }
 
+        /// <summary>
+        /// Returns the elements of a sequence, but if it is empty then
+        /// returns an alternate sequence from an array of values.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements in the sequences.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="fallback">The array that is returned as the alternate
+        /// sequence if <paramref name="source"/> is empty.</param>
+        /// <returns>
+        /// An <see cref="IAsyncEnumerable{T}"/> that containing fallback values
+        /// if <paramref name="source"/> is empty; otherwise, <paramref name="source"/>.
+        /// </returns>
         public static IAsyncEnumerable<TSource> FallbackIfEmpty<TSource>(
             this IAsyncEnumerable<TSource> source,
             params TSource[] fallback)
@@ -86,6 +158,18 @@ namespace MoreAsyncLINQ
             return source.FallbackIfEmpty(fallback.ToAsyncEnumerable());
         }
 
+        /// <summary>
+        /// Returns the elements of a sequence, but if it is empty then
+        /// returns an alternate sequence of values.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements in the sequences.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="fallback">The alternate sequence that is returned
+        /// if <paramref name="source"/> is empty.</param>
+        /// <returns>
+        /// An <see cref="IAsyncEnumerable{T}"/> that containing fallback values
+        /// if <paramref name="source"/> is empty; otherwise, <paramref name="source"/>.
+        /// </returns>
         public static IAsyncEnumerable<TSource> FallbackIfEmpty<TSource>(
             this IAsyncEnumerable<TSource> source,
             IAsyncEnumerable<TSource> fallback)

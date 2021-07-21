@@ -10,6 +10,20 @@ namespace MoreAsyncLINQ
 {
     static partial class MoreAsyncEnumerable
     {
+        /// <summary>
+        /// Merges two or more sequences that are in a common order (either ascending or descending) into
+        /// a single sequence that preserves that order.
+        /// </summary>
+        /// <remarks>
+        /// Using SortedMerge on sequences that are not ordered or are not in the same order produces
+        /// undefined results.<br/>
+        /// <c>SortedMerge</c> uses performs the merge in a deferred, streaming manner. <br/>
+        /// </remarks>
+        /// <typeparam name="TSource">The type of the elements of the sequence</typeparam>
+        /// <param name="source">The primary sequence with which to merge</param>
+        /// <param name="direction">The ordering that all sequences must already exhibit</param>
+        /// <param name="otherSequences">A variable argument array of zero or more other sequences to merge with</param>
+        /// <returns>A merged, order-preserving sequence containing all of the elements of the original sequences</returns>
         public static IAsyncEnumerable<TSource> SortedMerge<TSource>(
             this IAsyncEnumerable<TSource> source,
             OrderByDirection direction,
@@ -21,6 +35,16 @@ namespace MoreAsyncLINQ
             return source.SortedMerge(direction, comparer: null, otherSequences);
         }
 
+        /// <summary>
+        /// Merges two or more sequences that are in a common order (either ascending or descending) into
+        /// a single sequence that preserves that order.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements in the sequence</typeparam>
+        /// <param name="source">The primary sequence with which to merge</param>
+        /// <param name="direction">The ordering that all sequences must already exhibit</param>
+        /// <param name="comparer">The comparer used to evaluate the relative order between elements</param>
+        /// <param name="otherSequences">A variable argument array of zero or more other sequences to merge with</param>
+        /// <returns>A merged, order-preserving sequence containing al of the elements of the original sequences</returns>
         public static IAsyncEnumerable<TSource> SortedMerge<TSource>(
             this IAsyncEnumerable<TSource> source,
             OrderByDirection direction,

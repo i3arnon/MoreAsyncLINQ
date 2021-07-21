@@ -8,6 +8,20 @@ namespace MoreAsyncLINQ
 {
     static partial class MoreAsyncEnumerable
     {
+        /// <summary>
+        /// Asserts that a source sequence contains a given count of elements.
+        /// </summary>
+        /// <typeparam name="TSource">Type of elements in <paramref name="source"/> sequence.</typeparam>
+        /// <param name="source">Source sequence.</param>
+        /// <param name="count">Count to assert.</param>
+        /// <returns>
+        /// Returns the original sequence as long it is contains the
+        /// number of elements specified by <paramref name="count"/>.
+        /// Otherwise it throws <see cref="Exception" />.
+        /// </returns>
+        /// <remarks>
+        /// This operator uses deferred execution and streams its results.
+        /// </remarks>
         public static IAsyncEnumerable<TSource> AssertCount<TSource>(
             this IAsyncEnumerable<TSource> source,
             int count)
@@ -20,6 +34,28 @@ namespace MoreAsyncLINQ
                 static (comparison, count) => new InvalidOperationException($"Sequence contains too {(comparison < 0 ? "few" : "many")} elements when exactly {count:N0} {(count == 1 ? "was" : "were")} expected."));
         }
 
+        /// <summary>
+        /// Asserts that a source sequence contains a given count of elements.
+        /// A parameter specifies the exception to be thrown.
+        /// </summary>
+        /// <typeparam name="TSource">Type of elements in <paramref name="source"/> sequence.</typeparam>
+        /// <param name="source">Source sequence.</param>
+        /// <param name="count">Count to assert.</param>
+        /// <param name="errorSelector">
+        /// Function that receives a comparison (a negative integer if actual
+        /// count is less than <paramref name="count"/> and a positive integer
+        /// if actual count is greater than <paramref name="count"/>) and
+        /// <paramref name="count"/> as arguments and which returns the
+        /// <see cref="Exception"/> object to throw.</param>
+        /// <returns>
+        /// Returns the original sequence as long it is contains the
+        /// number of elements specified by <paramref name="count"/>.
+        /// Otherwise it throws the <see cref="Exception" /> object
+        /// returned by calling <paramref name="errorSelector"/>.
+        /// </returns>
+        /// <remarks>
+        /// This operator uses deferred execution and streams its results.
+        /// </remarks>
         public static IAsyncEnumerable<TSource> AssertCount<TSource>(
             this IAsyncEnumerable<TSource> source,
             int count,
@@ -71,6 +107,28 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Asserts that a source sequence contains a given count of elements.
+        /// A parameter specifies the exception to be thrown.
+        /// </summary>
+        /// <typeparam name="TSource">Type of elements in <paramref name="source"/> sequence.</typeparam>
+        /// <param name="source">Source sequence.</param>
+        /// <param name="count">Count to assert.</param>
+        /// <param name="errorSelector">
+        /// Function that receives a comparison (a negative integer if actual
+        /// count is less than <paramref name="count"/> and a positive integer
+        /// if actual count is greater than <paramref name="count"/>) and
+        /// <paramref name="count"/> as arguments and which returns the
+        /// <see cref="Exception"/> object to throw.</param>
+        /// <returns>
+        /// Returns the original sequence as long it is contains the
+        /// number of elements specified by <paramref name="count"/>.
+        /// Otherwise it throws the <see cref="Exception" /> object
+        /// returned by calling <paramref name="errorSelector"/>.
+        /// </returns>
+        /// <remarks>
+        /// This operator uses deferred execution and streams its results.
+        /// </remarks>
         public static IAsyncEnumerable<TSource> AssertCountAwait<TSource>(
             this IAsyncEnumerable<TSource> source,
             int count,

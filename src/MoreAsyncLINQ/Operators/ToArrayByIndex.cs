@@ -8,6 +8,28 @@ namespace MoreAsyncLINQ
 {
     static partial class MoreAsyncEnumerable
     {
+        /// <summary>
+        /// Creates an array from an <see cref="IAsyncEnumerable{T}"/> where a
+        /// function is used to determine the index at which an element will
+        /// be placed in the array.
+        /// </summary>
+        /// <param name="source">The source sequence for the array.</param>
+        /// <param name="indexSelector">
+        /// A function that maps an element to its index.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <typeparam name="TSource">
+        /// The type of the element in <paramref name="source"/>.</typeparam>
+        /// <returns>
+        /// An array that contains the elements from the input sequence. The
+        /// size of the array will be as large as the highest index returned
+        /// by the <paramref name="indexSelector"/> plus 1.
+        /// </returns>
+        /// <remarks>
+        /// This method forces immediate query evaluation. It should not be
+        /// used on infinite sequences. If more than one element maps to the
+        /// same index then the latter element overwrites the former in the
+        /// resulting array.
+        /// </remarks>
         public static ValueTask<TSource[]> ToArrayByIndexAsync<TSource>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, int> indexSelector,
@@ -22,6 +44,34 @@ namespace MoreAsyncLINQ
                 cancellationToken);
         }
 
+        /// <summary>
+        /// Creates an array from an <see cref="IAsyncEnumerable{T}"/> where a
+        /// function is used to determine the index at which an element will
+        /// be placed in the array. The elements are projected into the array
+        /// via an additional function.
+        /// </summary>
+        /// <param name="source">The source sequence for the array.</param>
+        /// <param name="indexSelector">
+        /// A function that maps an element to its index.</param>
+        /// <param name="resultSelector">
+        /// A function to project a source element into an element of the
+        /// resulting array.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <typeparam name="TSource">
+        /// The type of the element in <paramref name="source"/>.</typeparam>
+        /// <typeparam name="TResult">
+        /// The type of the element in the resulting array.</typeparam>
+        /// <returns>
+        /// An array that contains the projected elements from the input
+        /// sequence. The size of the array will be as large as the highest
+        /// index returned by the <paramref name="indexSelector"/> plus 1.
+        /// </returns>
+        /// <remarks>
+        /// This method forces immediate query evaluation. It should not be
+        /// used on infinite sequences. If more than one element maps to the
+        /// same index then the latter element overwrites the former in the
+        /// resulting array.
+        /// </remarks>
         public static ValueTask<TResult[]> ToArrayByIndexAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, int> indexSelector,
@@ -38,6 +88,34 @@ namespace MoreAsyncLINQ
                 cancellationToken);
         }
 
+        /// <summary>
+        /// Creates an array from an <see cref="IAsyncEnumerable{T}"/> where a
+        /// function is used to determine the index at which an element will
+        /// be placed in the array. The elements are projected into the array
+        /// via an additional function.
+        /// </summary>
+        /// <param name="source">The source sequence for the array.</param>
+        /// <param name="indexSelector">
+        /// A function that maps an element to its index.</param>
+        /// <param name="resultSelector">
+        /// A function to project a source element into an element of the
+        /// resulting array.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <typeparam name="TSource">
+        /// The type of the element in <paramref name="source"/>.</typeparam>
+        /// <typeparam name="TResult">
+        /// The type of the element in the resulting array.</typeparam>
+        /// <returns>
+        /// An array that contains the projected elements from the input
+        /// sequence. The size of the array will be as large as the highest
+        /// index returned by the <paramref name="indexSelector"/> plus 1.
+        /// </returns>
+        /// <remarks>
+        /// This method forces immediate query evaluation. It should not be
+        /// used on infinite sequences. If more than one element maps to the
+        /// same index then the latter element overwrites the former in the
+        /// resulting array.
+        /// </remarks>
         public static ValueTask<TResult[]> ToArrayByIndexAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, int> indexSelector,
@@ -88,6 +166,28 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Creates an array of user-specified length from an
+        /// <see cref="IAsyncEnumerable{T}"/> where a function is used to determine
+        /// the index at which an element will be placed in the array.
+        /// </summary>
+        /// <param name="source">The source sequence for the array.</param>
+        /// <param name="length">The (non-negative) length of the resulting array.</param>
+        /// <param name="indexSelector">
+        /// A function that maps an element to its index.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <typeparam name="TSource">
+        /// The type of the element in <paramref name="source"/>.</typeparam>
+        /// <returns>
+        /// An array of size <paramref name="length"/> that contains the
+        /// elements from the input sequence.
+        /// </returns>
+        /// <remarks>
+        /// This method forces immediate query evaluation. It should not be
+        /// used on infinite sequences. If more than one element maps to the
+        /// same index then the latter element overwrites the former in the
+        /// resulting array.
+        /// </remarks>
         public static ValueTask<TSource[]> ToArrayByIndexAsync<TSource>(
             this IAsyncEnumerable<TSource> source,
             int length,
@@ -105,6 +205,34 @@ namespace MoreAsyncLINQ
                 cancellationToken);
         }
 
+        /// <summary>
+        /// Creates an array of user-specified length from an
+        /// <see cref="IAsyncEnumerable{T}"/> where a function is used to determine
+        /// the index at which an element will be placed in the array. The
+        /// elements are projected into the array via an additional function.
+        /// </summary>
+        /// <param name="source">The source sequence for the array.</param>
+        /// <param name="length">The (non-negative) length of the resulting array.</param>
+        /// <param name="indexSelector">
+        /// A function that maps an element to its index.</param>
+        /// <param name="resultSelector">
+        /// A function to project a source element into an element of the
+        /// resulting array.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <typeparam name="TSource">
+        /// The type of the element in <paramref name="source"/>.</typeparam>
+        /// <typeparam name="TResult">
+        /// The type of the element in the resulting array.</typeparam>
+        /// <returns>
+        /// An array of size <paramref name="length"/> that contains the
+        /// projected elements from the input sequence.
+        /// </returns>
+        /// <remarks>
+        /// This method forces immediate query evaluation. It should not be
+        /// used on infinite sequences. If more than one element maps to the
+        /// same index then the latter element overwrites the former in the
+        /// resulting array.
+        /// </remarks>
         public static ValueTask<TResult[]> ToArrayByIndexAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             int length,
@@ -124,6 +252,34 @@ namespace MoreAsyncLINQ
                 cancellationToken);
         }
 
+        /// <summary>
+        /// Creates an array of user-specified length from an
+        /// <see cref="IAsyncEnumerable{T}"/> where a function is used to determine
+        /// the index at which an element will be placed in the array. The
+        /// elements are projected into the array via an additional function.
+        /// </summary>
+        /// <param name="source">The source sequence for the array.</param>
+        /// <param name="length">The (non-negative) length of the resulting array.</param>
+        /// <param name="indexSelector">
+        /// A function that maps an element to its index.</param>
+        /// <param name="resultSelector">
+        /// A function to project a source element into an element of the
+        /// resulting array.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <typeparam name="TSource">
+        /// The type of the element in <paramref name="source"/>.</typeparam>
+        /// <typeparam name="TResult">
+        /// The type of the element in the resulting array.</typeparam>
+        /// <returns>
+        /// An array of size <paramref name="length"/> that contains the
+        /// projected elements from the input sequence.
+        /// </returns>
+        /// <remarks>
+        /// This method forces immediate query evaluation. It should not be
+        /// used on infinite sequences. If more than one element maps to the
+        /// same index then the latter element overwrites the former in the
+        /// resulting array.
+        /// </remarks>
         public static ValueTask<TResult[]> ToArrayByIndexAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             int length,
@@ -161,6 +317,28 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Creates an array from an <see cref="IAsyncEnumerable{T}"/> where a
+        /// function is used to determine the index at which an element will
+        /// be placed in the array.
+        /// </summary>
+        /// <param name="source">The source sequence for the array.</param>
+        /// <param name="indexSelector">
+        /// A function that maps an element to its index.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <typeparam name="TSource">
+        /// The type of the element in <paramref name="source"/>.</typeparam>
+        /// <returns>
+        /// An array that contains the elements from the input sequence. The
+        /// size of the array will be as large as the highest index returned
+        /// by the <paramref name="indexSelector"/> plus 1.
+        /// </returns>
+        /// <remarks>
+        /// This method forces immediate query evaluation. It should not be
+        /// used on infinite sequences. If more than one element maps to the
+        /// same index then the latter element overwrites the former in the
+        /// resulting array.
+        /// </remarks>
         public static ValueTask<TSource[]> ToArrayByIndexAwaitAsync<TSource>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, ValueTask<int>> indexSelector,
@@ -175,6 +353,34 @@ namespace MoreAsyncLINQ
                 cancellationToken);
         }
 
+        /// <summary>
+        /// Creates an array from an <see cref="IAsyncEnumerable{T}"/> where a
+        /// function is used to determine the index at which an element will
+        /// be placed in the array. The elements are projected into the array
+        /// via an additional function.
+        /// </summary>
+        /// <param name="source">The source sequence for the array.</param>
+        /// <param name="indexSelector">
+        /// A function that maps an element to its index.</param>
+        /// <param name="resultSelector">
+        /// A function to project a source element into an element of the
+        /// resulting array.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <typeparam name="TSource">
+        /// The type of the element in <paramref name="source"/>.</typeparam>
+        /// <typeparam name="TResult">
+        /// The type of the element in the resulting array.</typeparam>
+        /// <returns>
+        /// An array that contains the projected elements from the input
+        /// sequence. The size of the array will be as large as the highest
+        /// index returned by the <paramref name="indexSelector"/> plus 1.
+        /// </returns>
+        /// <remarks>
+        /// This method forces immediate query evaluation. It should not be
+        /// used on infinite sequences. If more than one element maps to the
+        /// same index then the latter element overwrites the former in the
+        /// resulting array.
+        /// </remarks>
         public static ValueTask<TResult[]> ToArrayByIndexAwaitAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, ValueTask<int>> indexSelector,
@@ -191,6 +397,34 @@ namespace MoreAsyncLINQ
                 cancellationToken);
         }
 
+        /// <summary>
+        /// Creates an array from an <see cref="IAsyncEnumerable{T}"/> where a
+        /// function is used to determine the index at which an element will
+        /// be placed in the array. The elements are projected into the array
+        /// via an additional function.
+        /// </summary>
+        /// <param name="source">The source sequence for the array.</param>
+        /// <param name="indexSelector">
+        /// A function that maps an element to its index.</param>
+        /// <param name="resultSelector">
+        /// A function to project a source element into an element of the
+        /// resulting array.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <typeparam name="TSource">
+        /// The type of the element in <paramref name="source"/>.</typeparam>
+        /// <typeparam name="TResult">
+        /// The type of the element in the resulting array.</typeparam>
+        /// <returns>
+        /// An array that contains the projected elements from the input
+        /// sequence. The size of the array will be as large as the highest
+        /// index returned by the <paramref name="indexSelector"/> plus 1.
+        /// </returns>
+        /// <remarks>
+        /// This method forces immediate query evaluation. It should not be
+        /// used on infinite sequences. If more than one element maps to the
+        /// same index then the latter element overwrites the former in the
+        /// resulting array.
+        /// </remarks>
         public static ValueTask<TResult[]> ToArrayByIndexAwaitAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, ValueTask<int>> indexSelector,
@@ -241,6 +475,28 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Creates an array of user-specified length from an
+        /// <see cref="IAsyncEnumerable{T}"/> where a function is used to determine
+        /// the index at which an element will be placed in the array.
+        /// </summary>
+        /// <param name="source">The source sequence for the array.</param>
+        /// <param name="length">The (non-negative) length of the resulting array.</param>
+        /// <param name="indexSelector">
+        /// A function that maps an element to its index.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <typeparam name="TSource">
+        /// The type of the element in <paramref name="source"/>.</typeparam>
+        /// <returns>
+        /// An array of size <paramref name="length"/> that contains the
+        /// elements from the input sequence.
+        /// </returns>
+        /// <remarks>
+        /// This method forces immediate query evaluation. It should not be
+        /// used on infinite sequences. If more than one element maps to the
+        /// same index then the latter element overwrites the former in the
+        /// resulting array.
+        /// </remarks>
         public static ValueTask<TSource[]> ToArrayByIndexAwaitAsync<TSource>(
             this IAsyncEnumerable<TSource> source,
             int length,
@@ -258,6 +514,34 @@ namespace MoreAsyncLINQ
                 cancellationToken);
         }
 
+        /// <summary>
+        /// Creates an array of user-specified length from an
+        /// <see cref="IAsyncEnumerable{T}"/> where a function is used to determine
+        /// the index at which an element will be placed in the array. The
+        /// elements are projected into the array via an additional function.
+        /// </summary>
+        /// <param name="source">The source sequence for the array.</param>
+        /// <param name="length">The (non-negative) length of the resulting array.</param>
+        /// <param name="indexSelector">
+        /// A function that maps an element to its index.</param>
+        /// <param name="resultSelector">
+        /// A function to project a source element into an element of the
+        /// resulting array.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <typeparam name="TSource">
+        /// The type of the element in <paramref name="source"/>.</typeparam>
+        /// <typeparam name="TResult">
+        /// The type of the element in the resulting array.</typeparam>
+        /// <returns>
+        /// An array of size <paramref name="length"/> that contains the
+        /// projected elements from the input sequence.
+        /// </returns>
+        /// <remarks>
+        /// This method forces immediate query evaluation. It should not be
+        /// used on infinite sequences. If more than one element maps to the
+        /// same index then the latter element overwrites the former in the
+        /// resulting array.
+        /// </remarks>
         public static ValueTask<TResult[]> ToArrayByIndexAwaitAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             int length,
@@ -277,6 +561,34 @@ namespace MoreAsyncLINQ
                 cancellationToken);
         }
 
+        /// <summary>
+        /// Creates an array of user-specified length from an
+        /// <see cref="IAsyncEnumerable{T}"/> where a function is used to determine
+        /// the index at which an element will be placed in the array. The
+        /// elements are projected into the array via an additional function.
+        /// </summary>
+        /// <param name="source">The source sequence for the array.</param>
+        /// <param name="length">The (non-negative) length of the resulting array.</param>
+        /// <param name="indexSelector">
+        /// A function that maps an element to its index.</param>
+        /// <param name="resultSelector">
+        /// A function to project a source element into an element of the
+        /// resulting array.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <typeparam name="TSource">
+        /// The type of the element in <paramref name="source"/>.</typeparam>
+        /// <typeparam name="TResult">
+        /// The type of the element in the resulting array.</typeparam>
+        /// <returns>
+        /// An array of size <paramref name="length"/> that contains the
+        /// projected elements from the input sequence.
+        /// </returns>
+        /// <remarks>
+        /// This method forces immediate query evaluation. It should not be
+        /// used on infinite sequences. If more than one element maps to the
+        /// same index then the latter element overwrites the former in the
+        /// resulting array.
+        /// </remarks>
         public static ValueTask<TResult[]> ToArrayByIndexAwaitAsync<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             int length,

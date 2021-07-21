@@ -15,6 +15,28 @@ namespace MoreAsyncLINQ
             "Fourth",
         };
 
+        /// <summary>
+        /// Returns a projection of tuples, where each tuple contains the N-th
+        /// element from each of the argument sequences. An exception is thrown
+        /// if the input sequences are of different lengths.
+        /// </summary>
+        /// <typeparam name="T1">Type of elements in first sequence</typeparam>
+        /// <typeparam name="T2">Type of elements in second sequence</typeparam>
+        /// <typeparam name="TResult">Type of elements in result sequence</typeparam>
+        /// <param name="first">The first sequence.</param>
+        /// <param name="second">The second sequence.</param>
+        /// <param name="resultSelector">
+        /// Function to apply to each quadruplet of elements.</param>
+        /// <returns>
+        /// A sequence that contains elements of the four input sequences,
+        /// combined by <paramref name="resultSelector"/>.
+        /// </returns>
+        /// <exception cref="InvalidOperationException">
+        /// The input sequences are of different lengths.
+        /// </exception>
+        /// <remarks>
+        /// This operator uses deferred execution and streams its results.
+        /// </remarks>
         public static IAsyncEnumerable<TResult> EquiZip<T1, T2, TResult>(
             this IAsyncEnumerable<T1> first,
             IAsyncEnumerable<T2> second,
@@ -31,6 +53,30 @@ namespace MoreAsyncLINQ
                 (firstElement, secondElement, _, _) => resultSelector(firstElement, secondElement));
         }
 
+        /// <summary>
+        /// Returns a projection of tuples, where each tuple contains the N-th
+        /// element from each of the argument sequences. An exception is thrown
+        /// if the input sequences are of different lengths.
+        /// </summary>
+        /// <typeparam name="T1">Type of elements in first sequence</typeparam>
+        /// <typeparam name="T2">Type of elements in second sequence</typeparam>
+        /// <typeparam name="T3">Type of elements in third sequence</typeparam>
+        /// <typeparam name="TResult">Type of elements in result sequence</typeparam>
+        /// <param name="first">The first sequence.</param>
+        /// <param name="second">The second sequence.</param>
+        /// <param name="third">The third sequence.</param>
+        /// <param name="resultSelector">
+        /// Function to apply to each quadruplet of elements.</param>
+        /// <returns>
+        /// A sequence that contains elements of the four input sequences,
+        /// combined by <paramref name="resultSelector"/>.
+        /// </returns>
+        /// <exception cref="InvalidOperationException">
+        /// The input sequences are of different lengths.
+        /// </exception>
+        /// <remarks>
+        /// This operator uses deferred execution and streams its results.
+        /// </remarks>
         public static IAsyncEnumerable<TResult> EquiZip<T1, T2, T3, TResult>(
             this IAsyncEnumerable<T1> first,
             IAsyncEnumerable<T2> second,
@@ -49,6 +95,32 @@ namespace MoreAsyncLINQ
                 (firstElement, secondElement, thirdElement, _) => resultSelector(firstElement, secondElement, thirdElement));
         }
 
+        /// <summary>
+        /// Returns a projection of tuples, where each tuple contains the N-th
+        /// element from each of the argument sequences. An exception is thrown
+        /// if the input sequences are of different lengths.
+        /// </summary>
+        /// <typeparam name="T1">Type of elements in first sequence</typeparam>
+        /// <typeparam name="T2">Type of elements in second sequence</typeparam>
+        /// <typeparam name="T3">Type of elements in third sequence</typeparam>
+        /// <typeparam name="T4">Type of elements in fourth sequence</typeparam>
+        /// <typeparam name="TResult">Type of elements in result sequence</typeparam>
+        /// <param name="first">The first sequence.</param>
+        /// <param name="second">The second sequence.</param>
+        /// <param name="third">The third sequence.</param>
+        /// <param name="fourth">The fourth sequence.</param>
+        /// <param name="resultSelector">
+        /// Function to apply to each quadruplet of elements.</param>
+        /// <returns>
+        /// A sequence that contains elements of the four input sequences,
+        /// combined by <paramref name="resultSelector"/>.
+        /// </returns>
+        /// <exception cref="InvalidOperationException">
+        /// The input sequences are of different lengths.
+        /// </exception>
+        /// <remarks>
+        /// This operator uses deferred execution and streams its results.
+        /// </remarks>
         public static IAsyncEnumerable<TResult> EquiZip<T1, T2, T3, T4, TResult>(
             this IAsyncEnumerable<T1> first,
             IAsyncEnumerable<T2> second,
@@ -93,6 +165,28 @@ namespace MoreAsyncLINQ
                 EquiZipErrorSelector);
         }
 
+        /// <summary>
+        /// Returns a projection of tuples, where each tuple contains the N-th
+        /// element from each of the argument sequences. An exception is thrown
+        /// if the input sequences are of different lengths.
+        /// </summary>
+        /// <typeparam name="T1">Type of elements in first sequence</typeparam>
+        /// <typeparam name="T2">Type of elements in second sequence</typeparam>
+        /// <typeparam name="TResult">Type of elements in result sequence</typeparam>
+        /// <param name="first">The first sequence.</param>
+        /// <param name="second">The second sequence.</param>
+        /// <param name="resultSelector">
+        /// Function to apply to each quadruplet of elements.</param>
+        /// <returns>
+        /// A sequence that contains elements of the four input sequences,
+        /// combined by <paramref name="resultSelector"/>.
+        /// </returns>
+        /// <exception cref="InvalidOperationException">
+        /// The input sequences are of different lengths.
+        /// </exception>
+        /// <remarks>
+        /// This operator uses deferred execution and streams its results.
+        /// </remarks>
         public static IAsyncEnumerable<TResult> EquiZipAwait<T1, T2, TResult>(
             this IAsyncEnumerable<T1> first,
             IAsyncEnumerable<T2> second,
@@ -109,6 +203,30 @@ namespace MoreAsyncLINQ
                 (firstElement, secondElement, _, _) => resultSelector(firstElement, secondElement));
         }
 
+        /// <summary>
+        /// Returns a projection of tuples, where each tuple contains the N-th
+        /// element from each of the argument sequences. An exception is thrown
+        /// if the input sequences are of different lengths.
+        /// </summary>
+        /// <typeparam name="T1">Type of elements in first sequence</typeparam>
+        /// <typeparam name="T2">Type of elements in second sequence</typeparam>
+        /// <typeparam name="T3">Type of elements in third sequence</typeparam>
+        /// <typeparam name="TResult">Type of elements in result sequence</typeparam>
+        /// <param name="first">The first sequence.</param>
+        /// <param name="second">The second sequence.</param>
+        /// <param name="third">The third sequence.</param>
+        /// <param name="resultSelector">
+        /// Function to apply to each quadruplet of elements.</param>
+        /// <returns>
+        /// A sequence that contains elements of the four input sequences,
+        /// combined by <paramref name="resultSelector"/>.
+        /// </returns>
+        /// <exception cref="InvalidOperationException">
+        /// The input sequences are of different lengths.
+        /// </exception>
+        /// <remarks>
+        /// This operator uses deferred execution and streams its results.
+        /// </remarks>
         public static IAsyncEnumerable<TResult> EquiZipAwait<T1, T2, T3, TResult>(
             this IAsyncEnumerable<T1> first,
             IAsyncEnumerable<T2> second,
@@ -127,6 +245,32 @@ namespace MoreAsyncLINQ
                 (firstElement, secondElement, thirdElement, _) => resultSelector(firstElement, secondElement, thirdElement));
         }
 
+        /// <summary>
+        /// Returns a projection of tuples, where each tuple contains the N-th
+        /// element from each of the argument sequences. An exception is thrown
+        /// if the input sequences are of different lengths.
+        /// </summary>
+        /// <typeparam name="T1">Type of elements in first sequence</typeparam>
+        /// <typeparam name="T2">Type of elements in second sequence</typeparam>
+        /// <typeparam name="T3">Type of elements in third sequence</typeparam>
+        /// <typeparam name="T4">Type of elements in fourth sequence</typeparam>
+        /// <typeparam name="TResult">Type of elements in result sequence</typeparam>
+        /// <param name="first">The first sequence.</param>
+        /// <param name="second">The second sequence.</param>
+        /// <param name="third">The third sequence.</param>
+        /// <param name="fourth">The fourth sequence.</param>
+        /// <param name="resultSelector">
+        /// Function to apply to each quadruplet of elements.</param>
+        /// <returns>
+        /// A sequence that contains elements of the four input sequences,
+        /// combined by <paramref name="resultSelector"/>.
+        /// </returns>
+        /// <exception cref="InvalidOperationException">
+        /// The input sequences are of different lengths.
+        /// </exception>
+        /// <remarks>
+        /// This operator uses deferred execution and streams its results.
+        /// </remarks>
         public static IAsyncEnumerable<TResult> EquiZipAwait<T1, T2, T3, T4, TResult>(
             this IAsyncEnumerable<T1> first,
             IAsyncEnumerable<T2> second,

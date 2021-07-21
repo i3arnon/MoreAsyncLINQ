@@ -7,6 +7,27 @@ namespace MoreAsyncLINQ
 {
     static partial class MoreAsyncEnumerable
     {
+        /// <summary>
+        /// Applies two accumulators sequentially in a single pass over a
+        /// sequence.
+        /// </summary>
+        /// <typeparam name="TSource">The type of elements in <paramref name="source"/>.</typeparam>
+        /// <typeparam name="TAccumulate1">The type of first accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate2">The type of second accumulator value.</typeparam>
+        /// <typeparam name="TResult">The type of the accumulated result.</typeparam>
+        /// <param name="source">The source sequence</param>
+        /// <param name="seed1">The seed value for the first accumulator.</param>
+        /// <param name="accumulator1">The first accumulator.</param>
+        /// <param name="seed2">The seed value for the second accumulator.</param>
+        /// <param name="accumulator2">The second accumulator.</param>
+        /// <param name="resultSelector">
+        /// A function that projects a single result given the result of each
+        /// accumulator.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The value returned by <paramref name="resultSelector"/>.</returns>
+        /// <remarks>
+        /// This operator executes immediately.
+        /// </remarks>
         public static ValueTask<TResult> AggregateAsync<
            TSource,
            TAccumulate1,
@@ -58,6 +79,30 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Applies three accumulators sequentially in a single pass over a
+        /// sequence.
+        /// </summary>
+        /// <typeparam name="TSource">The type of elements in <paramref name="source"/>.</typeparam>
+        /// <typeparam name="TAccumulate1">The type of first accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate2">The type of second accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate3">The type of third accumulator value.</typeparam>
+        /// <typeparam name="TResult">The type of the accumulated result.</typeparam>
+        /// <param name="source">The source sequence</param>
+        /// <param name="seed1">The seed value for the first accumulator.</param>
+        /// <param name="accumulator1">The first accumulator.</param>
+        /// <param name="seed2">The seed value for the second accumulator.</param>
+        /// <param name="accumulator2">The second accumulator.</param>
+        /// <param name="seed3">The seed value for the third accumulator.</param>
+        /// <param name="accumulator3">The third accumulator.</param>
+        /// <param name="resultSelector">
+        /// A function that projects a single result given the result of each
+        /// accumulator.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The value returned by <paramref name="resultSelector"/>.</returns>
+        /// <remarks>
+        /// This operator executes immediately.
+        /// </remarks>
         public static ValueTask<TResult> AggregateAsync<
            TSource,
            TAccumulate1,
@@ -120,6 +165,33 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Applies four accumulators sequentially in a single pass over a
+        /// sequence.
+        /// </summary>
+        /// <typeparam name="TSource">The type of elements in <paramref name="source"/>.</typeparam>
+        /// <typeparam name="TAccumulate1">The type of first accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate2">The type of second accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate3">The type of third accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate4">The type of fourth accumulator value.</typeparam>
+        /// <typeparam name="TResult">The type of the accumulated result.</typeparam>
+        /// <param name="source">The source sequence</param>
+        /// <param name="seed1">The seed value for the first accumulator.</param>
+        /// <param name="accumulator1">The first accumulator.</param>
+        /// <param name="seed2">The seed value for the second accumulator.</param>
+        /// <param name="accumulator2">The second accumulator.</param>
+        /// <param name="seed3">The seed value for the third accumulator.</param>
+        /// <param name="accumulator3">The third accumulator.</param>
+        /// <param name="seed4">The seed value for the fourth accumulator.</param>
+        /// <param name="accumulator4">The fourth accumulator.</param>
+        /// <param name="resultSelector">
+        /// A function that projects a single result given the result of each
+        /// accumulator.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The value returned by <paramref name="resultSelector"/>.</returns>
+        /// <remarks>
+        /// This operator executes immediately.
+        /// </remarks>
         public static ValueTask<TResult> AggregateAsync<
            TSource,
            TAccumulate1,
@@ -193,6 +265,36 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Applies five accumulators sequentially in a single pass over a
+        /// sequence.
+        /// </summary>
+        /// <typeparam name="TSource">The type of elements in <paramref name="source"/>.</typeparam>
+        /// <typeparam name="TAccumulate1">The type of first accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate2">The type of second accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate3">The type of third accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate4">The type of fourth accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate5">The type of fifth accumulator value.</typeparam>
+        /// <typeparam name="TResult">The type of the accumulated result.</typeparam>
+        /// <param name="source">The source sequence</param>
+        /// <param name="seed1">The seed value for the first accumulator.</param>
+        /// <param name="accumulator1">The first accumulator.</param>
+        /// <param name="seed2">The seed value for the second accumulator.</param>
+        /// <param name="accumulator2">The second accumulator.</param>
+        /// <param name="seed3">The seed value for the third accumulator.</param>
+        /// <param name="accumulator3">The third accumulator.</param>
+        /// <param name="seed4">The seed value for the fourth accumulator.</param>
+        /// <param name="accumulator4">The fourth accumulator.</param>
+        /// <param name="seed5">The seed value for the fifth accumulator.</param>
+        /// <param name="accumulator5">The fifth accumulator.</param>
+        /// <param name="resultSelector">
+        /// A function that projects a single result given the result of each
+        /// accumulator.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The value returned by <paramref name="resultSelector"/>.</returns>
+        /// <remarks>
+        /// This operator executes immediately.
+        /// </remarks>
         public static ValueTask<TResult> AggregateAsync<
             TSource,
             TAccumulate1,
@@ -277,6 +379,39 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Applies six accumulators sequentially in a single pass over a
+        /// sequence.
+        /// </summary>
+        /// <typeparam name="TSource">The type of elements in <paramref name="source"/>.</typeparam>
+        /// <typeparam name="TAccumulate1">The type of first accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate2">The type of second accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate3">The type of third accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate4">The type of fourth accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate5">The type of fifth accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate6">The type of sixth accumulator value.</typeparam>
+        /// <typeparam name="TResult">The type of the accumulated result.</typeparam>
+        /// <param name="source">The source sequence</param>
+        /// <param name="seed1">The seed value for the first accumulator.</param>
+        /// <param name="accumulator1">The first accumulator.</param>
+        /// <param name="seed2">The seed value for the second accumulator.</param>
+        /// <param name="accumulator2">The second accumulator.</param>
+        /// <param name="seed3">The seed value for the third accumulator.</param>
+        /// <param name="accumulator3">The third accumulator.</param>
+        /// <param name="seed4">The seed value for the fourth accumulator.</param>
+        /// <param name="accumulator4">The fourth accumulator.</param>
+        /// <param name="seed5">The seed value for the fifth accumulator.</param>
+        /// <param name="accumulator5">The fifth accumulator.</param>
+        /// <param name="seed6">The seed value for the sixth accumulator.</param>
+        /// <param name="accumulator6">The sixth accumulator.</param>
+        /// <param name="resultSelector">
+        /// A function that projects a single result given the result of each
+        /// accumulator.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The value returned by <paramref name="resultSelector"/>.</returns>
+        /// <remarks>
+        /// This operator executes immediately.
+        /// </remarks>
         public static ValueTask<TResult> AggregateAsync<
             TSource,
             TAccumulate1,
@@ -372,6 +507,42 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Applies seven accumulators sequentially in a single pass over a
+        /// sequence.
+        /// </summary>
+        /// <typeparam name="TSource">The type of elements in <paramref name="source"/>.</typeparam>
+        /// <typeparam name="TAccumulate1">The type of first accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate2">The type of second accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate3">The type of third accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate4">The type of fourth accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate5">The type of fifth accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate6">The type of sixth accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate7">The type of seventh accumulator value.</typeparam>
+        /// <typeparam name="TResult">The type of the accumulated result.</typeparam>
+        /// <param name="source">The source sequence</param>
+        /// <param name="seed1">The seed value for the first accumulator.</param>
+        /// <param name="accumulator1">The first accumulator.</param>
+        /// <param name="seed2">The seed value for the second accumulator.</param>
+        /// <param name="accumulator2">The second accumulator.</param>
+        /// <param name="seed3">The seed value for the third accumulator.</param>
+        /// <param name="accumulator3">The third accumulator.</param>
+        /// <param name="seed4">The seed value for the fourth accumulator.</param>
+        /// <param name="accumulator4">The fourth accumulator.</param>
+        /// <param name="seed5">The seed value for the fifth accumulator.</param>
+        /// <param name="accumulator5">The fifth accumulator.</param>
+        /// <param name="seed6">The seed value for the sixth accumulator.</param>
+        /// <param name="accumulator6">The sixth accumulator.</param>
+        /// <param name="seed7">The seed value for the seventh accumulator.</param>
+        /// <param name="accumulator7">The seventh accumulator.</param>
+        /// <param name="resultSelector">
+        /// A function that projects a single result given the result of each
+        /// accumulator.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The value returned by <paramref name="resultSelector"/>.</returns>
+        /// <remarks>
+        /// This operator executes immediately.
+        /// </remarks>
         public static ValueTask<TResult> AggregateAsync<
             TSource,
             TAccumulate1,
@@ -478,6 +649,45 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Applies eight accumulators sequentially in a single pass over a
+        /// sequence.
+        /// </summary>
+        /// <typeparam name="TSource">The type of elements in <paramref name="source"/>.</typeparam>
+        /// <typeparam name="TAccumulate1">The type of first accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate2">The type of second accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate3">The type of third accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate4">The type of fourth accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate5">The type of fifth accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate6">The type of sixth accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate7">The type of seventh accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate8">The type of eighth accumulator value.</typeparam>
+        /// <typeparam name="TResult">The type of the accumulated result.</typeparam>
+        /// <param name="source">The source sequence</param>
+        /// <param name="seed1">The seed value for the first accumulator.</param>
+        /// <param name="accumulator1">The first accumulator.</param>
+        /// <param name="seed2">The seed value for the second accumulator.</param>
+        /// <param name="accumulator2">The second accumulator.</param>
+        /// <param name="seed3">The seed value for the third accumulator.</param>
+        /// <param name="accumulator3">The third accumulator.</param>
+        /// <param name="seed4">The seed value for the fourth accumulator.</param>
+        /// <param name="accumulator4">The fourth accumulator.</param>
+        /// <param name="seed5">The seed value for the fifth accumulator.</param>
+        /// <param name="accumulator5">The fifth accumulator.</param>
+        /// <param name="seed6">The seed value for the sixth accumulator.</param>
+        /// <param name="accumulator6">The sixth accumulator.</param>
+        /// <param name="seed7">The seed value for the seventh accumulator.</param>
+        /// <param name="accumulator7">The seventh accumulator.</param>
+        /// <param name="seed8">The seed value for the eighth accumulator.</param>
+        /// <param name="accumulator8">The eighth accumulator.</param>
+        /// <param name="resultSelector">
+        /// A function that projects a single result given the result of each
+        /// accumulator.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The value returned by <paramref name="resultSelector"/>.</returns>
+        /// <remarks>
+        /// This operator executes immediately.
+        /// </remarks>
         public static ValueTask<TResult> AggregateAsync<
             TSource,
             TAccumulate1,
@@ -595,6 +805,27 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Applies two accumulators sequentially in a single pass over a
+        /// sequence.
+        /// </summary>
+        /// <typeparam name="TSource">The type of elements in <paramref name="source"/>.</typeparam>
+        /// <typeparam name="TAccumulate1">The type of first accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate2">The type of second accumulator value.</typeparam>
+        /// <typeparam name="TResult">The type of the accumulated result.</typeparam>
+        /// <param name="source">The source sequence</param>
+        /// <param name="seed1">The seed value for the first accumulator.</param>
+        /// <param name="accumulator1">The first accumulator.</param>
+        /// <param name="seed2">The seed value for the second accumulator.</param>
+        /// <param name="accumulator2">The second accumulator.</param>
+        /// <param name="resultSelector">
+        /// A function that projects a single result given the result of each
+        /// accumulator.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The value returned by <paramref name="resultSelector"/>.</returns>
+        /// <remarks>
+        /// This operator executes immediately.
+        /// </remarks>
         public static ValueTask<TResult> AggregateAwaitAsync<
             TSource,
             TAccumulate1,
@@ -647,6 +878,30 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Applies three accumulators sequentially in a single pass over a
+        /// sequence.
+        /// </summary>
+        /// <typeparam name="TSource">The type of elements in <paramref name="source"/>.</typeparam>
+        /// <typeparam name="TAccumulate1">The type of first accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate2">The type of second accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate3">The type of third accumulator value.</typeparam>
+        /// <typeparam name="TResult">The type of the accumulated result.</typeparam>
+        /// <param name="source">The source sequence</param>
+        /// <param name="seed1">The seed value for the first accumulator.</param>
+        /// <param name="accumulator1">The first accumulator.</param>
+        /// <param name="seed2">The seed value for the second accumulator.</param>
+        /// <param name="accumulator2">The second accumulator.</param>
+        /// <param name="seed3">The seed value for the third accumulator.</param>
+        /// <param name="accumulator3">The third accumulator.</param>
+        /// <param name="resultSelector">
+        /// A function that projects a single result given the result of each
+        /// accumulator.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The value returned by <paramref name="resultSelector"/>.</returns>
+        /// <remarks>
+        /// This operator executes immediately.
+        /// </remarks>
         public static ValueTask<TResult> AggregateAwaitAsync<
             TSource,
             TAccumulate1,
@@ -710,6 +965,33 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Applies four accumulators sequentially in a single pass over a
+        /// sequence.
+        /// </summary>
+        /// <typeparam name="TSource">The type of elements in <paramref name="source"/>.</typeparam>
+        /// <typeparam name="TAccumulate1">The type of first accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate2">The type of second accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate3">The type of third accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate4">The type of fourth accumulator value.</typeparam>
+        /// <typeparam name="TResult">The type of the accumulated result.</typeparam>
+        /// <param name="source">The source sequence</param>
+        /// <param name="seed1">The seed value for the first accumulator.</param>
+        /// <param name="accumulator1">The first accumulator.</param>
+        /// <param name="seed2">The seed value for the second accumulator.</param>
+        /// <param name="accumulator2">The second accumulator.</param>
+        /// <param name="seed3">The seed value for the third accumulator.</param>
+        /// <param name="accumulator3">The third accumulator.</param>
+        /// <param name="seed4">The seed value for the fourth accumulator.</param>
+        /// <param name="accumulator4">The fourth accumulator.</param>
+        /// <param name="resultSelector">
+        /// A function that projects a single result given the result of each
+        /// accumulator.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The value returned by <paramref name="resultSelector"/>.</returns>
+        /// <remarks>
+        /// This operator executes immediately.
+        /// </remarks>
         public static ValueTask<TResult> AggregateAwaitAsync<
             TSource,
             TAccumulate1,
@@ -784,6 +1066,36 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Applies five accumulators sequentially in a single pass over a
+        /// sequence.
+        /// </summary>
+        /// <typeparam name="TSource">The type of elements in <paramref name="source"/>.</typeparam>
+        /// <typeparam name="TAccumulate1">The type of first accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate2">The type of second accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate3">The type of third accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate4">The type of fourth accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate5">The type of fifth accumulator value.</typeparam>
+        /// <typeparam name="TResult">The type of the accumulated result.</typeparam>
+        /// <param name="source">The source sequence</param>
+        /// <param name="seed1">The seed value for the first accumulator.</param>
+        /// <param name="accumulator1">The first accumulator.</param>
+        /// <param name="seed2">The seed value for the second accumulator.</param>
+        /// <param name="accumulator2">The second accumulator.</param>
+        /// <param name="seed3">The seed value for the third accumulator.</param>
+        /// <param name="accumulator3">The third accumulator.</param>
+        /// <param name="seed4">The seed value for the fourth accumulator.</param>
+        /// <param name="accumulator4">The fourth accumulator.</param>
+        /// <param name="seed5">The seed value for the fifth accumulator.</param>
+        /// <param name="accumulator5">The fifth accumulator.</param>
+        /// <param name="resultSelector">
+        /// A function that projects a single result given the result of each
+        /// accumulator.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The value returned by <paramref name="resultSelector"/>.</returns>
+        /// <remarks>
+        /// This operator executes immediately.
+        /// </remarks>
         public static ValueTask<TResult> AggregateAwaitAsync<
             TSource,
             TAccumulate1,
@@ -869,6 +1181,39 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Applies six accumulators sequentially in a single pass over a
+        /// sequence.
+        /// </summary>
+        /// <typeparam name="TSource">The type of elements in <paramref name="source"/>.</typeparam>
+        /// <typeparam name="TAccumulate1">The type of first accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate2">The type of second accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate3">The type of third accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate4">The type of fourth accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate5">The type of fifth accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate6">The type of sixth accumulator value.</typeparam>
+        /// <typeparam name="TResult">The type of the accumulated result.</typeparam>
+        /// <param name="source">The source sequence</param>
+        /// <param name="seed1">The seed value for the first accumulator.</param>
+        /// <param name="accumulator1">The first accumulator.</param>
+        /// <param name="seed2">The seed value for the second accumulator.</param>
+        /// <param name="accumulator2">The second accumulator.</param>
+        /// <param name="seed3">The seed value for the third accumulator.</param>
+        /// <param name="accumulator3">The third accumulator.</param>
+        /// <param name="seed4">The seed value for the fourth accumulator.</param>
+        /// <param name="accumulator4">The fourth accumulator.</param>
+        /// <param name="seed5">The seed value for the fifth accumulator.</param>
+        /// <param name="accumulator5">The fifth accumulator.</param>
+        /// <param name="seed6">The seed value for the sixth accumulator.</param>
+        /// <param name="accumulator6">The sixth accumulator.</param>
+        /// <param name="resultSelector">
+        /// A function that projects a single result given the result of each
+        /// accumulator.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The value returned by <paramref name="resultSelector"/>.</returns>
+        /// <remarks>
+        /// This operator executes immediately.
+        /// </remarks>
         public static ValueTask<TResult> AggregateAwaitAsync<
             TSource,
             TAccumulate1,
@@ -965,6 +1310,42 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Applies seven accumulators sequentially in a single pass over a
+        /// sequence.
+        /// </summary>
+        /// <typeparam name="TSource">The type of elements in <paramref name="source"/>.</typeparam>
+        /// <typeparam name="TAccumulate1">The type of first accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate2">The type of second accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate3">The type of third accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate4">The type of fourth accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate5">The type of fifth accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate6">The type of sixth accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate7">The type of seventh accumulator value.</typeparam>
+        /// <typeparam name="TResult">The type of the accumulated result.</typeparam>
+        /// <param name="source">The source sequence</param>
+        /// <param name="seed1">The seed value for the first accumulator.</param>
+        /// <param name="accumulator1">The first accumulator.</param>
+        /// <param name="seed2">The seed value for the second accumulator.</param>
+        /// <param name="accumulator2">The second accumulator.</param>
+        /// <param name="seed3">The seed value for the third accumulator.</param>
+        /// <param name="accumulator3">The third accumulator.</param>
+        /// <param name="seed4">The seed value for the fourth accumulator.</param>
+        /// <param name="accumulator4">The fourth accumulator.</param>
+        /// <param name="seed5">The seed value for the fifth accumulator.</param>
+        /// <param name="accumulator5">The fifth accumulator.</param>
+        /// <param name="seed6">The seed value for the sixth accumulator.</param>
+        /// <param name="accumulator6">The sixth accumulator.</param>
+        /// <param name="seed7">The seed value for the seventh accumulator.</param>
+        /// <param name="accumulator7">The seventh accumulator.</param>
+        /// <param name="resultSelector">
+        /// A function that projects a single result given the result of each
+        /// accumulator.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The value returned by <paramref name="resultSelector"/>.</returns>
+        /// <remarks>
+        /// This operator executes immediately.
+        /// </remarks>
         public static ValueTask<TResult> AggregateAwaitAsync<
             TSource,
             TAccumulate1,
@@ -1072,6 +1453,45 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Applies eight accumulators sequentially in a single pass over a
+        /// sequence.
+        /// </summary>
+        /// <typeparam name="TSource">The type of elements in <paramref name="source"/>.</typeparam>
+        /// <typeparam name="TAccumulate1">The type of first accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate2">The type of second accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate3">The type of third accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate4">The type of fourth accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate5">The type of fifth accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate6">The type of sixth accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate7">The type of seventh accumulator value.</typeparam>
+        /// <typeparam name="TAccumulate8">The type of eighth accumulator value.</typeparam>
+        /// <typeparam name="TResult">The type of the accumulated result.</typeparam>
+        /// <param name="source">The source sequence</param>
+        /// <param name="seed1">The seed value for the first accumulator.</param>
+        /// <param name="accumulator1">The first accumulator.</param>
+        /// <param name="seed2">The seed value for the second accumulator.</param>
+        /// <param name="accumulator2">The second accumulator.</param>
+        /// <param name="seed3">The seed value for the third accumulator.</param>
+        /// <param name="accumulator3">The third accumulator.</param>
+        /// <param name="seed4">The seed value for the fourth accumulator.</param>
+        /// <param name="accumulator4">The fourth accumulator.</param>
+        /// <param name="seed5">The seed value for the fifth accumulator.</param>
+        /// <param name="accumulator5">The fifth accumulator.</param>
+        /// <param name="seed6">The seed value for the sixth accumulator.</param>
+        /// <param name="accumulator6">The sixth accumulator.</param>
+        /// <param name="seed7">The seed value for the seventh accumulator.</param>
+        /// <param name="accumulator7">The seventh accumulator.</param>
+        /// <param name="seed8">The seed value for the eighth accumulator.</param>
+        /// <param name="accumulator8">The eighth accumulator.</param>
+        /// <param name="resultSelector">
+        /// A function that projects a single result given the result of each
+        /// accumulator.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The value returned by <paramref name="resultSelector"/>.</returns>
+        /// <remarks>
+        /// This operator executes immediately.
+        /// </remarks>
         public static ValueTask<TResult> AggregateAwaitAsync<
             TSource,
             TAccumulate1,

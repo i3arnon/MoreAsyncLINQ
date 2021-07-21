@@ -9,6 +9,22 @@ namespace MoreAsyncLINQ
 {
     static partial class MoreAsyncEnumerable
     {
+        /// <summary>
+        /// Performs a right-associative scan (inclusive prefix) on a sequence of elements.
+        /// This operator is the right-associative version of the
+        /// <see cref="MoreAsyncEnumerable.Scan{TSource}(IAsyncEnumerable{TSource}, Func{TSource, TSource, TSource})"/> LINQ operator.
+        /// </summary>
+        /// <typeparam name="TSource">Type of elements in source sequence.</typeparam>
+        /// <param name="source">Source sequence.</param>
+        /// <param name="func">
+        /// A right-associative accumulator function to be invoked on each element.
+        /// Its first argument is the current value in the sequence; second argument is the previous accumulator value.
+        /// </param>
+        /// <returns>The scanned sequence.</returns>
+        /// <remarks>
+        /// This operator uses deferred execution and streams its results.
+        /// Source sequence is consumed greedily when an iteration of the resulting sequence begins.
+        /// </remarks>
         public static IAsyncEnumerable<TSource> ScanRight<TSource>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource> func)
@@ -24,6 +40,22 @@ namespace MoreAsyncLINQ
                         : null);
         }
 
+        /// <summary>
+        /// Performs a right-associative scan (inclusive prefix) on a sequence of elements.
+        /// The specified seed value is used as the initial accumulator value.
+        /// This operator is the right-associative version of the
+        /// <see cref="MoreAsyncEnumerable.Scan{TSource, TState}(IAsyncEnumerable{TSource}, TState, Func{TState, TSource, TState})"/> LINQ operator.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
+        /// <typeparam name="TAccumulate">The type of the accumulator value.</typeparam>
+        /// <param name="source">Source sequence.</param>
+        /// <param name="seed">The initial accumulator value.</param>
+        /// <param name="func">A right-associative accumulator function to be invoked on each element.</param>
+        /// <returns>The scanned sequence.</returns>
+        /// <remarks>
+        /// This operator uses deferred execution and streams its results.
+        /// Source sequence is consumed greedily when an iteration of the resulting sequence begins.
+        /// </remarks>
         public static IAsyncEnumerable<TAccumulate> ScanRight<TSource, TAccumulate>(
             this IAsyncEnumerable<TSource> source,
             TAccumulate seed,
@@ -63,6 +95,22 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Performs a right-associative scan (inclusive prefix) on a sequence of elements.
+        /// This operator is the right-associative version of the
+        /// <see cref="MoreAsyncEnumerable.ScanAwait{TSource}(IAsyncEnumerable{TSource}, Func{TSource, TSource, ValueTask{TSource}})"/> LINQ operator.
+        /// </summary>
+        /// <typeparam name="TSource">Type of elements in source sequence.</typeparam>
+        /// <param name="source">Source sequence.</param>
+        /// <param name="func">
+        /// A right-associative accumulator function to be invoked on each element.
+        /// Its first argument is the current value in the sequence; second argument is the previous accumulator value.
+        /// </param>
+        /// <returns>The scanned sequence.</returns>
+        /// <remarks>
+        /// This operator uses deferred execution and streams its results.
+        /// Source sequence is consumed greedily when an iteration of the resulting sequence begins.
+        /// </remarks>
         public static IAsyncEnumerable<TSource> ScanRightAwait<TSource>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, ValueTask<TSource>> func)
@@ -78,6 +126,22 @@ namespace MoreAsyncLINQ
                         : null);
         }
 
+        /// <summary>
+        /// Performs a right-associative scan (inclusive prefix) on a sequence of elements.
+        /// The specified seed value is used as the initial accumulator value.
+        /// This operator is the right-associative version of the
+        /// <see cref="MoreAsyncEnumerable.ScanAwait{TSource, TState}(IAsyncEnumerable{TSource}, TState, Func{TState, TSource, ValueTask{TState}})"/> LINQ operator.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
+        /// <typeparam name="TAccumulate">The type of the accumulator value.</typeparam>
+        /// <param name="source">Source sequence.</param>
+        /// <param name="seed">The initial accumulator value.</param>
+        /// <param name="func">A right-associative accumulator function to be invoked on each element.</param>
+        /// <returns>The scanned sequence.</returns>
+        /// <remarks>
+        /// This operator uses deferred execution and streams its results.
+        /// Source sequence is consumed greedily when an iteration of the resulting sequence begins.
+        /// </remarks>
         public static IAsyncEnumerable<TAccumulate> ScanRightAwait<TSource, TAccumulate>(
             this IAsyncEnumerable<TSource> source,
             TAccumulate seed,

@@ -8,6 +8,19 @@ namespace MoreAsyncLINQ
 {
     static partial class MoreAsyncEnumerable
     {
+        /// <summary>
+        /// Applies a right-associative accumulator function over a sequence.
+        /// This operator is the right-associative version of the
+        /// <see cref="AsyncEnumerable.AggregateAsync{TSource}(IAsyncEnumerable{TSource}, Func{TSource, TSource, TSource}, CancellationToken)"/> LINQ operator.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
+        /// <param name="source">Source sequence.</param>
+        /// <param name="func">A right-associative accumulator function to be invoked on each element.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The final accumulator value.</returns>
+        /// <remarks>
+        /// This operator executes immediately.
+        /// </remarks>
         public static ValueTask<TSource> AggregateRightAsync<TSource>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource> func,
@@ -33,6 +46,22 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Applies a right-associative accumulator function over a sequence.
+        /// The specified seed value is used as the initial accumulator value.
+        /// This operator is the right-associative version of the
+        /// <see cref="AsyncEnumerable.AggregateAsync{TSource, TAccumulate}(IAsyncEnumerable{TSource}, TAccumulate, Func{TAccumulate, TSource, TAccumulate}, CancellationToken)"/> LINQ operator.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
+        /// <typeparam name="TAccumulate">The type of the accumulator value.</typeparam>
+        /// <param name="source">Source sequence.</param>
+        /// <param name="seed">The initial accumulator value.</param>
+        /// <param name="func">A right-associative accumulator function to be invoked on each element.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The final accumulator value.</returns>
+        /// <remarks>
+        /// This operator executes immediately.
+        /// </remarks>
         public static ValueTask<TAccumulate> AggregateRightAsync<TSource, TAccumulate>(
             this IAsyncEnumerable<TSource> source,
             TAccumulate seed,
@@ -56,6 +85,25 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Applies a right-associative accumulator function over a sequence.
+        /// The specified seed value is used as the initial accumulator value,
+        /// and the specified function is used to select the result value.
+        /// This operator is the right-associative version of the
+        /// <see cref="AsyncEnumerable.AggregateAsync{TSource, TAccumulate, TResult}(IAsyncEnumerable{TSource}, TAccumulate, Func{TAccumulate, TSource, TAccumulate}, Func{TAccumulate, TResult}, CancellationToken)"/> LINQ operator.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
+        /// <typeparam name="TAccumulate">The type of the accumulator value.</typeparam>
+        /// <typeparam name="TResult">The type of the resulting value.</typeparam>
+        /// <param name="source">Source sequence.</param>
+        /// <param name="seed">The initial accumulator value.</param>
+        /// <param name="func">A right-associative accumulator function to be invoked on each element.</param>
+        /// <param name="resultSelector">A function to transform the final accumulator value into the result value.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The transformed final accumulator value.</returns>
+        /// <remarks>
+        /// This operator executes immediately.
+        /// </remarks>
         public static ValueTask<TResult> AggregateRightAsync<TSource, TAccumulate, TResult>(
             this IAsyncEnumerable<TSource> source,
             TAccumulate seed,
@@ -95,6 +143,19 @@ namespace MoreAsyncLINQ
             return accumulator;
         }
 
+        /// <summary>
+        /// Applies a right-associative accumulator function over a sequence.
+        /// This operator is the right-associative version of the
+        /// <see cref="AsyncEnumerable.AggregateAwaitAsync{TSource}(IAsyncEnumerable{TSource}, Func{TSource, TSource, ValueTask{TSource}}, CancellationToken)"/> LINQ operator.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
+        /// <param name="source">Source sequence.</param>
+        /// <param name="func">A right-associative accumulator function to be invoked on each element.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The final accumulator value.</returns>
+        /// <remarks>
+        /// This operator executes immediately.
+        /// </remarks>
         public static ValueTask<TSource> AggregateRightAwaitAsync<TSource>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, ValueTask<TSource>> func,
@@ -120,6 +181,22 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Applies a right-associative accumulator function over a sequence.
+        /// The specified seed value is used as the initial accumulator value.
+        /// This operator is the right-associative version of the
+        /// <see cref="AsyncEnumerable.AggregateAwaitAsync{TSource, TAccumulate}(IAsyncEnumerable{TSource}, TAccumulate, Func{TAccumulate, TSource, ValueTask{TAccumulate}}, CancellationToken)"/> LINQ operator.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
+        /// <typeparam name="TAccumulate">The type of the accumulator value.</typeparam>
+        /// <param name="source">Source sequence.</param>
+        /// <param name="seed">The initial accumulator value.</param>
+        /// <param name="func">A right-associative accumulator function to be invoked on each element.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The final accumulator value.</returns>
+        /// <remarks>
+        /// This operator executes immediately.
+        /// </remarks>
         public static ValueTask<TAccumulate> AggregateRightAwaitAsync<TSource, TAccumulate>(
             this IAsyncEnumerable<TSource> source,
             TAccumulate seed,
@@ -143,6 +220,25 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Applies a right-associative accumulator function over a sequence.
+        /// The specified seed value is used as the initial accumulator value,
+        /// and the specified function is used to select the result value.
+        /// This operator is the right-associative version of the
+        /// <see cref="AsyncEnumerable.AggregateAwaitAsync{TSource, TAccumulate, TResult}(IAsyncEnumerable{TSource}, TAccumulate, Func{TAccumulate, TSource, ValueTask{TAccumulate}}, Func{TAccumulate, ValueTask{TResult}}, CancellationToken)"/> LINQ operator.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
+        /// <typeparam name="TAccumulate">The type of the accumulator value.</typeparam>
+        /// <typeparam name="TResult">The type of the resulting value.</typeparam>
+        /// <param name="source">Source sequence.</param>
+        /// <param name="seed">The initial accumulator value.</param>
+        /// <param name="func">A right-associative accumulator function to be invoked on each element.</param>
+        /// <param name="resultSelector">A function to transform the final accumulator value into the result value.</param>
+        /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+        /// <returns>The transformed final accumulator value.</returns>
+        /// <remarks>
+        /// This operator executes immediately.
+        /// </remarks>
         public static ValueTask<TResult> AggregateRightAwaitAsync<TSource, TAccumulate, TResult>(
             this IAsyncEnumerable<TSource> source,
             TAccumulate seed,

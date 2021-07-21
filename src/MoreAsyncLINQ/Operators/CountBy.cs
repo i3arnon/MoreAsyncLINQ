@@ -8,6 +8,15 @@ namespace MoreAsyncLINQ
 {
     static partial class MoreAsyncEnumerable
     {
+        /// <summary>
+        /// Applies a key-generating function to each element of a sequence and returns a sequence of
+        /// unique keys and their number of occurrences in the original sequence.
+        /// </summary>
+        /// <typeparam name="TSource">Type of the elements of the source sequence.</typeparam>
+        /// <typeparam name="TKey">Type of the projected element.</typeparam>
+        /// <param name="source">Source sequence.</param>
+        /// <param name="keySelector">Function that transforms each item of source sequence into a key to be compared against the others.</param>
+        /// <returns>A sequence of unique keys and their number of occurrences in the original sequence.</returns>
         public static IAsyncEnumerable<(TKey Key, int Count)> CountBy<TSource, TKey>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TKey> keySelector)
@@ -18,6 +27,18 @@ namespace MoreAsyncLINQ
             return source.CountBy(keySelector, comparer: null);
         }
 
+        /// <summary>
+        /// Applies a key-generating function to each element of a sequence and returns a sequence of
+        /// unique keys and their number of occurrences in the original sequence.
+        /// An additional argument specifies a comparer to use for testing equivalence of keys.
+        /// </summary>
+        /// <typeparam name="TSource">Type of the elements of the source sequence.</typeparam>
+        /// <typeparam name="TKey">Type of the projected element.</typeparam>
+        /// <param name="source">Source sequence.</param>
+        /// <param name="keySelector">Function that transforms each item of source sequence into a key to be compared against the others.</param>
+        /// <param name="comparer">The equality comparer to use to determine whether or not keys are equal.
+        /// If null, the default equality comparer for <typeparamref name="TSource"/> is used.</param>
+        /// <returns>A sequence of unique keys and their number of occurrences in the original sequence.</returns>
         public static IAsyncEnumerable<(TKey Key, int Count)> CountBy<TSource, TKey>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
@@ -83,6 +104,15 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Applies a key-generating function to each element of a sequence and returns a sequence of
+        /// unique keys and their number of occurrences in the original sequence.
+        /// </summary>
+        /// <typeparam name="TSource">Type of the elements of the source sequence.</typeparam>
+        /// <typeparam name="TKey">Type of the projected element.</typeparam>
+        /// <param name="source">Source sequence.</param>
+        /// <param name="keySelector">Function that transforms each item of source sequence into a key to be compared against the others.</param>
+        /// <returns>A sequence of unique keys and their number of occurrences in the original sequence.</returns>
         public static IAsyncEnumerable<(TKey Key, int Count)> CountByAwait<TSource, TKey>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, ValueTask<TKey>> keySelector)
@@ -93,6 +123,18 @@ namespace MoreAsyncLINQ
             return source.CountByAwait(keySelector, comparer: null);
         }
 
+        /// <summary>
+        /// Applies a key-generating function to each element of a sequence and returns a sequence of
+        /// unique keys and their number of occurrences in the original sequence.
+        /// An additional argument specifies a comparer to use for testing equivalence of keys.
+        /// </summary>
+        /// <typeparam name="TSource">Type of the elements of the source sequence.</typeparam>
+        /// <typeparam name="TKey">Type of the projected element.</typeparam>
+        /// <param name="source">Source sequence.</param>
+        /// <param name="keySelector">Function that transforms each item of source sequence into a key to be compared against the others.</param>
+        /// <param name="comparer">The equality comparer to use to determine whether or not keys are equal.
+        /// If null, the default equality comparer for <typeparamref name="TSource"/> is used.</param>
+        /// <returns>A sequence of unique keys and their number of occurrences in the original sequence.</returns>
         public static IAsyncEnumerable<(TKey Key, int Count)> CountByAwait<TSource, TKey>(
            this IAsyncEnumerable<TSource> source,
            Func<TSource, ValueTask<TKey>> keySelector,

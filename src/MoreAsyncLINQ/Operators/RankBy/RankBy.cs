@@ -9,6 +9,14 @@ namespace MoreAsyncLINQ
 {
     static partial class MoreAsyncEnumerable
     {
+        /// <summary>
+        /// Ranks each item in the sequence in descending ordering by a specified key using a default comparer
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements in the source sequence</typeparam>
+        /// <typeparam name="TKey">The type of the key used to rank items in the sequence</typeparam>
+        /// <param name="source">The sequence of items to rank</param>
+        /// <param name="keySelector">A key selector function which returns the value by which to rank items in the sequence</param>
+        /// <returns>A sequence of position integers representing the ranks of the corresponding items in the sequence</returns>
         public static IAsyncEnumerable<int> RankBy<TSource, TKey>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TKey> keySelector)
@@ -20,6 +28,15 @@ namespace MoreAsyncLINQ
             return source.RankBy(keySelector, comparer: null);
         }
 
+        /// <summary>
+        /// Ranks each item in a sequence using a specified key and a caller-supplied comparer
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements in the source sequence</typeparam>
+        /// <typeparam name="TKey">The type of the key used to rank items in the sequence</typeparam>
+        /// <param name="source">The sequence of items to rank</param>
+        /// <param name="keySelector">A key selector function which returns the value by which to rank items in the sequence</param>
+        /// <param name="comparer">An object that defines the comparison semantics for keys used to rank items</param>
+        /// <returns>A sequence of position integers representing the ranks of the corresponding items in the sequence</returns>
         public static IAsyncEnumerable<int> RankBy<TSource, TKey>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
@@ -57,6 +74,14 @@ namespace MoreAsyncLINQ
             }
         }
 
+        /// <summary>
+        /// Ranks each item in the sequence in descending ordering by a specified key using a default comparer
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements in the source sequence</typeparam>
+        /// <typeparam name="TKey">The type of the key used to rank items in the sequence</typeparam>
+        /// <param name="source">The sequence of items to rank</param>
+        /// <param name="keySelector">A key selector function which returns the value by which to rank items in the sequence</param>
+        /// <returns>A sequence of position integers representing the ranks of the corresponding items in the sequence</returns>
         public static IAsyncEnumerable<int> RankByAwait<TSource, TKey>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, ValueTask<TKey>> keySelector)
@@ -68,7 +93,15 @@ namespace MoreAsyncLINQ
             return source.RankByAwait(keySelector, comparer: null);
         }
 
-
+        /// <summary>
+        /// Ranks each item in a sequence using a specified key and a caller-supplied comparer
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements in the source sequence</typeparam>
+        /// <typeparam name="TKey">The type of the key used to rank items in the sequence</typeparam>
+        /// <param name="source">The sequence of items to rank</param>
+        /// <param name="keySelector">A key selector function which returns the value by which to rank items in the sequence</param>
+        /// <param name="comparer">An object that defines the comparison semantics for keys used to rank items</param>
+        /// <returns>A sequence of position integers representing the ranks of the corresponding items in the sequence</returns>
         public static IAsyncEnumerable<int> RankByAwait<TSource, TKey>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, ValueTask<TKey>> keySelector,

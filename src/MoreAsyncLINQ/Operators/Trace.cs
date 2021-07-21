@@ -6,6 +6,18 @@ namespace MoreAsyncLINQ
 {
     static partial class MoreAsyncEnumerable
     {
+        /// <summary>
+        /// Traces the elements of a source sequence for diagnostics.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <param name="source">Source sequence whose elements to trace.</param>
+        /// <returns>
+        /// Return the source sequence unmodified.
+        /// </returns>
+        /// <remarks>
+        /// This a pass-through operator that uses deferred execution and
+        /// streams the results.
+        /// </remarks>
         public static IAsyncEnumerable<TSource> Trace<TSource>(this IAsyncEnumerable<TSource> source)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
@@ -13,6 +25,23 @@ namespace MoreAsyncLINQ
             return source.Trace(format: null);
         }
 
+        /// <summary>
+        /// Traces the elements of a source sequence for diagnostics using
+        /// custom formatting.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <param name="source">Source sequence whose elements to trace.</param>
+        /// <param name="format">
+        /// String to use to format the trace message. If null then the
+        /// element value becomes the traced message.
+        /// </param>
+        /// <returns>
+        /// Return the source sequence unmodified.
+        /// </returns>
+        /// <remarks>
+        /// This a pass-through operator that uses deferred execution and
+        /// streams the results.
+        /// </remarks>
         public static IAsyncEnumerable<TSource> Trace<TSource>(
             this IAsyncEnumerable<TSource> source,
             string? format)
@@ -24,6 +53,20 @@ namespace MoreAsyncLINQ
                 : source.Trace(element => string.Format(format, element));
         }
 
+        /// <summary>
+        /// Traces the elements of a source sequence for diagnostics using
+        /// a custom formatter.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <param name="source">Source sequence whose elements to trace.</param>
+        /// <param name="formatter">Function used to format each source element into a string.</param>
+        /// <returns>
+        /// Return the source sequence unmodified.
+        /// </returns>
+        /// <remarks>
+        /// This a pass-through operator that uses deferred execution and
+        /// streams the results.
+        /// </remarks>
         public static IAsyncEnumerable<TSource> Trace<TSource>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, string> formatter)
@@ -34,6 +77,20 @@ namespace MoreAsyncLINQ
             return source.Pipe(element => System.Diagnostics.Trace.WriteLine(formatter(element)));
         }
 
+        /// <summary>
+        /// Traces the elements of a source sequence for diagnostics using
+        /// a custom formatter.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+        /// <param name="source">Source sequence whose elements to trace.</param>
+        /// <param name="formatter">Function used to format each source element into a string.</param>
+        /// <returns>
+        /// Return the source sequence unmodified.
+        /// </returns>
+        /// <remarks>
+        /// This a pass-through operator that uses deferred execution and
+        /// streams the results.
+        /// </remarks>
         public static IAsyncEnumerable<TSource> TraceAwait<TSource>(
             this IAsyncEnumerable<TSource> source,
             Func<TSource, ValueTask<string>> formatter)
