@@ -308,7 +308,7 @@ Performs a right outer join between two sequences.
 ### RunLengthEncode
 
 Run-length encodes a sequence by converting consecutive instances of the same
-element into a `KeyValuePair<T, int>` representing the item and its occurrence
+element into a tuple representing the item and its occurrence
 count.
 
 ### Scan
@@ -383,7 +383,7 @@ direction (ascending, descending) according to a key.
 
 ### ToArrayByIndex
 
-Creates an array from an IEnumerable<T> where a function is used to determine
+Creates an array from an `IAsyncEnumerable<T>` where a function is used to determine
 the index at which an element will be placed in the array.
 
 ### ToDelimitedString
