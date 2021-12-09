@@ -24,10 +24,6 @@ Applies multiple accumulators sequentially in a single pass over a sequence.
 Applies a right-associative accumulator function over a sequence.
 This operator is the right-associative version of the `Aggregate` operator.
 
-### Append
-
-Returns a sequence consisting of the head element and the given tail elements.
-
 ### Assert
 
 Asserts that all elements of a sequence meet a given condition otherwise
@@ -278,10 +274,6 @@ sets of keys.
 ### Pipe
 
 Executes the given action on each element in the source sequence and yields it
-
-### Prepend
-
-Prepends a single value to a sequence
 
 ### PreScan
 
