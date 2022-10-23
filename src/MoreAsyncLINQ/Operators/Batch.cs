@@ -44,6 +44,7 @@ namespace MoreAsyncLINQ
         /// <param name="size">Size of buckets.</param>
         /// <param name="resultSelector">The projection to apply to each bucket.</param>
         /// <returns>A sequence of projections on equally sized buckets containing elements of the source collection.</returns>
+        /// <remarks>
         /// <para>
         /// This operator uses deferred execution and streams its results
         /// (buckets are streamed but their content buffered).</para>
@@ -59,6 +60,7 @@ namespace MoreAsyncLINQ
         /// hoping for a single bucket, then it can lead to memory exhaustion
         /// (<see cref="OutOfMemoryException"/>).
         /// </para>
+        /// </remarks>
         public static IAsyncEnumerable<TResult> Batch<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             int size,
@@ -123,6 +125,7 @@ namespace MoreAsyncLINQ
         /// <param name="size">Size of buckets.</param>
         /// <param name="resultSelector">The projection to apply to each bucket.</param>
         /// <returns>A sequence of projections on equally sized buckets containing elements of the source collection.</returns>
+        /// <remarks>
         /// <para>
         /// This operator uses deferred execution and streams its results
         /// (buckets are streamed but their content buffered).</para>
@@ -138,6 +141,7 @@ namespace MoreAsyncLINQ
         /// hoping for a single bucket, then it can lead to memory exhaustion
         /// (<see cref="OutOfMemoryException"/>).
         /// </para>
+        /// </remarks>
         public static IAsyncEnumerable<TResult> BatchAwait<TSource, TResult>(
             this IAsyncEnumerable<TSource> source,
             int size,
