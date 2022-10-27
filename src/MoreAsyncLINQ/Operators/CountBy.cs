@@ -71,19 +71,12 @@ namespace MoreAsyncLINQ
                     var keys = new List<TKey>();
                     var counts = new List<int>();
 
-                    (TKey, int)? previous = null;
                     await foreach (var element in source.WithCancellation(cancellationToken).ConfigureAwait(false))
                     {
                         var key = keySelector(element);
 
                         int index;
-                        if (previous is ({ } previousKey, var previousIndex)
-                            && comparer.GetHashCode(previousKey) == comparer.GetHashCode(key)
-                            && comparer.Equals(previousKey, key))
-                        {
-                            index = previousIndex;
-                        }
-                        else if (indexMap.TryGetValue(key, out var existingIndex))
+                        if (indexMap.TryGetValue(key, out var existingIndex))
                         {
                             index = existingIndex;
                         }
@@ -96,7 +89,6 @@ namespace MoreAsyncLINQ
                         }
 
                         counts[index]++;
-                        previous = (key, index);
                     }
 
                     return (keys, counts);
@@ -167,19 +159,12 @@ namespace MoreAsyncLINQ
                     var keys = new List<TKey>();
                     var counts = new List<int>();
 
-                    (TKey, int)? previous = null;
                     await foreach (var element in source.WithCancellation(cancellationToken).ConfigureAwait(false))
                     {
                         var key = await keySelector(element).ConfigureAwait(false);
 
                         int index;
-                        if (previous is ({ } previousKey, var previousIndex)
-                            && comparer.GetHashCode(previousKey) == comparer.GetHashCode(key)
-                            && comparer.Equals(previousKey, key))
-                        {
-                            index = previousIndex;
-                        }
-                        else if (indexMap.TryGetValue(key, out var existingIndex))
+                        if (indexMap.TryGetValue(key, out var existingIndex))
                         {
                             index = existingIndex;
                         }
@@ -192,7 +177,6 @@ namespace MoreAsyncLINQ
                         }
 
                         counts[index]++;
-                        previous = (key, index);
                     }
 
                     return (keys, counts);

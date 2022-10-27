@@ -40,7 +40,7 @@ namespace MoreAsyncLINQ
             return source.ScanBy(
                 keySelector,
                 seedSelector,
-                accumulator, 
+                accumulator,
                 comparer: null);
         }
 
@@ -95,32 +95,16 @@ namespace MoreAsyncLINQ
             {
                 var stateMap = new NullableKeyDictionary<TKey, TState>(comparer);
 
-                (TKey, TState)? previous = null;
                 await foreach (var element in source.WithCancellation(cancellationToken).ConfigureAwait(false))
                 {
                     var key = keySelector(element);
-
-                    TState state;
-                    if (previous is ({ } previousKey, { } previousState)
-                        && comparer.GetHashCode(previousKey) == comparer.GetHashCode(key)
-                        && comparer.Equals(previousKey, key))
-                    {
-                        state = previousState;
-                    }
-                    else if (stateMap.TryGetValue(key, out var existingState))
-                    {
-                        state = existingState;
-                    }
-                    else
-                    {
-                        state = seedSelector(key);
-                    }
-
+                    var state =
+                        stateMap.TryGetValue(key, out var existingState)
+                            ? existingState
+                            : seedSelector(key);
                     state = accumulator(state, key, element);
                     stateMap[key] = state;
                     yield return (key, state);
-
-                    previous = (key, state);
                 }
             }
         }
@@ -212,32 +196,16 @@ namespace MoreAsyncLINQ
             {
                 var stateMap = new NullableKeyDictionary<TKey, TState>(comparer);
 
-                (TKey, TState)? previous = null;
                 await foreach (var element in source.WithCancellation(cancellationToken).ConfigureAwait(false))
                 {
                     var key = await keySelector(element).ConfigureAwait(false);
-
-                    TState state;
-                    if (previous is ({ } previousKey, { } previousState)
-                        && comparer.GetHashCode(previousKey) == comparer.GetHashCode(key)
-                        && comparer.Equals(previousKey, key))
-                    {
-                        state = previousState;
-                    }
-                    else if (stateMap.TryGetValue(key, out var existingState))
-                    {
-                        state = existingState;
-                    }
-                    else
-                    {
-                        state = await seedSelector(key).ConfigureAwait(false);
-                    }
-
+                    var state =
+                        stateMap.TryGetValue(key, out var existingState)
+                            ? existingState
+                            : await seedSelector(key).ConfigureAwait(false);
                     state = await accumulator(state, key, element).ConfigureAwait(false);
                     stateMap[key] = state;
                     yield return (key, state);
-
-                    previous = (key, state);
                 }
             }
         }
