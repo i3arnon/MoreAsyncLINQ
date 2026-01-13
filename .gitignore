@@ -1,24 +1,7 @@
-# User-specific files
-*.suo
-*.user
-*.userosscache
-*.sln.docstates
-
 # Build results
-[Dd]ebug/
-[Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
-x64/
-x86/
-build/
-[Bb]in/
-[Oo]bj/
+bin/
+obj/
 
-# Visual Studio 2015 cache/options directory
-.vs/
-
-# ReSharper
-_ReSharper*/
-*.[Rr]e[Ss]harper
+# Rider
 *.DotSettings.user
+.idea/
