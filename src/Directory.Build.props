@@ -1,10 +1,10 @@
 <Project>
+  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+
   <PropertyGroup>
-    <LangVersion>latest</LangVersion>
-    <Nullable>enable</Nullable>
-    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
     <WarningsNotAsErrors>CS0419,CS1574</WarningsNotAsErrors>
   </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="ConfigureAwaitChecker.Analyzer" Version="5.0.0.1" PrivateAssets="All" />
     <PackageReference Include="JetBrains.Annotations" Version="2022.1.0" PrivateAssets="All" />
