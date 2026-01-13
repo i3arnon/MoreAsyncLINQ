@@ -94,8 +94,8 @@ namespace MoreAsyncLINQ
 
             comparer ??= Comparer<TKey>.Default;
             return direction == Ascending
-                ? source.OrderByAwait(keySelector, comparer)
-                : source.OrderByDescendingAwait(keySelector, comparer);
+                ? source.OrderBy((element, _) => keySelector(element), comparer)
+                : source.OrderByDescending((element, _) => keySelector(element), comparer);
         }
     }
 }

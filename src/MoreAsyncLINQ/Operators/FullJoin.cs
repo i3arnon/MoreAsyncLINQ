@@ -564,7 +564,7 @@ namespace MoreAsyncLINQ
             {
                 var secondKeyAndElements =
                     await second.
-                        SelectAwait(async element => (key: await secondKeySelector(element).ConfigureAwait(false), element)).
+                        Select(async (TSecond element, CancellationToken _) => (key: await secondKeySelector(element).ConfigureAwait(false), element)).
                         ToArrayAsync(cancellationToken).
                         ConfigureAwait(false);
                 var secondLookup =

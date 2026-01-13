@@ -432,15 +432,15 @@ namespace MoreAsyncLINQ
 
             comparer ??= EqualityComparer<TKey>.Default;
             return first.
-                GroupJoinAwait(
+                GroupJoin(
                     second,
-                    firstKeySelector,
-                    secondKeySelector,
-                    (firstElement, secondElements) => ValueTasks.FromResult((firstElement, secondElements: secondElements.Select(secondElement => (hasValue: true, value: secondElement)))),
+                    (firstElement, _) => firstKeySelector(firstElement),
+                    (secondElement, _) => secondKeySelector(secondElement),
+                    (firstElement, secondElements, _) => ValueTasks.FromResult((firstElement, secondElements: secondElements.Select(secondElement => (hasValue: true, value: secondElement)))),
                     comparer).
-                SelectManyAwait(
-                    tuple => ValueTasks.FromResult(tuple.secondElements.DefaultIfEmpty()),
-                    (tuple, secondElement) =>
+                SelectMany(
+                    (tuple, _) => ValueTasks.FromResult(tuple.secondElements.DefaultIfEmpty()),
+                    (tuple, secondElement, _) =>
                         secondElement.hasValue
                             ? bothSelector(tuple.firstElement, secondElement.value)
                             : firstSelector(tuple.firstElement));

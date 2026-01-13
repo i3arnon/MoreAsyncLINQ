@@ -201,7 +201,7 @@ namespace MoreAsyncLINQ
                     ? source
                     : Enumerable.Range(start: 0, width - collectionCount.Value).
                         ToAsyncEnumerable().
-                        SelectAwait(paddingSelector).
+                        Select((int index, CancellationToken _) => paddingSelector(index)).
                         Concat(source)
                 : Core(source, width, paddingSelector);
 

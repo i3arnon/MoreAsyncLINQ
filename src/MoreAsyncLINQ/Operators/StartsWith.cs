@@ -92,8 +92,8 @@ namespace MoreAsyncLINQ
                         GetAsyncEnumerator();
 
                 return await second.
-                    AllAwaitAsync(
-                        async secondElement =>
+                    AllAsync(
+                        async (secondElement, _) =>
                             await firstEnumerator.MoveNextAsync() &&
                             comparer.Equals(firstEnumerator.Current, secondElement),
                         cancellationToken).

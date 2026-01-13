@@ -9,7 +9,7 @@ namespace MoreAsyncLINQ
 {
     static partial class MoreAsyncEnumerable
     {
-        private static IAsyncEnumerable<TSource> Memoize<TSource>(this IAsyncEnumerable<TSource> source) =>
+        private static MemoizedAsyncEnumerable<TSource> Memoize<TSource>(this IAsyncEnumerable<TSource> source) =>
             source is MemoizedAsyncEnumerable<TSource> memoizedAsyncEnumerable
                 ? memoizedAsyncEnumerable
                 : new MemoizedAsyncEnumerable<TSource>(source);
