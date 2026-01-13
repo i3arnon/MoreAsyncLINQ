@@ -49,11 +49,11 @@ namespace MoreAsyncLINQ
         /// This operator uses deferred execution and streams its results
         /// (buckets are streamed but their content buffered).</para>
         /// <para>
-        /// <para>
         /// When more than one bucket is streamed, all buckets except the last
         /// is guaranteed to have <paramref name="size"/> elements. The last
         /// bucket may be smaller depending on the remaining elements in the
         /// <paramref name="source"/> sequence.</para>
+        /// <para>
         /// Each bucket is pre-allocated to <paramref name="size"/> elements.
         /// If <paramref name="size"/> is set to a very large value, e.g.
         /// <see cref="int.MaxValue"/> to effectively disable batching by just
@@ -130,11 +130,11 @@ namespace MoreAsyncLINQ
         /// This operator uses deferred execution and streams its results
         /// (buckets are streamed but their content buffered).</para>
         /// <para>
-        /// <para>
         /// When more than one bucket is streamed, all buckets except the last
         /// is guaranteed to have <paramref name="size"/> elements. The last
         /// bucket may be smaller depending on the remaining elements in the
         /// <paramref name="source"/> sequence.</para>
+        /// <para>
         /// Each bucket is pre-allocated to <paramref name="size"/> elements.
         /// If <paramref name="size"/> is set to a very large value, e.g.
         /// <see cref="int.MaxValue"/> to effectively disable batching by just
