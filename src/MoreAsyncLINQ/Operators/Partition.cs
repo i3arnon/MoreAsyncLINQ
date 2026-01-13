@@ -31,7 +31,7 @@ namespace MoreAsyncLINQ
 
             return source.PartitionAsync(
                 predicate,
-                static(grouping1, grouping2) => (grouping1, grouping2),
+                static (grouping1, grouping2) => (grouping1, grouping2),
                 cancellationToken);
         }
 
