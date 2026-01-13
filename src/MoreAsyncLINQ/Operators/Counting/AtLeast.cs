@@ -8,7 +8,7 @@ namespace MoreAsyncLINQ
     static partial class MoreAsyncEnumerable
     {
         /// <summary>
-        /// Determines whether or not the number of elements in the sequence is greater than
+        /// Determines whether the number of elements in the sequence is greater than
         /// or equal to the given integer.
         /// </summary>
         /// <typeparam name="TSource">Element type of sequence</typeparam>

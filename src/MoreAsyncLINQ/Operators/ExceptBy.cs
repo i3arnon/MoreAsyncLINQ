@@ -165,7 +165,7 @@ namespace MoreAsyncLINQ
             {
                 var set =
                     await second.
-                        SelectAwait(keySelector).
+                        Select((TSource element, CancellationToken _) => keySelector(element)).
                         ToHashSetAsync(keyComparer, cancellationToken).
                         ConfigureAwait(false);
                 await foreach (var element in first.WithCancellation(cancellationToken).ConfigureAwait(false))

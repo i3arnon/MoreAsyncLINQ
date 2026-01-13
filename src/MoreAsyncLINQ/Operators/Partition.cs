@@ -80,7 +80,7 @@ namespace MoreAsyncLINQ
         /// The return value from <paramref name="resultSelector"/>.
         /// </returns>
         public static ValueTask<TResult> PartitionAsync<TSource, TResult>(
-            this IAsyncEnumerable<IAsyncGrouping<bool, TSource>> source,
+            this IAsyncEnumerable<IGrouping<bool, TSource>> source,
             Func<IAsyncEnumerable<TSource>, IAsyncEnumerable<TSource>, TResult> resultSelector,
             CancellationToken cancellationToken = default)
         {
@@ -111,7 +111,7 @@ namespace MoreAsyncLINQ
         /// The return value from <paramref name="resultSelector"/>.
         /// </returns>
         public static ValueTask<TResult> PartitionAsync<TSource, TResult>(
-            this IAsyncEnumerable<IAsyncGrouping<bool?, TSource>> source,
+            this IAsyncEnumerable<IGrouping<bool?, TSource>> source,
             Func<IAsyncEnumerable<TSource>, IAsyncEnumerable<TSource>, IAsyncEnumerable<TSource>, TResult> resultSelector,
             CancellationToken cancellationToken = default)
         {
@@ -146,9 +146,9 @@ namespace MoreAsyncLINQ
         /// The return value from <paramref name="resultSelector"/>.
         /// </returns>
         public static ValueTask<TResult> PartitionAsync<TKey, TElement, TResult>(
-            this IAsyncEnumerable<IAsyncGrouping<TKey, TElement>> source,
+            this IAsyncEnumerable<IGrouping<TKey, TElement>> source,
             TKey key,
-            Func<IAsyncEnumerable<TElement>, IAsyncEnumerable<IAsyncGrouping<TKey, TElement>>, TResult> resultSelector,
+            Func<IAsyncEnumerable<TElement>, IAsyncEnumerable<IGrouping<TKey, TElement>>, TResult> resultSelector,
             CancellationToken cancellationToken = default)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
@@ -183,10 +183,10 @@ namespace MoreAsyncLINQ
         /// The return value from <paramref name="resultSelector"/>.
         /// </returns>
         public static ValueTask<TResult> PartitionAsync<TKey, TElement, TResult>(
-            this IAsyncEnumerable<IAsyncGrouping<TKey, TElement>> source,
+            this IAsyncEnumerable<IGrouping<TKey, TElement>> source,
             TKey key,
             IEqualityComparer<TKey>? comparer,
-            Func<IAsyncEnumerable<TElement>, IAsyncEnumerable<IAsyncGrouping<TKey, TElement>>, TResult> resultSelector,
+            Func<IAsyncEnumerable<TElement>, IAsyncEnumerable<IGrouping<TKey, TElement>>, TResult> resultSelector,
             CancellationToken cancellationToken = default)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
@@ -224,10 +224,10 @@ namespace MoreAsyncLINQ
         /// The return value from <paramref name="resultSelector"/>.
         /// </returns>
         public static ValueTask<TResult> PartitionAsync<TKey, TElement, TResult>(
-            this IAsyncEnumerable<IAsyncGrouping<TKey, TElement>> source,
+            this IAsyncEnumerable<IGrouping<TKey, TElement>> source,
             TKey key1,
             TKey key2,
-            Func<IAsyncEnumerable<TElement>, IAsyncEnumerable<TElement>, IAsyncEnumerable<IAsyncGrouping<TKey, TElement>>, TResult> resultSelector,
+            Func<IAsyncEnumerable<TElement>, IAsyncEnumerable<TElement>, IAsyncEnumerable<IGrouping<TKey, TElement>>, TResult> resultSelector,
             CancellationToken cancellationToken = default)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
@@ -265,11 +265,11 @@ namespace MoreAsyncLINQ
         /// The return value from <paramref name="resultSelector"/>.
         /// </returns>
         public static ValueTask<TResult> PartitionAsync<TKey, TElement, TResult>(
-            this IAsyncEnumerable<IAsyncGrouping<TKey, TElement>> source,
+            this IAsyncEnumerable<IGrouping<TKey, TElement>> source,
             TKey key1,
             TKey key2,
             IEqualityComparer<TKey>? comparer,
-            Func<IAsyncEnumerable<TElement>, IAsyncEnumerable<TElement>, IAsyncEnumerable<IAsyncGrouping<TKey, TElement>>, TResult> resultSelector,
+            Func<IAsyncEnumerable<TElement>, IAsyncEnumerable<TElement>, IAsyncEnumerable<IGrouping<TKey, TElement>>, TResult> resultSelector,
             CancellationToken cancellationToken = default)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
@@ -308,11 +308,11 @@ namespace MoreAsyncLINQ
         /// The return value from <paramref name="resultSelector"/>.
         /// </returns>
         public static ValueTask<TResult> PartitionAsync<TKey, TElement, TResult>(
-            this IAsyncEnumerable<IAsyncGrouping<TKey, TElement>> source,
+            this IAsyncEnumerable<IGrouping<TKey, TElement>> source,
             TKey key1,
             TKey key2,
             TKey key3,
-            Func<IAsyncEnumerable<TElement>, IAsyncEnumerable<TElement>, IAsyncEnumerable<TElement>, IAsyncEnumerable<IAsyncGrouping<TKey, TElement>>, TResult> resultSelector,
+            Func<IAsyncEnumerable<TElement>, IAsyncEnumerable<TElement>, IAsyncEnumerable<TElement>, IAsyncEnumerable<IGrouping<TKey, TElement>>, TResult> resultSelector,
             CancellationToken cancellationToken = default)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
@@ -353,12 +353,12 @@ namespace MoreAsyncLINQ
         /// The return value from <paramref name="resultSelector"/>.
         /// </returns>
         public static ValueTask<TResult> PartitionAsync<TKey, TElement, TResult>(
-            this IAsyncEnumerable<IAsyncGrouping<TKey, TElement>> source,
+            this IAsyncEnumerable<IGrouping<TKey, TElement>> source,
             TKey key1,
             TKey key2,
             TKey key3,
             IEqualityComparer<TKey>? comparer,
-            Func<IAsyncEnumerable<TElement>, IAsyncEnumerable<TElement>, IAsyncEnumerable<TElement>, IAsyncEnumerable<IAsyncGrouping<TKey, TElement>>, TResult> resultSelector,
+            Func<IAsyncEnumerable<TElement>, IAsyncEnumerable<TElement>, IAsyncEnumerable<TElement>, IAsyncEnumerable<IGrouping<TKey, TElement>>, TResult> resultSelector,
             CancellationToken cancellationToken = default)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
@@ -376,13 +376,13 @@ namespace MoreAsyncLINQ
         }
 
         private static async ValueTask<TResult> PartitionAsync<TKey, TSource, TResult>(
-            this IAsyncEnumerable<IAsyncGrouping<TKey, TSource>> source,
+            this IAsyncEnumerable<IGrouping<TKey, TSource>> source,
             int count,
             TKey key1,
             TKey key2,
             TKey key3,
             IEqualityComparer<TKey>? comparer,
-            Func<IAsyncEnumerable<TSource>, IAsyncEnumerable<TSource>, IAsyncEnumerable<TSource>, IAsyncEnumerable<IAsyncGrouping<TKey, TSource>>, TResult> resultSelector,
+            Func<IAsyncEnumerable<TSource>, IAsyncEnumerable<TSource>, IAsyncEnumerable<TSource>, IAsyncEnumerable<IGrouping<TKey, TSource>>, TResult> resultSelector,
             CancellationToken cancellationToken = default)
         {
             Debug.Assert(count is >= 1 and <= 3);
@@ -392,24 +392,24 @@ namespace MoreAsyncLINQ
             var grouping1 = count >= 1 ? null : Empty<TSource>();
             var grouping2 = count >= 2 ? null : Empty<TSource>();
             var grouping3 = count == 3 ? null : Empty<TSource>();
-            List<IAsyncGrouping<TKey, TSource>>? groupings = null;
+            List<IGrouping<TKey, TSource>>? groupings = null;
             await foreach (var grouping in source.WithCancellation(cancellationToken).ConfigureAwait(false))
             {
                 if (grouping1 is null && comparer.Equals(grouping.Key, key1))
                 {
-                    grouping1 = grouping;
+                    grouping1 = grouping.ToAsyncEnumerable();
                 }
                 else if (grouping2 is null && comparer.Equals(grouping.Key, key2))
                 {
-                    grouping2 = grouping;
+                    grouping2 = grouping.ToAsyncEnumerable();
                 }
                 else if (grouping3 is null && comparer.Equals(grouping.Key, key3))
                 {
-                    grouping3 = grouping;
+                    grouping3 = grouping.ToAsyncEnumerable();
                 }
                 else
                 {
-                    groupings ??= new List<IAsyncGrouping<TKey, TSource>>();
+                    groupings ??= new List<IGrouping<TKey, TSource>>();
                     groupings.Add(grouping);
                 }
             }
@@ -418,7 +418,7 @@ namespace MoreAsyncLINQ
                 grouping1 ?? Empty<TSource>(),
                 grouping2 ?? Empty<TSource>(),
                 grouping3 ?? Empty<TSource>(),
-                groupings?.ToAsyncEnumerable() ?? Empty<IAsyncGrouping<TKey, TSource>>());
+                groupings?.ToAsyncEnumerable() ?? Empty<IGrouping<TKey, TSource>>());
         }
 
         /// <summary>
@@ -472,7 +472,7 @@ namespace MoreAsyncLINQ
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (predicate is null) throw new ArgumentNullException(nameof(predicate));
 
-            return source.GroupByAwait(predicate).PartitionAwaitAsync(resultSelector, cancellationToken);
+            return source.GroupBy((element, _) => predicate(element)).PartitionAwaitAsync(resultSelector, cancellationToken);
         }
 
         /// <summary>
@@ -491,7 +491,7 @@ namespace MoreAsyncLINQ
         /// The return value from <paramref name="resultSelector"/>.
         /// </returns>
         public static ValueTask<TResult> PartitionAwaitAsync<TSource, TResult>(
-            this IAsyncEnumerable<IAsyncGrouping<bool, TSource>> source,
+            this IAsyncEnumerable<IGrouping<bool, TSource>> source,
             Func<IAsyncEnumerable<TSource>, IAsyncEnumerable<TSource>, ValueTask<TResult>> resultSelector,
             CancellationToken cancellationToken = default)
         {
@@ -522,7 +522,7 @@ namespace MoreAsyncLINQ
         /// The return value from <paramref name="resultSelector"/>.
         /// </returns>
         public static ValueTask<TResult> PartitionAwaitAsync<TSource, TResult>(
-            this IAsyncEnumerable<IAsyncGrouping<bool?, TSource>> source,
+            this IAsyncEnumerable<IGrouping<bool?, TSource>> source,
             Func<IAsyncEnumerable<TSource>, IAsyncEnumerable<TSource>, IAsyncEnumerable<TSource>, ValueTask<TResult>> resultSelector,
             CancellationToken cancellationToken = default)
         {
@@ -557,9 +557,9 @@ namespace MoreAsyncLINQ
         /// The return value from <paramref name="resultSelector"/>.
         /// </returns>
         public static ValueTask<TResult> PartitionAwaitAsync<TKey, TElement, TResult>(
-            this IAsyncEnumerable<IAsyncGrouping<TKey, TElement>> source,
+            this IAsyncEnumerable<IGrouping<TKey, TElement>> source,
             TKey key,
-            Func<IAsyncEnumerable<TElement>, IAsyncEnumerable<IAsyncGrouping<TKey, TElement>>, ValueTask<TResult>> resultSelector,
+            Func<IAsyncEnumerable<TElement>, IAsyncEnumerable<IGrouping<TKey, TElement>>, ValueTask<TResult>> resultSelector,
             CancellationToken cancellationToken = default)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
@@ -594,10 +594,10 @@ namespace MoreAsyncLINQ
         /// The return value from <paramref name="resultSelector"/>.
         /// </returns>
         public static ValueTask<TResult> PartitionAwaitAsync<TKey, TElement, TResult>(
-            this IAsyncEnumerable<IAsyncGrouping<TKey, TElement>> source,
+            this IAsyncEnumerable<IGrouping<TKey, TElement>> source,
             TKey key,
             IEqualityComparer<TKey>? comparer,
-            Func<IAsyncEnumerable<TElement>, IAsyncEnumerable<IAsyncGrouping<TKey, TElement>>, ValueTask<TResult>> resultSelector,
+            Func<IAsyncEnumerable<TElement>, IAsyncEnumerable<IGrouping<TKey, TElement>>, ValueTask<TResult>> resultSelector,
             CancellationToken cancellationToken = default)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
@@ -635,10 +635,10 @@ namespace MoreAsyncLINQ
         /// The return value from <paramref name="resultSelector"/>.
         /// </returns>
         public static ValueTask<TResult> PartitionAwaitAsync<TKey, TElement, TResult>(
-            this IAsyncEnumerable<IAsyncGrouping<TKey, TElement>> source,
+            this IAsyncEnumerable<IGrouping<TKey, TElement>> source,
             TKey key1,
             TKey key2,
-            Func<IAsyncEnumerable<TElement>, IAsyncEnumerable<TElement>, IAsyncEnumerable<IAsyncGrouping<TKey, TElement>>, ValueTask<TResult>> resultSelector,
+            Func<IAsyncEnumerable<TElement>, IAsyncEnumerable<TElement>, IAsyncEnumerable<IGrouping<TKey, TElement>>, ValueTask<TResult>> resultSelector,
             CancellationToken cancellationToken = default)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
@@ -676,11 +676,11 @@ namespace MoreAsyncLINQ
         /// The return value from <paramref name="resultSelector"/>.
         /// </returns>
         public static ValueTask<TResult> PartitionAwaitAsync<TKey, TElement, TResult>(
-            this IAsyncEnumerable<IAsyncGrouping<TKey, TElement>> source,
+            this IAsyncEnumerable<IGrouping<TKey, TElement>> source,
             TKey key1,
             TKey key2,
             IEqualityComparer<TKey>? comparer,
-            Func<IAsyncEnumerable<TElement>, IAsyncEnumerable<TElement>, IAsyncEnumerable<IAsyncGrouping<TKey, TElement>>, ValueTask<TResult>> resultSelector,
+            Func<IAsyncEnumerable<TElement>, IAsyncEnumerable<TElement>, IAsyncEnumerable<IGrouping<TKey, TElement>>, ValueTask<TResult>> resultSelector,
             CancellationToken cancellationToken = default)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
@@ -719,11 +719,11 @@ namespace MoreAsyncLINQ
         /// The return value from <paramref name="resultSelector"/>.
         /// </returns>
         public static ValueTask<TResult> PartitionAwaitAsync<TKey, TElement, TResult>(
-            this IAsyncEnumerable<IAsyncGrouping<TKey, TElement>> source,
+            this IAsyncEnumerable<IGrouping<TKey, TElement>> source,
             TKey key1,
             TKey key2,
             TKey key3,
-            Func<IAsyncEnumerable<TElement>, IAsyncEnumerable<TElement>, IAsyncEnumerable<TElement>, IAsyncEnumerable<IAsyncGrouping<TKey, TElement>>, ValueTask<TResult>> resultSelector,
+            Func<IAsyncEnumerable<TElement>, IAsyncEnumerable<TElement>, IAsyncEnumerable<TElement>, IAsyncEnumerable<IGrouping<TKey, TElement>>, ValueTask<TResult>> resultSelector,
             CancellationToken cancellationToken = default)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
@@ -764,12 +764,12 @@ namespace MoreAsyncLINQ
         /// The return value from <paramref name="resultSelector"/>.
         /// </returns>
         public static ValueTask<TResult> PartitionAwaitAsync<TKey, TElement, TResult>(
-            this IAsyncEnumerable<IAsyncGrouping<TKey, TElement>> source,
+            this IAsyncEnumerable<IGrouping<TKey, TElement>> source,
             TKey key1,
             TKey key2,
             TKey key3,
             IEqualityComparer<TKey>? comparer,
-            Func<IAsyncEnumerable<TElement>, IAsyncEnumerable<TElement>, IAsyncEnumerable<TElement>, IAsyncEnumerable<IAsyncGrouping<TKey, TElement>>, ValueTask<TResult>> resultSelector,
+            Func<IAsyncEnumerable<TElement>, IAsyncEnumerable<TElement>, IAsyncEnumerable<TElement>, IAsyncEnumerable<IGrouping<TKey, TElement>>, ValueTask<TResult>> resultSelector,
             CancellationToken cancellationToken = default)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
@@ -787,13 +787,13 @@ namespace MoreAsyncLINQ
         }
 
         private static async ValueTask<TResult> PartitionAwaitAsync<TKey, TSource, TResult>(
-            this IAsyncEnumerable<IAsyncGrouping<TKey, TSource>> source,
+            this IAsyncEnumerable<IGrouping<TKey, TSource>> source,
             int count,
             TKey key1,
             TKey key2,
             TKey key3,
             IEqualityComparer<TKey>? comparer,
-            Func<IAsyncEnumerable<TSource>, IAsyncEnumerable<TSource>, IAsyncEnumerable<TSource>, IAsyncEnumerable<IAsyncGrouping<TKey, TSource>>, ValueTask<TResult>> resultSelector,
+            Func<IAsyncEnumerable<TSource>, IAsyncEnumerable<TSource>, IAsyncEnumerable<TSource>, IAsyncEnumerable<IGrouping<TKey, TSource>>, ValueTask<TResult>> resultSelector,
             CancellationToken cancellationToken = default)
         {
             Debug.Assert(count is >= 1 and <= 3);
@@ -803,24 +803,24 @@ namespace MoreAsyncLINQ
             var grouping1 = count >= 1 ? null : Empty<TSource>();
             var grouping2 = count >= 2 ? null : Empty<TSource>();
             var grouping3 = count == 3 ? null : Empty<TSource>();
-            List<IAsyncGrouping<TKey, TSource>>? groupings = null;
+            List<IGrouping<TKey, TSource>>? groupings = null;
             await foreach (var grouping in source.WithCancellation(cancellationToken).ConfigureAwait(false))
             {
                 if (grouping1 is null && comparer.Equals(grouping.Key, key1))
                 {
-                    grouping1 = grouping;
+                    grouping1 = grouping.ToAsyncEnumerable();
                 }
                 else if (grouping2 is null && comparer.Equals(grouping.Key, key2))
                 {
-                    grouping2 = grouping;
+                    grouping2 = grouping.ToAsyncEnumerable();
                 }
                 else if (grouping3 is null && comparer.Equals(grouping.Key, key3))
                 {
-                    grouping3 = grouping;
+                    grouping3 = grouping.ToAsyncEnumerable();
                 }
                 else
                 {
-                    groupings ??= new List<IAsyncGrouping<TKey, TSource>>();
+                    groupings ??= new List<IGrouping<TKey, TSource>>();
                     groupings.Add(grouping);
                 }
             }
@@ -829,7 +829,7 @@ namespace MoreAsyncLINQ
                     grouping1 ?? Empty<TSource>(),
                     grouping2 ?? Empty<TSource>(),
                     grouping3 ?? Empty<TSource>(),
-                    groupings?.ToAsyncEnumerable() ?? Empty<IAsyncGrouping<TKey, TSource>>()).
+                    groupings?.ToAsyncEnumerable() ?? Empty<IGrouping<TKey, TSource>>()).
                 ConfigureAwait(false);
         }
     }

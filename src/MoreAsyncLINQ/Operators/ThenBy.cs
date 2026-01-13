@@ -72,7 +72,7 @@ namespace MoreAsyncLINQ
 
             return source.ThenByAwait(keySelector, comparer: null, direction);
         }
-        
+
         /// <summary>
         /// Performs a subsequent ordering of elements in a sequence in a particular direction (ascending, descending) according to a key
         /// </summary>
@@ -94,8 +94,8 @@ namespace MoreAsyncLINQ
 
             comparer ??= Comparer<TKey>.Default;
             return direction == Ascending
-                ? source.ThenByAwait(keySelector, comparer)
-                : source.ThenByDescendingAwait(keySelector, comparer);
+                ? source.ThenBy((element, _) => keySelector(element), comparer)
+                : source.ThenByDescending((element, _) => keySelector(element), comparer);
         }
     }
 }

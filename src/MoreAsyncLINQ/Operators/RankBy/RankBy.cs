@@ -65,6 +65,7 @@ namespace MoreAsyncLINQ
                         ToDictionaryAsync(
                             tuple => tuple.Element,
                             tuple => tuple.Index,
+                            comparer: null,
                             cancellationToken).
                         ConfigureAwait(false);
                 foreach (var element in list)
@@ -125,11 +126,12 @@ namespace MoreAsyncLINQ
                     await list.
                         Distinct().
                         ToAsyncEnumerable().
-                        OrderByDescendingAwait(keySelector, comparer).
+                        OrderByDescending((element, _) => keySelector(element), comparer).
                         Index(startIndex: 1).
                         ToDictionaryAsync(
                             tuple => tuple.Element,
                             tuple => tuple.Index,
+                            comparer: null,
                             cancellationToken).
                         ConfigureAwait(false);
                 foreach (var element in list)
