@@ -108,7 +108,7 @@ namespace MoreAsyncLINQ
                     }
                 }
 
-                if (index > 0)
+                if (batch is not null && index > 0)
                 {
                     Array.Resize(ref batch, index);
                     yield return resultSelector(batch);
@@ -189,7 +189,7 @@ namespace MoreAsyncLINQ
                     }
                 }
 
-                if (index > 0)
+                if (batch is not null && index > 0)
                 {
                     Array.Resize(ref batch, index);
                     yield return await resultSelector(batch).ConfigureAwait(false);
