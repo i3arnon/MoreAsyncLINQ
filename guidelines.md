@@ -1,5 +1,9 @@
 # Contribution Guidelines
 
+## IsKnownEmpty
+
+Use `IsKnownEmpty` where possible to efficiently check for empty async enumerables.
+
 ## `ConfigureAwait(false)` - No Longer Required
 
 ### Guidelines for This Project
