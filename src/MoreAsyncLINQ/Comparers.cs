@@ -15,17 +15,14 @@ namespace MoreAsyncLINQ
                 : comparer;
         }
 
-        private sealed class ReverseComparer<T> : IComparer<T>
+        private sealed class ReverseComparer<T>(IComparer<T> comparer) : IComparer<T>
         {
-            private readonly IComparer<T> _comparer;
-
-            public ReverseComparer(IComparer<T> comparer)
-            {
-                _comparer = comparer;
-            }
-
+#if NET5_0_OR_GREATER
+            public int Compare(T? first, T? second) =>
+#else
             public int Compare(T first, T second) =>
-                _comparer.Compare(first, second) switch
+#endif
+                comparer.Compare(first, second) switch
                 {
                     > 0 => -1,
                     0 => 0,
