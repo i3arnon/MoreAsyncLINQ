@@ -33,15 +33,17 @@ static partial class MoreAsyncEnumerable
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (size <= 0) throw new ArgumentOutOfRangeException(nameof(size));
 
-        return Core(source, size);
+        return source.IsKnownEmpty()
+            ? AsyncEnumerable.Empty<IList<TSource>>()
+            : Core(source, size, default);
 
         static async IAsyncEnumerable<IList<TSource>> Core(
             IAsyncEnumerable<TSource> source,
             int size,
-            [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            [EnumeratorCancellation] CancellationToken cancellationToken)
         {
             var window = new List<TSource>(size);
-            await foreach (var element in source.WithCancellation(cancellationToken).ConfigureAwait(false))
+            await foreach (var element in source.WithCancellation(cancellationToken))
             {
                 window.Add(element);
                 if (window.Count == size)
