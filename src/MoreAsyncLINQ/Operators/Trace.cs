@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MoreAsyncLINQ;
@@ -99,5 +100,29 @@ static partial class MoreAsyncEnumerable
         if (formatter is null) throw new ArgumentNullException(nameof(formatter));
 
         return source.PipeAwait(async element => System.Diagnostics.Trace.WriteLine(await formatter(element).ConfigureAwait(false)));
+    }
+    
+    /// <summary>
+    /// Traces the elements of a source sequence for diagnostics using
+    /// a custom formatter.
+    /// </summary>
+    /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+    /// <param name="source">Source sequence whose elements to trace.</param>
+    /// <param name="formatter">Function used to format each source element into a string.</param>
+    /// <returns>
+    /// Return the source sequence unmodified.
+    /// </returns>
+    /// <remarks>
+    /// This a pass-through operator that uses deferred execution and
+    /// streams the results.
+    /// </remarks>
+    public static IAsyncEnumerable<TSource> Trace<TSource>(
+        this IAsyncEnumerable<TSource> source,
+        Func<TSource, CancellationToken, ValueTask<string>> formatter)
+    {
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (formatter is null) throw new ArgumentNullException(nameof(formatter));
+
+        return source.Pipe(async (element, cancellationToken) => System.Diagnostics.Trace.WriteLine(await formatter(element, cancellationToken)));
     }
 }
