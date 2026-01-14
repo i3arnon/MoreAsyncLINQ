@@ -1,12 +1,17 @@
 # Contribution Guidelines
 
-## IsKnownEmpty
+## API Design
+
+- No more _"Await"_ in method names
+- When accepting async delegates (i.e. for methods that return `ValueTask` or `ValueTask<T>`) make sure the last delegate method parameter is a `CancellationToken`
+
+## Implementation
+
+### IsKnownEmpty
 
 Use `IsKnownEmpty` where possible to efficiently check for empty async enumerables.
 
-## `ConfigureAwait(false)` - No Longer Required
-
-### Guidelines for This Project
+### No `ConfigureAwait(false)`
 
 Following the same pattern established by the .NET runtime:
 
@@ -14,7 +19,7 @@ Following the same pattern established by the .NET runtime:
 2. **Do NOT use `ConfigureAwait(false)`** on `MoveNextAsync()`, `DisposeAsync()`, or other async enumerable operations
 3. Trust that consumers will configure await behavior at the call site if needed using `source.ConfigureAwait(false)`
 
-### References:
+#### References:
 
 This change was implemented in [dotnet/runtime PR #113911: Remove ConfigureAwait(false) from AsyncEnumerable LINQ](https://github.com/dotnet/runtime/pull/113911).
 
