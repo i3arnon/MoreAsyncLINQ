@@ -28,17 +28,18 @@ static partial class MoreAsyncEnumerable
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
 
-        return Core(source);
+        return source.IsKnownEmpty()
+            ? AsyncEnumerable.Empty<TSource[]>()
+            : Core(source, default);
 
         static async IAsyncEnumerable<TSource[]> Core(
             IAsyncEnumerable<IAsyncEnumerable<TSource>> source,
-            [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            [EnumeratorCancellation] CancellationToken cancellationToken)
         {
             IAsyncEnumerator<TSource>?[] enumerators =
                 await source.
                     Select(enumerable => enumerable.GetAsyncEnumerator(cancellationToken)).
-                    AcquireAsync(cancellationToken).
-                    ConfigureAwait(false);
+                    AcquireAsync(cancellationToken);
                 
             try
             {
@@ -54,14 +55,14 @@ static partial class MoreAsyncEnumerable
                             continue;
                         }
 
-                        if (await enumerator.MoveNextAsync().ConfigureAwait(false))
+                        if (await enumerator.MoveNextAsync())
                         {
                             column[count] = enumerator.Current;
                             count++;
                         }
                         else
                         {
-                            await enumerator.DisposeAsync().ConfigureAwait(false);
+                            await enumerator.DisposeAsync();
                             enumerators[index] = null;
                         }
                     }
@@ -81,7 +82,7 @@ static partial class MoreAsyncEnumerable
                 {
                     if (enumerator is not null)
                     {
-                        await enumerator.DisposeAsync().ConfigureAwait(false);
+                        await enumerator.DisposeAsync();
                     }
                 }
             }
