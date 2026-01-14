@@ -35,12 +35,12 @@ static partial class MoreAsyncEnumerable
     {
         if (childrenSelector is null) throw new ArgumentNullException(nameof(childrenSelector));
 
-        return Core(root, childrenSelector);
+        return Core(root, childrenSelector, default);
 
         static async IAsyncEnumerable<TSource> Core(
             TSource root,
             Func<TSource, IAsyncEnumerable<TSource>> childrenSelector,
-            [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            [EnumeratorCancellation] CancellationToken cancellationToken)
         {
             var stack = new Stack<TSource>();
             stack.Push(root);
@@ -50,7 +50,7 @@ static partial class MoreAsyncEnumerable
                 var element = stack.Pop();
                 yield return element;
 
-                await foreach (var child in childrenSelector(element).Reverse().WithCancellation(cancellationToken).ConfigureAwait(false))
+                await foreach (var child in childrenSelector(element).Reverse().WithCancellation(cancellationToken))
                 {
                     stack.Push(child);
                 }
