@@ -114,16 +114,11 @@ static partial class MoreAsyncEnumerable
         }
     }
 
-    private sealed class EnumeratorsDisposable<T> : IAsyncDisposable
+    private sealed class EnumeratorsDisposable<T>(IEnumerable<IAsyncEnumerator<T>> enumerators) : IAsyncDisposable
     {
-        private readonly List<IAsyncEnumerator<T>> _enumerators;
+        private readonly List<IAsyncEnumerator<T>> _enumerators = new(enumerators);
 
         public int Count => _enumerators.Count;
-
-        public EnumeratorsDisposable(IEnumerable<IAsyncEnumerator<T>> enumerators)
-        {
-            _enumerators = new List<IAsyncEnumerator<T>>(enumerators);
-        }
 
         public IAsyncEnumerator<T> this[int index] => _enumerators[index];
 

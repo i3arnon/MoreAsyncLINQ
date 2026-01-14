@@ -25,7 +25,7 @@ internal static class Extrema<T>
                 return;
             }
 
-            store ??= new List<T>();
+            store ??= [];
             store.Add(item);
         }
 
@@ -55,8 +55,8 @@ internal static class Extrema<T>
 
 internal sealed class Extremum<T> : Extrema<(bool, T), T>
 {
-    public static Extremum<T> First { get; } = new Extremum<T>(poppable: false);
-    public static Extremum<T> Last { get; } = new Extremum<T>(poppable: true);
+    public static Extremum<T> First { get; } = new(poppable: false);
+    public static Extremum<T> Last { get; } = new(poppable: true);
 
     private readonly bool _poppable;
 
@@ -78,7 +78,7 @@ internal sealed class Extremum<T> : Extrema<(bool, T), T>
     public override IEnumerable<T> GetEnumerable((bool, T) store) =>
         store is (true, var element)
             ? Repeat(element, count: 1)
-            : Empty<T>();
+            : [];
 
     public override (bool, T) InitializeStore() => default;
     public override void ResetStore(ref (bool, T) store) => store = default;
