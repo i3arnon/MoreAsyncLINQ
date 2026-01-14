@@ -3,13 +3,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
-namespace MoreAsyncLINQ
+namespace MoreAsyncLINQ;
+
+internal static class AsyncEnumerableExtensions
 {
-    internal static class AsyncEnumerableExtensions
-    {
-        public static ValueTask<int?> TryGetCollectionCountAsync<TSource>(
-            [NoEnumeration] this IAsyncEnumerable<TSource> source,
-            CancellationToken cancellationToken) =>
-            ValueTasks.FromResult((int?)null);
-    }
+    public static ValueTask<int?> TryGetCollectionCountAsync<TSource>(
+        [NoEnumeration] this IAsyncEnumerable<TSource> source,
+        CancellationToken cancellationToken) =>
+        ValueTasks.FromResult((int?)null);
 }
