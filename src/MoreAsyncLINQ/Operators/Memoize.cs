@@ -10,23 +10,16 @@ namespace MoreAsyncLINQ;
 static partial class MoreAsyncEnumerable
 {
     private static MemoizedAsyncEnumerable<TSource> Memoize<TSource>(this IAsyncEnumerable<TSource> source) =>
-        source is MemoizedAsyncEnumerable<TSource> memoizedAsyncEnumerable
-            ? memoizedAsyncEnumerable
-            : new MemoizedAsyncEnumerable<TSource>(source);
+        source as MemoizedAsyncEnumerable<TSource> ?? new MemoizedAsyncEnumerable<TSource>(source);
 
-    private sealed class MemoizedAsyncEnumerable<T> : IAsyncEnumerable<T>, IAsyncDisposable
+    private sealed class MemoizedAsyncEnumerable<T>(IAsyncEnumerable<T> source) : IAsyncEnumerable<T>, IAsyncDisposable
     {
-        private readonly IAsyncEnumerable<T> _source;
+        private readonly IAsyncEnumerable<T> _source = source ?? throw new ArgumentNullException(nameof(source));
 
         private List<T>? _cache;
         private ConfiguredCancelableAsyncEnumerable<T>.Enumerator? _enumerator;
         private ExceptionDispatchInfo? _exception;
         private int? _exceptionIndex;
-
-        public MemoizedAsyncEnumerable(IAsyncEnumerable<T> source)
-        {
-            _source = source ?? throw new ArgumentNullException(nameof(source));
-        }
 
         public async IAsyncEnumerator<T> GetAsyncEnumerator(CancellationToken cancellationToken = default)
         {
