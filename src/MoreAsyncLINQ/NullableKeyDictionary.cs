@@ -1,49 +1,41 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
 namespace MoreAsyncLINQ
 {
     internal sealed class NullableKeyDictionary<TKey, TValue>
     {
-        private readonly Dictionary<TKey, TValue> _dictionary;
-        private (bool exists, TValue value) _nullKey;
+        private readonly Dictionary<ValueTuple<TKey>, TValue> _dictionary;
 
         public NullableKeyDictionary(IEqualityComparer<TKey> comparer)
         {
-            _dictionary = new Dictionary<TKey, TValue>(comparer);
-            _nullKey = default;
+            var keyComparer =
+                ReferenceEquals(comparer, EqualityComparer<TKey>.Default)
+                    ? null
+                    : new ValueTupleItemComparer<TKey>(comparer);
+            
+            _dictionary = new Dictionary<ValueTuple<TKey>, TValue>(keyComparer);
         }
 
         public TValue this[TKey key]
         {
-            set
-            {
-                if (key is null)
-                {
-                    _nullKey = (true, value);
-                }
-                else
-                {
-                    _dictionary[key] = value;
-                }
-            }
+            get => _dictionary[ValueTuple.Create(key)];
+            set => _dictionary[ValueTuple.Create(key)] = value;
         }
+        
+        public bool TryGetValue(TKey key, [MaybeNullWhen(false)] out TValue value) =>
+            _dictionary.TryGetValue(ValueTuple.Create(key), out value);
 
-        public bool TryGetValue(TKey key, [MaybeNullWhen(false)] out TValue value)
+        private sealed class ValueTupleItemComparer<T>(IEqualityComparer<T> comparer) : IEqualityComparer<ValueTuple<T>>
         {
-            if (key is not null)
-            {
-                return _dictionary.TryGetValue(key, out value);
-            }
+            public bool Equals(ValueTuple<T> first, ValueTuple<T> second) =>
+                comparer.Equals(first.Item1, second.Item1);
 
-            if (_nullKey.exists)
-            {
-                value = _nullKey.value;
-                return true;
-            }
-
-            value = default;
-            return false;
+            public int GetHashCode(ValueTuple<T> valueTuple) =>
+                valueTuple.Item1 is { } value
+                    ? comparer.GetHashCode(value)
+                    : 0;
         }
     }
 }
