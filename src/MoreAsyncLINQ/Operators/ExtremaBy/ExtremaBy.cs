@@ -4,90 +4,89 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MoreAsyncLINQ
+namespace MoreAsyncLINQ;
+
+static partial class MoreAsyncEnumerable
 {
-    static partial class MoreAsyncEnumerable
+    private static async IAsyncEnumerable<TSource> ExtremaBy<TSource, TKey, TStore>(
+        this IAsyncEnumerable<TSource> source,
+        Extrema<TStore, TSource> extrema,
+        int? limit,
+        Func<TSource, TKey> selector,
+        Func<TKey, TKey, int> comparer,
+        [EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
-        private static async IAsyncEnumerable<TSource> ExtremaBy<TSource, TKey, TStore>(
-            this IAsyncEnumerable<TSource> source,
-            Extrema<TStore, TSource> extrema,
-            int? limit,
-            Func<TSource, TKey> selector,
-            Func<TKey, TKey, int> comparer,
-            [EnumeratorCancellation] CancellationToken cancellationToken = default)
+        await using var enumerator = source.WithCancellation(cancellationToken).ConfigureAwait(false).GetAsyncEnumerator();
+
+        if (!await enumerator.MoveNextAsync())
         {
-            await using var enumerator = source.WithCancellation(cancellationToken).ConfigureAwait(false).GetAsyncEnumerator();
+            yield break;
+        }
 
-            if (!await enumerator.MoveNextAsync())
+        var store = extrema.InitializeStore();
+        extrema.AddItem(ref store, limit, enumerator.Current);
+        var extremaKey = selector(enumerator.Current);
+        while (await enumerator.MoveNextAsync())
+        {
+            var element = enumerator.Current;
+            var key = selector(element);
+            switch (comparer(key, extremaKey))
             {
-                yield break;
-            }
-
-            var store = extrema.InitializeStore();
-            extrema.AddItem(ref store, limit, enumerator.Current);
-            var extremaKey = selector(enumerator.Current);
-            while (await enumerator.MoveNextAsync())
-            {
-                var element = enumerator.Current;
-                var key = selector(element);
-                switch (comparer(key, extremaKey))
-                {
-                    case > 0:
-                        extrema.ResetStore(ref store);
-                        extrema.AddItem(ref store, limit, element);
-                        extremaKey = key;
-                        break;
-                    case 0:
-                        extrema.AddItem(ref store, limit, element);
-                        break;
-                }
-            }
-
-            foreach (var element in extrema.GetEnumerable(store))
-            {
-                yield return element;
+                case > 0:
+                    extrema.ResetStore(ref store);
+                    extrema.AddItem(ref store, limit, element);
+                    extremaKey = key;
+                    break;
+                case 0:
+                    extrema.AddItem(ref store, limit, element);
+                    break;
             }
         }
 
-        private static async IAsyncEnumerable<TSource> ExtremaByAwait<TSource, TKey, TStore>(
-            this IAsyncEnumerable<TSource> source,
-            Extrema<TStore, TSource> extrema,
-            int? limit,
-            Func<TSource, ValueTask<TKey>> selector,
-            Func<TKey, TKey, int> comparer,
-            [EnumeratorCancellation] CancellationToken cancellationToken = default)
+        foreach (var element in extrema.GetEnumerable(store))
         {
-            await using var enumerator = source.WithCancellation(cancellationToken).ConfigureAwait(false).GetAsyncEnumerator();
+            yield return element;
+        }
+    }
 
-            if (!await enumerator.MoveNextAsync())
-            {
-                yield break;
-            }
+    private static async IAsyncEnumerable<TSource> ExtremaByAwait<TSource, TKey, TStore>(
+        this IAsyncEnumerable<TSource> source,
+        Extrema<TStore, TSource> extrema,
+        int? limit,
+        Func<TSource, ValueTask<TKey>> selector,
+        Func<TKey, TKey, int> comparer,
+        [EnumeratorCancellation] CancellationToken cancellationToken = default)
+    {
+        await using var enumerator = source.WithCancellation(cancellationToken).ConfigureAwait(false).GetAsyncEnumerator();
 
-            var store = extrema.InitializeStore();
-            extrema.AddItem(ref store, limit, enumerator.Current);
-            var extremaKey = await selector(enumerator.Current).ConfigureAwait(false);
-            while (await enumerator.MoveNextAsync())
-            {
-                var element = enumerator.Current;
-                var key = await selector(element).ConfigureAwait(false);
-                switch (comparer(key, extremaKey))
-                {
-                    case > 0:
-                        extrema.ResetStore(ref store);
-                        extrema.AddItem(ref store, limit, element);
-                        extremaKey = key;
-                        break;
-                    case 0:
-                        extrema.AddItem(ref store, limit, element);
-                        break;
-                }
-            }
+        if (!await enumerator.MoveNextAsync())
+        {
+            yield break;
+        }
 
-            foreach (var element in extrema.GetEnumerable(store))
+        var store = extrema.InitializeStore();
+        extrema.AddItem(ref store, limit, enumerator.Current);
+        var extremaKey = await selector(enumerator.Current).ConfigureAwait(false);
+        while (await enumerator.MoveNextAsync())
+        {
+            var element = enumerator.Current;
+            var key = await selector(element).ConfigureAwait(false);
+            switch (comparer(key, extremaKey))
             {
-                yield return element;
+                case > 0:
+                    extrema.ResetStore(ref store);
+                    extrema.AddItem(ref store, limit, element);
+                    extremaKey = key;
+                    break;
+                case 0:
+                    extrema.AddItem(ref store, limit, element);
+                    break;
             }
+        }
+
+        foreach (var element in extrema.GetEnumerable(store))
+        {
+            yield return element;
         }
     }
 }

@@ -1,10 +1,9 @@
 ﻿using System.Threading.Tasks;
 
-namespace MoreAsyncLINQ
+namespace MoreAsyncLINQ;
+
+internal static class ValueTasks
 {
-    internal static class ValueTasks
-    {
-        public static ValueTask<TResult> FromResult<TResult>(TResult result) =>
-            new ValueTask<TResult>(result);
-    }
+    public static ValueTask<TResult> FromResult<TResult>(TResult result) =>
+        new ValueTask<TResult>(result);
 }
