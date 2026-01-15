@@ -53,8 +53,8 @@ static partial class MoreAsyncEnumerable
         if (source is null) throw new ArgumentNullException(nameof(source));
 
         return source.ToLookupAsync(
-            pair => pair.Key,
-            pair => pair.Value,
+            static pair => pair.Key,
+            static pair => pair.Value,
             comparer,
             cancellationToken);
     }
@@ -105,8 +105,8 @@ static partial class MoreAsyncEnumerable
         if (source is null) throw new ArgumentNullException(nameof(source));
 
         return source.ToLookupAsync(
-            tuple => tuple.Key,
-            tuple => tuple.Value,
+            static tuple => tuple.Key,
+            static tuple => tuple.Value,
             comparer,
             cancellationToken);
     }

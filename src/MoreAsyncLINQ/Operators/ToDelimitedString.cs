@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -35,10 +36,10 @@ static partial class MoreAsyncEnumerable
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (delimiter is null) throw new ArgumentNullException(nameof(delimiter));
 
-        return source.ToDelimitedStringAsync(
+        return ToDelimitedStringAsync(
+            source.WithCancellation(cancellationToken),
             delimiter,
-            static (builder, element) => builder.Append(element),
-            cancellationToken);
+            static (builder, element) => builder.Append(element));
     }
 
     /// <summary>
@@ -68,10 +69,10 @@ static partial class MoreAsyncEnumerable
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (delimiter is null) throw new ArgumentNullException(nameof(delimiter));
 
-        return source.ToDelimitedStringAsync(
+        return ToDelimitedStringAsync(
+            source.WithCancellation(cancellationToken),
             delimiter,
-            static (builder, element) => builder.Append(element),
-            cancellationToken);
+            static (builder, element) => builder.Append(element));
     }
 
     /// <summary>
@@ -101,10 +102,10 @@ static partial class MoreAsyncEnumerable
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (delimiter is null) throw new ArgumentNullException(nameof(delimiter));
 
-        return source.ToDelimitedStringAsync(
+        return ToDelimitedStringAsync(
+            source.WithCancellation(cancellationToken),
             delimiter,
-            static (builder, element) => builder.Append(element),
-            cancellationToken);
+            static (builder, element) => builder.Append(element));
     }
 
     /// <summary>
@@ -134,10 +135,10 @@ static partial class MoreAsyncEnumerable
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (delimiter is null) throw new ArgumentNullException(nameof(delimiter));
 
-        return source.ToDelimitedStringAsync(
+        return ToDelimitedStringAsync(
+            source.WithCancellation(cancellationToken),
             delimiter,
-            static (builder, element) => builder.Append(element),
-            cancellationToken);
+            static (builder, element) => builder.Append(element));
     }
 
     /// <summary>
@@ -166,11 +167,11 @@ static partial class MoreAsyncEnumerable
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (delimiter is null) throw new ArgumentNullException(nameof(delimiter));
-
-        return source.ToDelimitedStringAsync(
+        
+        return ToDelimitedStringAsync(
+            source.WithCancellation(cancellationToken),
             delimiter,
-            static (builder, element) => builder.Append(element),
-            cancellationToken);
+            static (builder, element) => builder.Append(element));
     }
 
     /// <summary>
@@ -199,11 +200,11 @@ static partial class MoreAsyncEnumerable
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (delimiter is null) throw new ArgumentNullException(nameof(delimiter));
-
-        return source.ToDelimitedStringAsync(
+        
+        return ToDelimitedStringAsync(
+            source.WithCancellation(cancellationToken),
             delimiter,
-            static (builder, element) => builder.Append(element),
-            cancellationToken);
+            static (builder, element) => builder.Append(element));
     }
 
     /// <summary>
@@ -232,11 +233,11 @@ static partial class MoreAsyncEnumerable
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (delimiter is null) throw new ArgumentNullException(nameof(delimiter));
-
-        return source.ToDelimitedStringAsync(
+        
+        return ToDelimitedStringAsync(
+            source.WithCancellation(cancellationToken),
             delimiter,
-            static (builder, element) => builder.Append(element),
-            cancellationToken);
+            static (builder, element) => builder.Append(element));
     }
 
     /// <summary>
@@ -265,11 +266,11 @@ static partial class MoreAsyncEnumerable
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (delimiter is null) throw new ArgumentNullException(nameof(delimiter));
-
-        return source.ToDelimitedStringAsync(
+        
+        return ToDelimitedStringAsync(
+            source.WithCancellation(cancellationToken),
             delimiter,
-            static (builder, element) => builder.Append(element),
-            cancellationToken);
+            static (builder, element) => builder.Append(element));
     }
 
     /// <summary>
@@ -298,11 +299,11 @@ static partial class MoreAsyncEnumerable
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (delimiter is null) throw new ArgumentNullException(nameof(delimiter));
-
-        return source.ToDelimitedStringAsync(
+        
+        return ToDelimitedStringAsync(
+            source.WithCancellation(cancellationToken),
             delimiter,
-            static (builder, element) => builder.Append(element),
-            cancellationToken);
+            static (builder, element) => builder.Append(element));
     }
 
     /// <summary>
@@ -331,11 +332,11 @@ static partial class MoreAsyncEnumerable
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (delimiter is null) throw new ArgumentNullException(nameof(delimiter));
-
-        return source.ToDelimitedStringAsync(
+        
+        return ToDelimitedStringAsync(
+            source.WithCancellation(cancellationToken),
             delimiter,
-            static (builder, element) => builder.Append(element),
-            cancellationToken);
+            static (builder, element) => builder.Append(element));
     }
 
     /// <summary>
@@ -365,10 +366,10 @@ static partial class MoreAsyncEnumerable
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (delimiter is null) throw new ArgumentNullException(nameof(delimiter));
 
-        return source.ToDelimitedStringAsync(
+        return ToDelimitedStringAsync(
+            source.WithCancellation(cancellationToken),
             delimiter,
-            static (builder, element) => builder.Append(element),
-            cancellationToken);
+            static (builder, element) => builder.Append(element));
     }
 
     /// <summary>
@@ -397,11 +398,11 @@ static partial class MoreAsyncEnumerable
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (delimiter is null) throw new ArgumentNullException(nameof(delimiter));
-
-        return source.ToDelimitedStringAsync(
+        
+        return ToDelimitedStringAsync(
+            source.WithCancellation(cancellationToken),
             delimiter,
-            static (builder, element) => builder.Append(element),
-            cancellationToken);
+            static (builder, element) => builder.Append(element));
     }
 
     /// <summary>
@@ -430,11 +431,11 @@ static partial class MoreAsyncEnumerable
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (delimiter is null) throw new ArgumentNullException(nameof(delimiter));
-
-        return source.ToDelimitedStringAsync(
+        
+        return ToDelimitedStringAsync(
+            source.WithCancellation(cancellationToken),
             delimiter,
-            static (builder, element) => builder.Append(element),
-            cancellationToken);
+            static (builder, element) => builder.Append(element));
     }
 
     /// <summary>
@@ -463,11 +464,11 @@ static partial class MoreAsyncEnumerable
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (delimiter is null) throw new ArgumentNullException(nameof(delimiter));
-
-        return source.ToDelimitedStringAsync(
+        
+        return ToDelimitedStringAsync(
+            source.WithCancellation(cancellationToken),
             delimiter,
-            static (builder, element) => builder.Append(element),
-            cancellationToken);
+            static (builder, element) => builder.Append(element));
     }
 
     /// <summary>
@@ -498,19 +499,18 @@ static partial class MoreAsyncEnumerable
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (delimiter is null) throw new ArgumentNullException(nameof(delimiter));
 
-        return source.ToDelimitedStringAsync(
+        return ToDelimitedStringAsync(
+            source.WithCancellation(cancellationToken),
             delimiter,
-            static (builder, element) => builder.Append(element),
-            cancellationToken);
+            static (builder, element) => builder.Append(element));
     }
 
     private static async ValueTask<string> ToDelimitedStringAsync<TSource>(
-        this IAsyncEnumerable<TSource> source,
+        ConfiguredCancelableAsyncEnumerable<TSource> source,
         string delimiter,
-        Action<StringBuilder, TSource> appender,
-        CancellationToken cancellationToken)
+        Action<StringBuilder, TSource> appender)
     {
-        await using var enumerator = source.WithCancellation(cancellationToken).ConfigureAwait(false).GetAsyncEnumerator();
+        await using var enumerator = source.GetAsyncEnumerator();
 
         if (!await enumerator.MoveNextAsync())
         {
