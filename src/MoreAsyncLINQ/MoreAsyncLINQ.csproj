@@ -27,7 +27,7 @@ Modernize API &amp; implementation:
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <TargetFrameworks>net462;netstandard2.0;net8.0;net9.0;net10.0</TargetFrameworks>
-    <Version>2.0.0</Version>
+    <Version>2.0.0-preview.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
