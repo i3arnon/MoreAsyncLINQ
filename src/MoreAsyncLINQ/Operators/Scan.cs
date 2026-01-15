@@ -17,7 +17,7 @@ static partial class MoreAsyncEnumerable
     /// N-th element is the sum of the first N input elements. More
     /// generally, the scan allows any commutative binary operation, not
     /// just a sum.
-    /// The exclusive version of Scan is <see cref="MoreAsyncEnumerable.PreScan{TSource}"/>.
+    /// The exclusive version of Scan is <see cref="MoreAsyncEnumerable.PreScan{TSource}(IAsyncEnumerable{TSource}, Func{TSource, TSource, TSource}, TSource)"/>.
     /// This operator uses deferred execution and streams its result.
     /// </remarks>
     /// <typeparam name="TSource">Type of elements in source sequence</typeparam>
@@ -193,7 +193,7 @@ static partial class MoreAsyncEnumerable
     /// N-th element is the sum of the first N input elements. More
     /// generally, the scan allows any commutative binary operation, not
     /// just a sum.
-    /// The exclusive version of Scan is <see cref="MoreAsyncEnumerable.PreScan{TSource}"/>.
+    /// The exclusive version of Scan is <see cref="PreScan{TSource}(IAsyncEnumerable{TSource}, Func{TSource, TSource, CancellationToken, ValueTask{TSource}}, TSource)"/>.
     /// This operator uses deferred execution and streams its result.
     /// </remarks>
     /// <typeparam name="TSource">Type of elements in source sequence</typeparam>
