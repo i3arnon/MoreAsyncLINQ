@@ -53,6 +53,12 @@ static partial class MoreAsyncEnumerable
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (otherSequences is null) throw new ArgumentNullException(nameof(otherSequences));
+        
+        if (source.IsKnownEmpty() &&
+            otherSequences.All(static sequence => sequence.IsKnownEmpty()))
+        {
+            return AsyncEnumerable.Empty<TSource>();
+        }
 
         if (otherSequences.Length == 0)
         {
@@ -64,28 +70,28 @@ static partial class MoreAsyncEnumerable
             new[] { source }.Concat(otherSequences),
             direction == Ascending
                 ? (first, second) => comparer.Compare(second, first) < 0
-                : (first, second) => comparer.Compare(second, first) > 0);
+                : (first, second) => comparer.Compare(second, first) > 0,
+            default);
 
         static async IAsyncEnumerable<TSource> Core(
             IEnumerable<IAsyncEnumerable<TSource>> sequences,
             Func<TSource, TSource, bool> precedenceFunc,
-            [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            [EnumeratorCancellation] CancellationToken cancellationToken)
         {
             var enumerators =
                 await sequences.
                     Select(sequence => sequence.GetAsyncEnumerator(cancellationToken)).
                     ToAsyncEnumerable().
-                    AcquireAsync(cancellationToken).
-                    ConfigureAwait(false);
+                    AcquireAsync(cancellationToken);
 
             var enumeratorsDisposable = new EnumeratorsDisposable<TSource>(enumerators);
-            await using (enumeratorsDisposable.ConfigureAwait(false))
+            await using (enumeratorsDisposable)
             {
                 for (var index = enumeratorsDisposable.Count - 1; index >= 0; index--)
                 {
-                    if (!await enumeratorsDisposable[index].MoveNextAsync().ConfigureAwait(false))
+                    if (!await enumeratorsDisposable[index].MoveNextAsync())
                     {
-                        await enumeratorsDisposable.DisposeEnumeratorAsync(index).ConfigureAwait(false);
+                        await enumeratorsDisposable.DisposeEnumeratorAsync(index);
                     }
                 }
 
@@ -105,9 +111,9 @@ static partial class MoreAsyncEnumerable
 
                     yield return nextElement;
 
-                    if (!await enumeratorsDisposable[nextIndex].MoveNextAsync().ConfigureAwait(false))
+                    if (!await enumeratorsDisposable[nextIndex].MoveNextAsync())
                     {
-                        await enumeratorsDisposable.DisposeEnumeratorAsync(nextIndex).ConfigureAwait(false);
+                        await enumeratorsDisposable.DisposeEnumeratorAsync(nextIndex);
                     }
                 }
             }
@@ -116,7 +122,7 @@ static partial class MoreAsyncEnumerable
 
     private sealed class EnumeratorsDisposable<T>(IEnumerable<IAsyncEnumerator<T>> enumerators) : IAsyncDisposable
     {
-        private readonly List<IAsyncEnumerator<T>> _enumerators = new(enumerators);
+        private readonly List<IAsyncEnumerator<T>> _enumerators = [..enumerators];
 
         public int Count => _enumerators.Count;
 

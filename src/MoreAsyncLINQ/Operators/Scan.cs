@@ -31,14 +31,16 @@ static partial class MoreAsyncEnumerable
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (transformation is null) throw new ArgumentNullException(nameof(transformation));
 
-        return Core(source, transformation);
+        return source.IsKnownEmpty()
+            ? AsyncEnumerable.Empty<TSource>()
+            : Core(source, transformation, default);
 
         static async IAsyncEnumerable<TSource> Core(
             IAsyncEnumerable<TSource> source,
             Func<TSource, TSource, TSource> transformation,
-            [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            [EnumeratorCancellation] CancellationToken cancellationToken)
         {
-            await using var enumerator = source.WithCancellation(cancellationToken).ConfigureAwait(false).GetAsyncEnumerator();
+            await using var enumerator = source.WithCancellation(cancellationToken).GetAsyncEnumerator();
 
             if (!await enumerator.MoveNextAsync())
             {
@@ -57,7 +59,7 @@ static partial class MoreAsyncEnumerable
     }
 
     /// <summary>
-    /// Like <see cref="AsyncEnumerable.AggregateAsync{TSource}"/> except returns
+    /// Like <see cref="AsyncEnumerable.AggregateAsync{TSource}(IAsyncEnumerable{TSource}, Func{TSource, TSource, TSource}, CancellationToken)"/> except returns
     /// the sequence of intermediate results as well as the final one.
     /// An additional parameter specifies a seed.
     /// </summary>
@@ -78,17 +80,17 @@ static partial class MoreAsyncEnumerable
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (transformation is null) throw new ArgumentNullException(nameof(transformation));
 
-        return Core(source, seed, transformation);
+        return Core(source, seed, transformation, default);
 
         static async IAsyncEnumerable<TState> Core(
             IAsyncEnumerable<TSource> source,
             TState seed,
             Func<TState, TSource, TState> transformation,
-            [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            [EnumeratorCancellation] CancellationToken cancellationToken)
         {
             yield return seed;
 
-            await foreach (var element in source.WithCancellation(cancellationToken).ConfigureAwait(false))
+            await foreach (var element in source.WithCancellation(cancellationToken))
             {
                 seed = transformation(seed, element);
                 yield return seed;
@@ -178,6 +180,100 @@ static partial class MoreAsyncEnumerable
             await foreach (var element in source.WithCancellation(cancellationToken).ConfigureAwait(false))
             {
                 seed = await transformation(seed, element).ConfigureAwait(false);
+                yield return seed;
+            }
+        }
+    }
+    
+    /// <summary>
+    /// Performs a scan (inclusive prefix sum) on a sequence of elements.
+    /// </summary>
+    /// <remarks>
+    /// An inclusive prefix sum returns an equal-length sequence where the
+    /// N-th element is the sum of the first N input elements. More
+    /// generally, the scan allows any commutative binary operation, not
+    /// just a sum.
+    /// The exclusive version of Scan is <see cref="MoreAsyncEnumerable.PreScan{TSource}"/>.
+    /// This operator uses deferred execution and streams its result.
+    /// </remarks>
+    /// <typeparam name="TSource">Type of elements in source sequence</typeparam>
+    /// <param name="source">Source sequence</param>
+    /// <param name="transformation">Transformation operation</param>
+    /// <returns>The scanned sequence</returns>
+    public static IAsyncEnumerable<TSource> Scan<TSource>(
+        this IAsyncEnumerable<TSource> source,
+        Func<TSource, TSource, CancellationToken, ValueTask<TSource>> transformation)
+    {
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (transformation is null) throw new ArgumentNullException(nameof(transformation));
+
+        return source.IsKnownEmpty()
+            ? AsyncEnumerable.Empty<TSource>()
+            : Core(source, transformation, default);
+
+        static async IAsyncEnumerable<TSource> Core(
+            IAsyncEnumerable<TSource> source,
+            Func<TSource, TSource, CancellationToken, ValueTask<TSource>> transformation,
+            [EnumeratorCancellation] CancellationToken cancellationToken)
+        {
+            await using var enumerator = source.WithCancellation(cancellationToken).GetAsyncEnumerator();
+
+            if (!await enumerator.MoveNextAsync())
+            {
+                yield break;
+            }
+
+            var seed = enumerator.Current;
+            yield return seed;
+
+            while (await enumerator.MoveNextAsync())
+            {
+                seed = await transformation(seed, enumerator.Current, cancellationToken);
+                yield return seed;
+            }
+        }
+    }
+    
+    /// <summary>
+    /// Like <see cref="AsyncEnumerable.AggregateAsync{TSource}(IAsyncEnumerable{TSource}, Func{TSource, TSource, CancellationToken, ValueTask{TSource}}, CancellationToken)"/> except returns
+    /// the sequence of intermediate results as well as the final one.
+    /// An additional parameter specifies a seed.
+    /// </summary>
+    /// <remarks>
+    /// This operator uses deferred execution and streams its result.
+    /// </remarks>
+    /// <typeparam name="TSource">Type of elements in source sequence</typeparam>
+    /// <typeparam name="TState">Type of state</typeparam>
+    /// <param name="source">Source sequence</param>
+    /// <param name="seed">Initial state to seed</param>
+    /// <param name="transformation">Transformation operation</param>
+    /// <returns>The scanned sequence</returns>
+    public static IAsyncEnumerable<TState> Scan<TSource, TState>(
+        this IAsyncEnumerable<TSource> source,
+        TState seed,
+        Func<TState, TSource, CancellationToken, ValueTask<TState>> transformation)
+    {
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (transformation is null) throw new ArgumentNullException(nameof(transformation));
+
+        return Core(
+            source,
+            seed,
+            transformation,
+            default);
+
+        static async IAsyncEnumerable<TState> Core(
+            IAsyncEnumerable<TSource> source,
+            TState seed,
+            Func<TState, TSource, CancellationToken, ValueTask<TState>> transformation,
+            [EnumeratorCancellation] CancellationToken cancellationToken)
+        {
+            yield return seed;
+
+            await foreach (var element in source.WithCancellation(cancellationToken))
+            {
+                seed = await transformation(seed, element, cancellationToken);
+
                 yield return seed;
             }
         }
