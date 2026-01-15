@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,9 +21,13 @@ static partial class MoreAsyncEnumerable
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (count < 0) throw new ArgumentOutOfRangeException(nameof(count), $"{nameof(count)} must be greater or equal to zero.");
 
-        return source.RepeatCore(count);
+        return source.IsKnownEmpty()
+            ? AsyncEnumerable.Empty<TSource>()
+            : RepeatCore(
+                source,
+                count,
+                default);
     }
-
 
     /// <summary>
     /// Repeats the sequence forever.
@@ -34,16 +39,21 @@ static partial class MoreAsyncEnumerable
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
 
-        return source.RepeatCore(count: null);
+        return source.IsKnownEmpty()
+            ? AsyncEnumerable.Empty<TSource>()
+            : RepeatCore(
+                source,
+                count: null,
+                default);
     }
 
     private static async IAsyncEnumerable<TSource> RepeatCore<TSource>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         int? count,
-        [EnumeratorCancellation] CancellationToken cancellationToken = default)
+        [EnumeratorCancellation] CancellationToken cancellationToken)
     {
         var memo = source.Memoize();
-        await using ((memo as IAsyncDisposable).ConfigureAwait(false))
+        await using (memo)
         {
             while (true)
             {
@@ -57,7 +67,7 @@ static partial class MoreAsyncEnumerable
                     count--;
                 }
 
-                await foreach (var element in memo.WithCancellation(cancellationToken).ConfigureAwait(false))
+                await foreach (var element in memo.WithCancellation(cancellationToken))
                 {
                     yield return element;
                 }
