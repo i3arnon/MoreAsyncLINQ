@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -68,21 +68,21 @@ static partial class MoreAsyncEnumerable
         if (first is null) throw new ArgumentNullException(nameof(first));
         if (second is null) throw new ArgumentNullException(nameof(second));
 
-        return Core(first, second, comparer, cancellationToken);
+        return first.IsKnownEmpty() &&
+               second.IsKnownEmpty()
+            ? ValueTasks.FromResult(true)
+            : Core(
+                first.WithCancellation(cancellationToken),
+                second.WithCancellation(cancellationToken),
+                comparer,
+                cancellationToken);
 
         static async ValueTask<bool> Core(
-            IAsyncEnumerable<TSource> first,
-            IAsyncEnumerable<TSource> second,
+            ConfiguredCancelableAsyncEnumerable<TSource> first,
+            ConfiguredCancelableAsyncEnumerable<TSource> second,
             IEqualityComparer<TSource>? comparer,
             CancellationToken cancellationToken)
         {
-            if (await first.TryGetCollectionCountAsync(cancellationToken).ConfigureAwait(false) is { } firstCollectionCount &&
-                await second.TryGetCollectionCountAsync(cancellationToken).ConfigureAwait(false) is { } secondCollectionCount &&
-                secondCollectionCount > firstCollectionCount)
-            {
-                return false;
-            }
-
             comparer ??= EqualityComparer<TSource>.Default;
 
             await using var firstEnumerator =
@@ -90,14 +90,17 @@ static partial class MoreAsyncEnumerable
                     WithCancellation(cancellationToken).
                     ConfigureAwait(false).
                     GetAsyncEnumerator();
+            
+            await foreach (var secondElement in second)
+            {
+                if (!await firstEnumerator.MoveNextAsync() ||
+                    !comparer.Equals(firstEnumerator.Current, secondElement))
+                {
+                    return false;
+                }
+            }
 
-            return await second.
-                AllAsync(
-                    async (secondElement, _) =>
-                        await firstEnumerator.MoveNextAsync() &&
-                        comparer.Equals(firstEnumerator.Current, secondElement),
-                    cancellationToken).
-                ConfigureAwait(false);
+            return true;
         }
     }
 }
