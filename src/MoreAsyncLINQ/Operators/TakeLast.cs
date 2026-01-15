@@ -30,25 +30,23 @@ static partial class MoreAsyncEnumerable
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
 
-        return count <= 0
+        return count <= 0 ||
+               source.IsKnownEmpty()
             ? Empty<TSource>()
-            : Core(source, count);
+            : Core(source, count, default);
 
         static async IAsyncEnumerable<TSource> Core(
             IAsyncEnumerable<TSource> source,
             int count,
-            [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            [EnumeratorCancellation] CancellationToken cancellationToken)
         {
-            var collectionCount = await source.TryGetCollectionCountAsync(cancellationToken).ConfigureAwait(false);
             var result =
-                collectionCount is null
-                    ? source.
-                        CountDown(count).
-                        SkipWhile(tuple => tuple.Countdown is null).
-                        Select(tuple => tuple.Element)
-                    : source.Slice(Max(0, collectionCount.Value - count), int.MaxValue);
+                source.
+                    CountDown(count).
+                    SkipWhile(tuple => tuple.Countdown is null).
+                    Select(tuple => tuple.Element);
 
-            await foreach (var element in result.WithCancellation(cancellationToken).ConfigureAwait(false))
+            await foreach (var element in result.WithCancellation(cancellationToken))
             {
                 yield return element;
             }

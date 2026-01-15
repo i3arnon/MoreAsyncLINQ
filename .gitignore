@@ -5,3 +5,6 @@ obj/
 # Rider
 *.DotSettings.user
 .idea/
+
+# Verify
+*.received.*
