@@ -24,7 +24,7 @@ static partial class MoreAsyncEnumerable
     /// <typeparam name="TSource">The type of the elements of the source sequences</typeparam>
     /// <param name="sequence">The first sequence in the interleave group</param>
     /// <param name="otherSequences">The other sequences in the interleave group</param>
-    /// <returns>A sequence of interleaved elements from all of the source sequences</returns>
+    /// <returns>A sequence of interleaved elements from all the source sequences</returns>
     public static IAsyncEnumerable<TSource> Interleave<TSource>(
         this IAsyncEnumerable<TSource> sequence,
         params IAsyncEnumerable<TSource>[] otherSequences)
@@ -32,12 +32,18 @@ static partial class MoreAsyncEnumerable
         if (sequence is null) throw new ArgumentNullException(nameof(sequence));
         if (otherSequences is null) throw new ArgumentNullException(nameof(otherSequences));
 
-        return Core(sequence, otherSequences);
+        return sequence.IsKnownEmpty() &&
+               otherSequences.All(otherSequence => otherSequence.IsKnownEmpty())
+            ? AsyncEnumerable.Empty<TSource>()
+            : Core(
+                sequence,
+                otherSequences,
+                default);
 
         static async IAsyncEnumerable<TSource> Core(
             IAsyncEnumerable<TSource> sequence,
             IAsyncEnumerable<TSource>[] otherSequences,
-            [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            [EnumeratorCancellation] CancellationToken cancellationToken)
         {
             var sequences = new[] { sequence }.Concat(otherSequences);
             var enumerators = new ConfiguredCancelableAsyncEnumerable<TSource>.Enumerator?[otherSequences.Length + 1];
@@ -45,7 +51,7 @@ static partial class MoreAsyncEnumerable
             try
             {
                 var enumeratorIndex = 0;
-                foreach (var enumerator in sequences.Select(sequence => sequence.WithCancellation(cancellationToken).ConfigureAwait(false).GetAsyncEnumerator()))
+                foreach (var enumerator in sequences.Select(sequence => sequence.WithCancellation(cancellationToken).GetAsyncEnumerator()))
                 {
                     enumerators[enumeratorIndex] = enumerator;
                     if (await enumerator.MoveNextAsync())
