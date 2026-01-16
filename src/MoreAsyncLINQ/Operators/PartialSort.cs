@@ -7,8 +7,8 @@ namespace MoreAsyncLINQ;
 static partial class MoreAsyncEnumerable
 {
     /// <summary>
-    /// Combines <see cref="AsyncEnumerable.OrderBy{TSource,TKey}(IAsyncEnumerable{TSource},Func{TSource,TKey})"/>,
-    /// where each element is its key, and <see cref="AsyncEnumerable.Take{TSource}"/>
+    /// Combines <see cref="AsyncEnumerable.OrderBy{TSource, TKey}(IAsyncEnumerable{TSource}, Func{TSource, TKey}, IComparer{TKey})"/>,
+    /// where each element is its key, and <see cref="AsyncEnumerable.Take{TSource}(IAsyncEnumerable{TSource}, int)"/>
     /// in a single operation.
     /// </summary>
     /// <typeparam name="TSource">Type of elements in the sequence.</typeparam>
@@ -30,7 +30,7 @@ static partial class MoreAsyncEnumerable
 
     /// <summary>
     /// Combines <see cref="MoreAsyncEnumerable.OrderBy{TSource, TKey}(IAsyncEnumerable{TSource}, Func{TSource, TKey}, IComparer{TKey}, OrderByDirection)"/>,
-    /// where each element is its key, and <see cref="AsyncEnumerable.Take{TSource}"/>
+    /// where each element is its key, and <see cref="AsyncEnumerable.Take{TSource}(IAsyncEnumerable{TSource}, int)"/>
     /// in a single operation.
     /// An additional parameter specifies the direction of the sort
     /// </summary>
@@ -55,7 +55,7 @@ static partial class MoreAsyncEnumerable
 
     /// <summary>
     /// Combines <see cref="MoreAsyncEnumerable.OrderBy{TSource, TKey}(IAsyncEnumerable{TSource}, Func{TSource, TKey}, IComparer{TKey}, OrderByDirection)"/>,
-    /// where each element is its key, and <see cref="AsyncEnumerable.Take{TSource}"/>
+    /// where each element is its key, and <see cref="AsyncEnumerable.Take{TSource}(IAsyncEnumerable{TSource}, int)"/>
     /// in a single operation.
     /// Additional parameters specify how the elements compare to each other and
     /// the direction of the sort.
@@ -83,7 +83,7 @@ static partial class MoreAsyncEnumerable
 
     /// <summary>
     /// Combines <see cref="AsyncEnumerable.OrderBy{TSource,TKey}(IAsyncEnumerable{TSource},Func{TSource,TKey},IComparer{TKey})"/>,
-    /// where each element is its key, and <see cref="AsyncEnumerable.Take{TSource}"/>
+    /// where each element is its key, and <see cref="AsyncEnumerable.Take{TSource}(IAsyncEnumerable{TSource}, int)"/>
     /// in a single operation. An additional parameter specifies how the
     /// elements compare to each other.
     /// </summary>
@@ -103,10 +103,14 @@ static partial class MoreAsyncEnumerable
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
 
-        return source.PartialSortBy<TSource, TSource>(
-            count,
-            keySelector: null,
-            keyComparer: null,
-            comparer);
+        return source.IsKnownEmpty()
+            ? AsyncEnumerable.Empty<TSource>()
+            : PartialSortBy(
+                source,
+                count,
+                keySelector: (Func<TSource, TSource>?)null,
+                keyComparer: null,
+                comparer,
+                default);
     }
 }
