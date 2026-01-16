@@ -21,7 +21,10 @@
 
 Modernize API &amp; implementation:
 - Add overloads matching System.Linq.AsyncEnumerable API (i.e. async lambdas should have a `CancellationToken` parameter)
-- Remove ConfigureAwait(false) calls, matching System.Linq.AsyncEnumerable.</PackageReleaseNotes>
+- Remove ConfigureAwait(false) calls, matching System.Linq.AsyncEnumerable.
+
+Breaking Changes:
+- PartitionAsync now returns a `ValueTask&lt;(IEnumerable&lt;TSource&gt; True, IEnumerable&lt;TSource&gt; False)&gt;` instead of a `ValueTask&lt;(IAsyncEnumerable&lt;TSource&gt; True, IAsyncEnumerable&lt;TSource&gt; False)&gt;`</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <PackageTags>linq;async</PackageTags>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
