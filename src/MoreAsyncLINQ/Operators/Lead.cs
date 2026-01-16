@@ -63,16 +63,23 @@ static partial class MoreAsyncEnumerable
         if (offset <= 0) throw new ArgumentOutOfRangeException(nameof(offset));
         if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
 
-        return Core(source, offset, defaultLeadValue, resultSelector);
+        return source.IsKnownEmpty()
+            ? AsyncEnumerable.Empty<TResult>()
+            : Core(
+                source,
+                offset,
+                defaultLeadValue,
+                resultSelector,
+                default);
 
         static async IAsyncEnumerable<TResult> Core(
             IAsyncEnumerable<TSource> source,
             int offset,
             TSource defaultLeadValue,
             Func<TSource, TSource, TResult> resultSelector,
-            [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            [EnumeratorCancellation] CancellationToken cancellationToken)
         {
-            await using var enumerator = source.WithCancellation(cancellationToken).ConfigureAwait(false).GetAsyncEnumerator();
+            await using var enumerator = source.WithCancellation(cancellationToken).GetAsyncEnumerator();
 
             var queue = new Queue<TSource>(offset);
 
@@ -183,6 +190,102 @@ static partial class MoreAsyncEnumerable
             while (queue.Count > 0)
             {
                 yield return await resultSelector(queue.Dequeue(), defaultLeadValue).ConfigureAwait(false);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Produces a projection of a sequence by evaluating pairs of elements separated by a positive offset.
+    /// </summary>
+    /// <remarks>
+    /// This operator evaluates in a deferred and streaming manner.<br/>
+    /// For elements of the sequence that are less than <paramref name="offset"/> items from the end,
+    /// default(T) is used as the lead value.<br/>
+    /// </remarks>
+    /// <typeparam name="TSource">The type of the elements in the source sequence</typeparam>
+    /// <typeparam name="TResult">The type of the elements in the result sequence</typeparam>
+    /// <param name="source">The sequence over which to evaluate Lead</param>
+    /// <param name="offset">The offset (expressed as a positive number) by which to lead each element of the sequence</param>
+    /// <param name="resultSelector">A projection function which accepts the current and subsequent (lead) element (in that order) and produces a result</param>
+    /// <returns>A sequence produced by projecting each element of the sequence with its lead pairing</returns>
+    public static IAsyncEnumerable<TResult> Lead<TSource, TResult>(
+        this IAsyncEnumerable<TSource> source,
+        int offset,
+        Func<TSource, TSource?, CancellationToken, ValueTask<TResult>> resultSelector)
+    {
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (offset <= 0) throw new ArgumentOutOfRangeException(nameof(offset));
+        if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
+
+        return source.
+            Select(Option.Some).
+            Lead(
+                offset,
+                defaultLeadValue: default,
+                (elementOption, leadOption, cancellationToken) => resultSelector(elementOption.Value, leadOption.OrDefault(), cancellationToken));
+    }
+
+    /// <summary>
+    /// Produces a projection of a sequence by evaluating pairs of elements separated by a positive offset.
+    /// </summary>
+    /// <remarks>
+    /// This operator evaluates in a deferred and streaming manner.<br/>
+    /// </remarks>
+    /// <typeparam name="TSource">The type of the elements in the source sequence</typeparam>
+    /// <typeparam name="TResult">The type of the elements in the result sequence</typeparam>
+    /// <param name="source">The sequence over which to evaluate Lead</param>
+    /// <param name="offset">The offset (expressed as a positive number) by which to lead each element of the sequence</param>
+    /// <param name="defaultLeadValue">A default value supplied for the leading element when none is available</param>
+    /// <param name="resultSelector">A projection function which accepts the current and subsequent (lead) element (in that order) and produces a result</param>
+    /// <returns>A sequence produced by projecting each element of the sequence with its lead pairing</returns>
+    public static IAsyncEnumerable<TResult> Lead<TSource, TResult>(
+        this IAsyncEnumerable<TSource> source,
+        int offset,
+        TSource defaultLeadValue,
+        Func<TSource, TSource, CancellationToken, ValueTask<TResult>> resultSelector)
+    {
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (offset <= 0) throw new ArgumentOutOfRangeException(nameof(offset));
+        if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
+
+        return source.IsKnownEmpty()
+            ? AsyncEnumerable.Empty<TResult>()
+            : Core(
+                source,
+                offset,
+                defaultLeadValue,
+                resultSelector,
+                default);
+
+        static async IAsyncEnumerable<TResult> Core(
+            IAsyncEnumerable<TSource> source,
+            int offset,
+            TSource defaultLeadValue,
+            Func<TSource, TSource, CancellationToken, ValueTask<TResult>> resultSelector,
+            [EnumeratorCancellation] CancellationToken cancellationToken)
+        {
+            await using var enumerator = source.WithCancellation(cancellationToken).GetAsyncEnumerator();
+
+            var queue = new Queue<TSource>(offset);
+
+            var hasMore = await enumerator.MoveNextAsync();
+            while (hasMore && queue.Count < offset)
+            {
+                queue.Enqueue(enumerator.Current);
+                hasMore = await enumerator.MoveNextAsync();
+            }
+
+            while (hasMore)
+            {
+                yield return await resultSelector(queue.Dequeue(), enumerator.Current, cancellationToken);
+
+                queue.Enqueue(enumerator.Current);
+                hasMore = await enumerator.MoveNextAsync();
+            }
+
+            while (queue.Count > 0)
+            {
+                yield return await resultSelector(queue.Dequeue(), defaultLeadValue, cancellationToken);
             }
         }
     }
