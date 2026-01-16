@@ -29,10 +29,12 @@ static partial class MoreAsyncEnumerable
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (width < 0) throw new ArgumentOutOfRangeException(nameof(width));
 
-        return source.Pad(
+        return Pad(
+            source,
             width,
             padding: default,
-            paddingSelector: null);
+            paddingSelector: (Func<int, TSource>?)null,
+            default);
     }
 
     /// <summary>
@@ -58,10 +60,12 @@ static partial class MoreAsyncEnumerable
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (width < 0) throw new ArgumentOutOfRangeException(nameof(width));
 
-        return source.Pad(
+        return Pad(
+            source,
             width,
             padding,
-            paddingSelector: null);
+            paddingSelector: (Func<int, TSource>?)null,
+            default);
     }
 
     /// <summary>
@@ -88,21 +92,23 @@ static partial class MoreAsyncEnumerable
         if (width < 0) throw new ArgumentOutOfRangeException(nameof(width));
         if (paddingSelector is null) throw new ArgumentNullException(nameof(paddingSelector));
 
-        return source.Pad(
+        return Pad(
+            source,
             width,
             padding: default,
-            paddingSelector);
+            paddingSelector,
+            default);
     }
 
     private static async IAsyncEnumerable<TSource> Pad<TSource>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         int width,
         TSource? padding,
         Func<int, TSource>? paddingSelector,
-        [EnumeratorCancellation] CancellationToken cancellationToken = default)
+        [EnumeratorCancellation] CancellationToken cancellationToken)
     {
         var count = 0;
-        await foreach (var element in source.WithCancellation(cancellationToken).ConfigureAwait(false))
+        await foreach (var element in source.WithCancellation(cancellationToken))
         {
             yield return element;
 
@@ -169,6 +175,63 @@ static partial class MoreAsyncEnumerable
             yield return paddingSelector is null
                 ? padding!
                 : await paddingSelector(count).ConfigureAwait(false);
+
+            count++;
+        }
+    }
+
+    /// <summary>
+    /// Pads a sequence with a dynamic filler value if it is narrower (shorter
+    /// in length) than a given width.
+    /// </summary>
+    /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
+    /// <param name="source">The sequence to pad.</param>
+    /// <param name="width">The width/length below which to pad.</param>
+    /// <param name="paddingSelector">Function to calculate padding.</param>
+    /// <returns>
+    /// Returns a sequence that is at least as wide/long as the width/length
+    /// specified by the <paramref name="width"/> parameter.
+    /// </returns>
+    /// <remarks>
+    /// This operator uses deferred execution and streams its results.
+    /// </remarks>
+    public static IAsyncEnumerable<TSource> Pad<TSource>(
+        this IAsyncEnumerable<TSource> source,
+        int width,
+        Func<int, CancellationToken, ValueTask<TSource>> paddingSelector)
+    {
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (width < 0) throw new ArgumentOutOfRangeException(nameof(width));
+        if (paddingSelector is null) throw new ArgumentNullException(nameof(paddingSelector));
+
+        return Pad(
+            source,
+            width,
+            padding: default,
+            paddingSelector,
+            default);
+    }
+
+    private static async IAsyncEnumerable<TSource> Pad<TSource>(
+        IAsyncEnumerable<TSource> source,
+        int width,
+        TSource? padding,
+        Func<int, CancellationToken, ValueTask<TSource>>? paddingSelector,
+        [EnumeratorCancellation] CancellationToken cancellationToken)
+    {
+        var count = 0;
+        await foreach (var element in source.WithCancellation(cancellationToken))
+        {
+            yield return element;
+
+            count++;
+        }
+
+        while (count < width)
+        {
+            yield return paddingSelector is null
+                ? padding!
+                : await paddingSelector(count, cancellationToken);
 
             count++;
         }
