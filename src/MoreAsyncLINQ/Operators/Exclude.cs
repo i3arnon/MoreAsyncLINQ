@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,17 +24,22 @@ static partial class MoreAsyncEnumerable
         if (startIndex < 0) throw new ArgumentOutOfRangeException(nameof(startIndex));
         if (count < 0) throw new ArgumentOutOfRangeException(nameof(count));
 
-        return count == 0
-            ? source
-            : Core(source, startIndex, count);
+        if (count == 0)
+        {
+            return source;
+        }
+
+        return source.IsKnownEmpty()
+            ? AsyncEnumerable.Empty<TSource>()
+            : Core(source, startIndex, count, default);
 
         static async IAsyncEnumerable<TSource> Core(
             IAsyncEnumerable<TSource> source,
             int startIndex,
             int count,
-            [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            [EnumeratorCancellation] CancellationToken cancellationToken)
         {
-            await using var enumerator = source.WithCancellation(cancellationToken).ConfigureAwait(false).GetAsyncEnumerator();
+            await using var enumerator = source.WithCancellation(cancellationToken).GetAsyncEnumerator();
 
             var index = 0;
             for (; index < startIndex && await enumerator.MoveNextAsync(); index++)
