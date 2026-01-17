@@ -21,7 +21,7 @@ static partial class MoreAsyncEnumerable
     /// mapped to their keys.
     /// </returns>
     public static ValueTask<Dictionary<TKey, TValue>> ToDictionaryAsync<TKey, TValue>(
-        this IAsyncEnumerable<KeyValuePair<TKey, TValue>> source,
+        IAsyncEnumerable<KeyValuePair<TKey, TValue>> source,
         CancellationToken cancellationToken = default)
         where TKey : notnull
     {
@@ -45,7 +45,7 @@ static partial class MoreAsyncEnumerable
     /// mapped to their keys.
     /// </returns>
     public static ValueTask<Dictionary<TKey, TValue>> ToDictionaryAsync<TKey, TValue>(
-        this IAsyncEnumerable<KeyValuePair<TKey, TValue>> source,
+        IAsyncEnumerable<KeyValuePair<TKey, TValue>> source,
         IEqualityComparer<TKey>? comparer,
         CancellationToken cancellationToken = default)
         where TKey : notnull
@@ -73,7 +73,7 @@ static partial class MoreAsyncEnumerable
     /// mapped to their keys.
     /// </returns>
     public static ValueTask<Dictionary<TKey, TValue>> ToDictionaryAsync<TKey, TValue>(
-        this IAsyncEnumerable<(TKey Key, TValue Value)> source,
+        IAsyncEnumerable<(TKey Key, TValue Value)> source,
         CancellationToken cancellationToken = default)
         where TKey : notnull
     {
@@ -97,7 +97,7 @@ static partial class MoreAsyncEnumerable
     /// mapped to their keys.
     /// </returns>
     public static ValueTask<Dictionary<TKey, TValue>> ToDictionaryAsync<TKey, TValue>(
-        this IAsyncEnumerable<(TKey Key, TValue Value)> source,
+        IAsyncEnumerable<(TKey Key, TValue Value)> source,
         IEqualityComparer<TKey>? comparer,
         CancellationToken cancellationToken = default)
         where TKey : notnull

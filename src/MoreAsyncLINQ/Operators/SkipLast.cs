@@ -16,7 +16,7 @@ static partial class MoreAsyncEnumerable
     /// An <see cref="IAsyncEnumerable{T}"/> containing the source sequence elements except for the bypassed ones at the end.
     /// </returns>
     public static IAsyncEnumerable<TSource> SkipLast<TSource>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         int count)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
