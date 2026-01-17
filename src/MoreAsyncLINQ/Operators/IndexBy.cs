@@ -80,6 +80,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>
     /// A sequence of elements paired with their index within the key-group.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(IndexBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<(int Index, TSource Element)> IndexByAwait<TSource, TKey>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TKey>> keySelector)
@@ -109,6 +110,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>
     /// A sequence of elements paired with their index within the key-group.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(IndexBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<(int Index, TSource Element)> IndexByAwait<TSource, TKey>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TKey>> keySelector,

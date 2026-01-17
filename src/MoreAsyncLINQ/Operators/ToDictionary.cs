@@ -20,6 +20,7 @@ static partial class MoreAsyncEnumerable
     /// A <see cref="Dictionary{TKey, TValue}"/> containing the values
     /// mapped to their keys.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(ToDictionaryAsync)}.")]
     public static ValueTask<Dictionary<TKey, TValue>> ToDictionaryAsync<TKey, TValue>(
         IAsyncEnumerable<KeyValuePair<TKey, TValue>> source,
         CancellationToken cancellationToken = default)
@@ -44,6 +45,7 @@ static partial class MoreAsyncEnumerable
     /// A <see cref="Dictionary{TKey, TValue}"/> containing the values
     /// mapped to their keys.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(ToDictionaryAsync)}.")]
     public static ValueTask<Dictionary<TKey, TValue>> ToDictionaryAsync<TKey, TValue>(
         IAsyncEnumerable<KeyValuePair<TKey, TValue>> source,
         IEqualityComparer<TKey>? comparer,
@@ -72,6 +74,7 @@ static partial class MoreAsyncEnumerable
     /// A <see cref="Dictionary{TKey, TValue}"/> containing the values
     /// mapped to their keys.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(ToDictionaryAsync)}.")]
     public static ValueTask<Dictionary<TKey, TValue>> ToDictionaryAsync<TKey, TValue>(
         IAsyncEnumerable<(TKey Key, TValue Value)> source,
         CancellationToken cancellationToken = default)
@@ -96,6 +99,7 @@ static partial class MoreAsyncEnumerable
     /// A <see cref="Dictionary{TKey, TValue}"/> containing the values
     /// mapped to their keys.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(ToDictionaryAsync)}.")]
     public static ValueTask<Dictionary<TKey, TValue>> ToDictionaryAsync<TKey, TValue>(
         IAsyncEnumerable<(TKey Key, TValue Value)> source,
         IEqualityComparer<TKey>? comparer,

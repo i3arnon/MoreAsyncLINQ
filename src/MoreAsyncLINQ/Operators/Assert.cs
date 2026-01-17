@@ -91,6 +91,7 @@ static partial class MoreAsyncEnumerable
     /// <remarks>
     /// This operator uses deferred execution and streams its results.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(Assert)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> AssertAwait<TSource>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<bool>> predicate) =>
@@ -110,6 +111,7 @@ static partial class MoreAsyncEnumerable
     /// <remarks>
     /// This operator uses deferred execution and streams its results.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(Assert)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> AssertAwait<TSource>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<bool>> predicate,

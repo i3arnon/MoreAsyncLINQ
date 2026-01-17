@@ -9,7 +9,7 @@ namespace MoreAsyncLINQ;
 static partial class MoreAsyncEnumerable
 {
     /// <summary>
-    /// Determines whether or not the number of elements in the sequence is between
+    /// Determines whether the number of elements in the sequence is between
     /// an inclusive range of minimum and maximum integers.
     /// </summary>
     /// <typeparam name="TSource">Element type of sequence</typeparam>

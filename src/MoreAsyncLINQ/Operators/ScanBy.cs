@@ -131,6 +131,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>
     /// A sequence of keys paired with intermediate accumulator states.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(ScanBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<(TKey Key, TState State)> ScanByAwait<TSource, TKey, TState>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TKey>> keySelector,
@@ -171,6 +172,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>
     /// A sequence of keys paired with intermediate accumulator states.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(ScanBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<(TKey Key, TState State)> ScanByAwait<TSource, TKey, TState>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TKey>> keySelector,

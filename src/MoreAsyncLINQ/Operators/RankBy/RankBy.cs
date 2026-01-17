@@ -88,6 +88,7 @@ static partial class MoreAsyncEnumerable
     /// <param name="source">The sequence of items to rank</param>
     /// <param name="keySelector">A key selector function which returns the value by which to rank items in the sequence</param>
     /// <returns>A sequence of position integers representing the ranks of the corresponding items in the sequence</returns>
+    [Obsolete($"Use an overload of {nameof(RankBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<int> RankByAwait<TSource, TKey>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TKey>> keySelector)
@@ -108,6 +109,7 @@ static partial class MoreAsyncEnumerable
     /// <param name="keySelector">A key selector function which returns the value by which to rank items in the sequence</param>
     /// <param name="comparer">An object that defines the comparison semantics for keys used to rank items</param>
     /// <returns>A sequence of position integers representing the ranks of the corresponding items in the sequence</returns>
+    [Obsolete($"Use an overload of {nameof(RankBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<int> RankByAwait<TSource, TKey>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TKey>> keySelector,

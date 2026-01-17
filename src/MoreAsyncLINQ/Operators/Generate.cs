@@ -20,6 +20,7 @@ static partial class MoreAsyncEnumerable
     /// <remarks>
     /// This function defers element generation until needed and streams the results.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(Generate)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> GenerateAwait<TResult>(
         TResult initial,
         Func<TResult, ValueTask<TResult>> generator)

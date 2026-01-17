@@ -167,6 +167,7 @@ static partial class MoreAsyncEnumerable
     /// <remarks>
     /// This operator uses deferred execution and streams its results.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(PadStart)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> PadStartAwait<TSource>(
         this IAsyncEnumerable<TSource> source,
         int width,
@@ -179,6 +180,7 @@ static partial class MoreAsyncEnumerable
         return source.PadStartAwaitCore<TSource>(width, paddingSelector);
     }
 
+    [Obsolete]
     private static async IAsyncEnumerable<TSource> PadStartAwaitCore<TSource>(
         this IAsyncEnumerable<TSource> source,
         int width,

@@ -126,6 +126,7 @@ static partial class MoreAsyncEnumerable
     /// <remarks>
     /// This operator uses deferred execution and streams its results.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(AssertCount)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> AssertCountAwait<TSource>(
         this IAsyncEnumerable<TSource> source,
         int count,

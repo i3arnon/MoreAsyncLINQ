@@ -170,6 +170,7 @@ static partial class MoreAsyncEnumerable
     /// <remarks>
     /// This operator uses deferred execution and streams its results.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(ZipLongest)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> ZipLongestAwait<T1, T2, TResult>(
         this IAsyncEnumerable<T1> first,
         IAsyncEnumerable<T2> second,
@@ -210,6 +211,7 @@ static partial class MoreAsyncEnumerable
     /// <remarks>
     /// This operator uses deferred execution and streams its results.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(ZipLongest)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> ZipLongestAwait<T1, T2, T3, TResult>(
         this IAsyncEnumerable<T1> first,
         IAsyncEnumerable<T2> second,
@@ -254,6 +256,7 @@ static partial class MoreAsyncEnumerable
     /// <remarks>
     /// This operator uses deferred execution and streams its results.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(ZipLongest)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> ZipLongestAwait<T1, T2, T3, T4, TResult>(
         this IAsyncEnumerable<T1> first,
         IAsyncEnumerable<T2> second,

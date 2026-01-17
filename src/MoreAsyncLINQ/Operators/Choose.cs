@@ -75,6 +75,7 @@ static partial class MoreAsyncEnumerable
     /// This method uses deferred execution semantics and streams its
     /// results.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(Choose)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> ChooseAwait<TSource, TResult>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<(bool, TResult)>> chooser)

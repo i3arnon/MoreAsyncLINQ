@@ -101,6 +101,7 @@ static partial class MoreAsyncEnumerable
     /// <param name="predicate">Predicate used to determine when to stop yielding results from the source.</param>
     /// <returns>Items from the source sequence after the predicate first returns true when applied to the item.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="source"/> or <paramref name="predicate"/> is null</exception>
+    [Obsolete($"Use an overload of {nameof(SkipUntil)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> SkipUntilAwait<TSource>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<bool>> predicate)

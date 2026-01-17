@@ -63,6 +63,7 @@ static partial class MoreAsyncEnumerable
     /// <param name="keySelector">A key selector function</param>
     /// <param name="direction">A direction in which to order the elements (ascending, descending)</param>
     /// <returns>An ordered copy of the source sequence</returns>
+    [Obsolete($"Use an overload of {nameof(OrderBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IOrderedAsyncEnumerable<TSource> OrderByAwait<TSource, TKey>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TKey>> keySelector,
@@ -84,6 +85,7 @@ static partial class MoreAsyncEnumerable
     /// <param name="direction">A direction in which to order the elements (ascending, descending)</param>
     /// <param name="comparer">A comparer used to define the semantics of element comparison</param>
     /// <returns>An ordered copy of the source sequence</returns>
+    [Obsolete($"Use an overload of {nameof(OrderBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IOrderedAsyncEnumerable<TSource> OrderByAwait<TSource, TKey>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TKey>> keySelector,

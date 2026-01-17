@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ static partial class MoreAsyncEnumerable
     /// <param name="source">Source sequence.</param>
     /// <param name="keySelector">Function that transforms each item of source sequence into a key to be compared against the others.</param>
     /// <returns>A sequence of unique keys and their number of occurrences in the original sequence.</returns>
+    [Obsolete($"Use an overload of {nameof(CountBy)}.")]
     public static IAsyncEnumerable<(TKey Key, int Count)> CountBy<TSource, TKey>(
         IAsyncEnumerable<TSource> source,
         Func<TSource, TKey> keySelector)
@@ -36,9 +38,10 @@ static partial class MoreAsyncEnumerable
     /// <typeparam name="TKey">Type of the projected element.</typeparam>
     /// <param name="source">Source sequence.</param>
     /// <param name="keySelector">Function that transforms each item of source sequence into a key to be compared against the others.</param>
-    /// <param name="comparer">The equality comparer to use to determine whether or not keys are equal.
+    /// <param name="comparer">The equality comparer to use to determine whether keys are equal.
     /// If null, the default equality comparer for <typeparamref name="TSource"/> is used.</param>
     /// <returns>A sequence of unique keys and their number of occurrences in the original sequence.</returns>
+    [Obsolete($"Use an overload of {nameof(CountBy)}.")]
     public static IAsyncEnumerable<(TKey Key, int Count)> CountBy<TSource, TKey>(
         IAsyncEnumerable<TSource> source,
         Func<TSource, TKey> keySelector,
@@ -105,6 +108,7 @@ static partial class MoreAsyncEnumerable
     /// <param name="source">Source sequence.</param>
     /// <param name="keySelector">Function that transforms each item of source sequence into a key to be compared against the others.</param>
     /// <returns>A sequence of unique keys and their number of occurrences in the original sequence.</returns>
+    [Obsolete($"Use an overload of {nameof(CountBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<(TKey Key, int Count)> CountByAwait<TSource, TKey>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TKey>> keySelector)
@@ -124,9 +128,10 @@ static partial class MoreAsyncEnumerable
     /// <typeparam name="TKey">Type of the projected element.</typeparam>
     /// <param name="source">Source sequence.</param>
     /// <param name="keySelector">Function that transforms each item of source sequence into a key to be compared against the others.</param>
-    /// <param name="comparer">The equality comparer to use to determine whether or not keys are equal.
+    /// <param name="comparer">The equality comparer to use to determine whether keys are equal.
     /// If null, the default equality comparer for <typeparamref name="TSource"/> is used.</param>
     /// <returns>A sequence of unique keys and their number of occurrences in the original sequence.</returns>
+    [Obsolete($"Use an overload of {nameof(CountBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<(TKey Key, int Count)> CountByAwait<TSource, TKey>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TKey>> keySelector,

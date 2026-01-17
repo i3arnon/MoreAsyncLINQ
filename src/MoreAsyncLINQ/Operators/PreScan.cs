@@ -84,6 +84,7 @@ static partial class MoreAsyncEnumerable
     /// <param name="transformation">Transformation operation</param>
     /// <param name="identity">Identity element (see remarks)</param>
     /// <returns>The scanned sequence</returns>
+    [Obsolete($"Use an overload of {nameof(PartialSortBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> PreScanAwait<TSource>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, TSource, ValueTask<TSource>> transformation,

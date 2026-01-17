@@ -168,6 +168,7 @@ static partial class MoreAsyncEnumerable
     /// results. If elements are missing at the end of the sequence then
     /// they remain missing.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(FillBackward)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> FillBackwardAwait<TSource>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<bool>> predicate)
@@ -202,6 +203,7 @@ static partial class MoreAsyncEnumerable
     /// results. If elements are missing at the end of the sequence then
     /// they remain missing.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(FillBackward)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> FillBackwardAwait<TSource>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<bool>> predicate,

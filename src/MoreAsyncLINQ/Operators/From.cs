@@ -20,6 +20,7 @@ static partial class MoreAsyncEnumerable
     /// <typeparam name="TResult">The type of the object returned by the function.</typeparam>
     /// <param name="function">The function to evaluate.</param>
     /// <returns>A sequence with the value resulting from invoking <paramref name="function"/>.</returns>
+    [Obsolete($"Use an overload of {nameof(From)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> FromAwait<TResult>(Func<ValueTask<TResult>> function)
     {
         if (function is null) throw new ArgumentNullException(nameof(function));
@@ -44,6 +45,7 @@ static partial class MoreAsyncEnumerable
     /// <param name="function1">The first function to evaluate.</param>
     /// <param name="function2">The second function to evaluate.</param>
     /// <returns>A sequence with the values resulting from invoking <paramref name="function1"/> and <paramref name="function2"/>.</returns>
+    [Obsolete($"Use an overload of {nameof(From)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> FromAwait<TResult>(
         Func<ValueTask<TResult>> function1,
         Func<ValueTask<TResult>> function2)
@@ -75,6 +77,7 @@ static partial class MoreAsyncEnumerable
     /// <param name="function2">The second function to evaluate.</param>
     /// <param name="function3">The third function to evaluate.</param>
     /// <returns>A sequence with the values resulting from invoking <paramref name="function1"/>, <paramref name="function2"/> and <paramref name="function3"/>.</returns>
+    [Obsolete($"Use an overload of {nameof(From)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> FromAwait<TResult>(
         Func<ValueTask<TResult>> function1,
         Func<ValueTask<TResult>> function2,
@@ -109,6 +112,7 @@ static partial class MoreAsyncEnumerable
     /// <param name="functions">The functions to evaluate.</param>
     /// <returns>A sequence with the values resulting from invoking all of the <paramref name="functions"/>.</returns>
     /// <exception cref="ArgumentNullException">When <paramref name="functions"/> is <c>null</c>.</exception>
+    [Obsolete($"Use an overload of {nameof(From)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> FromAwait<TResult>(params Func<ValueTask<TResult>>[] functions)
     {
         if (functions is null) throw new ArgumentNullException(nameof(functions));

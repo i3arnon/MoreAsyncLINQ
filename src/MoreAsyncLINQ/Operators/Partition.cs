@@ -54,6 +54,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>
     /// The return value from <paramref name="resultSelector"/>.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(PartitionAsync)} that accepts an async delegate with {nameof(IEnumerable<>)} parameters.")]
     public static ValueTask<TResult> PartitionAsync<TSource, TResult>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, bool> predicate,
@@ -81,6 +82,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>
     /// The return value from <paramref name="resultSelector"/>.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(PartitionAsync)} that accepts an async delegate with {nameof(IEnumerable<>)} parameters.")]
     public static ValueTask<TResult> PartitionAsync<TSource, TResult>(
         this IAsyncEnumerable<IGrouping<bool, TSource>> source,
         Func<IAsyncEnumerable<TSource>, IAsyncEnumerable<TSource>, TResult> resultSelector,
@@ -112,6 +114,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>
     /// The return value from <paramref name="resultSelector"/>.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(PartitionAsync)} that accepts an async delegate with {nameof(IEnumerable<>)} parameters.")]
     public static ValueTask<TResult> PartitionAsync<TSource, TResult>(
         this IAsyncEnumerable<IGrouping<bool?, TSource>> source,
         Func<IAsyncEnumerable<TSource>, IAsyncEnumerable<TSource>, IAsyncEnumerable<TSource>, TResult> resultSelector,
@@ -147,6 +150,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>
     /// The return value from <paramref name="resultSelector"/>.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(PartitionAsync)} that accepts an async delegate with {nameof(IEnumerable<>)} parameters.")]
     public static ValueTask<TResult> PartitionAsync<TKey, TElement, TResult>(
         this IAsyncEnumerable<IGrouping<TKey, TElement>> source,
         TKey key,
@@ -184,6 +188,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>
     /// The return value from <paramref name="resultSelector"/>.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(PartitionAsync)} that accepts an async delegate with {nameof(IEnumerable<>)} parameters.")]
     public static ValueTask<TResult> PartitionAsync<TKey, TElement, TResult>(
         this IAsyncEnumerable<IGrouping<TKey, TElement>> source,
         TKey key,
@@ -225,6 +230,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>
     /// The return value from <paramref name="resultSelector"/>.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(PartitionAsync)} that accepts an async delegate with {nameof(IEnumerable<>)} parameters.")]
     public static ValueTask<TResult> PartitionAsync<TKey, TElement, TResult>(
         this IAsyncEnumerable<IGrouping<TKey, TElement>> source,
         TKey key1,
@@ -266,6 +272,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>
     /// The return value from <paramref name="resultSelector"/>.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(PartitionAsync)} that accepts an async delegate with {nameof(IEnumerable<>)} parameters.")]
     public static ValueTask<TResult> PartitionAsync<TKey, TElement, TResult>(
         this IAsyncEnumerable<IGrouping<TKey, TElement>> source,
         TKey key1,
@@ -309,6 +316,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>
     /// The return value from <paramref name="resultSelector"/>.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(PartitionAsync)} that accepts an async delegate with {nameof(IEnumerable<>)} parameters.")]
     public static ValueTask<TResult> PartitionAsync<TKey, TElement, TResult>(
         this IAsyncEnumerable<IGrouping<TKey, TElement>> source,
         TKey key1,
@@ -354,6 +362,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>
     /// The return value from <paramref name="resultSelector"/>.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(PartitionAsync)} that accepts an async delegate with {nameof(IEnumerable<>)} parameters.")]
     public static ValueTask<TResult> PartitionAsync<TKey, TElement, TResult>(
         this IAsyncEnumerable<IGrouping<TKey, TElement>> source,
         TKey key1,
@@ -434,6 +443,7 @@ static partial class MoreAsyncEnumerable
     /// A tuple of elements satisfying the predicate and those that do not,
     /// respectively.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(PartitionAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<(IAsyncEnumerable<TSource> True, IAsyncEnumerable<TSource> False)> PartitionAwaitAsync<TSource>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<bool>> predicate,
@@ -465,6 +475,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>
     /// The return value from <paramref name="resultSelector"/>.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(PartitionAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> PartitionAwaitAsync<TSource, TResult>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<bool>> predicate,
@@ -492,6 +503,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>
     /// The return value from <paramref name="resultSelector"/>.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(PartitionAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> PartitionAwaitAsync<TSource, TResult>(
         this IAsyncEnumerable<IGrouping<bool, TSource>> source,
         Func<IAsyncEnumerable<TSource>, IAsyncEnumerable<TSource>, ValueTask<TResult>> resultSelector,
@@ -523,6 +535,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>
     /// The return value from <paramref name="resultSelector"/>.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(PartitionAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> PartitionAwaitAsync<TSource, TResult>(
         this IAsyncEnumerable<IGrouping<bool?, TSource>> source,
         Func<IAsyncEnumerable<TSource>, IAsyncEnumerable<TSource>, IAsyncEnumerable<TSource>, ValueTask<TResult>> resultSelector,
@@ -558,6 +571,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>
     /// The return value from <paramref name="resultSelector"/>.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(PartitionAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> PartitionAwaitAsync<TKey, TElement, TResult>(
         this IAsyncEnumerable<IGrouping<TKey, TElement>> source,
         TKey key,
@@ -595,6 +609,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>
     /// The return value from <paramref name="resultSelector"/>.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(PartitionAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> PartitionAwaitAsync<TKey, TElement, TResult>(
         this IAsyncEnumerable<IGrouping<TKey, TElement>> source,
         TKey key,
@@ -636,6 +651,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>
     /// The return value from <paramref name="resultSelector"/>.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(PartitionAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> PartitionAwaitAsync<TKey, TElement, TResult>(
         this IAsyncEnumerable<IGrouping<TKey, TElement>> source,
         TKey key1,
@@ -677,6 +693,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>
     /// The return value from <paramref name="resultSelector"/>.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(PartitionAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> PartitionAwaitAsync<TKey, TElement, TResult>(
         this IAsyncEnumerable<IGrouping<TKey, TElement>> source,
         TKey key1,
@@ -720,6 +737,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>
     /// The return value from <paramref name="resultSelector"/>.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(PartitionAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> PartitionAwaitAsync<TKey, TElement, TResult>(
         this IAsyncEnumerable<IGrouping<TKey, TElement>> source,
         TKey key1,
@@ -765,6 +783,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>
     /// The return value from <paramref name="resultSelector"/>.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(PartitionAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> PartitionAwaitAsync<TKey, TElement, TResult>(
         this IAsyncEnumerable<IGrouping<TKey, TElement>> source,
         TKey key1,

@@ -34,6 +34,7 @@ static partial class MoreAsyncEnumerable
     /// <remarks>
     /// This operator uses deferred execution and streams its results.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(Unfold)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> UnfoldAwait<TState, T, TResult>(
         TState state,
         Func<TState, ValueTask<T>> generator,

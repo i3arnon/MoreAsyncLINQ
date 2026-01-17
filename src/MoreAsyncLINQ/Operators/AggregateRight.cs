@@ -166,6 +166,7 @@ static partial class MoreAsyncEnumerable
     /// <remarks>
     /// This operator executes immediately.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(AggregateRightAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TSource> AggregateRightAwaitAsync<TSource>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, TSource, ValueTask<TSource>> func,
@@ -207,6 +208,7 @@ static partial class MoreAsyncEnumerable
     /// <remarks>
     /// This operator executes immediately.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(AggregateRightAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TAccumulate> AggregateRightAwaitAsync<TSource, TAccumulate>(
         this IAsyncEnumerable<TSource> source,
         TAccumulate seed,
@@ -249,6 +251,7 @@ static partial class MoreAsyncEnumerable
     /// <remarks>
     /// This operator executes immediately.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(AggregateRightAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> AggregateRightAwaitAsync<TSource, TAccumulate, TResult>(
         this IAsyncEnumerable<TSource> source,
         TAccumulate seed,
