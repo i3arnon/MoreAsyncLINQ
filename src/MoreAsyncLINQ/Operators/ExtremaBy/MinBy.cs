@@ -22,15 +22,14 @@ static partial class MoreAsyncEnumerable
     /// <param name="selector">Selector to use to pick the results to compare</param>
     /// <returns>The sequence of minimal elements, according to the projection.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="source"/> or <paramref name="selector"/> is null</exception>
-    [Obsolete($"Use an overload of {nameof(Minima)}.")]
     public static IExtremaAsyncEnumerable<TSource> MinBy<TSource, TKey>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, TKey> selector)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (selector is null) throw new ArgumentNullException(nameof(selector));
 
-        return MinBy(source, selector, comparer: null);
+        return source.MinBy(selector, comparer: null);
     }
 
     /// <summary>
@@ -49,9 +48,8 @@ static partial class MoreAsyncEnumerable
     /// <returns>The sequence of minimal elements, according to the projection.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="source"/>, <paramref name="selector"/>
     /// or <paramref name="comparer"/> is null</exception>
-    [Obsolete($"Use an overload of {nameof(Minima)}.")]
     public static IExtremaAsyncEnumerable<TSource> MinBy<TSource, TKey>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, TKey> selector,
         IComparer<TKey>? comparer)
     {
@@ -81,7 +79,7 @@ static partial class MoreAsyncEnumerable
     /// <exception cref="ArgumentNullException"><paramref name="source"/> or <paramref name="selector"/> is null</exception>
     [Obsolete($"Use an overload of {nameof(Minima)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IExtremaAsyncEnumerable<TSource> MinByAwait<TSource, TKey>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TKey>> selector)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
@@ -108,7 +106,7 @@ static partial class MoreAsyncEnumerable
     /// or <paramref name="comparer"/> is null</exception>
     [Obsolete($"Use an overload of {nameof(Minima)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IExtremaAsyncEnumerable<TSource> MinByAwait<TSource, TKey>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TKey>> selector,
         IComparer<TKey>? comparer)
     {
