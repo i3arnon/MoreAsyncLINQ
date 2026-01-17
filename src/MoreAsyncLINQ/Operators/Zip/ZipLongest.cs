@@ -312,7 +312,7 @@ static partial class MoreAsyncEnumerable
                 third: null,
                 fourth: null,
                 (firstElement, secondElement, _, _, cancellationToken) => resultSelector(firstElement, secondElement, cancellationToken),
-                limit: 2);
+                limit: 1);
     }
 
     /// <summary>
