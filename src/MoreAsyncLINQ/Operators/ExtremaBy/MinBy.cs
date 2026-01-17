@@ -22,13 +22,13 @@ static partial class MoreAsyncEnumerable
     /// <returns>The sequence of minimal elements, according to the projection.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="source"/> or <paramref name="selector"/> is null</exception>
     public static IExtremaAsyncEnumerable<TSource> MinBy<TSource, TKey>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         Func<TSource, TKey> selector)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (selector is null) throw new ArgumentNullException(nameof(selector));
 
-        return source.MinBy(selector, comparer: null);
+        return MinBy(source, selector, comparer: null);
     }
 
     /// <summary>
@@ -48,7 +48,7 @@ static partial class MoreAsyncEnumerable
     /// <exception cref="ArgumentNullException"><paramref name="source"/>, <paramref name="selector"/>
     /// or <paramref name="comparer"/> is null</exception>
     public static IExtremaAsyncEnumerable<TSource> MinBy<TSource, TKey>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         Func<TSource, TKey> selector,
         IComparer<TKey>? comparer)
     {
@@ -58,7 +58,7 @@ static partial class MoreAsyncEnumerable
         return new ExtremaAsyncEnumerable<TSource, TKey>(
             source,
             selector,
-            GetMinByComparer(comparer));
+            GetMinimaComparer(comparer));
     }
 
     /// <summary>
@@ -77,13 +77,13 @@ static partial class MoreAsyncEnumerable
     /// <returns>The sequence of minimal elements, according to the projection.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="source"/> or <paramref name="selector"/> is null</exception>
     public static IExtremaAsyncEnumerable<TSource> MinByAwait<TSource, TKey>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TKey>> selector)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (selector is null) throw new ArgumentNullException(nameof(selector));
 
-        return source.MinByAwait(selector, comparer: null);
+        return MinByAwait(source, selector, comparer: null);
     }
 
     /// <summary>
@@ -103,7 +103,7 @@ static partial class MoreAsyncEnumerable
     /// <exception cref="ArgumentNullException"><paramref name="source"/>, <paramref name="selector"/>
     /// or <paramref name="comparer"/> is null</exception>
     public static IExtremaAsyncEnumerable<TSource> MinByAwait<TSource, TKey>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TKey>> selector,
         IComparer<TKey>? comparer)
     {
@@ -112,13 +112,7 @@ static partial class MoreAsyncEnumerable
 
         return new ExtremaAsyncEnumerableWithTask<TSource, TKey>(
             source,
-            selector,
-            GetMinByComparer(comparer));
-    }
-
-    private static Func<T, T, int> GetMinByComparer<T>(IComparer<T>? comparer)
-    {
-        comparer ??= Comparer<T>.Default;
-        return (first, second) => -Math.Sign(comparer.Compare(first, second));
+            (element, _) => selector(element),
+            GetMinimaComparer(comparer));
     }
 }
