@@ -24,7 +24,8 @@ Modernize API &amp; implementation:
 - Remove ConfigureAwait(false) calls, matching System.Linq.AsyncEnumerable.
 
 Breaking Changes:
-- PartitionAsync now returns a `ValueTask&lt;(IEnumerable&lt;TSource&gt; True, IEnumerable&lt;TSource&gt; False)&gt;` instead of a `ValueTask&lt;(IAsyncEnumerable&lt;TSource&gt; True, IAsyncEnumerable&lt;TSource&gt; False)&gt;`</PackageReleaseNotes>
+- PartitionAsync now returns a `ValueTask&lt;(IEnumerable&lt;TSource&gt; True, IEnumerable&lt;TSource&gt; False)&gt;` instead of a `ValueTask&lt;(IAsyncEnumerable&lt;TSource&gt; True, IAsyncEnumerable&lt;TSource&gt; False)&gt;`
+- Hide CountBy, DistinctBy, Index since they're included in .NET</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <PackageTags>linq;async</PackageTags>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>

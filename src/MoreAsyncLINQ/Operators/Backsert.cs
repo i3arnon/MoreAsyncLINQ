@@ -49,18 +49,28 @@ static partial class MoreAsyncEnumerable
         if (first is null) throw new ArgumentNullException(nameof(first));
         if (second is null) throw new ArgumentNullException(nameof(second));
         if (index < 0) throw new ArgumentOutOfRangeException(nameof(index));
+        
+        if (index == 0)
+        {
+            return first.Concat(second);
+        }
 
-        return index == 0
-            ? first.Concat(second)
-            : Core(first, second, index);
+        return first.IsKnownEmpty() &&
+               second.IsKnownEmpty()
+            ? AsyncEnumerable.Empty<TSource>()
+            : Core(
+                first,
+                second,
+                index,
+                default);
 
         static async IAsyncEnumerable<TSource> Core(
             IAsyncEnumerable<TSource> first,
             IAsyncEnumerable<TSource> second,
             int index,
-            [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            [EnumeratorCancellation] CancellationToken cancellationToken)
         {
-            await using var enumerator = first.CountDown(index).WithCancellation(cancellationToken).ConfigureAwait(false).GetAsyncEnumerator();
+            await using var enumerator = first.CountDown(index).WithCancellation(cancellationToken).GetAsyncEnumerator();
 
             if (!await enumerator.MoveNextAsync())
             {
@@ -81,7 +91,7 @@ static partial class MoreAsyncEnumerable
                 if (countdown == index - 1)
                 {
                     // ReSharper disable once PossibleMultipleEnumeration
-                    await foreach (var secondElement in second.WithCancellation(cancellationToken).ConfigureAwait(false))
+                    await foreach (var secondElement in second.WithCancellation(cancellationToken))
                     {
                         yield return secondElement;
                     }

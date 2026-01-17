@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -43,18 +44,20 @@ static partial class MoreAsyncEnumerable
         if (second is null) throw new ArgumentNullException(nameof(second));
         if (index < 0) throw new ArgumentOutOfRangeException(nameof(index));
 
-        return Core(first, second, index);
+        return first.IsKnownEmpty() &&
+               second.IsKnownEmpty()
+            ? AsyncEnumerable.Empty<TSource>()
+            : Core(first, second, index, default);
 
         static async IAsyncEnumerable<TSource> Core(
             IAsyncEnumerable<TSource> first,
             IAsyncEnumerable<TSource> second,
             int index,
-            [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            [EnumeratorCancellation] CancellationToken cancellationToken)
         {
             await using var enumerator =
                 first.
                     WithCancellation(cancellationToken).
-                    ConfigureAwait(false).
                     GetAsyncEnumerator();
 
             var currentIndex = 0;
@@ -70,7 +73,7 @@ static partial class MoreAsyncEnumerable
                     $"{nameof(index)} is greater than the length of {nameof(first)}");
             }
 
-            await foreach (var element in second.WithCancellation(cancellationToken).ConfigureAwait(false))
+            await foreach (var element in second.WithCancellation(cancellationToken))
             {
                 yield return element;
             }

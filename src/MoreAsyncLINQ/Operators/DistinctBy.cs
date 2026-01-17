@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,7 +25,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>A sequence consisting of distinct elements from the source sequence,
     /// comparing them by the specified key projection.</returns>
     public static IAsyncEnumerable<TSource> DistinctBy<TSource, TKey>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         Func<TSource, TKey> keySelector)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
@@ -51,7 +52,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>A sequence consisting of distinct elements from the source sequence,
     /// comparing them by the specified key projection.</returns>
     public static IAsyncEnumerable<TSource> DistinctBy<TSource, TKey>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         Func<TSource, TKey> keySelector,
         IEqualityComparer<TKey>? comparer)
     {

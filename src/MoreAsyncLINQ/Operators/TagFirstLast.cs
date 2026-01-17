@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -35,7 +36,7 @@ static partial class MoreAsyncEnumerable
             count: 1,
             (indexedElement, countDownCount) =>
                 resultSelector(
-                    indexedElement.Element,
+                    indexedElement.Item,
                     indexedElement.Index == 0,
                     countDownCount == 0));
     }
@@ -68,7 +69,7 @@ static partial class MoreAsyncEnumerable
             count: 1,
             (indexedElement, countDownCount) =>
                 resultSelector(
-                    indexedElement.Element,
+                    indexedElement.Item,
                     indexedElement.Index == 0,
                     countDownCount == 0));
     }
@@ -103,7 +104,7 @@ static partial class MoreAsyncEnumerable
                 count: 1,
                 (indexedElement, countDownCount, cancellationToken) =>
                     resultSelector(
-                        indexedElement.Element,
+                        indexedElement.Item,
                         indexedElement.Index == 0,
                         countDownCount == 0,
                         cancellationToken));

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -51,18 +52,21 @@ static partial class MoreAsyncEnumerable
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (predicate is null) throw new ArgumentNullException(nameof(predicate));
 
-        return Core(
-            source,
-            predicate,
-            errorSelector ?? (static _ => new InvalidOperationException("Sequence contains an invalid item.")));
+        return source.IsKnownEmpty()
+            ? AsyncEnumerable.Empty<TSource>()
+            : Core(
+                source,
+                predicate,
+                errorSelector ?? (static _ => new InvalidOperationException("Sequence contains an invalid item.")),
+                default);
 
         static async IAsyncEnumerable<TSource> Core(
             IAsyncEnumerable<TSource> source,
             Func<TSource, bool> predicate,
             Func<TSource, Exception> errorSelector,
-            [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            [EnumeratorCancellation] CancellationToken cancellationToken)
         {
-            await foreach (var element in source.WithCancellation(cancellationToken).ConfigureAwait(false))
+            await foreach (var element in source.WithCancellation(cancellationToken))
             {
                 yield return predicate(element)
                     ? element
@@ -130,6 +134,72 @@ static partial class MoreAsyncEnumerable
                 yield return await predicate(element).ConfigureAwait(false)
                     ? element
                     : throw (await errorSelector(element).ConfigureAwait(false));
+            }
+        }
+    }
+
+    /// <summary>
+    /// Asserts that all elements of a sequence meet a given condition
+    /// otherwise throws an <see cref="Exception"/> object.
+    /// </summary>
+    /// <typeparam name="TSource">Type of elements in <paramref name="source"/> sequence.</typeparam>
+    /// <param name="source">Source sequence.</param>
+    /// <param name="predicate">Function that asserts an element of the <paramref name="source"/> sequence for a condition.</param>
+    /// <returns>
+    /// Returns the original sequence.
+    /// </returns>
+    /// <exception cref="InvalidOperationException">The input sequence
+    /// contains an element that does not meet the condition being
+    /// asserted.</exception>
+    /// <remarks>
+    /// This operator uses deferred execution and streams its results.
+    /// </remarks>
+    public static IAsyncEnumerable<TSource> Assert<TSource>(
+        this IAsyncEnumerable<TSource> source,
+        Func<TSource, CancellationToken, ValueTask<bool>> predicate) =>
+        source.Assert(predicate, errorSelector: null);
+
+    /// <summary>
+    /// Asserts that all elements of a sequence meet a given condition
+    /// otherwise throws an <see cref="Exception"/> object.
+    /// </summary>
+    /// <typeparam name="TSource">Type of elements in <paramref name="source"/> sequence.</typeparam>
+    /// <param name="source">Source sequence.</param>
+    /// <param name="predicate">Function that asserts an element of the input sequence for a condition.</param>
+    /// <param name="errorSelector">Function that returns the <see cref="Exception"/> object to throw.</param>
+    /// <returns>
+    /// Returns the original sequence.
+    /// </returns>
+    /// <remarks>
+    /// This operator uses deferred execution and streams its results.
+    /// </remarks>
+    public static IAsyncEnumerable<TSource> Assert<TSource>(
+        this IAsyncEnumerable<TSource> source,
+        Func<TSource, CancellationToken, ValueTask<bool>> predicate,
+        Func<TSource, CancellationToken, ValueTask<Exception>>? errorSelector)
+    {
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (predicate is null) throw new ArgumentNullException(nameof(predicate));
+
+        return source.IsKnownEmpty()
+            ? AsyncEnumerable.Empty<TSource>()
+            : Core(
+                source,
+                predicate,
+                errorSelector ?? (static (_, _) => ValueTasks.FromResult<Exception>(new InvalidOperationException("Sequence contains an invalid item."))),
+                default);
+
+        static async IAsyncEnumerable<TSource> Core(
+            IAsyncEnumerable<TSource> source,
+            Func<TSource, CancellationToken, ValueTask<bool>> predicate,
+            Func<TSource, CancellationToken, ValueTask<Exception>> errorSelector,
+            [EnumeratorCancellation] CancellationToken cancellationToken)
+        {
+            await foreach (var element in source.WithCancellation(cancellationToken))
+            {
+                yield return await predicate(element, cancellationToken)
+                    ? element
+                    : throw (await errorSelector(element, cancellationToken));
             }
         }
     }

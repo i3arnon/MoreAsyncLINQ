@@ -68,30 +68,25 @@ static partial class MoreAsyncEnumerable
         if (first is null) throw new ArgumentNullException(nameof(first));
         if (second is null) throw new ArgumentNullException(nameof(second));
 
-        return first.IsKnownEmpty() &&
-               second.IsKnownEmpty()
+        return first.IsKnownEmpty()
             ? ValueTasks.FromResult(true)
             : Core(
-                first.WithCancellation(cancellationToken),
-                second.WithCancellation(cancellationToken),
+                first,
+                second,
                 comparer,
                 cancellationToken);
 
         static async ValueTask<bool> Core(
-            ConfiguredCancelableAsyncEnumerable<TSource> first,
-            ConfiguredCancelableAsyncEnumerable<TSource> second,
+            IAsyncEnumerable<TSource> first,
+            IAsyncEnumerable<TSource> second,
             IEqualityComparer<TSource>? comparer,
             CancellationToken cancellationToken)
         {
             comparer ??= EqualityComparer<TSource>.Default;
 
-            await using var firstEnumerator =
-                first.
-                    WithCancellation(cancellationToken).
-                    ConfigureAwait(false).
-                    GetAsyncEnumerator();
+            await using var firstEnumerator = first.WithCancellation(cancellationToken).GetAsyncEnumerator();
             
-            await foreach (var secondElement in second)
+            await foreach (var secondElement in second.WithCancellation(cancellationToken))
             {
                 if (!await firstEnumerator.MoveNextAsync() ||
                     !comparer.Equals(firstEnumerator.Current, secondElement))

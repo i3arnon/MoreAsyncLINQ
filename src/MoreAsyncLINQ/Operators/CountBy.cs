@@ -18,13 +18,13 @@ static partial class MoreAsyncEnumerable
     /// <param name="keySelector">Function that transforms each item of source sequence into a key to be compared against the others.</param>
     /// <returns>A sequence of unique keys and their number of occurrences in the original sequence.</returns>
     public static IAsyncEnumerable<(TKey Key, int Count)> CountBy<TSource, TKey>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         Func<TSource, TKey> keySelector)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (keySelector is null) throw new ArgumentNullException(nameof(keySelector));
 
-        return source.CountBy(keySelector, comparer: null);
+        return CountBy(source, keySelector, comparer: null);
     }
 
     /// <summary>
@@ -40,7 +40,7 @@ static partial class MoreAsyncEnumerable
     /// If null, the default equality comparer for <typeparamref name="TSource"/> is used.</param>
     /// <returns>A sequence of unique keys and their number of occurrences in the original sequence.</returns>
     public static IAsyncEnumerable<(TKey Key, int Count)> CountBy<TSource, TKey>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         Func<TSource, TKey> keySelector,
         IEqualityComparer<TKey>? comparer)
     {

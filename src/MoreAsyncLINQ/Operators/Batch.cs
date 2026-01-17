@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -70,27 +71,23 @@ static partial class MoreAsyncEnumerable
         if (size <= 0) throw new ArgumentOutOfRangeException(nameof(size));
         if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
 
-        return Core(source, size, resultSelector);
+        return source.IsKnownEmpty()
+            ? AsyncEnumerable.Empty<TResult>()
+            : Core(
+                source,
+                size,
+                resultSelector,
+                default);
 
         static async IAsyncEnumerable<TResult> Core(
             IAsyncEnumerable<TSource> source,
             int size,
             Func<TSource[], TResult> resultSelector,
-            [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            [EnumeratorCancellation] CancellationToken cancellationToken)
         {
-            var count = await source.TryGetCollectionCountAsync(cancellationToken).ConfigureAwait(false);
-            switch (count)
-            {
-                case 0:
-                    yield break;
-                case > 0 when count <= size:
-                    size = count.Value;
-                    break;
-            }
-
             var index = 0;
             TSource[]? batch = null;
-            await foreach (var element in source.WithCancellation(cancellationToken).ConfigureAwait(false))
+            await foreach (var element in source.WithCancellation(cancellationToken))
             {
                 if (batch is null)
                 {
@@ -193,6 +190,83 @@ static partial class MoreAsyncEnumerable
             {
                 Array.Resize(ref batch, index);
                 yield return await resultSelector(batch).ConfigureAwait(false);
+            }
+        }
+    }
+    
+    /// <summary>
+    /// Batches the source sequence into sized buckets and applies a projection to each bucket.
+    /// </summary>
+    /// <typeparam name="TSource">Type of elements in <paramref name="source"/> sequence.</typeparam>
+    /// <typeparam name="TResult">Type of result returned by <paramref name="resultSelector"/>.</typeparam>
+    /// <param name="source">The source sequence.</param>
+    /// <param name="size">Size of buckets.</param>
+    /// <param name="resultSelector">The projection to apply to each bucket.</param>
+    /// <returns>A sequence of projections on equally sized buckets containing elements of the source collection.</returns>
+    /// <remarks>
+    /// <para>
+    /// This operator uses deferred execution and streams its results
+    /// (buckets are streamed but their content buffered).</para>
+    /// <para>
+    /// When more than one bucket is streamed, all buckets except the last
+    /// is guaranteed to have <paramref name="size"/> elements. The last
+    /// bucket may be smaller depending on the remaining elements in the
+    /// <paramref name="source"/> sequence.</para>
+    /// <para>
+    /// Each bucket is pre-allocated to <paramref name="size"/> elements.
+    /// If <paramref name="size"/> is set to a very large value, e.g.
+    /// <see cref="int.MaxValue"/> to effectively disable batching by just
+    /// hoping for a single bucket, then it can lead to memory exhaustion
+    /// (<see cref="OutOfMemoryException"/>).
+    /// </para>
+    /// </remarks>
+    public static IAsyncEnumerable<TResult> Batch<TSource, TResult>(
+        this IAsyncEnumerable<TSource> source,
+        int size,
+        Func<TSource[], CancellationToken, ValueTask<TResult>> resultSelector)
+    {
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (size <= 0) throw new ArgumentOutOfRangeException(nameof(size));
+        if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
+
+        return source.IsKnownEmpty()
+            ? AsyncEnumerable.Empty<TResult>()
+            : Core(
+                source,
+                size,
+                resultSelector,
+                default);
+
+        static async IAsyncEnumerable<TResult> Core(
+            IAsyncEnumerable<TSource> source,
+            int size,
+            Func<TSource[], CancellationToken, ValueTask<TResult>> resultSelector,
+            [EnumeratorCancellation] CancellationToken cancellationToken)
+        {
+            var index = 0;
+            TSource[]? batch = null;
+            await foreach (var element in source.WithCancellation(cancellationToken))
+            {
+                if (batch is null)
+                {
+                    batch = new TSource[size];
+                    index = 0;
+                }
+
+                batch[index] = element;
+                index++;
+                if (index == size)
+                {
+                    yield return await resultSelector(batch, cancellationToken);
+
+                    batch = null;
+                }
+            }
+
+            if (batch is not null && index > 0)
+            {
+                Array.Resize(ref batch, index);
+                yield return await resultSelector(batch, cancellationToken);
             }
         }
     }

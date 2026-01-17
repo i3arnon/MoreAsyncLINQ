@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -39,7 +40,7 @@ static partial class MoreAsyncEnumerable
             Func<TSource, TResult> folder,
             CancellationToken cancellationToken)
         {
-            var elements = await GetFoldElementsAsync(source, count: 1, cancellationToken).ConfigureAwait(false);
+            var elements = await GetFoldElementsAsync(source, count: 1, cancellationToken);
             return folder(elements[0]);
         }
     }
@@ -76,7 +77,7 @@ static partial class MoreAsyncEnumerable
             Func<TSource, TSource, TResult> folder,
             CancellationToken cancellationToken)
         {
-            var elements = await GetFoldElementsAsync(source, count: 2, cancellationToken).ConfigureAwait(false);
+            var elements = await GetFoldElementsAsync(source, count: 2, cancellationToken);
             return folder(
                 elements[0],
                 elements[1]);
@@ -115,7 +116,7 @@ static partial class MoreAsyncEnumerable
             Func<TSource, TSource, TSource, TResult> folder,
             CancellationToken cancellationToken)
         {
-            var elements = await GetFoldElementsAsync(source, count: 3, cancellationToken).ConfigureAwait(false);
+            var elements = await GetFoldElementsAsync(source, count: 3, cancellationToken);
             return folder(
                 elements[0],
                 elements[1],
@@ -155,7 +156,7 @@ static partial class MoreAsyncEnumerable
             Func<TSource, TSource, TSource, TSource, TResult> folder,
             CancellationToken cancellationToken)
         {
-            var elements = await GetFoldElementsAsync(source, count: 4, cancellationToken).ConfigureAwait(false);
+            var elements = await GetFoldElementsAsync(source, count: 4, cancellationToken);
             return folder(
                 elements[0],
                 elements[1],
@@ -196,7 +197,7 @@ static partial class MoreAsyncEnumerable
             Func<TSource, TSource, TSource, TSource, TSource, TResult> folder,
             CancellationToken cancellationToken)
         {
-            var elements = await GetFoldElementsAsync(source, count: 5, cancellationToken).ConfigureAwait(false);
+            var elements = await GetFoldElementsAsync(source, count: 5, cancellationToken);
             return folder(
                 elements[0],
                 elements[1],
@@ -238,7 +239,7 @@ static partial class MoreAsyncEnumerable
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TResult> folder,
             CancellationToken cancellationToken)
         {
-            var elements = await GetFoldElementsAsync(source, count: 6, cancellationToken).ConfigureAwait(false);
+            var elements = await GetFoldElementsAsync(source, count: 6, cancellationToken);
             return folder(
                 elements[0],
                 elements[1],
@@ -281,7 +282,7 @@ static partial class MoreAsyncEnumerable
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TResult> folder,
             CancellationToken cancellationToken)
         {
-            var elements = await GetFoldElementsAsync(source, count: 7, cancellationToken).ConfigureAwait(false);
+            var elements = await GetFoldElementsAsync(source, count: 7, cancellationToken);
             return folder(
                 elements[0],
                 elements[1],
@@ -325,7 +326,7 @@ static partial class MoreAsyncEnumerable
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TResult> folder,
             CancellationToken cancellationToken)
         {
-            var elements = await GetFoldElementsAsync(source, count: 8, cancellationToken).ConfigureAwait(false);
+            var elements = await GetFoldElementsAsync(source, count: 8, cancellationToken);
             return folder(
                 elements[0],
                 elements[1],
@@ -370,7 +371,7 @@ static partial class MoreAsyncEnumerable
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TResult> folder,
             CancellationToken cancellationToken)
         {
-            var elements = await GetFoldElementsAsync(source, count: 9, cancellationToken).ConfigureAwait(false);
+            var elements = await GetFoldElementsAsync(source, count: 9, cancellationToken);
             return folder(
                 elements[0],
                 elements[1],
@@ -416,7 +417,7 @@ static partial class MoreAsyncEnumerable
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TResult> folder,
             CancellationToken cancellationToken)
         {
-            var elements = await GetFoldElementsAsync(source, count: 10, cancellationToken).ConfigureAwait(false);
+            var elements = await GetFoldElementsAsync(source, count: 10, cancellationToken);
             return folder(
                 elements[0],
                 elements[1],
@@ -463,7 +464,7 @@ static partial class MoreAsyncEnumerable
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TResult> folder,
             CancellationToken cancellationToken)
         {
-            var elements = await GetFoldElementsAsync(source, count: 11, cancellationToken).ConfigureAwait(false);
+            var elements = await GetFoldElementsAsync(source, count: 11, cancellationToken);
             return folder(
                 elements[0],
                 elements[1],
@@ -511,7 +512,7 @@ static partial class MoreAsyncEnumerable
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TResult> folder,
             CancellationToken cancellationToken)
         {
-            var elements = await GetFoldElementsAsync(source, count: 12, cancellationToken).ConfigureAwait(false);
+            var elements = await GetFoldElementsAsync(source, count: 12, cancellationToken);
             return folder(
                 elements[0],
                 elements[1],
@@ -560,7 +561,7 @@ static partial class MoreAsyncEnumerable
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TResult> folder,
             CancellationToken cancellationToken)
         {
-            var elements = await GetFoldElementsAsync(source, count: 13, cancellationToken).ConfigureAwait(false);
+            var elements = await GetFoldElementsAsync(source, count: 13, cancellationToken);
             return folder(
                 elements[0],
                 elements[1],
@@ -610,7 +611,7 @@ static partial class MoreAsyncEnumerable
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TResult> folder,
             CancellationToken cancellationToken)
         {
-            var elements = await GetFoldElementsAsync(source, count: 14, cancellationToken).ConfigureAwait(false);
+            var elements = await GetFoldElementsAsync(source, count: 14, cancellationToken);
             return folder(
                 elements[0],
                 elements[1],
@@ -661,7 +662,7 @@ static partial class MoreAsyncEnumerable
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TResult> folder,
             CancellationToken cancellationToken)
         {
-            var elements = await GetFoldElementsAsync(source, count: 15, cancellationToken).ConfigureAwait(false);
+            var elements = await GetFoldElementsAsync(source, count: 15, cancellationToken);
             return folder(
                 elements[0],
                 elements[1],
@@ -713,7 +714,7 @@ static partial class MoreAsyncEnumerable
             Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TResult> folder,
             CancellationToken cancellationToken)
         {
-            var elements = await GetFoldElementsAsync(source, count: 16, cancellationToken).ConfigureAwait(false);
+            var elements = await GetFoldElementsAsync(source, count: 16, cancellationToken);
             return folder(
                 elements[0],
                 elements[1],
@@ -1460,6 +1461,694 @@ static partial class MoreAsyncEnumerable
                 elements[15]).ConfigureAwait(false);
         }
     }
+    
+    /// <summary>
+    /// Returns the result of applying a function to a sequence of
+    /// one element.
+    /// </summary>
+    /// <remarks>
+    /// This operator uses immediate execution and effectively buffers
+    /// as many items of the source sequence as necessary.
+    /// </remarks>
+    /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+    /// <typeparam name="TResult">Type of the result</typeparam>
+    /// <param name="source">The sequence of items to fold.</param>
+    /// <param name="folder">Function to apply to the elements in the sequence.</param>
+    /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+    /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+    /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 16 elements</exception>
+    public static ValueTask<TResult> FoldAsync<TSource, TResult>(
+        this IAsyncEnumerable<TSource> source,
+        Func<TSource, CancellationToken, ValueTask<TResult>> folder,
+        CancellationToken cancellationToken = default)
+    {
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (folder is null) throw new ArgumentNullException(nameof(folder));
+
+        return Core(source, folder, cancellationToken);
+
+        static async ValueTask<TResult> Core(
+            IAsyncEnumerable<TSource> source,
+            Func<TSource, CancellationToken, ValueTask<TResult>> folder,
+            CancellationToken cancellationToken)
+        {
+            var elements = await GetFoldElementsAsync(source, count: 1, cancellationToken);
+            return await folder(elements[0], cancellationToken);
+        }
+    }
+    
+    /// <summary>
+    /// Returns the result of applying a function to a sequence of
+    /// 2 elements.
+    /// </summary>
+    /// <remarks>
+    /// This operator uses immediate execution and effectively buffers
+    /// as many items of the source sequence as necessary.
+    /// </remarks>
+    /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+    /// <typeparam name="TResult">Type of the result</typeparam>
+    /// <param name="source">The sequence of items to fold.</param>
+    /// <param name="folder">Function to apply to the elements in the sequence.</param>
+    /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+    /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+    /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 16 elements</exception>
+    public static ValueTask<TResult> FoldAsync<TSource, TResult>(
+        this IAsyncEnumerable<TSource> source,
+        Func<TSource, TSource, CancellationToken, ValueTask<TResult>> folder,
+        CancellationToken cancellationToken = default)
+    {
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (folder is null) throw new ArgumentNullException(nameof(folder));
+
+        return Core(source, folder, cancellationToken);
+
+        static async ValueTask<TResult> Core(
+            IAsyncEnumerable<TSource> source,
+            Func<TSource, TSource, CancellationToken, ValueTask<TResult>> folder,
+            CancellationToken cancellationToken)
+        {
+            var elements = await GetFoldElementsAsync(source, count: 2, cancellationToken);
+            return await folder(
+                elements[0],
+                elements[1],
+                cancellationToken);
+        }
+    }
+    
+    /// <summary>
+    /// Returns the result of applying a function to a sequence of
+    /// 3 elements.
+    /// </summary>
+    /// <remarks>
+    /// This operator uses immediate execution and effectively buffers
+    /// as many items of the source sequence as necessary.
+    /// </remarks>
+    /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+    /// <typeparam name="TResult">Type of the result</typeparam>
+    /// <param name="source">The sequence of items to fold.</param>
+    /// <param name="folder">Function to apply to the elements in the sequence.</param>
+    /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+    /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+    /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 16 elements</exception>
+    public static ValueTask<TResult> FoldAsync<TSource, TResult>(
+        this IAsyncEnumerable<TSource> source,
+        Func<TSource, TSource, TSource, CancellationToken, ValueTask<TResult>> folder,
+        CancellationToken cancellationToken = default)
+    {
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (folder is null) throw new ArgumentNullException(nameof(folder));
+
+        return Core(source, folder, cancellationToken);
+
+        static async ValueTask<TResult> Core(
+            IAsyncEnumerable<TSource> source,
+            Func<TSource, TSource, TSource, CancellationToken, ValueTask<TResult>> folder,
+            CancellationToken cancellationToken)
+        {
+            var elements = await GetFoldElementsAsync(source, count: 3, cancellationToken);
+            return await folder(
+                elements[0],
+                elements[1],
+                elements[2],
+                cancellationToken);
+        }
+    }
+    
+    /// <summary>
+    /// Returns the result of applying a function to a sequence of
+    /// 4 elements.
+    /// </summary>
+    /// <remarks>
+    /// This operator uses immediate execution and effectively buffers
+    /// as many items of the source sequence as necessary.
+    /// </remarks>
+    /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+    /// <typeparam name="TResult">Type of the result</typeparam>
+    /// <param name="source">The sequence of items to fold.</param>
+    /// <param name="folder">Function to apply to the elements in the sequence.</param>
+    /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+    /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+    /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 16 elements</exception>
+    public static ValueTask<TResult> FoldAsync<TSource, TResult>(
+        this IAsyncEnumerable<TSource> source,
+        Func<TSource, TSource, TSource, TSource, CancellationToken, ValueTask<TResult>> folder,
+        CancellationToken cancellationToken = default)
+    {
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (folder is null) throw new ArgumentNullException(nameof(folder));
+
+        return Core(source, folder, cancellationToken);
+
+        static async ValueTask<TResult> Core(
+            IAsyncEnumerable<TSource> source,
+            Func<TSource, TSource, TSource, TSource, CancellationToken, ValueTask<TResult>> folder,
+            CancellationToken cancellationToken)
+        {
+            var elements = await GetFoldElementsAsync(source, count: 4, cancellationToken);
+            return await folder(
+                elements[0],
+                elements[1],
+                elements[2],
+                elements[3],
+                cancellationToken);
+        }
+    }
+    
+    /// <summary>
+    /// Returns the result of applying a function to a sequence of
+    /// 5 elements.
+    /// </summary>
+    /// <remarks>
+    /// This operator uses immediate execution and effectively buffers
+    /// as many items of the source sequence as necessary.
+    /// </remarks>
+    /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+    /// <typeparam name="TResult">Type of the result</typeparam>
+    /// <param name="source">The sequence of items to fold.</param>
+    /// <param name="folder">Function to apply to the elements in the sequence.</param>
+    /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+    /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+    /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 16 elements</exception>
+    public static ValueTask<TResult> FoldAsync<TSource, TResult>(
+        this IAsyncEnumerable<TSource> source,
+        Func<TSource, TSource, TSource, TSource, TSource, CancellationToken, ValueTask<TResult>> folder,
+        CancellationToken cancellationToken = default)
+    {
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (folder is null) throw new ArgumentNullException(nameof(folder));
+
+        return Core(source, folder, cancellationToken);
+
+        static async ValueTask<TResult> Core(
+            IAsyncEnumerable<TSource> source,
+            Func<TSource, TSource, TSource, TSource, TSource, CancellationToken, ValueTask<TResult>> folder,
+            CancellationToken cancellationToken)
+        {
+            var elements = await GetFoldElementsAsync(source, count: 5, cancellationToken);
+            return await folder(
+                elements[0],
+                elements[1],
+                elements[2],
+                elements[3],
+                elements[4],
+                cancellationToken);
+        }
+    }
+    
+    /// <summary>
+    /// Returns the result of applying a function to a sequence of
+    /// 6 elements.
+    /// </summary>
+    /// <remarks>
+    /// This operator uses immediate execution and effectively buffers
+    /// as many items of the source sequence as necessary.
+    /// </remarks>
+    /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+    /// <typeparam name="TResult">Type of the result</typeparam>
+    /// <param name="source">The sequence of items to fold.</param>
+    /// <param name="folder">Function to apply to the elements in the sequence.</param>
+    /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+    /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+    /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 16 elements</exception>
+    public static ValueTask<TResult> FoldAsync<TSource, TResult>(
+        this IAsyncEnumerable<TSource> source,
+        Func<TSource, TSource, TSource, TSource, TSource, TSource, CancellationToken, ValueTask<TResult>> folder,
+        CancellationToken cancellationToken = default)
+    {
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (folder is null) throw new ArgumentNullException(nameof(folder));
+
+        return Core(source, folder, cancellationToken);
+
+        static async ValueTask<TResult> Core(
+            IAsyncEnumerable<TSource> source,
+            Func<TSource, TSource, TSource, TSource, TSource, TSource, CancellationToken, ValueTask<TResult>> folder,
+            CancellationToken cancellationToken)
+        {
+            var elements = await GetFoldElementsAsync(source, count: 6, cancellationToken);
+            return await folder(
+                elements[0],
+                elements[1],
+                elements[2],
+                elements[3],
+                elements[4],
+                elements[5],
+                cancellationToken);
+        }
+    }
+    
+    /// <summary>
+    /// Returns the result of applying a function to a sequence of
+    /// 7 elements.
+    /// </summary>
+    /// <remarks>
+    /// This operator uses immediate execution and effectively buffers
+    /// as many items of the source sequence as necessary.
+    /// </remarks>
+    /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+    /// <typeparam name="TResult">Type of the result</typeparam>
+    /// <param name="source">The sequence of items to fold.</param>
+    /// <param name="folder">Function to apply to the elements in the sequence.</param>
+    /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+    /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+    /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 16 elements</exception>
+    public static ValueTask<TResult> FoldAsync<TSource, TResult>(
+        this IAsyncEnumerable<TSource> source,
+        Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, CancellationToken, ValueTask<TResult>> folder,
+        CancellationToken cancellationToken = default)
+    {
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (folder is null) throw new ArgumentNullException(nameof(folder));
+
+        return Core(source, folder, cancellationToken);
+
+        static async ValueTask<TResult> Core(
+            IAsyncEnumerable<TSource> source,
+            Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, CancellationToken, ValueTask<TResult>> folder,
+            CancellationToken cancellationToken)
+        {
+            var elements = await GetFoldElementsAsync(source, count: 7, cancellationToken);
+            return await folder(
+                elements[0],
+                elements[1],
+                elements[2],
+                elements[3],
+                elements[4],
+                elements[5],
+                elements[6],
+                cancellationToken);
+        }
+    }
+    
+    /// <summary>
+    /// Returns the result of applying a function to a sequence of
+    /// 8 elements.
+    /// </summary>
+    /// <remarks>
+    /// This operator uses immediate execution and effectively buffers
+    /// as many items of the source sequence as necessary.
+    /// </remarks>
+    /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+    /// <typeparam name="TResult">Type of the result</typeparam>
+    /// <param name="source">The sequence of items to fold.</param>
+    /// <param name="folder">Function to apply to the elements in the sequence.</param>
+    /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+    /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+    /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 16 elements</exception>
+    public static ValueTask<TResult> FoldAsync<TSource, TResult>(
+        this IAsyncEnumerable<TSource> source,
+        Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, CancellationToken, ValueTask<TResult>> folder,
+        CancellationToken cancellationToken = default)
+    {
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (folder is null) throw new ArgumentNullException(nameof(folder));
+
+        return Core(source, folder, cancellationToken);
+
+        static async ValueTask<TResult> Core(
+            IAsyncEnumerable<TSource> source,
+            Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, CancellationToken, ValueTask<TResult>> folder,
+            CancellationToken cancellationToken)
+        {
+            var elements = await GetFoldElementsAsync(source, count: 8, cancellationToken);
+            return await folder(
+                elements[0],
+                elements[1],
+                elements[2],
+                elements[3],
+                elements[4],
+                elements[5],
+                elements[6],
+                elements[7],
+                cancellationToken);
+        }
+    }
+    
+    /// <summary>
+    /// Returns the result of applying a function to a sequence of
+    /// 9 elements.
+    /// </summary>
+    /// <remarks>
+    /// This operator uses immediate execution and effectively buffers
+    /// as many items of the source sequence as necessary.
+    /// </remarks>
+    /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+    /// <typeparam name="TResult">Type of the result</typeparam>
+    /// <param name="source">The sequence of items to fold.</param>
+    /// <param name="folder">Function to apply to the elements in the sequence.</param>
+    /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+    /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+    /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 16 elements</exception>
+    public static ValueTask<TResult> FoldAsync<TSource, TResult>(
+        this IAsyncEnumerable<TSource> source,
+        Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, CancellationToken, ValueTask<TResult>> folder,
+        CancellationToken cancellationToken = default)
+    {
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (folder is null) throw new ArgumentNullException(nameof(folder));
+
+        return Core(source, folder, cancellationToken);
+
+        static async ValueTask<TResult> Core(
+            IAsyncEnumerable<TSource> source,
+            Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, CancellationToken, ValueTask<TResult>> folder,
+            CancellationToken cancellationToken)
+        {
+            var elements = await GetFoldElementsAsync(source, count: 9, cancellationToken);
+            return await folder(
+                elements[0],
+                elements[1],
+                elements[2],
+                elements[3],
+                elements[4],
+                elements[5],
+                elements[6],
+                elements[7],
+                elements[8],
+                cancellationToken);
+        }
+    }
+    
+    /// <summary>
+    /// Returns the result of applying a function to a sequence of
+    /// 10 elements.
+    /// </summary>
+    /// <remarks>
+    /// This operator uses immediate execution and effectively buffers
+    /// as many items of the source sequence as necessary.
+    /// </remarks>
+    /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+    /// <typeparam name="TResult">Type of the result</typeparam>
+    /// <param name="source">The sequence of items to fold.</param>
+    /// <param name="folder">Function to apply to the elements in the sequence.</param>
+    /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+    /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+    /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 16 elements</exception>
+    public static ValueTask<TResult> FoldAsync<TSource, TResult>(
+        this IAsyncEnumerable<TSource> source,
+        Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, CancellationToken, ValueTask<TResult>> folder,
+        CancellationToken cancellationToken = default)
+    {
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (folder is null) throw new ArgumentNullException(nameof(folder));
+
+        return Core(source, folder, cancellationToken);
+
+        static async ValueTask<TResult> Core(
+            IAsyncEnumerable<TSource> source,
+            Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, CancellationToken, ValueTask<TResult>> folder,
+            CancellationToken cancellationToken)
+        {
+            var elements = await GetFoldElementsAsync(source, count: 10, cancellationToken);
+            return await folder(
+                elements[0],
+                elements[1],
+                elements[2],
+                elements[3],
+                elements[4],
+                elements[5],
+                elements[6],
+                elements[7],
+                elements[8],
+                elements[9],
+                cancellationToken);
+        }
+    }
+    
+    /// <summary>
+    /// Returns the result of applying a function to a sequence of
+    /// 11 elements.
+    /// </summary>
+    /// <remarks>
+    /// This operator uses immediate execution and effectively buffers
+    /// as many items of the source sequence as necessary.
+    /// </remarks>
+    /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+    /// <typeparam name="TResult">Type of the result</typeparam>
+    /// <param name="source">The sequence of items to fold.</param>
+    /// <param name="folder">Function to apply to the elements in the sequence.</param>
+    /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+    /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+    /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 16 elements</exception>
+    public static ValueTask<TResult> FoldAsync<TSource, TResult>(
+        this IAsyncEnumerable<TSource> source,
+        Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, CancellationToken, ValueTask<TResult>> folder,
+        CancellationToken cancellationToken = default)
+    {
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (folder is null) throw new ArgumentNullException(nameof(folder));
+
+        return Core(source, folder, cancellationToken);
+
+        static async ValueTask<TResult> Core(
+            IAsyncEnumerable<TSource> source,
+            Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, CancellationToken, ValueTask<TResult>> folder,
+            CancellationToken cancellationToken)
+        {
+            var elements = await GetFoldElementsAsync(source, count: 11, cancellationToken);
+            return await folder(
+                elements[0],
+                elements[1],
+                elements[2],
+                elements[3],
+                elements[4],
+                elements[5],
+                elements[6],
+                elements[7],
+                elements[8],
+                elements[9],
+                elements[10],
+                cancellationToken);
+        }
+    }
+    
+    /// <summary>
+    /// Returns the result of applying a function to a sequence of
+    /// 12 elements.
+    /// </summary>
+    /// <remarks>
+    /// This operator uses immediate execution and effectively buffers
+    /// as many items of the source sequence as necessary.
+    /// </remarks>
+    /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+    /// <typeparam name="TResult">Type of the result</typeparam>
+    /// <param name="source">The sequence of items to fold.</param>
+    /// <param name="folder">Function to apply to the elements in the sequence.</param>
+    /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+    /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+    /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 16 elements</exception>
+    public static ValueTask<TResult> FoldAsync<TSource, TResult>(
+        this IAsyncEnumerable<TSource> source,
+        Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, CancellationToken, ValueTask<TResult>> folder,
+        CancellationToken cancellationToken = default)
+    {
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (folder is null) throw new ArgumentNullException(nameof(folder));
+
+        return Core(source, folder, cancellationToken);
+
+        static async ValueTask<TResult> Core(
+            IAsyncEnumerable<TSource> source,
+            Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, CancellationToken, ValueTask<TResult>> folder,
+            CancellationToken cancellationToken)
+        {
+            var elements = await GetFoldElementsAsync(source, count: 12, cancellationToken);
+            return await folder(
+                elements[0],
+                elements[1],
+                elements[2],
+                elements[3],
+                elements[4],
+                elements[5],
+                elements[6],
+                elements[7],
+                elements[8],
+                elements[9],
+                elements[10],
+                elements[11],
+                cancellationToken);
+        }
+    }
+
+    /// <summary>
+    /// Returns the result of applying a function to a sequence of
+    /// 13 elements.
+    /// </summary>
+    /// <remarks>
+    /// This operator uses immediate execution and effectively buffers
+    /// as many items of the source sequence as necessary.
+    /// </remarks>
+    /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+    /// <typeparam name="TResult">Type of the result</typeparam>
+    /// <param name="source">The sequence of items to fold.</param>
+    /// <param name="folder">Function to apply to the elements in the sequence.</param>
+    /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+    /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+    /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 16 elements</exception>
+    public static ValueTask<TResult> FoldAsync<TSource, TResult>(
+        this IAsyncEnumerable<TSource> source,
+        Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, CancellationToken, ValueTask<TResult>> folder,
+        CancellationToken cancellationToken = default)
+    {
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (folder is null) throw new ArgumentNullException(nameof(folder));
+
+        return Core(source, folder, cancellationToken);
+
+        static async ValueTask<TResult> Core(
+            IAsyncEnumerable<TSource> source,
+            Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, CancellationToken, ValueTask<TResult>> folder,
+            CancellationToken cancellationToken)
+        {
+            var elements = await GetFoldElementsAsync(source, count: 13, cancellationToken);
+            return await folder(
+                elements[0],
+                elements[1],
+                elements[2],
+                elements[3],
+                elements[4],
+                elements[5],
+                elements[6],
+                elements[7],
+                elements[8],
+                elements[9],
+                elements[10],
+                elements[11],
+                elements[12],
+                cancellationToken);
+        }
+    }
+
+    /// <summary>
+    /// Returns the result of applying a function to a sequence of
+    /// 14 elements.
+    /// </summary>
+    /// <remarks>
+    /// This operator uses immediate execution and effectively buffers
+    /// as many items of the source sequence as necessary.
+    /// </remarks>
+    /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+    /// <typeparam name="TResult">Type of the result</typeparam>
+    /// <param name="source">The sequence of items to fold.</param>
+    /// <param name="folder">Function to apply to the elements in the sequence.</param>
+    /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+    /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+    /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 16 elements</exception>
+    public static ValueTask<TResult> FoldAsync<TSource, TResult>(
+        this IAsyncEnumerable<TSource> source,
+        Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, CancellationToken, ValueTask<TResult>> folder,
+        CancellationToken cancellationToken = default)
+    {
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (folder is null) throw new ArgumentNullException(nameof(folder));
+
+        return Core(source, folder, cancellationToken);
+
+        static async ValueTask<TResult> Core(
+            IAsyncEnumerable<TSource> source,
+            Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, CancellationToken, ValueTask<TResult>> folder,
+            CancellationToken cancellationToken)
+        {
+            var elements = await GetFoldElementsAsync(source, count: 14, cancellationToken);
+            return await folder(
+                elements[0],
+                elements[1],
+                elements[2],
+                elements[3],
+                elements[4],
+                elements[5],
+                elements[6],
+                elements[7],
+                elements[8],
+                elements[9],
+                elements[10],
+                elements[11],
+                elements[12],
+                elements[13],
+                cancellationToken);
+        }
+    }
+
+    /// <summary>
+    /// Returns the result of applying a function to a sequence of
+    /// 15 elements.
+    /// </summary>
+    /// <remarks>
+    /// This operator uses immediate execution and effectively buffers
+    /// as many items of the source sequence as necessary.
+    /// </remarks>
+    /// <typeparam name="TSource">Type of element in the source sequence</typeparam>
+    /// <typeparam name="TResult">Type of the result</typeparam>
+    /// <param name="source">The sequence of items to fold.</param>
+    /// <param name="folder">Function to apply to the elements in the sequence.</param>
+    /// <param name="cancellationToken">The optional cancellation token to be used for cancelling the sequence at any time.</param>
+    /// <returns>The folded value returned by <paramref name="folder"/>.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="source"/> is null</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="folder"/> is null</exception>
+    /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 16 elements</exception>
+    public static ValueTask<TResult> FoldAsync<TSource, TResult>(
+        this IAsyncEnumerable<TSource> source,
+        Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, CancellationToken, ValueTask<TResult>> folder,
+        CancellationToken cancellationToken = default)
+    {
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (folder is null) throw new ArgumentNullException(nameof(folder));
+
+        return Core(source, folder, cancellationToken);
+
+        static async ValueTask<TResult> Core(
+            IAsyncEnumerable<TSource> source,
+            Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, CancellationToken, ValueTask<TResult>> folder,
+            CancellationToken cancellationToken)
+        {
+            var elements = await GetFoldElementsAsync(source, count: 15, cancellationToken);
+            return await folder(
+                elements[0],
+                elements[1],
+                elements[2],
+                elements[3],
+                elements[4],
+                elements[5],
+                elements[6],
+                elements[7],
+                elements[8],
+                elements[9],
+                elements[10],
+                elements[11],
+                elements[12],
+                elements[13],
+                elements[14],
+                cancellationToken);
+        }
+    }
 
     private static async ValueTask<TSource[]> GetFoldElementsAsync<TSource>(
         IAsyncEnumerable<TSource> source,
@@ -1467,7 +2156,7 @@ static partial class MoreAsyncEnumerable
         CancellationToken cancellationToken)
     {
         var elements = new TSource[count];
-        await foreach (var (index, element) in source.Index().AssertCount(count).WithCancellation(cancellationToken).ConfigureAwait(false))
+        await foreach (var (index, element) in source.Index().AssertCount(count).WithCancellation(cancellationToken))
         {
             elements[index] = element;
         }

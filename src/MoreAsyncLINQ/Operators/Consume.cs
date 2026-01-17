@@ -20,13 +20,15 @@ static partial class MoreAsyncEnumerable
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
 
-        return Core(source, cancellationToken);
+        return source.IsKnownEmpty()
+            ? new ValueTask()
+            : Core(source, cancellationToken);
 
         static async ValueTask Core(
             IAsyncEnumerable<TSource> source,
             CancellationToken cancellationToken)
         {
-            await foreach (var _ in source.WithCancellation(cancellationToken).ConfigureAwait(false))
+            await foreach (var _ in source.WithCancellation(cancellationToken))
             {
             }
         }

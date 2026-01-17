@@ -15,10 +15,10 @@ static partial class MoreAsyncEnumerable
     /// <returns>A sequence of <see cref="ValueTuple{T1,T2}"/>.</returns>
     /// <remarks>This operator uses deferred execution and streams its
     /// results.</remarks>
-    public static IAsyncEnumerable<(int Index, TSource Element)> Index<TSource>(this IAsyncEnumerable<TSource> source)
+    public static IAsyncEnumerable<(int Index, TSource Element)> Index<TSource>(IAsyncEnumerable<TSource> source)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
-            
+        
         return source.Index(startIndex: 0);
     }
 
