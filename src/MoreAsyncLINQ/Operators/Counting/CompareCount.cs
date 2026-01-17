@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -28,48 +29,29 @@ static partial class MoreAsyncEnumerable
         if (first is null) throw new ArgumentNullException(nameof(first));
         if (second is null) throw new ArgumentNullException(nameof(second));
 
-        return Core(first, second, cancellationToken);
+        return first.IsKnownEmpty() &&
+               second.IsKnownEmpty()
+            ? ValueTasks.FromResult(0)
+            : Core(
+                first.WithCancellation(cancellationToken),
+                second.WithCancellation(cancellationToken));
 
         static async ValueTask<int> Core(
-            IAsyncEnumerable<TFirst> first,
-            IAsyncEnumerable<TSecond> second,
-            CancellationToken cancellationToken)
+            ConfiguredCancelableAsyncEnumerable<TFirst> first,
+            ConfiguredCancelableAsyncEnumerable<TSecond> second)
         {
-            var firstCollectionCount = await first.TryGetCollectionCountAsync(cancellationToken).ConfigureAwait(false);
-            var secondCollectionCount = await second.TryGetCollectionCountAsync(cancellationToken).ConfigureAwait(false);
+            await using var firstEnumerator = first.GetAsyncEnumerator();
+            await using var secondEnumerator = second.GetAsyncEnumerator();
 
-            switch (firstCollectionCount, secondCollectionCount)
+            bool firstHasNext;
+            bool secondHasNext;
+            do
             {
-                case ({ } firstCount, { } secondCount):
-                {
-                    return firstCount.CompareTo(secondCount);
-                }
-                case ({ } firstCount, null):
-                {
-                    var secondCount = await second.CountAsync(firstCount + 1, cancellationToken).ConfigureAwait(false);
-                    return firstCount.CompareTo(secondCount);
-                }
-                case (null, { } secondCount):
-                {
-                    var firstCount = await first.CountAsync(secondCount + 1, cancellationToken).ConfigureAwait(false);
-                    return firstCount.CompareTo(secondCount);
-                }
-                case (null, null):
-                {
-                    await using var firstEnumerator = first.WithCancellation(cancellationToken).ConfigureAwait(false).GetAsyncEnumerator();
-                    await using var secondEnumerator = second.WithCancellation(cancellationToken).ConfigureAwait(false).GetAsyncEnumerator();
+                firstHasNext = await firstEnumerator.MoveNextAsync();
+                secondHasNext = await secondEnumerator.MoveNextAsync();
+            } while (firstHasNext && secondHasNext);
 
-                    bool firstHasNext;
-                    bool secondHasNext;
-                    do
-                    {
-                        firstHasNext = await firstEnumerator.MoveNextAsync();
-                        secondHasNext = await secondEnumerator.MoveNextAsync();
-                    } while (firstHasNext && secondHasNext);
-
-                    return firstHasNext.CompareTo(secondHasNext);
-                }
-            }
+            return firstHasNext.CompareTo(secondHasNext);
         }
     }
 }

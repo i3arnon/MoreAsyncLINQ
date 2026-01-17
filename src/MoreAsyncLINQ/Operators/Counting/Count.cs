@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading;
+﻿using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace MoreAsyncLINQ;
@@ -7,11 +6,10 @@ namespace MoreAsyncLINQ;
 static partial class MoreAsyncEnumerable
 {
     private static async ValueTask<int> CountAsync<TSource>(
-        this IAsyncEnumerable<TSource> source,
-        int limit,
-        CancellationToken cancellationToken = default)
+        ConfiguredCancelableAsyncEnumerable<TSource> source,
+        int limit)
     {
-        await using var enumerator = source.WithCancellation(cancellationToken).ConfigureAwait(false).GetAsyncEnumerator();
+        await using var enumerator = source.GetAsyncEnumerator();
 
         var count = 0;
         while (count < limit && await enumerator.MoveNextAsync())

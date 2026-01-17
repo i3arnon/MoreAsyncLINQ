@@ -8,7 +8,7 @@ namespace MoreAsyncLINQ;
 static partial class MoreAsyncEnumerable
 {
     /// <summary>
-    /// Determines whether or not the number of elements in the sequence is equals to the given integer.
+    /// Determines whether the number of elements in the sequence is equals to the given integer.
     /// </summary>
     /// <typeparam name="TSource">Element type of sequence</typeparam>
     /// <param name="source">The source sequence</param>
@@ -27,6 +27,12 @@ static partial class MoreAsyncEnumerable
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (count < 0) throw new ArgumentOutOfRangeException(nameof(count), $"{nameof(count)} must be non-negative");
 
-        return source.CountBetweenAsync(count + 1, count, count, cancellationToken);
+        return source.IsKnownEmpty()
+            ? ValueTasks.FromResult(count == 0)
+            : CountBetweenAsync(
+                source.WithCancellation(cancellationToken),
+                count + 1,
+                count,
+                count);
     }
 }
