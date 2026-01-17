@@ -344,6 +344,7 @@ static partial class MoreAsyncEnumerable
     /// <param name="source">The source sequence.</param>
     /// <param name="separator">Separator element.</param>
     /// <returns>A sequence of splits of elements.</returns>
+    [Obsolete($"Use an overload of {nameof(Split)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<IAsyncEnumerable<TSource>> SplitAwait<TSource>(
         this IAsyncEnumerable<TSource> source,
         TSource separator)
@@ -361,6 +362,7 @@ static partial class MoreAsyncEnumerable
     /// <param name="separator">Separator element.</param>
     /// <param name="count">Maximum number of splits.</param>
     /// <returns>A sequence of splits of elements.</returns>
+    [Obsolete($"Use an overload of {nameof(Split)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<IAsyncEnumerable<TSource>> SplitAwait<TSource>(
         this IAsyncEnumerable<TSource> source,
         TSource separator,
@@ -385,6 +387,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>
     /// A sequence of values typed as <typeparamref name="TResult"/>.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(Split)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> SplitAwait<TSource, TResult>(
         this IAsyncEnumerable<TSource> source,
         TSource separator,
@@ -410,6 +413,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>
     /// A sequence of values typed as <typeparamref name="TResult"/>.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(Split)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> SplitAwait<TSource, TResult>(
         this IAsyncEnumerable<TSource> source,
         TSource separator,
@@ -433,6 +437,7 @@ static partial class MoreAsyncEnumerable
     /// <param name="comparer">Comparer used to determine separator
     /// element equality.</param>
     /// <returns>A sequence of splits of elements.</returns>
+    [Obsolete($"Use an overload of {nameof(Split)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<IAsyncEnumerable<TSource>> SplitAwait<TSource>(
         this IAsyncEnumerable<TSource> source,
         TSource separator,
@@ -455,6 +460,7 @@ static partial class MoreAsyncEnumerable
     /// element equality.</param>
     /// <param name="count">Maximum number of splits.</param>
     /// <returns>A sequence of splits of elements.</returns>
+    [Obsolete($"Use an overload of {nameof(Split)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<IAsyncEnumerable<TSource>> SplitAwait<TSource>(
         this IAsyncEnumerable<TSource> source,
         TSource separator,
@@ -483,6 +489,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>
     /// A sequence of values typed as <typeparamref name="TResult"/>.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(Split)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> SplitAwait<TSource, TResult>(
         this IAsyncEnumerable<TSource> source,
         TSource separator,
@@ -513,6 +520,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>
     /// A sequence of values typed as <typeparamref name="TResult"/>.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(Split)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> SplitAwait<TSource, TResult>(
         this IAsyncEnumerable<TSource> source,
         TSource separator,
@@ -540,6 +548,7 @@ static partial class MoreAsyncEnumerable
     /// <param name="separatorFunc">Predicate function used to determine
     /// the splitter elements in the source sequence.</param>
     /// <returns>A sequence of splits of elements.</returns>
+    [Obsolete($"Use an overload of {nameof(Split)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<IAsyncEnumerable<TSource>> SplitAwait<TSource>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<bool>> separatorFunc)
@@ -560,6 +569,7 @@ static partial class MoreAsyncEnumerable
     /// the splitter elements in the source sequence.</param>
     /// <param name="count">Maximum number of splits.</param>
     /// <returns>A sequence of splits of elements.</returns>
+    [Obsolete($"Use an overload of {nameof(Split)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<IAsyncEnumerable<TSource>> SplitAwait<TSource>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<bool>> separatorFunc,
@@ -586,6 +596,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>
     /// A sequence of values typed as <typeparamref name="TResult"/>.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(Split)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> SplitAwait<TSource, TResult>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<bool>> separatorFunc,
@@ -614,6 +625,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>
     /// A sequence of values typed as <typeparamref name="TResult"/>.
     /// </returns>
+    [Obsolete($"Use an overload of {nameof(Split)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> SplitAwait<TSource, TResult>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<bool>> separatorFunc,

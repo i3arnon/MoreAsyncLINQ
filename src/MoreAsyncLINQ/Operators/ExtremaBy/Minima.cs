@@ -29,7 +29,7 @@ static partial class MoreAsyncEnumerable
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (selector is null) throw new ArgumentNullException(nameof(selector));
 
-        return MinBy(source, selector, comparer: null);
+        return Minima(source, selector, comparer: null);
     }
 
     /// <summary>

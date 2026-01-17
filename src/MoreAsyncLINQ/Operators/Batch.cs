@@ -139,6 +139,7 @@ static partial class MoreAsyncEnumerable
     /// (<see cref="OutOfMemoryException"/>).
     /// </para>
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(Batch)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> BatchAwait<TSource, TResult>(
         this IAsyncEnumerable<TSource> source,
         int size,

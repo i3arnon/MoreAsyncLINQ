@@ -434,6 +434,7 @@ static partial class MoreAsyncEnumerable
     /// This method uses deferred execution. The behavior is undefined
     /// if the sequences are unordered (by key) as inputs.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(OrderedMerge)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> OrderedMergeAwait<TSource, TKey>(
         this IAsyncEnumerable<TSource> first,
         IAsyncEnumerable<TSource> second,
@@ -481,6 +482,7 @@ static partial class MoreAsyncEnumerable
     /// This method uses deferred execution. The behavior is undefined
     /// if the sequences are unordered (by key) as inputs.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(OrderedMerge)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> OrderedMergeAwait<TSource, TKey, TResult>(
         this IAsyncEnumerable<TSource> first,
         IAsyncEnumerable<TSource> second,
@@ -535,6 +537,7 @@ static partial class MoreAsyncEnumerable
     /// This method uses deferred execution. The behavior is undefined
     /// if the sequences are unordered (by key) as inputs.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(OrderedMerge)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> OrderedMergeAwait<TSource, TKey, TResult>(
         this IAsyncEnumerable<TSource> first,
         IAsyncEnumerable<TSource> second,
@@ -593,6 +596,7 @@ static partial class MoreAsyncEnumerable
     /// This method uses deferred execution. The behavior is undefined
     /// if the sequences are unordered (by key) as inputs.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(OrderedMerge)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> OrderedMergeAwait<TFirst, TSecond, TKey, TResult>(
         this IAsyncEnumerable<TFirst> first,
         IAsyncEnumerable<TSecond> second,
@@ -654,6 +658,7 @@ static partial class MoreAsyncEnumerable
     /// This method uses deferred execution. The behavior is undefined
     /// if the sequences are unordered (by key) as inputs.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(OrderedMerge)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> OrderedMergeAwait<TFirst, TSecond, TKey, TResult>(
         this IAsyncEnumerable<TFirst> first,
         IAsyncEnumerable<TSecond> second,

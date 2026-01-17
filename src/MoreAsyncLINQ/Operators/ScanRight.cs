@@ -119,6 +119,7 @@ static partial class MoreAsyncEnumerable
     /// This operator uses deferred execution and streams its results.
     /// Source sequence is consumed greedily when an iteration of the resulting sequence begins.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(ScanRight)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> ScanRightAwait<TSource>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, TSource, ValueTask<TSource>> func)
@@ -150,6 +151,7 @@ static partial class MoreAsyncEnumerable
     /// This operator uses deferred execution and streams its results.
     /// Source sequence is consumed greedily when an iteration of the resulting sequence begins.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(ScanRight)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TAccumulate> ScanRightAwait<TSource, TAccumulate>(
         this IAsyncEnumerable<TSource> source,
         TAccumulate seed,

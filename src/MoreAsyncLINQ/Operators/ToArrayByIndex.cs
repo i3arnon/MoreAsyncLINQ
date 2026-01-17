@@ -346,6 +346,7 @@ static partial class MoreAsyncEnumerable
     /// same index then the latter element overwrites the former in the
     /// resulting array.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(ToArrayByIndexAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TSource[]> ToArrayByIndexAwaitAsync<TSource>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<int>> indexSelector,
@@ -388,6 +389,7 @@ static partial class MoreAsyncEnumerable
     /// same index then the latter element overwrites the former in the
     /// resulting array.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(ToArrayByIndexAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult[]> ToArrayByIndexAwaitAsync<TSource, TResult>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<int>> indexSelector,
@@ -432,6 +434,7 @@ static partial class MoreAsyncEnumerable
     /// same index then the latter element overwrites the former in the
     /// resulting array.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(ToArrayByIndexAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult[]> ToArrayByIndexAwaitAsync<TSource, TResult>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<int>> indexSelector,
@@ -504,6 +507,7 @@ static partial class MoreAsyncEnumerable
     /// same index then the latter element overwrites the former in the
     /// resulting array.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(ToArrayByIndexAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TSource[]> ToArrayByIndexAwaitAsync<TSource>(
         this IAsyncEnumerable<TSource> source,
         int length,
@@ -549,6 +553,7 @@ static partial class MoreAsyncEnumerable
     /// same index then the latter element overwrites the former in the
     /// resulting array.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(ToArrayByIndexAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult[]> ToArrayByIndexAwaitAsync<TSource, TResult>(
         this IAsyncEnumerable<TSource> source,
         int length,
@@ -596,6 +601,7 @@ static partial class MoreAsyncEnumerable
     /// same index then the latter element overwrites the former in the
     /// resulting array.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(ToArrayByIndexAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult[]> ToArrayByIndexAwaitAsync<TSource, TResult>(
         this IAsyncEnumerable<TSource> source,
         int length,

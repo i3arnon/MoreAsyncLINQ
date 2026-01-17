@@ -113,6 +113,7 @@ static partial class MoreAsyncEnumerable
     /// <param name="keySelector">The mapping from source element to key.</param>
     /// <returns>A sequence of elements from <paramref name="first"/> whose key was not also a key for
     /// any element in <paramref name="second"/>.</returns>
+    [Obsolete($"Use an overload of {nameof(ExceptBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> ExceptByAwait<TSource, TKey>(
         this IAsyncEnumerable<TSource> first,
         IAsyncEnumerable<TSource> second,
@@ -145,6 +146,7 @@ static partial class MoreAsyncEnumerable
     /// If null, the default equality comparer for <c>TSource</c> is used.</param>
     /// <returns>A sequence of elements from <paramref name="first"/> whose key was not also a key for
     /// any element in <paramref name="second"/>.</returns>
+    [Obsolete($"Use an overload of {nameof(ExceptBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> ExceptByAwait<TSource, TKey>(
         this IAsyncEnumerable<TSource> first,
         IAsyncEnumerable<TSource> second,

@@ -119,6 +119,7 @@ static partial class MoreAsyncEnumerable
     /// <param name="offset">The offset (expressed as a positive number) by which to lead each element of the sequence</param>
     /// <param name="resultSelector">A projection function which accepts the current and subsequent (lead) element (in that order) and produces a result</param>
     /// <returns>A sequence produced by projecting each element of the sequence with its lead pairing</returns>
+    [Obsolete($"Use an overload of {nameof(Lead)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> LeadAwait<TSource, TResult>(
         this IAsyncEnumerable<TSource> source,
         int offset,
@@ -149,6 +150,7 @@ static partial class MoreAsyncEnumerable
     /// <param name="defaultLeadValue">A default value supplied for the leading element when none is available</param>
     /// <param name="resultSelector">A projection function which accepts the current and subsequent (lead) element (in that order) and produces a result</param>
     /// <returns>A sequence produced by projecting each element of the sequence with its lead pairing</returns>
+    [Obsolete($"Use an overload of {nameof(Lead)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> LeadAwait<TSource, TResult>(
         this IAsyncEnumerable<TSource> source,
         int offset,

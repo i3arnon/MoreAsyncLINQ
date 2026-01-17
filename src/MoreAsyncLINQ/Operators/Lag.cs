@@ -120,6 +120,7 @@ static partial class MoreAsyncEnumerable
     /// <param name="offset">The offset (expressed as a positive number) by which to lag each value of the sequence</param>
     /// <param name="resultSelector">A projection function which accepts the current and lagged items (in that order) and returns a result</param>
     /// <returns>A sequence produced by projecting each element of the sequence with its lagged pairing</returns>
+    [Obsolete($"Use an overload of {nameof(Lag)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> LagAwait<TSource, TResult>(
         this IAsyncEnumerable<TSource> source,
         int offset,
@@ -150,6 +151,7 @@ static partial class MoreAsyncEnumerable
     /// <param name="defaultLagValue">A default value supplied for the lagged value prior to the lag offset</param>
     /// <param name="resultSelector">A projection function which accepts the current and lagged items (in that order) and returns a result</param>
     /// <returns>A sequence produced by projecting each element of the sequence with its lagged pairing</returns>
+    [Obsolete($"Use an overload of {nameof(Lag)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> LagAwait<TSource, TResult>(
         this IAsyncEnumerable<TSource> source,
         int offset,

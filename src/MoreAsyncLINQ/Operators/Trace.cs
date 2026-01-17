@@ -92,6 +92,7 @@ static partial class MoreAsyncEnumerable
     /// This a pass-through operator that uses deferred execution and
     /// streams the results.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(Trace)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> TraceAwait<TSource>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<string>> formatter)

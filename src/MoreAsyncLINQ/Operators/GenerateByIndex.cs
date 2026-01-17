@@ -25,6 +25,7 @@ static partial class MoreAsyncEnumerable
     /// <para>
     /// This function defers execution and streams the results.</para>
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(GenerateByIndex)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> GenerateByIndexAwait<TResult>(Func<int, ValueTask<TResult>> generator)
     {
         if (generator is null) throw new ArgumentNullException(nameof(generator));

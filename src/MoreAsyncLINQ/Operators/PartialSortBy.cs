@@ -206,6 +206,7 @@ static partial class MoreAsyncEnumerable
     /// <remarks>
     /// This operator uses deferred execution and streams it results.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(PartialSortBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> PartialSortByAwait<TSource, TKey>(
         this IAsyncEnumerable<TSource> source,
         int count,
@@ -233,6 +234,7 @@ static partial class MoreAsyncEnumerable
     /// <remarks>
     /// This operator uses deferred execution and streams it results.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(PartialSortBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> PartialSortByAwait<TSource, TKey>(
         this IAsyncEnumerable<TSource> source,
         int count,
@@ -263,6 +265,7 @@ static partial class MoreAsyncEnumerable
     /// <remarks>
     /// This operator uses deferred execution and streams it results.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(PartialSortBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> PartialSortByAwait<TSource, TKey>(
         this IAsyncEnumerable<TSource> source,
         int count,
@@ -292,6 +295,7 @@ static partial class MoreAsyncEnumerable
     /// <remarks>
     /// This operator uses deferred execution and streams it results.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(PartialSortBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> PartialSortByAwait<TSource, TKey>(
         this IAsyncEnumerable<TSource> source,
         int count,

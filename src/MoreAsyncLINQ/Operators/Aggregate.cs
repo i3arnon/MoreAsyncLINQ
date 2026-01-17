@@ -883,6 +883,7 @@ static partial class MoreAsyncEnumerable
     /// <remarks>
     /// This operator executes immediately.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(AggregateAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> AggregateAwaitAsync<
         TSource,
         TAccumulate1,
@@ -959,6 +960,7 @@ static partial class MoreAsyncEnumerable
     /// <remarks>
     /// This operator executes immediately.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(AggregateAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> AggregateAwaitAsync<
         TSource,
         TAccumulate1,
@@ -1049,6 +1051,7 @@ static partial class MoreAsyncEnumerable
     /// <remarks>
     /// This operator executes immediately.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(AggregateAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> AggregateAwaitAsync<
         TSource,
         TAccumulate1,
@@ -1153,6 +1156,7 @@ static partial class MoreAsyncEnumerable
     /// <remarks>
     /// This operator executes immediately.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(AggregateAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> AggregateAwaitAsync<
         TSource,
         TAccumulate1,
@@ -1271,6 +1275,7 @@ static partial class MoreAsyncEnumerable
     /// <remarks>
     /// This operator executes immediately.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(AggregateAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> AggregateAwaitAsync<
         TSource,
         TAccumulate1,
@@ -1403,6 +1408,7 @@ static partial class MoreAsyncEnumerable
     /// <remarks>
     /// This operator executes immediately.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(AggregateAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> AggregateAwaitAsync<
         TSource,
         TAccumulate1,
@@ -1549,6 +1555,7 @@ static partial class MoreAsyncEnumerable
     /// <remarks>
     /// This operator executes immediately.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(AggregateAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> AggregateAwaitAsync<
         TSource,
         TAccumulate1,

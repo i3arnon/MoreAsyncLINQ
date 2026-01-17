@@ -253,6 +253,7 @@ static partial class MoreAsyncEnumerable
     /// that match on a common key.</param>
     /// <returns>A sequence containing results projected from a right
     /// outer join of the two input sequences.</returns>
+    [Obsolete($"Use an overload of {nameof(RightJoin)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> RightJoinAwait<TSource, TKey, TResult>(
         this IAsyncEnumerable<TSource> first,
         IAsyncEnumerable<TSource> second,
@@ -306,6 +307,7 @@ static partial class MoreAsyncEnumerable
     /// keys for equality.</param>
     /// <returns>A sequence containing results projected from a right
     /// outer join of the two input sequences.</returns>
+    [Obsolete($"Use an overload of {nameof(RightJoin)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> RightJoinAwait<TSource, TKey, TResult>(
         this IAsyncEnumerable<TSource> first,
         IAsyncEnumerable<TSource> second,
@@ -360,6 +362,7 @@ static partial class MoreAsyncEnumerable
     /// that match on a common key.</param>
     /// <returns>A sequence containing results projected from a right
     /// outer join of the two input sequences.</returns>
+    [Obsolete($"Use an overload of {nameof(RightJoin)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> RightJoinAwait<TFirst, TSecond, TKey, TResult>(
         this IAsyncEnumerable<TFirst> first,
         IAsyncEnumerable<TSecond> second,
@@ -418,6 +421,7 @@ static partial class MoreAsyncEnumerable
     /// keys for equality.</param>
     /// <returns>A sequence containing results projected from a right
     /// outer join of the two input sequences.</returns>
+    [Obsolete($"Use an overload of {nameof(RightJoin)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> RightJoinAwait<TFirst, TSecond, TKey, TResult>(
         this IAsyncEnumerable<TFirst> first,
         IAsyncEnumerable<TSecond> second,

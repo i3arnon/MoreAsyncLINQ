@@ -29,9 +29,8 @@ static partial class MoreAsyncEnumerable
 
                 try
                 {
-                    var collectionCount = await _source.TryGetCollectionCountAsync(cancellationToken).ConfigureAwait(false);
                     _enumerator = _source.WithCancellation(cancellationToken).ConfigureAwait(false).GetAsyncEnumerator();
-                    _cache = new List<T>(collectionCount ?? 0);
+                    _cache = [];
                 }
                 catch (Exception exception)
                 {

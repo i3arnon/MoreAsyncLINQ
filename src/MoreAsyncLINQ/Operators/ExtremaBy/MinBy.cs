@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MoreAsyncLINQ;
@@ -21,6 +22,7 @@ static partial class MoreAsyncEnumerable
     /// <param name="selector">Selector to use to pick the results to compare</param>
     /// <returns>The sequence of minimal elements, according to the projection.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="source"/> or <paramref name="selector"/> is null</exception>
+    [Obsolete($"Use an overload of {nameof(Minima)}.")]
     public static IExtremaAsyncEnumerable<TSource> MinBy<TSource, TKey>(
         IAsyncEnumerable<TSource> source,
         Func<TSource, TKey> selector)
@@ -47,6 +49,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>The sequence of minimal elements, according to the projection.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="source"/>, <paramref name="selector"/>
     /// or <paramref name="comparer"/> is null</exception>
+    [Obsolete($"Use an overload of {nameof(Minima)}.")]
     public static IExtremaAsyncEnumerable<TSource> MinBy<TSource, TKey>(
         IAsyncEnumerable<TSource> source,
         Func<TSource, TKey> selector,
@@ -76,6 +79,7 @@ static partial class MoreAsyncEnumerable
     /// <param name="selector">Selector to use to pick the results to compare</param>
     /// <returns>The sequence of minimal elements, according to the projection.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="source"/> or <paramref name="selector"/> is null</exception>
+    [Obsolete($"Use an overload of {nameof(Minima)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IExtremaAsyncEnumerable<TSource> MinByAwait<TSource, TKey>(
         IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TKey>> selector)
@@ -102,6 +106,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>The sequence of minimal elements, according to the projection.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="source"/>, <paramref name="selector"/>
     /// or <paramref name="comparer"/> is null</exception>
+    [Obsolete($"Use an overload of {nameof(Minima)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IExtremaAsyncEnumerable<TSource> MinByAwait<TSource, TKey>(
         IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TKey>> selector,

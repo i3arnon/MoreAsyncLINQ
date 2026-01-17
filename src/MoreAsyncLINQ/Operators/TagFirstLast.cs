@@ -58,6 +58,7 @@ static partial class MoreAsyncEnumerable
     /// <remarks>
     /// This operator uses deferred execution and streams its results.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(TagFirstLast)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> TagFirstLastAwait<TSource, TResult>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, bool, bool, ValueTask<TResult>> resultSelector)

@@ -113,6 +113,7 @@ static partial class MoreAsyncEnumerable
     /// <param name="source">Source sequence</param>
     /// <param name="transformation">Transformation operation</param>
     /// <returns>The scanned sequence</returns>
+    [Obsolete($"Use an overload of {nameof(Scan)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> ScanAwait<TSource>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, TSource, ValueTask<TSource>> transformation)
@@ -159,6 +160,7 @@ static partial class MoreAsyncEnumerable
     /// <param name="seed">Initial state to seed</param>
     /// <param name="transformation">Transformation operation</param>
     /// <returns>The scanned sequence</returns>
+    [Obsolete($"Use an overload of {nameof(Scan)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TState> ScanAwait<TSource, TState>(
         this IAsyncEnumerable<TSource> source,
         TState seed,

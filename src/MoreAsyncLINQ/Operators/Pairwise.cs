@@ -74,6 +74,7 @@ static partial class MoreAsyncEnumerable
     /// <remarks>
     /// This operator uses deferred execution and streams its results.
     /// </remarks>
+    [Obsolete($"Use an overload of {nameof(Pairwise)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> PairwiseAwait<TSource, TResult>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, TSource, ValueTask<TResult>> resultSelector)

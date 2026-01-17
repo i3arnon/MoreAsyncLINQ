@@ -114,6 +114,7 @@ static partial class MoreAsyncEnumerable
     /// <exception cref="ArgumentNullException">
     /// Thrown if either <paramref name="source"/> or <paramref name="newSegmentPredicate"/> are <see langword="null"/>.
     /// </exception>
+    [Obsolete($"Use an overload of {nameof(Segment)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<IEnumerable<TSource>> SegmentAwait<TSource>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<bool>> newSegmentPredicate)
@@ -134,6 +135,7 @@ static partial class MoreAsyncEnumerable
     /// <exception cref="ArgumentNullException">
     /// Thrown if either <paramref name="source"/> or <paramref name="newSegmentPredicate"/> are <see langword="null"/>.
     /// </exception>
+    [Obsolete($"Use an overload of {nameof(Segment)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<IEnumerable<TSource>> SegmentAwait<TSource>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, int, ValueTask<bool>> newSegmentPredicate)
@@ -154,6 +156,7 @@ static partial class MoreAsyncEnumerable
     /// <exception cref="ArgumentNullException">
     /// Thrown if either <paramref name="source"/> or <paramref name="newSegmentPredicate"/> are <see langword="null"/>.
     /// </exception>
+    [Obsolete($"Use an overload of {nameof(Segment)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<IEnumerable<TSource>> SegmentAwait<TSource>(
         this IAsyncEnumerable<TSource> source,
         Func<TSource, TSource, int, ValueTask<bool>> newSegmentPredicate)
