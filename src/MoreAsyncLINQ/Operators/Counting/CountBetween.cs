@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -32,19 +33,22 @@ static partial class MoreAsyncEnumerable
         if (min < 0) throw new ArgumentOutOfRangeException(nameof(min), $"{nameof(min)} must be non-negative");
         if (max < min) throw new ArgumentOutOfRangeException(nameof(max), $"{nameof(max)} must be greater than or equal to {nameof(min)}");
 
-        return source.CountBetweenAsync(max + 1, min, max, cancellationToken);
+        return source.IsKnownEmpty()
+            ? ValueTasks.FromResult(min == 0)
+            : CountBetweenAsync(
+                source.WithCancellation(cancellationToken),
+                max + 1,
+                min,
+                max);
     }
 
     private static async ValueTask<bool> CountBetweenAsync<TSource>(
-        this IAsyncEnumerable<TSource> source,
+        ConfiguredCancelableAsyncEnumerable<TSource> source,
         int limit,
         int min,
-        int max,
-        CancellationToken cancellationToken = default)
+        int max)
     {
-        var collectionCount =
-            await source.TryGetCollectionCountAsync(cancellationToken).ConfigureAwait(false) ??
-            await source.CountAsync(limit, cancellationToken).ConfigureAwait(false);
+        var collectionCount = await CountAsync(source, limit);
 
         return collectionCount >= min &&
                collectionCount <= max;

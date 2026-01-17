@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,18 +30,17 @@ static partial class MoreAsyncEnumerable
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
 
-        return Core(source, cancellationToken);
+        return source.IsKnownEmpty()
+            ? ValueTasks.FromResult(Array.Empty<TSource>())
+            : Core(source.WithCancellation(cancellationToken));
 
-        static async ValueTask<TSource[]> Core(
-            IAsyncEnumerable<TSource> source,
-            CancellationToken cancellationToken)
+        static async ValueTask<TSource[]> Core(ConfiguredCancelableAsyncEnumerable<TSource> source) 
         {
-            var collectionCount = await source.TryGetCollectionCountAsync(cancellationToken).ConfigureAwait(false);
-            var elements = new List<TSource>(collectionCount ?? 0);
+            var elements = new List<TSource>();
 
             try
             {
-                await foreach (var element in source.WithCancellation(cancellationToken).ConfigureAwait(false))
+                await foreach (var element in source)
                 {
                     elements.Add(element);
                 }
@@ -54,7 +54,7 @@ static partial class MoreAsyncEnumerable
                     switch (element)
                     {
                         case IAsyncDisposable asyncDisposable:
-                            await asyncDisposable.DisposeAsync().ConfigureAwait(false);
+                            await asyncDisposable.DisposeAsync();
                             break;
                         case IDisposable disposable:
                             disposable.Dispose();

@@ -28,6 +28,10 @@ static partial class MoreAsyncEnumerable
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (count < 0) throw new ArgumentOutOfRangeException(nameof(count), $"{nameof(count)} must be non-negative");
 
-        return source.CountBetweenAsync(count, count, int.MaxValue, cancellationToken);
+        return CountBetweenAsync(
+            source.WithCancellation(cancellationToken),
+            count,
+            count,
+            int.MaxValue);
     }
 }
