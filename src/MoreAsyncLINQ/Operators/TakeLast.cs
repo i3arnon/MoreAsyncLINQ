@@ -25,7 +25,7 @@ static partial class MoreAsyncEnumerable
     /// This operator uses deferred execution and streams its results.
     /// </remarks>
     public static IAsyncEnumerable<TSource> TakeLast<TSource>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         int count)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
