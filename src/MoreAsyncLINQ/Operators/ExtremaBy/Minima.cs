@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MoreAsyncLINQ;
@@ -7,11 +8,11 @@ namespace MoreAsyncLINQ;
 static partial class MoreAsyncEnumerable
 {
     /// <summary>
-    /// Returns the maximal elements of the given sequence, based on
+    /// Returns the minimal elements of the given sequence, based on
     /// the given projection.
     /// </summary>
     /// <remarks>
-    /// This overload uses the default comparer  for the projected type.
+    /// This overload uses the default comparer for the projected type.
     /// This operator uses deferred execution. The results are evaluated
     /// and cached on first use to returned sequence.
     /// </remarks>
@@ -19,20 +20,20 @@ static partial class MoreAsyncEnumerable
     /// <typeparam name="TKey">Type of the projected element</typeparam>
     /// <param name="source">Source sequence</param>
     /// <param name="selector">Selector to use to pick the results to compare</param>
-    /// <returns>The sequence of maximal elements, according to the projection.</returns>
+    /// <returns>The sequence of minimal elements, according to the projection.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="source"/> or <paramref name="selector"/> is null</exception>
-    public static IExtremaAsyncEnumerable<TSource> MaxBy<TSource, TKey>(
-        IAsyncEnumerable<TSource> source,
+    public static IExtremaAsyncEnumerable<TSource> Minima<TSource, TKey>(
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, TKey> selector)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (selector is null) throw new ArgumentNullException(nameof(selector));
 
-        return MaxBy(source, selector, comparer: null);
+        return MinBy(source, selector, comparer: null);
     }
 
     /// <summary>
-    /// Returns the maximal elements of the given sequence, based on
+    /// Returns the minimal elements of the given sequence, based on
     /// the given projection and the specified comparer for projected values.
     /// </summary>
     /// <remarks>
@@ -44,29 +45,31 @@ static partial class MoreAsyncEnumerable
     /// <param name="source">Source sequence</param>
     /// <param name="selector">Selector to use to pick the results to compare</param>
     /// <param name="comparer">Comparer to use to compare projected values</param>
-    /// <returns>The sequence of maximal elements, according to the projection.</returns>
+    /// <returns>The sequence of minimal elements, according to the projection.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="source"/>, <paramref name="selector"/>
     /// or <paramref name="comparer"/> is null</exception>
-    public static IExtremaAsyncEnumerable<TSource> MaxBy<TSource, TKey>(
-        IAsyncEnumerable<TSource> source,
+    public static IExtremaAsyncEnumerable<TSource> Minima<TSource, TKey>(
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, TKey> selector,
         IComparer<TKey>? comparer)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (selector is null) throw new ArgumentNullException(nameof(selector));
 
-        return new ExtremaAsyncEnumerable<TSource, TKey>(
-            source,
-            selector,
-            GetMaximaComparer(comparer));
+        return source.IsKnownEmpty()
+            ? ExtremaAsyncEnumerable.Empty<TSource>()
+            : new ExtremaAsyncEnumerable<TSource, TKey>(
+                source,
+                selector,
+                GetMinimaComparer(comparer));
     }
 
     /// <summary>
-    /// Returns the maximal elements of the given sequence, based on
+    /// Returns the minimal elements of the given sequence, based on
     /// the given projection.
     /// </summary>
     /// <remarks>
-    /// This overload uses the default comparer  for the projected type.
+    /// This overload uses the default comparer for the projected type.
     /// This operator uses deferred execution. The results are evaluated
     /// and cached on first use to returned sequence.
     /// </remarks>
@@ -74,20 +77,20 @@ static partial class MoreAsyncEnumerable
     /// <typeparam name="TKey">Type of the projected element</typeparam>
     /// <param name="source">Source sequence</param>
     /// <param name="selector">Selector to use to pick the results to compare</param>
-    /// <returns>The sequence of maximal elements, according to the projection.</returns>
+    /// <returns>The sequence of minimal elements, according to the projection.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="source"/> or <paramref name="selector"/> is null</exception>
-    public static IExtremaAsyncEnumerable<TSource> MaxByAwait<TSource, TKey>(
-        IAsyncEnumerable<TSource> source,
-        Func<TSource, ValueTask<TKey>> selector)
+    public static IExtremaAsyncEnumerable<TSource> Minima<TSource, TKey>(
+        this IAsyncEnumerable<TSource> source,
+        Func<TSource, CancellationToken, ValueTask<TKey>> selector)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (selector is null) throw new ArgumentNullException(nameof(selector));
 
-        return MaxByAwait(source, selector, comparer: null);
+        return source.Minima(selector, comparer: null);
     }
 
     /// <summary>
-    /// Returns the maximal elements of the given sequence, based on
+    /// Returns the minimal elements of the given sequence, based on
     /// the given projection and the specified comparer for projected values.
     /// </summary>
     /// <remarks>
@@ -99,20 +102,28 @@ static partial class MoreAsyncEnumerable
     /// <param name="source">Source sequence</param>
     /// <param name="selector">Selector to use to pick the results to compare</param>
     /// <param name="comparer">Comparer to use to compare projected values</param>
-    /// <returns>The sequence of maximal elements, according to the projection.</returns>
+    /// <returns>The sequence of minimal elements, according to the projection.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="source"/>, <paramref name="selector"/>
     /// or <paramref name="comparer"/> is null</exception>
-    public static IExtremaAsyncEnumerable<TSource> MaxByAwait<TSource, TKey>(
-        IAsyncEnumerable<TSource> source,
-        Func<TSource, ValueTask<TKey>> selector,
+    public static IExtremaAsyncEnumerable<TSource> Minima<TSource, TKey>(
+        this IAsyncEnumerable<TSource> source,
+        Func<TSource, CancellationToken, ValueTask<TKey>> selector,
         IComparer<TKey>? comparer)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (selector is null) throw new ArgumentNullException(nameof(selector));
 
-        return new ExtremaAsyncEnumerableWithTask<TSource, TKey>(
-            source,
-            (element, _) => selector(element),
-            GetMaximaComparer(comparer));
+        return source.IsKnownEmpty()
+            ? ExtremaAsyncEnumerable.Empty<TSource>()
+            : new ExtremaAsyncEnumerableWithTask<TSource, TKey>(
+                source,
+                selector,
+                GetMinimaComparer(comparer));
+    }
+
+    private static Func<T, T, int> GetMinimaComparer<T>(IComparer<T>? comparer)
+    {
+        comparer ??= Comparer<T>.Default;
+        return (first, second) => -Math.Sign(comparer.Compare(first, second));
     }
 }

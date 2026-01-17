@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MoreAsyncLINQ;
@@ -21,14 +22,14 @@ static partial class MoreAsyncEnumerable
     /// <param name="selector">Selector to use to pick the results to compare</param>
     /// <returns>The sequence of maximal elements, according to the projection.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="source"/> or <paramref name="selector"/> is null</exception>
-    public static IExtremaAsyncEnumerable<TSource> MaxBy<TSource, TKey>(
-        IAsyncEnumerable<TSource> source,
+    public static IExtremaAsyncEnumerable<TSource> Maxima<TSource, TKey>(
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, TKey> selector)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (selector is null) throw new ArgumentNullException(nameof(selector));
 
-        return MaxBy(source, selector, comparer: null);
+        return source.Maxima(selector, comparer: null);
     }
 
     /// <summary>
@@ -47,18 +48,20 @@ static partial class MoreAsyncEnumerable
     /// <returns>The sequence of maximal elements, according to the projection.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="source"/>, <paramref name="selector"/>
     /// or <paramref name="comparer"/> is null</exception>
-    public static IExtremaAsyncEnumerable<TSource> MaxBy<TSource, TKey>(
-        IAsyncEnumerable<TSource> source,
+    public static IExtremaAsyncEnumerable<TSource> Maxima<TSource, TKey>(
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, TKey> selector,
         IComparer<TKey>? comparer)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (selector is null) throw new ArgumentNullException(nameof(selector));
 
-        return new ExtremaAsyncEnumerable<TSource, TKey>(
-            source,
-            selector,
-            GetMaximaComparer(comparer));
+        return source.IsKnownEmpty()
+            ? ExtremaAsyncEnumerable.Empty<TSource>()
+            : new ExtremaAsyncEnumerable<TSource, TKey>(
+                source,
+                selector,
+                GetMaximaComparer(comparer));
     }
 
     /// <summary>
@@ -76,14 +79,14 @@ static partial class MoreAsyncEnumerable
     /// <param name="selector">Selector to use to pick the results to compare</param>
     /// <returns>The sequence of maximal elements, according to the projection.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="source"/> or <paramref name="selector"/> is null</exception>
-    public static IExtremaAsyncEnumerable<TSource> MaxByAwait<TSource, TKey>(
-        IAsyncEnumerable<TSource> source,
-        Func<TSource, ValueTask<TKey>> selector)
+    public static IExtremaAsyncEnumerable<TSource> Maxima<TSource, TKey>(
+        this IAsyncEnumerable<TSource> source,
+        Func<TSource, CancellationToken, ValueTask<TKey>> selector)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (selector is null) throw new ArgumentNullException(nameof(selector));
 
-        return MaxByAwait(source, selector, comparer: null);
+        return source.Maxima(selector, comparer: null);
     }
 
     /// <summary>
@@ -102,17 +105,25 @@ static partial class MoreAsyncEnumerable
     /// <returns>The sequence of maximal elements, according to the projection.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="source"/>, <paramref name="selector"/>
     /// or <paramref name="comparer"/> is null</exception>
-    public static IExtremaAsyncEnumerable<TSource> MaxByAwait<TSource, TKey>(
-        IAsyncEnumerable<TSource> source,
-        Func<TSource, ValueTask<TKey>> selector,
+    public static IExtremaAsyncEnumerable<TSource> Maxima<TSource, TKey>(
+        this IAsyncEnumerable<TSource> source,
+        Func<TSource, CancellationToken, ValueTask<TKey>> selector,
         IComparer<TKey>? comparer)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (selector is null) throw new ArgumentNullException(nameof(selector));
 
-        return new ExtremaAsyncEnumerableWithTask<TSource, TKey>(
-            source,
-            (element, _) => selector(element),
-            GetMaximaComparer(comparer));
+        return source.IsKnownEmpty()
+            ? ExtremaAsyncEnumerable.Empty<TSource>()
+            : new ExtremaAsyncEnumerableWithTask<TSource, TKey>(
+                source,
+                selector,
+                GetMaximaComparer(comparer));
+    }
+
+    private static Func<T, T, int> GetMaximaComparer<T>(IComparer<T>? comparer)
+    {
+        comparer ??= Comparer<T>.Default;
+        return (first, second) => comparer.Compare(first, second);
     }
 }
