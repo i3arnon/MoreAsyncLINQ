@@ -144,36 +144,21 @@ static partial class MoreAsyncEnumerable
             Func<int, int, ValueTask<Exception>> errorSelector,
             [EnumeratorCancellation] CancellationToken cancellationToken = default)
         {
-            var collectionCount = await source.TryGetCollectionCountAsync(cancellationToken).ConfigureAwait(false);
-            if (collectionCount is null)
+            var currentCount = 0;
+            await foreach (var element in source.WithCancellation(cancellationToken).ConfigureAwait(false))
             {
-                var currentCount = 0;
-                await foreach (var element in source.WithCancellation(cancellationToken).ConfigureAwait(false))
+                currentCount++;
+                if (currentCount > count)
                 {
-                    currentCount++;
-                    if (currentCount > count)
-                    {
-                        throw await errorSelector(1, count).ConfigureAwait(false);
-                    }
-
-                    yield return element;
+                    throw await errorSelector(1, count).ConfigureAwait(false);
                 }
 
-                if (currentCount != count)
-                {
-                    throw await errorSelector(-1, count).ConfigureAwait(false);
-                }
+                yield return element;
             }
-            else if (collectionCount == count)
+
+            if (currentCount != count)
             {
-                await foreach (var element in source.WithCancellation(cancellationToken).ConfigureAwait(false))
-                {
-                    yield return element;
-                }
-            }
-            else
-            {
-                throw await errorSelector(collectionCount.Value.CompareTo(count), count).ConfigureAwait(false);
+                throw await errorSelector(-1, count).ConfigureAwait(false);
             }
         }
     }
