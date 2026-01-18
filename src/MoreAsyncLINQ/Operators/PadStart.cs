@@ -187,63 +187,40 @@ static partial class MoreAsyncEnumerable
         Func<int, ValueTask<TSource>> paddingSelector,
         [EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
-        var collectionCount = await source.TryGetCollectionCountAsync(cancellationToken).ConfigureAwait(false);
-        var result =
-            collectionCount is not null
-                ? collectionCount >= width
-                    ? source
-                    : Enumerable.Range(start: 0, width - collectionCount.Value).
-                        ToAsyncEnumerable().
-                        Select((int index, CancellationToken _) => paddingSelector(index)).
-                        Concat(source)
-                : Core(source, width, paddingSelector);
-
-        await foreach (var element in result.WithCancellation(cancellationToken).ConfigureAwait(false))
+        var window = new TSource[width];
+        var count = 0;
+        await using (var enumerator = source.WithCancellation(cancellationToken).ConfigureAwait(false).GetAsyncEnumerator())
         {
-            yield return element;
+            for (; count < width && await enumerator.MoveNextAsync(); count++)
+            {
+                window[count] = enumerator.Current;
+            }
+
+            if (count == width)
+            {
+                for (var index = 0; index < count; index++)
+                {
+                    yield return window[index];
+                }
+
+                while (await enumerator.MoveNextAsync())
+                {
+                    yield return enumerator.Current;
+                }
+
+                yield break;
+            }
         }
 
-        static async IAsyncEnumerable<TSource> Core(
-            IAsyncEnumerable<TSource> source,
-            int width,
-            Func<int, ValueTask<TSource>> paddingSelector,
-            [EnumeratorCancellation] CancellationToken cancellationToken = default)
+        var paddingLength = width - count;
+        for (var index = 0; index < paddingLength; index++)
         {
-            var window = new TSource[width];
-            var count = 0;
-            await using (var enumerator = source.WithCancellation(cancellationToken).ConfigureAwait(false).GetAsyncEnumerator())
-            {
-                for (; count < width && await enumerator.MoveNextAsync(); count++)
-                {
-                    window[count] = enumerator.Current;
-                }
+            yield return await paddingSelector(index).ConfigureAwait(false);
+        }
 
-                if (count == width)
-                {
-                    for (var index = 0; index < count; index++)
-                    {
-                        yield return window[index];
-                    }
-
-                    while (await enumerator.MoveNextAsync())
-                    {
-                        yield return enumerator.Current;
-                    }
-
-                    yield break;
-                }
-            }
-
-            var paddingLength = width - count;
-            for (var index = 0; index < paddingLength; index++)
-            {
-                yield return await paddingSelector(index).ConfigureAwait(false);
-            }
-
-            for (var index = 0; index < count; index++)
-            {
-                yield return window[index];
-            }
+        for (var index = 0; index < count; index++)
+        {
+            yield return window[index];
         }
     }
 

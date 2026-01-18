@@ -157,16 +157,6 @@ static partial class MoreAsyncEnumerable
             Func<TSource[], ValueTask<TResult>> resultSelector,
             [EnumeratorCancellation] CancellationToken cancellationToken = default)
         {
-            var count = await source.TryGetCollectionCountAsync(cancellationToken).ConfigureAwait(false);
-            switch (count)
-            {
-                case 0:
-                    yield break;
-                case > 0 when count <= size:
-                    size = count.Value;
-                    break;
-            }
-
             var index = 0;
             TSource[]? batch = null;
             await foreach (var element in source.WithCancellation(cancellationToken).ConfigureAwait(false))

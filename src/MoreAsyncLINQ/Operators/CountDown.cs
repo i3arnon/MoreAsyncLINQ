@@ -154,32 +154,19 @@ static partial class MoreAsyncEnumerable
             Func<TSource, int?, ValueTask<TResult>> resultSelector,
             [EnumeratorCancellation] CancellationToken cancellationToken = default)
         {
-            var collectionCount = await source.TryGetCollectionCountAsync(cancellationToken).ConfigureAwait(false);
-            if (collectionCount is not null)
+            var queue = new Queue<TSource>(Max(1, count + 1));
+            await foreach (var element in source.WithCancellation(cancellationToken).ConfigureAwait(false))
             {
-                await foreach (var element in source.WithCancellation(cancellationToken).ConfigureAwait(false))
+                queue.Enqueue(element);
+                if (queue.Count > count)
                 {
-                    yield return await resultSelector(element, collectionCount <= count ? collectionCount : null).ConfigureAwait(false);
-
-                    collectionCount--;
+                    yield return await resultSelector(queue.Dequeue(), null).ConfigureAwait(false);
                 }
             }
-            else
-            {
-                var queue = new Queue<TSource>(Max(1, count + 1));
-                await foreach (var element in source.WithCancellation(cancellationToken).ConfigureAwait(false))
-                {
-                    queue.Enqueue(element);
-                    if (queue.Count > count)
-                    {
-                        yield return await resultSelector(queue.Dequeue(), null).ConfigureAwait(false);
-                    }
-                }
 
-                while (queue.Count > 0)
-                {
-                    yield return await resultSelector(queue.Dequeue(), queue.Count).ConfigureAwait(false);
-                }
+            while (queue.Count > 0)
+            {
+                yield return await resultSelector(queue.Dequeue(), queue.Count).ConfigureAwait(false);
             }
         }
     }
