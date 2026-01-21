@@ -7,8 +7,6 @@ public abstract class AsyncEnumerableTests
             expected.ToArray(),
             await actual.ToArrayAsync());
 
-    protected static void AssertKnownEmpty<T>(IAsyncEnumerable<T> actual)
-    {
+    protected static void AssertKnownEmpty<T>(IAsyncEnumerable<T> actual) => 
         Assert.StartsWith("EmptyAsyncEnumerable", actual.GetType().Name);
-    }
 }
