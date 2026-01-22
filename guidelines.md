@@ -18,3 +18,13 @@ Each operator has sync and async delegate overloads sharing the same method name
 - Use `[EnumeratorCancellation]` on the `CancellationToken` parameter in iterator methods
 - Use `source.WithCancellation(cancellationToken)` in `await foreach` loops
 - No `ConfigureAwait(false)` — follow [.NET runtime conventions](https://github.com/dotnet/runtime/pull/113911)
+
+## Tests
+
+- Inherit from `AsyncEnumerableTests`
+- Standard test methods:
+  - `InvalidInputs_Throws` — verify `ArgumentNullException` for all null inputs
+  - `EmptySequence` — use `AssertKnownEmpty()` to verify empty sequence optimization
+  - `IsLazy` — use `BreakingSequence<T>` and `BreakingFunc.Of`/`OfAsync` to verify deferred execution
+- Use `[Theory]` with `[MemberData(nameof(IsAsync))]` to test sync and async delegate overloads
+- Use `AssertEqual(syncMoreLinqResult, asyncResult)` to verify behavior matches MoreLINQ

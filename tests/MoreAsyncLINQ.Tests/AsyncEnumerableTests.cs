@@ -2,6 +2,8 @@ namespace MoreAsyncLINQ.Tests;
 
 public abstract class AsyncEnumerableTests
 {
+    public static TheoryData<bool> IsAsync => [false, true];
+
     protected static async Task AssertEqual<T>(IEnumerable<T> expected, IAsyncEnumerable<T> actual) =>
         Assert.Equal(
             expected.ToArray(),

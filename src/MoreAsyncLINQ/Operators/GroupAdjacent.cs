@@ -154,11 +154,6 @@ static partial class MoreAsyncEnumerable
         Func<TKey, IList<TElement>, TResult> resultSelector,
         IEqualityComparer<TKey>? comparer)
     {
-        if (source is null) throw new ArgumentNullException(nameof(source));
-        if (keySelector is null) throw new ArgumentNullException(nameof(keySelector));
-        if (elementSelector is null) throw new ArgumentNullException(nameof(elementSelector));
-        if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
-
         return source.IsKnownEmpty()
             ? AsyncEnumerable.Empty<TResult>()
             : Core(
@@ -353,11 +348,6 @@ static partial class MoreAsyncEnumerable
         Func<TKey, IList<TElement>, CancellationToken, ValueTask<TResult>> resultSelector,
         IEqualityComparer<TKey>? comparer)
     {
-        if (source is null) throw new ArgumentNullException(nameof(source));
-        if (keySelector is null) throw new ArgumentNullException(nameof(keySelector));
-        if (elementSelector is null) throw new ArgumentNullException(nameof(elementSelector));
-        if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
-
         return source.IsKnownEmpty()
             ? AsyncEnumerable.Empty<TResult>()
             : Core(

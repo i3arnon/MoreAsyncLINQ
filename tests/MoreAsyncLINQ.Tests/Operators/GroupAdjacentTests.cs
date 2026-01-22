@@ -51,8 +51,7 @@ public class GroupAdjacentTests : AsyncEnumerableTests
     }
 
     [Theory]
-    [InlineData(false)]
-    [InlineData(true)]
+    [MemberData(nameof(IsAsync))]
     public void EmptySequence(bool isAsync)
     {
         var source = AsyncEnumerable.Empty<int>();
@@ -94,8 +93,7 @@ public class GroupAdjacentTests : AsyncEnumerableTests
     }
 
     [Theory]
-    [InlineData(false)]
-    [InlineData(true)]
+    [MemberData(nameof(IsAsync))]
     public async Task SourceSequence(bool isAsync)
     {
         const string one = "one";
@@ -123,8 +121,7 @@ public class GroupAdjacentTests : AsyncEnumerableTests
     }
 
     [Theory]
-    [InlineData(false)]
-    [InlineData(true)]
+    [MemberData(nameof(IsAsync))]
     public async Task SourceSequenceComparer(bool isAsync)
     {
         var source = new[] { "foo", "FOO", "Foo", "bar", "BAR", "Bar" };
@@ -141,8 +138,7 @@ public class GroupAdjacentTests : AsyncEnumerableTests
     }
 
     [Theory]
-    [InlineData(false)]
-    [InlineData(true)]
+    [MemberData(nameof(IsAsync))]
     public async Task SourceSequenceElementSelector(bool isAsync)
     {
         var source =
@@ -181,8 +177,7 @@ public class GroupAdjacentTests : AsyncEnumerableTests
     }
 
     [Theory]
-    [InlineData(false)]
-    [InlineData(true)]
+    [MemberData(nameof(IsAsync))]
     public async Task SourceSequenceElementSelectorComparer(bool isAsync)
     {
         var source =
@@ -224,8 +219,7 @@ public class GroupAdjacentTests : AsyncEnumerableTests
     }
 
     [Theory]
-    [InlineData(false)]
-    [InlineData(true)]
+    [MemberData(nameof(IsAsync))]
     public async Task SourceSequenceResultSelector(bool isAsync)
     {
         var source =
@@ -264,8 +258,7 @@ public class GroupAdjacentTests : AsyncEnumerableTests
     }
 
     [Theory]
-    [InlineData(false)]
-    [InlineData(true)]
+    [MemberData(nameof(IsAsync))]
     public async Task SourceSequenceResultSelectorComparer(bool isAsync)
     {
         var source =
@@ -307,8 +300,7 @@ public class GroupAdjacentTests : AsyncEnumerableTests
     }
 
     [Theory]
-    [InlineData(false)]
-    [InlineData(true)]
+    [MemberData(nameof(IsAsync))]
     public async Task SourceSequenceWithSomeNullKeys(bool isAsync)
     {
         var source =
