@@ -28,3 +28,8 @@ Each operator has sync and async delegate overloads sharing the same method name
   - `IsLazy` — use `BreakingSequence<T>` and `BreakingFunc.Of`/`OfAsync` to verify deferred execution
 - Use `[Theory]` with `[MemberData(nameof(IsAsync))]` to test sync and async delegate overloads
 - Use `AssertEqual(syncMoreLinqResult, asyncResult)` to verify behavior matches MoreLINQ
+
+## Documentation
+
+- Add new operator to `README.md` in alphabetical order
+- Approve new public API by copying `MoreAsyncLINQ.received.txt` to `MoreAsyncLINQ.verified.txt`

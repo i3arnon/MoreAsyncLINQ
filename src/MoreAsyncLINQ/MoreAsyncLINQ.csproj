@@ -16,7 +16,8 @@
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageReleaseNotes>Operators:
-- GroupAdjacent</PackageReleaseNotes>
+- GroupAdjacent
+- FullGroupJoin</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <PackageTags>linq;async</PackageTags>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
