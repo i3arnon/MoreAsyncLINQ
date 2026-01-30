@@ -877,6 +877,8 @@
         public static System.Threading.Tasks.ValueTask<TSource> SingleAsync<TSource>(this MoreAsyncLINQ.IExtremaAsyncEnumerable<TSource> source, System.Threading.CancellationToken cancellationToken = default) { }
         public static System.Threading.Tasks.ValueTask<TSource?> SingleOrDefaultAsync<TSource>(this MoreAsyncLINQ.IExtremaAsyncEnumerable<TSource> source, System.Threading.CancellationToken cancellationToken = default) { }
         public static System.Collections.Generic.IAsyncEnumerable<TSource> SkipLast<TSource>(System.Collections.Generic.IAsyncEnumerable<TSource> source, int count) { }
+        public static System.Collections.Generic.IAsyncEnumerable<TSource> SkipLastWhile<TSource>(this System.Collections.Generic.IAsyncEnumerable<TSource> source, System.Func<TSource, bool> predicate) { }
+        public static System.Collections.Generic.IAsyncEnumerable<TSource> SkipLastWhile<TSource>(this System.Collections.Generic.IAsyncEnumerable<TSource> source, System.Func<TSource, System.Threading.CancellationToken, System.Threading.Tasks.ValueTask<bool>> predicate) { }
         public static System.Collections.Generic.IAsyncEnumerable<TSource> SkipUntil<TSource>(this System.Collections.Generic.IAsyncEnumerable<TSource> source, System.Func<TSource, bool> predicate) { }
         public static System.Collections.Generic.IAsyncEnumerable<TSource> SkipUntil<TSource>(this System.Collections.Generic.IAsyncEnumerable<TSource> source, System.Func<TSource, System.Threading.CancellationToken, System.Threading.Tasks.ValueTask<bool>> predicate) { }
         [System.Obsolete("Use an overload of SkipUntil that accepts an async delegate with a CancellationTo" +

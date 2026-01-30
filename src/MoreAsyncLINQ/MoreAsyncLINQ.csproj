@@ -18,7 +18,8 @@
     <PackageReleaseNotes>Operators:
 - Duplicates
 - FullGroupJoin
-- GroupAdjacent</PackageReleaseNotes>
+- GroupAdjacent
+- SkipLastWhile</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <PackageTags>linq;async</PackageTags>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
