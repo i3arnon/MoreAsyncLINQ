@@ -100,6 +100,11 @@ Returns all distinct elements of the given source, where "distinctness" is
 determined via a projection and the default equality comparer for the
 projected type.
 
+### Duplicates
+
+Returns all duplicate elements of the given source, using the default equality
+comparer or a specified equality comparer.
+
 ### EndsWith
 
 Determines whether the end of the first sequence is equivalent to the second
