@@ -323,6 +323,10 @@ on the original sequence.
 
 Bypasses a specified number of elements at the end of the sequence.
 
+### SkipLastWhile
+
+Removes elements from the end of a sequence as long as a specified condition is true.
+
 ### SkipUntil
 
 Skips items from the input sequence until the given predicate returns true
