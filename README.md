@@ -152,6 +152,10 @@ Returns the result of applying a function to a sequence with 1 to 16 elements.
 Returns a sequence containing the values resulting from invoking (in order)
 each function in the source sequence of functions.
 
+### FullGroupJoin
+
+Performs a full group-join between two sequences.
+
 ### FullJoin
 
 Performs a full outer join between two sequences.
