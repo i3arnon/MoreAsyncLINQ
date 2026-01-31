@@ -76,7 +76,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(Pairwise)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> PairwiseAwait<TSource, TResult>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         Func<TSource, TSource, ValueTask<TResult>> resultSelector)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));

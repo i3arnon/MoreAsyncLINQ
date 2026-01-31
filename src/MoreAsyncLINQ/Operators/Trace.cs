@@ -94,13 +94,13 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(Trace)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> TraceAwait<TSource>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<string>> formatter)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (formatter is null) throw new ArgumentNullException(nameof(formatter));
 
-        return source.PipeAwait(async element => System.Diagnostics.Trace.WriteLine(await formatter(element).ConfigureAwait(false)));
+        return PipeAwait(source, async element => System.Diagnostics.Trace.WriteLine(await formatter(element).ConfigureAwait(false)));
     }
     
     /// <summary>

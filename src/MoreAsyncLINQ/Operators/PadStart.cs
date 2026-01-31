@@ -169,7 +169,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(PadStart)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> PadStartAwait<TSource>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         int width,
         Func<int, ValueTask<TSource>> paddingSelector)
     {
@@ -177,12 +177,12 @@ static partial class MoreAsyncEnumerable
         if (width < 0) throw new ArgumentOutOfRangeException(nameof(width));
         if (paddingSelector is null) throw new ArgumentNullException(nameof(paddingSelector));
 
-        return source.PadStartAwaitCore<TSource>(width, paddingSelector);
+        return PadStartAwaitCore(source, width, paddingSelector);
     }
 
     [Obsolete]
     private static async IAsyncEnumerable<TSource> PadStartAwaitCore<TSource>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         int width,
         Func<int, ValueTask<TSource>> paddingSelector,
         [EnumeratorCancellation] CancellationToken cancellationToken = default)

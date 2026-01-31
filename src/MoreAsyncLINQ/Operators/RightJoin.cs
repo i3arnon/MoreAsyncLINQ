@@ -255,7 +255,7 @@ static partial class MoreAsyncEnumerable
     /// outer join of the two input sequences.</returns>
     [Obsolete($"Use an overload of {nameof(RightJoin)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> RightJoinAwait<TSource, TKey, TResult>(
-        this IAsyncEnumerable<TSource> first,
+        IAsyncEnumerable<TSource> first,
         IAsyncEnumerable<TSource> second,
         Func<TSource, ValueTask<TKey>> keySelector,
         Func<TSource, ValueTask<TResult>> secondSelector,
@@ -267,7 +267,8 @@ static partial class MoreAsyncEnumerable
         if (secondSelector is null) throw new ArgumentNullException(nameof(secondSelector));
         if (bothSelector is null) throw new ArgumentNullException(nameof(bothSelector));
 
-        return first.RightJoinAwait(
+        return RightJoinAwait(
+            first,
             second,
             keySelector,
             keySelector,
@@ -309,7 +310,7 @@ static partial class MoreAsyncEnumerable
     /// outer join of the two input sequences.</returns>
     [Obsolete($"Use an overload of {nameof(RightJoin)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> RightJoinAwait<TSource, TKey, TResult>(
-        this IAsyncEnumerable<TSource> first,
+        IAsyncEnumerable<TSource> first,
         IAsyncEnumerable<TSource> second,
         Func<TSource, ValueTask<TKey>> keySelector,
         Func<TSource, ValueTask<TResult>> secondSelector,
@@ -322,7 +323,8 @@ static partial class MoreAsyncEnumerable
         if (secondSelector is null) throw new ArgumentNullException(nameof(secondSelector));
         if (bothSelector is null) throw new ArgumentNullException(nameof(bothSelector));
 
-        return first.RightJoinAwait(
+        return RightJoinAwait(
+            first,
             second,
             keySelector,
             keySelector,
@@ -364,7 +366,7 @@ static partial class MoreAsyncEnumerable
     /// outer join of the two input sequences.</returns>
     [Obsolete($"Use an overload of {nameof(RightJoin)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> RightJoinAwait<TFirst, TSecond, TKey, TResult>(
-        this IAsyncEnumerable<TFirst> first,
+        IAsyncEnumerable<TFirst> first,
         IAsyncEnumerable<TSecond> second,
         Func<TFirst, ValueTask<TKey>> firstKeySelector,
         Func<TSecond, ValueTask<TKey>> secondKeySelector,
@@ -378,7 +380,8 @@ static partial class MoreAsyncEnumerable
         if (secondSelector is null) throw new ArgumentNullException(nameof(secondSelector));
         if (bothSelector is null) throw new ArgumentNullException(nameof(bothSelector));
 
-        return first.RightJoinAwait(
+        return RightJoinAwait(
+            first,
             second,
             firstKeySelector,
             secondKeySelector,
@@ -423,7 +426,7 @@ static partial class MoreAsyncEnumerable
     /// outer join of the two input sequences.</returns>
     [Obsolete($"Use an overload of {nameof(RightJoin)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> RightJoinAwait<TFirst, TSecond, TKey, TResult>(
-        this IAsyncEnumerable<TFirst> first,
+        IAsyncEnumerable<TFirst> first,
         IAsyncEnumerable<TSecond> second,
         Func<TFirst, ValueTask<TKey>> firstKeySelector,
         Func<TSecond, ValueTask<TKey>> secondKeySelector,
@@ -438,7 +441,8 @@ static partial class MoreAsyncEnumerable
         if (secondSelector is null) throw new ArgumentNullException(nameof(secondSelector));
         if (bothSelector is null) throw new ArgumentNullException(nameof(bothSelector));
 
-        return second.LeftJoinAwait(
+        return LeftJoinAwait(
+            second,
             first,
             secondKeySelector,
             firstKeySelector,

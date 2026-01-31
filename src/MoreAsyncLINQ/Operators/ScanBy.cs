@@ -62,7 +62,7 @@ static partial class MoreAsyncEnumerable
     /// <param name="accumulator">
     /// An accumulator function invoked for each element.</param>
     /// <param name="comparer">The equality comparer to use to determine
-    /// whether or not keys are equal. If <c>null</c>, the default equality
+    /// whether keys are equal. If <c>null</c>, the default equality
     /// comparer for <typeparamref name="TSource"/> is used.</param>
     /// <returns>
     /// A sequence of keys paired with intermediate accumulator states.
@@ -133,7 +133,7 @@ static partial class MoreAsyncEnumerable
     /// </returns>
     [Obsolete($"Use an overload of {nameof(ScanBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<(TKey Key, TState State)> ScanByAwait<TSource, TKey, TState>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TKey>> keySelector,
         Func<TKey, ValueTask<TState>> seedSelector,
         Func<TState, TKey, TSource, ValueTask<TState>> accumulator)
@@ -143,7 +143,8 @@ static partial class MoreAsyncEnumerable
         if (seedSelector is null) throw new ArgumentNullException(nameof(seedSelector));
         if (accumulator is null) throw new ArgumentNullException(nameof(accumulator));
 
-        return source.ScanByAwait(
+        return ScanByAwait(
+            source,
             keySelector,
             seedSelector,
             accumulator,
@@ -167,14 +168,14 @@ static partial class MoreAsyncEnumerable
     /// <param name="accumulator">
     /// An accumulator function invoked for each element.</param>
     /// <param name="comparer">The equality comparer to use to determine
-    /// whether or not keys are equal. If <c>null</c>, the default equality
+    /// whether keys are equal. If <c>null</c>, the default equality
     /// comparer for <typeparamref name="TSource"/> is used.</param>
     /// <returns>
     /// A sequence of keys paired with intermediate accumulator states.
     /// </returns>
     [Obsolete($"Use an overload of {nameof(ScanBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<(TKey Key, TState State)> ScanByAwait<TSource, TKey, TState>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TKey>> keySelector,
         Func<TKey, ValueTask<TState>> seedSelector,
         Func<TState, TKey, TSource, ValueTask<TState>> accumulator,
@@ -269,7 +270,7 @@ static partial class MoreAsyncEnumerable
     /// <param name="accumulator">
     /// An accumulator function invoked for each element.</param>
     /// <param name="comparer">The equality comparer to use to determine
-    /// whether or not keys are equal. If <c>null</c>, the default equality
+    /// whether keys are equal. If <c>null</c>, the default equality
     /// comparer for <typeparamref name="TSource"/> is used.</param>
     /// <returns>
     /// A sequence of keys paired with intermediate accumulator states.

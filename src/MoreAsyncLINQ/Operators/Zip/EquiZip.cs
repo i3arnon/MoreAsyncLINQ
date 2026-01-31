@@ -210,7 +210,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(EquiZip)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> EquiZipAwait<T1, T2, TResult>(
-        this IAsyncEnumerable<T1> first,
+        IAsyncEnumerable<T1> first,
         IAsyncEnumerable<T2> second,
         Func<T1, T2, ValueTask<TResult>> resultSelector)
     {
@@ -251,7 +251,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(EquiZip)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> EquiZipAwait<T1, T2, T3, TResult>(
-        this IAsyncEnumerable<T1> first,
+        IAsyncEnumerable<T1> first,
         IAsyncEnumerable<T2> second,
         IAsyncEnumerable<T3> third,
         Func<T1, T2, T3, ValueTask<TResult>> resultSelector)
@@ -296,7 +296,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(EquiZip)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> EquiZipAwait<T1, T2, T3, T4, TResult>(
-        this IAsyncEnumerable<T1> first,
+        IAsyncEnumerable<T1> first,
         IAsyncEnumerable<T2> second,
         IAsyncEnumerable<T3> third,
         IAsyncEnumerable<T4> fourth,
