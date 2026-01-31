@@ -140,64 +140,6 @@ static partial class MoreAsyncEnumerable
     /// <remarks>
     /// This operator uses deferred execution and streams its results.
     /// </remarks>
-    [Obsolete($"Use an overload of {nameof(Pad)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
-    public static IAsyncEnumerable<TSource> PadAwait<TSource>(
-        IAsyncEnumerable<TSource> source,
-        int width,
-        Func<int, ValueTask<TSource>> paddingSelector)
-    {
-        if (source is null) throw new ArgumentNullException(nameof(source));
-        if (width < 0) throw new ArgumentOutOfRangeException(nameof(width));
-        if (paddingSelector is null) throw new ArgumentNullException(nameof(paddingSelector));
-
-        return PadAwait(
-            source,
-            width,
-            padding: default,
-            paddingSelector);
-    }
-
-    [Obsolete]
-    private static async IAsyncEnumerable<TSource> PadAwait<TSource>(
-        IAsyncEnumerable<TSource> source,
-        int width,
-        TSource? padding,
-        Func<int, ValueTask<TSource>>? paddingSelector,
-        [EnumeratorCancellation] CancellationToken cancellationToken = default)
-    {
-        var count = 0;
-        await foreach (var element in source.WithCancellation(cancellationToken).ConfigureAwait(false))
-        {
-            yield return element;
-
-            count++;
-        }
-
-        while (count < width)
-        {
-            yield return paddingSelector is null
-                ? padding!
-                : await paddingSelector(count).ConfigureAwait(false);
-
-            count++;
-        }
-    }
-
-    /// <summary>
-    /// Pads a sequence with a dynamic filler value if it is narrower (shorter
-    /// in length) than a given width.
-    /// </summary>
-    /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
-    /// <param name="source">The sequence to pad.</param>
-    /// <param name="width">The width/length below which to pad.</param>
-    /// <param name="paddingSelector">Function to calculate padding.</param>
-    /// <returns>
-    /// Returns a sequence that is at least as wide/long as the width/length
-    /// specified by the <paramref name="width"/> parameter.
-    /// </returns>
-    /// <remarks>
-    /// This operator uses deferred execution and streams its results.
-    /// </remarks>
     public static IAsyncEnumerable<TSource> Pad<TSource>(
         this IAsyncEnumerable<TSource> source,
         int width,
