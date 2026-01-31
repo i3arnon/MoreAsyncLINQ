@@ -436,7 +436,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(OrderedMerge)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> OrderedMergeAwait<TSource, TKey>(
-        IAsyncEnumerable<TSource> first,
+        this IAsyncEnumerable<TSource> first,
         IAsyncEnumerable<TSource> second,
         Func<TSource, ValueTask<TKey>> keySelector)
     {
@@ -444,8 +444,7 @@ static partial class MoreAsyncEnumerable
         if (second is null) throw new ArgumentNullException(nameof(second));
         if (keySelector is null) throw new ArgumentNullException(nameof(keySelector));
 
-        return OrderedMergeAwait(
-            first,
+        return first.OrderedMergeAwait(
             second,
             keySelector,
             keySelector,
@@ -485,7 +484,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(OrderedMerge)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> OrderedMergeAwait<TSource, TKey, TResult>(
-        IAsyncEnumerable<TSource> first,
+        this IAsyncEnumerable<TSource> first,
         IAsyncEnumerable<TSource> second,
         Func<TSource, ValueTask<TKey>> keySelector,
         Func<TSource, ValueTask<TResult>> firstSelector,
@@ -499,8 +498,7 @@ static partial class MoreAsyncEnumerable
         if (secondSelector is null) throw new ArgumentNullException(nameof(secondSelector));
         if (bothSelector is null) throw new ArgumentNullException(nameof(bothSelector));
 
-        return OrderedMergeAwait(
-            first,
+        return first.OrderedMergeAwait(
             second,
             keySelector,
             keySelector,
@@ -541,7 +539,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(OrderedMerge)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> OrderedMergeAwait<TSource, TKey, TResult>(
-        IAsyncEnumerable<TSource> first,
+        this IAsyncEnumerable<TSource> first,
         IAsyncEnumerable<TSource> second,
         Func<TSource, ValueTask<TKey>> keySelector,
         Func<TSource, ValueTask<TResult>> firstSelector,
@@ -556,8 +554,7 @@ static partial class MoreAsyncEnumerable
         if (secondSelector is null) throw new ArgumentNullException(nameof(secondSelector));
         if (bothSelector is null) throw new ArgumentNullException(nameof(bothSelector));
 
-        return OrderedMergeAwait(
-            first,
+        return first.OrderedMergeAwait(
             second,
             keySelector,
             keySelector,
@@ -601,7 +598,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(OrderedMerge)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> OrderedMergeAwait<TFirst, TSecond, TKey, TResult>(
-        IAsyncEnumerable<TFirst> first,
+        this IAsyncEnumerable<TFirst> first,
         IAsyncEnumerable<TSecond> second,
         Func<TFirst, ValueTask<TKey>> firstKeySelector,
         Func<TSecond, ValueTask<TKey>> secondKeySelector,
@@ -617,8 +614,7 @@ static partial class MoreAsyncEnumerable
         if (secondSelector is null) throw new ArgumentNullException(nameof(secondSelector));
         if (bothSelector is null) throw new ArgumentNullException(nameof(bothSelector));
 
-        return OrderedMergeAwait(
-            first,
+        return first.OrderedMergeAwait(
             second,
             firstKeySelector,
             secondKeySelector,
@@ -664,7 +660,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(OrderedMerge)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> OrderedMergeAwait<TFirst, TSecond, TKey, TResult>(
-        IAsyncEnumerable<TFirst> first,
+        this IAsyncEnumerable<TFirst> first,
         IAsyncEnumerable<TSecond> second,
         Func<TFirst, ValueTask<TKey>> firstKeySelector,
         Func<TSecond, ValueTask<TKey>> secondKeySelector,

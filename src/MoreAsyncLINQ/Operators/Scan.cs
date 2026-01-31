@@ -115,7 +115,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>The scanned sequence</returns>
     [Obsolete($"Use an overload of {nameof(Scan)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> ScanAwait<TSource>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, TSource, ValueTask<TSource>> transformation)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
@@ -162,7 +162,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>The scanned sequence</returns>
     [Obsolete($"Use an overload of {nameof(Scan)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TState> ScanAwait<TSource, TState>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         TState seed,
         Func<TState, TSource, ValueTask<TState>> transformation)
     {

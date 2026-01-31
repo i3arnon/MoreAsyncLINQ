@@ -208,14 +208,14 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(PartialSortBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> PartialSortByAwait<TSource, TKey>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         int count,
         Func<TSource, ValueTask<TKey>> keySelector)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (keySelector is null) throw new ArgumentNullException(nameof(keySelector));
 
-        return PartialSortByAwait(source, count, keySelector, comparer: null);
+        return source.PartialSortByAwait(count, keySelector, comparer: null);
     }
 
     /// <summary>
@@ -236,7 +236,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(PartialSortBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> PartialSortByAwait<TSource, TKey>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         int count,
         Func<TSource, ValueTask<TKey>> keySelector,
         OrderByDirection direction)
@@ -244,7 +244,7 @@ static partial class MoreAsyncEnumerable
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (keySelector is null) throw new ArgumentNullException(nameof(keySelector));
 
-        return PartialSortByAwait(source, count, keySelector, comparer: null, direction);
+        return source.PartialSortByAwait(count, keySelector, comparer: null, direction);
     }
 
     /// <summary>
@@ -267,7 +267,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(PartialSortBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> PartialSortByAwait<TSource, TKey>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         int count,
         Func<TSource, ValueTask<TKey>> keySelector,
         IComparer<TKey>? comparer,
@@ -276,7 +276,7 @@ static partial class MoreAsyncEnumerable
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (keySelector is null) throw new ArgumentNullException(nameof(keySelector));
 
-        return PartialSortByAwait(source, count, keySelector, Comparers.Get(comparer, direction));
+        return source.PartialSortByAwait(count, keySelector, Comparers.Get(comparer, direction));
     }
 
     /// <summary>
@@ -297,7 +297,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(PartialSortBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> PartialSortByAwait<TSource, TKey>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         int count,
         Func<TSource, ValueTask<TKey>> keySelector,
         IComparer<TKey>? comparer)

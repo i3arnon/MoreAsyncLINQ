@@ -93,9 +93,9 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(Assert)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> AssertAwait<TSource>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<bool>> predicate) =>
-        AssertAwait(source, predicate, errorSelector: null);
+        source.AssertAwait(predicate, errorSelector: null);
 
     /// <summary>
     /// Asserts that all elements of a sequence meet a given condition
@@ -113,7 +113,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(Assert)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> AssertAwait<TSource>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<bool>> predicate,
         Func<TSource, ValueTask<Exception>>? errorSelector)
     {

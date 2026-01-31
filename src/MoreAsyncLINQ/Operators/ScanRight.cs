@@ -121,7 +121,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(ScanRight)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> ScanRightAwait<TSource>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, TSource, ValueTask<TSource>> func)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
@@ -153,7 +153,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(ScanRight)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TAccumulate> ScanRightAwait<TSource, TAccumulate>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         TAccumulate seed,
         Func<TSource, TAccumulate, ValueTask<TAccumulate>> func)
     {

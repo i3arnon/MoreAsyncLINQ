@@ -168,7 +168,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(AggregateRightAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TSource> AggregateRightAwaitAsync<TSource>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, TSource, ValueTask<TSource>> func,
         CancellationToken cancellationToken = default)
     {
@@ -210,7 +210,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(AggregateRightAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TAccumulate> AggregateRightAwaitAsync<TSource, TAccumulate>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         TAccumulate seed,
         Func<TSource, TAccumulate, ValueTask<TAccumulate>> func,
         CancellationToken cancellationToken = default)
@@ -253,7 +253,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(AggregateRightAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> AggregateRightAwaitAsync<TSource, TAccumulate, TResult>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         TAccumulate seed,
         Func<TSource, TAccumulate, ValueTask<TAccumulate>> func,
         Func<TAccumulate, ValueTask<TResult>> resultSelector,
@@ -272,7 +272,7 @@ static partial class MoreAsyncEnumerable
             Func<TAccumulate, ValueTask<TResult>> resultSelector,
             CancellationToken cancellationToken)
         {
-            var accumulate = await AggregateRightAwaitAsync(source, seed, func, cancellationToken).ConfigureAwait(false);
+            var accumulate = await source.AggregateRightAwaitAsync(seed, func, cancellationToken).ConfigureAwait(false);
             return await resultSelector(accumulate).ConfigureAwait(false);
         }
     }
