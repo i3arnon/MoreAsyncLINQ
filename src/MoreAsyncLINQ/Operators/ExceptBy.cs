@@ -55,7 +55,7 @@ static partial class MoreAsyncEnumerable
     /// <param name="second">The sequence of elements whose keys may prevent elements in
     /// <paramref name="first"/> from being returned.</param>
     /// <param name="keySelector">The mapping from source element to key.</param>
-    /// <param name="keyComparer">The equality comparer to use to determine whether or not keys are equal.
+    /// <param name="keyComparer">The equality comparer to use to determine whether keys are equal.
     /// If null, the default equality comparer for <c>TSource</c> is used.</param>
     /// <returns>A sequence of elements from <paramref name="first"/> whose key was not also a key for
     /// any element in <paramref name="second"/>.</returns>
@@ -115,7 +115,7 @@ static partial class MoreAsyncEnumerable
     /// any element in <paramref name="second"/>.</returns>
     [Obsolete($"Use an overload of {nameof(ExceptBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> ExceptByAwait<TSource, TKey>(
-        this IAsyncEnumerable<TSource> first,
+        IAsyncEnumerable<TSource> first,
         IAsyncEnumerable<TSource> second,
         Func<TSource, ValueTask<TKey>> keySelector)
     {
@@ -123,7 +123,7 @@ static partial class MoreAsyncEnumerable
         if (second is null) throw new ArgumentNullException(nameof(second));
         if (keySelector is null) throw new ArgumentNullException(nameof(keySelector)); 
             
-        return first.ExceptByAwait(second, keySelector, keyComparer: null);
+        return ExceptByAwait(first, second, keySelector, keyComparer: null);
     }
 
     /// <summary>
@@ -142,13 +142,13 @@ static partial class MoreAsyncEnumerable
     /// <param name="second">The sequence of elements whose keys may prevent elements in
     /// <paramref name="first"/> from being returned.</param>
     /// <param name="keySelector">The mapping from source element to key.</param>
-    /// <param name="keyComparer">The equality comparer to use to determine whether or not keys are equal.
+    /// <param name="keyComparer">The equality comparer to use to determine whether keys are equal.
     /// If null, the default equality comparer for <c>TSource</c> is used.</param>
     /// <returns>A sequence of elements from <paramref name="first"/> whose key was not also a key for
     /// any element in <paramref name="second"/>.</returns>
     [Obsolete($"Use an overload of {nameof(ExceptBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> ExceptByAwait<TSource, TKey>(
-        this IAsyncEnumerable<TSource> first,
+        IAsyncEnumerable<TSource> first,
         IAsyncEnumerable<TSource> second,
         Func<TSource, ValueTask<TKey>> keySelector,
         IEqualityComparer<TKey>? keyComparer)
@@ -228,7 +228,7 @@ static partial class MoreAsyncEnumerable
     /// <param name="second">The sequence of elements whose keys may prevent elements in
     /// <paramref name="first"/> from being returned.</param>
     /// <param name="keySelector">The mapping from source element to key.</param>
-    /// <param name="keyComparer">The equality comparer to use to determine whether or not keys are equal.
+    /// <param name="keyComparer">The equality comparer to use to determine whether keys are equal.
     /// If null, the default equality comparer for <c>TSource</c> is used.</param>
     /// <returns>A sequence of elements from <paramref name="first"/> whose key was not also a key for
     /// any element in <paramref name="second"/>.</returns>

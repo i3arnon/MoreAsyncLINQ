@@ -889,7 +889,7 @@ static partial class MoreAsyncEnumerable
         TAccumulate1,
         TAccumulate2,
         TResult>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         TAccumulate1 seed1,
         Func<TAccumulate1, TSource, ValueTask<TAccumulate1>> accumulator1,
         TAccumulate2 seed2,
@@ -967,7 +967,7 @@ static partial class MoreAsyncEnumerable
         TAccumulate2,
         TAccumulate3,
         TResult>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         TAccumulate1 seed1,
         Func<TAccumulate1, TSource, ValueTask<TAccumulate1>> accumulator1,
         TAccumulate2 seed2,
@@ -1059,7 +1059,7 @@ static partial class MoreAsyncEnumerable
         TAccumulate3,
         TAccumulate4,
         TResult>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         TAccumulate1 seed1,
         Func<TAccumulate1, TSource, ValueTask<TAccumulate1>> accumulator1,
         TAccumulate2 seed2,
@@ -1165,7 +1165,7 @@ static partial class MoreAsyncEnumerable
         TAccumulate4,
         TAccumulate5,
         TResult>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         TAccumulate1 seed1,
         Func<TAccumulate1, TSource, ValueTask<TAccumulate1>> accumulator1,
         TAccumulate2 seed2,
@@ -1285,7 +1285,7 @@ static partial class MoreAsyncEnumerable
         TAccumulate5,
         TAccumulate6,
         TResult>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         TAccumulate1 seed1,
         Func<TAccumulate1, TSource, ValueTask<TAccumulate1>> accumulator1,
         TAccumulate2 seed2,
@@ -1419,7 +1419,7 @@ static partial class MoreAsyncEnumerable
         TAccumulate6,
         TAccumulate7,
         TResult>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         TAccumulate1 seed1,
         Func<TAccumulate1, TSource, ValueTask<TAccumulate1>> accumulator1,
         TAccumulate2 seed2,
@@ -1567,7 +1567,7 @@ static partial class MoreAsyncEnumerable
         TAccumulate7,
         TAccumulate8,
         TResult>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         TAccumulate1 seed1,
         Func<TAccumulate1, TSource, ValueTask<TAccumulate1>> accumulator1,
         TAccumulate2 seed2,

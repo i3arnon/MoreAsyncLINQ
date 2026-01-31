@@ -63,7 +63,7 @@ static partial class MoreAsyncEnumerable
     /// returned sequence. This operator uses deferred execution and streams it results.
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(Pipe)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
-    public static IAsyncEnumerable<TSource> PipeAwait<TSource>(this IAsyncEnumerable<TSource> source, Func<TSource, ValueTask> action)
+    public static IAsyncEnumerable<TSource> PipeAwait<TSource>(IAsyncEnumerable<TSource> source, Func<TSource, ValueTask> action)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (action is null) throw new ArgumentNullException(nameof(action));

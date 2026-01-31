@@ -702,7 +702,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(Cartesian)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> CartesianAwait<T1, T2, TResult>(
-        this IAsyncEnumerable<T1> first,
+        IAsyncEnumerable<T1> first,
         IAsyncEnumerable<T2> second,
         Func<T1, T2, ValueTask<TResult>> resultSelector)
     {
@@ -765,7 +765,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(Cartesian)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> CartesianAwait<T1, T2, T3, TResult>(
-        this IAsyncEnumerable<T1> first,
+        IAsyncEnumerable<T1> first,
         IAsyncEnumerable<T2> second,
         IAsyncEnumerable<T3> third,
         Func<T1, T2, T3, ValueTask<TResult>> resultSelector)
@@ -838,7 +838,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(Cartesian)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> CartesianAwait<T1, T2, T3, T4, TResult>(
-        this IAsyncEnumerable<T1> first,
+        IAsyncEnumerable<T1> first,
         IAsyncEnumerable<T2> second,
         IAsyncEnumerable<T3> third,
         IAsyncEnumerable<T4> fourth,
@@ -921,7 +921,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(Cartesian)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> CartesianAwait<T1, T2, T3, T4, T5, TResult>(
-        this IAsyncEnumerable<T1> first,
+        IAsyncEnumerable<T1> first,
         IAsyncEnumerable<T2> second,
         IAsyncEnumerable<T3> third,
         IAsyncEnumerable<T4> fourth,
@@ -1014,7 +1014,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(Cartesian)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> CartesianAwait<T1, T2, T3, T4, T5, T6, TResult>(
-        this IAsyncEnumerable<T1> first,
+        IAsyncEnumerable<T1> first,
         IAsyncEnumerable<T2> second,
         IAsyncEnumerable<T3> third,
         IAsyncEnumerable<T4> fourth,
@@ -1117,7 +1117,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(Cartesian)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> CartesianAwait<T1, T2, T3, T4, T5, T6, T7, TResult>(
-        this IAsyncEnumerable<T1> first,
+        IAsyncEnumerable<T1> first,
         IAsyncEnumerable<T2> second,
         IAsyncEnumerable<T3> third,
         IAsyncEnumerable<T4> fourth,
@@ -1230,7 +1230,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(Cartesian)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> CartesianAwait<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(
-        this IAsyncEnumerable<T1> first,
+        IAsyncEnumerable<T1> first,
         IAsyncEnumerable<T2> second,
         IAsyncEnumerable<T3> third,
         IAsyncEnumerable<T4> fourth,
