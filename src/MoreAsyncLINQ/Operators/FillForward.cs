@@ -153,13 +153,13 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(FillForward)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> FillForwardAwait<TSource>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<bool>> predicate)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (predicate is null) throw new ArgumentNullException(nameof(predicate));
 
-        return source.FillForwardCoreAwait(predicate, fillSelector: null);
+        return FillForwardCoreAwait(source, predicate, fillSelector: null);
     }
 
     /// <summary>
@@ -187,7 +187,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(FillForward)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> FillForwardAwait<TSource>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<bool>> predicate,
         Func<TSource, TSource, ValueTask<TSource>> fillSelector)
     {
@@ -195,12 +195,12 @@ static partial class MoreAsyncEnumerable
         if (predicate is null) throw new ArgumentNullException(nameof(predicate));
         if (fillSelector is null) throw new ArgumentNullException(nameof(fillSelector));
 
-        return source.FillForwardCoreAwait(predicate, fillSelector);
+        return FillForwardCoreAwait(source, predicate, fillSelector);
     }
 
     [Obsolete]
     private static async IAsyncEnumerable<TSource> FillForwardCoreAwait<TSource>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<bool>> predicate,
         Func<TSource, TSource, ValueTask<TSource>>? fillSelector,
         [EnumeratorCancellation] CancellationToken cancellationToken = default)

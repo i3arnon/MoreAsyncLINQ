@@ -170,7 +170,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(FillBackward)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> FillBackwardAwait<TSource>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<bool>> predicate)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
@@ -205,7 +205,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(FillBackward)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> FillBackwardAwait<TSource>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<bool>> predicate,
         Func<TSource, TSource, ValueTask<TSource>> fillSelector)
     {

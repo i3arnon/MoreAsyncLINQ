@@ -116,13 +116,13 @@ static partial class MoreAsyncEnumerable
     /// </exception>
     [Obsolete($"Use an overload of {nameof(Segment)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<IEnumerable<TSource>> SegmentAwait<TSource>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<bool>> newSegmentPredicate)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (newSegmentPredicate is null) throw new ArgumentNullException(nameof(newSegmentPredicate));
 
-        return source.SegmentAwait((current, _, _) => newSegmentPredicate(current));
+        return SegmentAwait(source, (current, _, _) => newSegmentPredicate(current));
     }
 
     /// <summary>
@@ -137,13 +137,13 @@ static partial class MoreAsyncEnumerable
     /// </exception>
     [Obsolete($"Use an overload of {nameof(Segment)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<IEnumerable<TSource>> SegmentAwait<TSource>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         Func<TSource, int, ValueTask<bool>> newSegmentPredicate)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (newSegmentPredicate is null) throw new ArgumentNullException(nameof(newSegmentPredicate));
 
-        return source.SegmentAwait((current, _, index) => newSegmentPredicate(current, index));
+        return SegmentAwait(source, (current, _, index) => newSegmentPredicate(current, index));
     }
 
     /// <summary>
@@ -158,7 +158,7 @@ static partial class MoreAsyncEnumerable
     /// </exception>
     [Obsolete($"Use an overload of {nameof(Segment)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<IEnumerable<TSource>> SegmentAwait<TSource>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         Func<TSource, TSource, int, ValueTask<bool>> newSegmentPredicate)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));

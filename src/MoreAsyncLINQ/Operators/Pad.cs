@@ -142,7 +142,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(Pad)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> PadAwait<TSource>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         int width,
         Func<int, ValueTask<TSource>> paddingSelector)
     {
@@ -150,7 +150,8 @@ static partial class MoreAsyncEnumerable
         if (width < 0) throw new ArgumentOutOfRangeException(nameof(width));
         if (paddingSelector is null) throw new ArgumentNullException(nameof(paddingSelector));
 
-        return source.PadAwait(
+        return PadAwait(
+            source,
             width,
             padding: default,
             paddingSelector);
@@ -158,7 +159,7 @@ static partial class MoreAsyncEnumerable
 
     [Obsolete]
     private static async IAsyncEnumerable<TSource> PadAwait<TSource>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         int width,
         TSource? padding,
         Func<int, ValueTask<TSource>>? paddingSelector,
