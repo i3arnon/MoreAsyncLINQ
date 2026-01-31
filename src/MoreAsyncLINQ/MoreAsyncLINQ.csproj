@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <Authors>Bar Arnon</Authors>
-    <WarningsNotAsErrors>CS0419,CS1574</WarningsNotAsErrors>
     <ContinuousIntegrationBuild>True</ContinuousIntegrationBuild>
     <Description>Additional async LINQ to objects operators for IAsyncEnumerable&lt;T&gt;</Description>
     <Deterministic>true</Deterministic>
@@ -11,11 +10,10 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IncludeSource>true</IncludeSource>
     <IncludeSymbols>true</IncludeSymbols>
-    <NoWarn>$(NoWarn);CA2007</NoWarn>
     <PackageId>MoreAsyncLINQ</PackageId>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageReleaseNotes>Breaking Chnages:
+    <PackageReleaseNotes>Breaking Changes:
 - Hide Obsolete overloads</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <PackageTags>linq;async</PackageTags>
