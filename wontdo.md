@@ -1,8 +1,6 @@
 # Won't Dos
 
-This document tracks operators from [MoreLINQ](https://github.com/morelinq/MoreLINQ) that are not yet implemented in MoreAsyncLINQ.
-
-Operators are ordered by estimated importance/popularity for async scenarios.
+This document tracks operators from [MoreLINQ](https://github.com/morelinq/MoreLINQ) that are not implemented in MoreAsyncLINQ.
 
 ## Experimental Operators
 
@@ -66,5 +64,49 @@ Returns a sequence representing all subsets of any size that are part of the ori
 ### ToDataTable
 
 Appends elements in the sequence as rows of a given DataTable.
+
+---
+
+## No Async Equivalent
+
+These operators rely on types or interfaces that have no async counterpart.
+
+### Flatten
+
+Flattens a sequence containing arbitrarily-nested sequences. This operator works with the non-generic `IEnumerable` interface to handle heterogeneous nesting (e.g., `object[]` containing other `object[]`). Since there's no `IAsyncEnumerable` equivalent of the non-generic `IEnumerable`, this operator cannot be implemented for async sequences.
+
+---
+
+## Implemented in .NET
+
+These operators are provided by [`System.Linq.AsyncEnumerable`](https://learn.microsoft.com/en-us/dotnet/api/system.linq.asyncenumerable?view=net-10.0) in .NET 10+.
+
+### Append
+
+[Returns a new sequence that contains the elements of the input sequence followed by the specified element.](https://learn.microsoft.com/en-us/dotnet/api/system.linq.asyncenumerable.append)
+
+---
+
+### Concat
+
+[Concatenates two sequences.](https://learn.microsoft.com/en-us/dotnet/api/system.linq.asyncenumerable.concat)
+
+---
+
+### Prepend
+
+[Returns a new sequence that contains the specified element followed by the elements of the input sequence.](https://learn.microsoft.com/en-us/dotnet/api/system.linq.asyncenumerable.prepend)
+
+---
+
+### Shuffle
+
+[Shuffles the order of the elements of a sequence.](https://learn.microsoft.com/en-us/dotnet/api/system.linq.asyncenumerable.shuffle)
+
+---
+
+### ToHashSet
+
+[Creates a HashSet from an async-enumerable sequence.](https://learn.microsoft.com/en-us/dotnet/api/system.linq.asyncenumerable.tohashsetasync)
 
 ---
