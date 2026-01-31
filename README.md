@@ -9,20 +9,20 @@ It's like [MoreLINQ], only asynchronous.
 
 ## Operators
 
-### Acquire
+### AcquireAsync
 
 Ensures that a source sequence of disposable objects are all acquired
 successfully. If the acquisition of any one fails then those successfully
 acquired till that point are disposed.
 
-### Aggregate
+### AggregateAsync
 
 Applies multiple accumulators sequentially in a single pass over a sequence.
 
-### AggregateRight
+### AggregateRightAsync
 
 Applies a right-associative accumulator function over a sequence.
-This operator is the right-associative version of the `Aggregate` operator.
+This operator is the right-associative version of the `AggregateAsync` operator.
 
 ### Assert
 
@@ -33,12 +33,12 @@ throws an exception.
 
 Asserts that a source sequence contains a given count of elements.
 
-### AtLeast
+### AtLeastAsync
 
 Determines whether or not the number of elements in the sequence is greater
 than or equal to the given integer.
 
-### AtMost
+### AtMostAsync
 
 Determines whether or not the number of elements in the sequence is lesser
 than or equal to the given integer.
@@ -67,17 +67,17 @@ sequence of result elements for source elements where the function returns a
 couple (2-tuple) having a `true` as its first element and result as the
 second.
 
-### CompareCount
+### CompareCountAsync
 
 Compares two sequences and returns an integer that indicates whether the
 first sequence has fewer, the same or more elements than the second sequence.
 
-### Consume
+### ConsumeAsync
 
 Completely consumes the given sequence. This method uses immediate execution,
 and doesn't store any data during execution
 
-### CountBetween
+### CountBetweenAsync
 
 Determines whether or not the number of elements in the sequence is between an
 inclusive range of minimum and maximum integers.
@@ -105,7 +105,7 @@ projected type.
 Returns all duplicate elements of the given source, using the default equality
 comparer or a specified equality comparer.
 
-### EndsWith
+### EndsWithAsync
 
 Determines whether the end of the first sequence is equivalent to the second
 sequence.
@@ -119,7 +119,7 @@ if the input sequences are of different lengths.
 ### Evaluate
 Returns a sequence containing the values resulting from invoking (in order) each function in the source sequence of functions.
 
-### Exactly
+### ExactlyAsync
 
 Determines whether or not the number of elements in the sequence is equals
 to the given integer.
@@ -148,11 +148,11 @@ with the following non-null reference or value in that sequence.
 Returns a sequence with each null reference or value in the source replaced
 with the previous non-null reference or value seen in that sequence.
 
-### ForEach
+### ForEachAsync
 
 Immediately executes the given action on each element in the source sequence.
 
-### Fold
+### FoldAsync
 
 Returns the result of applying a function to a sequence with 1 to 16 elements.
 
@@ -349,7 +349,7 @@ descending) into a single sequence that preserves that order.
 
 Splits the source sequence by a separator.
 
-### StartsWith
+### StartsWithAsync
 
 Determines whether the beginning of the first sequence is equivalent to the
 second sequence.
@@ -378,22 +378,22 @@ when applied to the current source item; that item will be the last returned
 Performs a subsequent ordering of elements in a sequence in a particular
 direction (ascending, descending) according to a key.
 
-### ToArrayByIndex
+### ToArrayByIndexAsync
 
 Creates an array from an `IAsyncEnumerable<T>` where a function is used to determine
 the index at which an element will be placed in the array.
 
-### ToDelimitedString
+### ToDelimitedStringAsync
 
 Creates a delimited string from a sequence of values. The delimiter used
 depends on the current culture of the executing thread.
 
-### ToDictionary
+### ToDictionaryAsync
 
 Creates a [dictionary][dict] from a sequence of [key-value pair][kvp] elements
 or tuples of 2.
 
-### ToLookup
+### ToLookupAsync
 
 Creates a [lookup][lookup] from a sequence of [key-value pair][kvp] elements
 or tuples of 2.
