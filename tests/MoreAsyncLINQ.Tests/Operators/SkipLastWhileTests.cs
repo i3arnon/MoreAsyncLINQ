@@ -45,8 +45,8 @@ public class SkipLastWhileTests : AsyncEnumerableTests
         await AssertEqual(
             source.SkipLastWhile(x => x < 5),
             isAsync
-                ? asyncSource.SkipLastWhile((x, _) => ValueTask.FromResult(x < 5))
-                : asyncSource.SkipLastWhile(x => x < 5));
+                ? asyncSource.SkipLastWhile(async (number, _) => number < 5)
+                : asyncSource.SkipLastWhile(number => number < 5));
     }
 
     [Theory]
@@ -59,8 +59,8 @@ public class SkipLastWhileTests : AsyncEnumerableTests
         await AssertEqual(
             source.SkipLastWhile(x => x == 100),
             isAsync
-                ? asyncSource.SkipLastWhile((x, _) => ValueTask.FromResult(x == 100))
-                : asyncSource.SkipLastWhile(x => x == 100));
+                ? asyncSource.SkipLastWhile(async (number, _) => number == 100)
+                : asyncSource.SkipLastWhile(number => number == 100));
     }
 
     [Theory]
@@ -73,8 +73,8 @@ public class SkipLastWhileTests : AsyncEnumerableTests
         await AssertEqual(
             source.SkipLastWhile(x => x > 2),
             isAsync
-                ? asyncSource.SkipLastWhile((x, _) => ValueTask.FromResult(x > 2))
-                : asyncSource.SkipLastWhile(x => x > 2));
+                ? asyncSource.SkipLastWhile(async (number, _) => number > 2)
+                : asyncSource.SkipLastWhile(number => number > 2));
     }
 
     [Theory]
@@ -101,8 +101,8 @@ public class SkipLastWhileTests : AsyncEnumerableTests
         await AssertEqual(
             source.SkipLastWhile(x => x == 0),
             isAsync
-                ? asyncSource.SkipLastWhile((x, _) => ValueTask.FromResult(x == 0))
-                : asyncSource.SkipLastWhile(x => x == 0));
+                ? asyncSource.SkipLastWhile(async (number, _) => number == 0)
+                : asyncSource.SkipLastWhile(number => number == 0));
     }
 }
 
