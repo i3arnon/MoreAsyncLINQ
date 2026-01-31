@@ -19,4 +19,16 @@ public static class BreakingFunc
 
     public static Func<T1, T2, T3, CancellationToken, ValueTask<TResult>> OfAsync<T1, T2, T3, TResult>() =>
         (_, _, _, _) => throw new InvalidOperationException("Function should not be invoked.");
+
+    public static Action<T> OfAction<T>() =>
+        _ => throw new InvalidOperationException("Action should not be invoked.");
+
+    public static Action<T1, T2> OfAction<T1, T2>() =>
+        (_, _) => throw new InvalidOperationException("Action should not be invoked.");
+
+    public static Func<T, CancellationToken, ValueTask> OfAsyncAction<T>() =>
+        (_, _) => throw new InvalidOperationException("Action should not be invoked.");
+
+    public static Func<T1, T2, CancellationToken, ValueTask> OfAsyncAction<T1, T2>() =>
+        (_, _, _) => throw new InvalidOperationException("Action should not be invoked.");
 }

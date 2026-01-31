@@ -148,6 +148,10 @@ with the following non-null reference or value in that sequence.
 Returns a sequence with each null reference or value in the source replaced
 with the previous non-null reference or value seen in that sequence.
 
+### ForEach
+
+Immediately executes the given action on each element in the source sequence.
+
 ### Fold
 
 Returns the result of applying a function to a sequence with 1 to 16 elements.
