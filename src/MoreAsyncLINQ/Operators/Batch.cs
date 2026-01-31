@@ -141,7 +141,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(Batch)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> BatchAwait<TSource, TResult>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         int size,
         Func<TSource[], ValueTask<TResult>> resultSelector)
     {

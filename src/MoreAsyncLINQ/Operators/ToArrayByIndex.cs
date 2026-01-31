@@ -348,15 +348,14 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(ToArrayByIndexAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TSource[]> ToArrayByIndexAwaitAsync<TSource>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<int>> indexSelector,
         CancellationToken cancellationToken = default)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (indexSelector is null) throw new ArgumentNullException(nameof(indexSelector));
 
-        return ToArrayByIndexAwaitAsync(
-            source,
+        return source.ToArrayByIndexAwaitAsync(
             indexSelector,
             static (element, _) => ValueTasks.FromResult(element),
             cancellationToken);
@@ -392,7 +391,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(ToArrayByIndexAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult[]> ToArrayByIndexAwaitAsync<TSource, TResult>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<int>> indexSelector,
         Func<TSource, ValueTask<TResult>> resultSelector,
         CancellationToken cancellationToken = default)
@@ -401,8 +400,7 @@ static partial class MoreAsyncEnumerable
         if (indexSelector is null) throw new ArgumentNullException(nameof(indexSelector));
         if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
 
-        return ToArrayByIndexAwaitAsync(
-            source,
+        return source.ToArrayByIndexAwaitAsync(
             indexSelector,
             (element, _) => resultSelector(element),
             cancellationToken);
@@ -438,7 +436,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(ToArrayByIndexAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult[]> ToArrayByIndexAwaitAsync<TSource, TResult>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<int>> indexSelector,
         Func<TSource, int, ValueTask<TResult>> resultSelector,
         CancellationToken cancellationToken = default)
@@ -476,9 +474,9 @@ static partial class MoreAsyncEnumerable
                 return Array.Empty<TResult>();
             }
 
-            return await ToArrayByIndexAwaitAsync(
-                    indexedElements.
-                        ToAsyncEnumerable(),
+            return await indexedElements.
+                ToAsyncEnumerable().
+                ToArrayByIndexAwaitAsync(
                     maxIndex + 1,
                     tuple => ValueTasks.FromResult(tuple.index),
                     tuple => resultSelector(tuple.element, tuple.index),
@@ -511,7 +509,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(ToArrayByIndexAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TSource[]> ToArrayByIndexAwaitAsync<TSource>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         int length,
         Func<TSource, ValueTask<int>> indexSelector,
         CancellationToken cancellationToken = default)
@@ -520,8 +518,7 @@ static partial class MoreAsyncEnumerable
         if (length < 0) throw new ArgumentOutOfRangeException(nameof(length));
         if (indexSelector is null) throw new ArgumentNullException(nameof(indexSelector));
 
-        return ToArrayByIndexAwaitAsync(
-            source,
+        return source.ToArrayByIndexAwaitAsync(
             length,
             indexSelector,
             static (element, _) => ValueTasks.FromResult(element),
@@ -558,7 +555,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(ToArrayByIndexAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult[]> ToArrayByIndexAwaitAsync<TSource, TResult>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         int length,
         Func<TSource, ValueTask<int>> indexSelector,
         Func<TSource, ValueTask<TResult>> resultSelector,
@@ -569,8 +566,7 @@ static partial class MoreAsyncEnumerable
         if (indexSelector is null) throw new ArgumentNullException(nameof(indexSelector));
         if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
 
-        return ToArrayByIndexAwaitAsync(
-            source,
+        return source.ToArrayByIndexAwaitAsync(
             length,
             indexSelector,
             (element, _) => resultSelector(element),
@@ -607,7 +603,7 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(ToArrayByIndexAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult[]> ToArrayByIndexAwaitAsync<TSource, TResult>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         int length,
         Func<TSource, ValueTask<int>> indexSelector,
         Func<TSource, int, ValueTask<TResult>> resultSelector,

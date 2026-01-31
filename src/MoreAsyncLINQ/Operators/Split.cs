@@ -346,12 +346,12 @@ static partial class MoreAsyncEnumerable
     /// <returns>A sequence of splits of elements.</returns>
     [Obsolete($"Use an overload of {nameof(Split)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<IAsyncEnumerable<TSource>> SplitAwait<TSource>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         TSource separator)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
 
-        return SplitAwait(source, separator, int.MaxValue);
+        return source.SplitAwait(separator, int.MaxValue);
     }
 
     /// <summary>
@@ -364,14 +364,14 @@ static partial class MoreAsyncEnumerable
     /// <returns>A sequence of splits of elements.</returns>
     [Obsolete($"Use an overload of {nameof(Split)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<IAsyncEnumerable<TSource>> SplitAwait<TSource>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         TSource separator,
         int count)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (count <= 0) throw new ArgumentOutOfRangeException(nameof(count));
 
-        return SplitAwait(source, separator, count, ValueTasks.FromResult);
+        return source.SplitAwait(separator, count, ValueTasks.FromResult);
     }
 
     /// <summary>
@@ -389,14 +389,14 @@ static partial class MoreAsyncEnumerable
     /// </returns>
     [Obsolete($"Use an overload of {nameof(Split)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> SplitAwait<TSource, TResult>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         TSource separator,
         Func<IAsyncEnumerable<TSource>, ValueTask<TResult>> resultSelector)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
 
-        return SplitAwait(source, separator, int.MaxValue, resultSelector);
+        return source.SplitAwait(separator, int.MaxValue, resultSelector);
     }
 
     /// <summary>
@@ -415,7 +415,7 @@ static partial class MoreAsyncEnumerable
     /// </returns>
     [Obsolete($"Use an overload of {nameof(Split)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> SplitAwait<TSource, TResult>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         TSource separator,
         int count,
         Func<IAsyncEnumerable<TSource>, ValueTask<TResult>> resultSelector)
@@ -424,7 +424,7 @@ static partial class MoreAsyncEnumerable
         if (count <= 0) throw new ArgumentOutOfRangeException(nameof(count));
         if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
 
-        return SplitAwait(source, separator, comparer: null, count, resultSelector);
+        return source.SplitAwait(separator, comparer: null, count, resultSelector);
     }
 
     /// <summary>
@@ -439,13 +439,13 @@ static partial class MoreAsyncEnumerable
     /// <returns>A sequence of splits of elements.</returns>
     [Obsolete($"Use an overload of {nameof(Split)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<IAsyncEnumerable<TSource>> SplitAwait<TSource>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         TSource separator,
         IEqualityComparer<TSource>? comparer)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
 
-        return SplitAwait(source, separator, comparer, int.MaxValue);
+        return source.SplitAwait(separator, comparer, int.MaxValue);
     }
 
     /// <summary>
@@ -462,7 +462,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>A sequence of splits of elements.</returns>
     [Obsolete($"Use an overload of {nameof(Split)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<IAsyncEnumerable<TSource>> SplitAwait<TSource>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         TSource separator,
         IEqualityComparer<TSource>? comparer,
         int count)
@@ -470,7 +470,7 @@ static partial class MoreAsyncEnumerable
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (count <= 0) throw new ArgumentOutOfRangeException(nameof(count));
 
-        return SplitAwait(source, separator, comparer, count, ValueTasks.FromResult);
+        return source.SplitAwait(separator, comparer, count, ValueTasks.FromResult);
     }
 
     /// <summary>
@@ -491,7 +491,7 @@ static partial class MoreAsyncEnumerable
     /// </returns>
     [Obsolete($"Use an overload of {nameof(Split)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> SplitAwait<TSource, TResult>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         TSource separator,
         IEqualityComparer<TSource>? comparer,
         Func<IAsyncEnumerable<TSource>, ValueTask<TResult>> resultSelector)
@@ -500,7 +500,7 @@ static partial class MoreAsyncEnumerable
         if (comparer is null) throw new ArgumentNullException(nameof(comparer));
         if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
 
-        return SplitAwait(source, separator, comparer, int.MaxValue, resultSelector);
+        return source.SplitAwait(separator, comparer, int.MaxValue, resultSelector);
     }
 
     /// <summary>
@@ -522,7 +522,7 @@ static partial class MoreAsyncEnumerable
     /// </returns>
     [Obsolete($"Use an overload of {nameof(Split)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> SplitAwait<TSource, TResult>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         TSource separator,
         IEqualityComparer<TSource>? comparer,
         int count,
@@ -533,8 +533,7 @@ static partial class MoreAsyncEnumerable
         if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
 
         comparer ??= EqualityComparer<TSource>.Default;
-        return SplitAwait(
-            source,
+        return source.SplitAwait(
             element => ValueTasks.FromResult(comparer.Equals(element, separator)),
             count,
             resultSelector);
@@ -551,13 +550,13 @@ static partial class MoreAsyncEnumerable
     /// <returns>A sequence of splits of elements.</returns>
     [Obsolete($"Use an overload of {nameof(Split)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<IAsyncEnumerable<TSource>> SplitAwait<TSource>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<bool>> separatorFunc)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (separatorFunc is null) throw new ArgumentNullException(nameof(separatorFunc));
 
-        return SplitAwait(source, separatorFunc, int.MaxValue);
+        return source.SplitAwait(separatorFunc, int.MaxValue);
     }
 
     /// <summary>
@@ -572,7 +571,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>A sequence of splits of elements.</returns>
     [Obsolete($"Use an overload of {nameof(Split)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<IAsyncEnumerable<TSource>> SplitAwait<TSource>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<bool>> separatorFunc,
         int count)
     {
@@ -580,7 +579,7 @@ static partial class MoreAsyncEnumerable
         if (separatorFunc is null) throw new ArgumentNullException(nameof(separatorFunc));
         if (count <= 0) throw new ArgumentOutOfRangeException(nameof(count));
 
-        return SplitAwait(source, separatorFunc, count, ValueTasks.FromResult);
+        return source.SplitAwait(separatorFunc, count, ValueTasks.FromResult);
     }
 
     /// <summary>
@@ -599,7 +598,7 @@ static partial class MoreAsyncEnumerable
     /// </returns>
     [Obsolete($"Use an overload of {nameof(Split)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> SplitAwait<TSource, TResult>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<bool>> separatorFunc,
         Func<IAsyncEnumerable<TSource>, ValueTask<TResult>> resultSelector)
     {
@@ -607,7 +606,7 @@ static partial class MoreAsyncEnumerable
         if (separatorFunc is null) throw new ArgumentNullException(nameof(separatorFunc));
         if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
 
-        return SplitAwait(source, separatorFunc, int.MaxValue, resultSelector);
+        return source.SplitAwait(separatorFunc, int.MaxValue, resultSelector);
     }
 
     /// <summary>
@@ -628,7 +627,7 @@ static partial class MoreAsyncEnumerable
     /// </returns>
     [Obsolete($"Use an overload of {nameof(Split)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> SplitAwait<TSource, TResult>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<bool>> separatorFunc,
         int count,
         Func<IAsyncEnumerable<TSource>, ValueTask<TResult>> resultSelector)

@@ -65,14 +65,14 @@ static partial class MoreAsyncEnumerable
     /// <returns>An ordered copy of the source sequence</returns>
     [Obsolete($"Use an overload of {nameof(ThenBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IOrderedAsyncEnumerable<TSource> ThenByAwait<TSource, TKey>(
-        IOrderedAsyncEnumerable<TSource> source,
+        this IOrderedAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TKey>> keySelector,
         OrderByDirection direction)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (keySelector is null) throw new ArgumentNullException(nameof(keySelector));
 
-        return ThenByAwait(source, keySelector, comparer: null, direction);
+        return source.ThenByAwait(keySelector, comparer: null, direction);
     }
 
     /// <summary>
@@ -87,7 +87,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>An ordered copy of the source sequence</returns>
     [Obsolete($"Use an overload of {nameof(ThenBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IOrderedAsyncEnumerable<TSource> ThenByAwait<TSource, TKey>(
-        IOrderedAsyncEnumerable<TSource> source,
+        this IOrderedAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TKey>> keySelector,
         IComparer<TKey>? comparer,
         OrderByDirection direction)

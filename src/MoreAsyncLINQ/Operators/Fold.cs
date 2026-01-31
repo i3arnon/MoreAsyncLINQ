@@ -754,7 +754,7 @@ static partial class MoreAsyncEnumerable
     /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 1 element</exception>
     [Obsolete($"Use an overload of {nameof(FoldAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TResult>> folder,
         CancellationToken cancellationToken = default)
     {
@@ -792,7 +792,7 @@ static partial class MoreAsyncEnumerable
     /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 2 elements</exception>
     [Obsolete($"Use an overload of {nameof(FoldAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, TSource, ValueTask<TResult>> folder,
         CancellationToken cancellationToken = default)
     {
@@ -832,7 +832,7 @@ static partial class MoreAsyncEnumerable
     /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 3 elements</exception>
     [Obsolete($"Use an overload of {nameof(FoldAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, TSource, TSource, ValueTask<TResult>> folder,
         CancellationToken cancellationToken = default)
     {
@@ -873,7 +873,7 @@ static partial class MoreAsyncEnumerable
     /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 4 elements</exception>
     [Obsolete($"Use an overload of {nameof(FoldAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, TSource, TSource, TSource, ValueTask<TResult>> folder,
         CancellationToken cancellationToken = default)
     {
@@ -915,7 +915,7 @@ static partial class MoreAsyncEnumerable
     /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 5 elements</exception>
     [Obsolete($"Use an overload of {nameof(FoldAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, TSource, TSource, TSource, TSource, ValueTask<TResult>> folder,
         CancellationToken cancellationToken = default)
     {
@@ -958,7 +958,7 @@ static partial class MoreAsyncEnumerable
     /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 6 elements</exception>
     [Obsolete($"Use an overload of {nameof(FoldAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, TSource, TSource, TSource, TSource, TSource, ValueTask<TResult>> folder,
         CancellationToken cancellationToken = default)
     {
@@ -1002,7 +1002,7 @@ static partial class MoreAsyncEnumerable
     /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 7 elements</exception>
     [Obsolete($"Use an overload of {nameof(FoldAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, ValueTask<TResult>> folder,
         CancellationToken cancellationToken = default)
     {
@@ -1047,7 +1047,7 @@ static partial class MoreAsyncEnumerable
     /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 8 elements</exception>
     [Obsolete($"Use an overload of {nameof(FoldAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, ValueTask<TResult>> folder,
         CancellationToken cancellationToken = default)
     {
@@ -1093,7 +1093,7 @@ static partial class MoreAsyncEnumerable
     /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 9 elements</exception>
     [Obsolete($"Use an overload of {nameof(FoldAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, ValueTask<TResult>> folder,
         CancellationToken cancellationToken = default)
     {
@@ -1140,7 +1140,7 @@ static partial class MoreAsyncEnumerable
     /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 10 elements</exception>
     [Obsolete($"Use an overload of {nameof(FoldAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, ValueTask<TResult>> folder,
         CancellationToken cancellationToken = default)
     {
@@ -1188,7 +1188,7 @@ static partial class MoreAsyncEnumerable
     /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 11 elements</exception>
     [Obsolete($"Use an overload of {nameof(FoldAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, ValueTask<TResult>> folder,
         CancellationToken cancellationToken = default)
     {
@@ -1237,7 +1237,7 @@ static partial class MoreAsyncEnumerable
     /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 12 elements</exception>
     [Obsolete($"Use an overload of {nameof(FoldAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, ValueTask<TResult>> folder,
         CancellationToken cancellationToken = default)
     {
@@ -1287,7 +1287,7 @@ static partial class MoreAsyncEnumerable
     /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 13 elements</exception>
     [Obsolete($"Use an overload of {nameof(FoldAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, ValueTask<TResult>> folder,
         CancellationToken cancellationToken = default)
     {
@@ -1338,7 +1338,7 @@ static partial class MoreAsyncEnumerable
     /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 14 elements</exception>
     [Obsolete($"Use an overload of {nameof(FoldAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, ValueTask<TResult>> folder,
         CancellationToken cancellationToken = default)
     {
@@ -1390,7 +1390,7 @@ static partial class MoreAsyncEnumerable
     /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 15 elements</exception>
     [Obsolete($"Use an overload of {nameof(FoldAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, ValueTask<TResult>> folder,
         CancellationToken cancellationToken = default)
     {
@@ -1443,7 +1443,7 @@ static partial class MoreAsyncEnumerable
     /// <exception cref="InvalidOperationException"><paramref name="source"/> does not contain exactly 16 elements</exception>
     [Obsolete($"Use an overload of {nameof(FoldAsync)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static ValueTask<TResult> FoldAwaitAsync<TSource, TResult>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, TSource, ValueTask<TResult>> folder,
         CancellationToken cancellationToken = default)
     {

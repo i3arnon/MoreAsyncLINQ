@@ -90,14 +90,14 @@ static partial class MoreAsyncEnumerable
     /// <returns>A sequence of position integers representing the ranks of the corresponding items in the sequence</returns>
     [Obsolete($"Use an overload of {nameof(RankBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<int> RankByAwait<TSource, TKey>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TKey>> keySelector)
         where TSource : notnull
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (keySelector is null) throw new ArgumentNullException(nameof(keySelector));
 
-        return RankByAwait(source, keySelector, comparer: null);
+        return source.RankByAwait(keySelector, comparer: null);
     }
 
     /// <summary>
@@ -111,7 +111,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>A sequence of position integers representing the ranks of the corresponding items in the sequence</returns>
     [Obsolete($"Use an overload of {nameof(RankBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<int> RankByAwait<TSource, TKey>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TKey>> keySelector,
         IComparer<TKey>? comparer)
         where TSource : notnull

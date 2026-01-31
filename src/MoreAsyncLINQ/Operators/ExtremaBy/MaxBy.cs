@@ -79,7 +79,7 @@ static partial class MoreAsyncEnumerable
     /// <exception cref="ArgumentNullException"><paramref name="source"/> or <paramref name="selector"/> is null</exception>
     [Obsolete($"Use an overload of {nameof(Maxima)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IExtremaAsyncEnumerable<TSource> MaxByAwait<TSource, TKey>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TKey>> selector)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
@@ -106,7 +106,7 @@ static partial class MoreAsyncEnumerable
     /// or <paramref name="comparer"/> is null</exception>
     [Obsolete($"Use an overload of {nameof(Maxima)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IExtremaAsyncEnumerable<TSource> MaxByAwait<TSource, TKey>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TKey>> selector,
         IComparer<TKey>? comparer)
     {

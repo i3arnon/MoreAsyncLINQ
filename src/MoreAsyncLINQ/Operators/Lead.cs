@@ -121,7 +121,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>A sequence produced by projecting each element of the sequence with its lead pairing</returns>
     [Obsolete($"Use an overload of {nameof(Lead)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> LeadAwait<TSource, TResult>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         int offset,
         Func<TSource, TSource?, ValueTask<TResult>> resultSelector)
     {
@@ -129,9 +129,9 @@ static partial class MoreAsyncEnumerable
         if (offset <= 0) throw new ArgumentOutOfRangeException(nameof(offset));
         if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
 
-        return LeadAwait(
-                source.
-                    Select(Option.Some),
+        return source.
+            Select(Option.Some).
+            LeadAwait(
                 offset,
                 defaultLeadValue: default,
                 (elementOption, leadOption) => resultSelector(elementOption.Value, leadOption.OrDefault()));
@@ -152,7 +152,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>A sequence produced by projecting each element of the sequence with its lead pairing</returns>
     [Obsolete($"Use an overload of {nameof(Lead)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> LeadAwait<TSource, TResult>(
-        IAsyncEnumerable<TSource> source,
+        this IAsyncEnumerable<TSource> source,
         int offset,
         TSource defaultLeadValue,
         Func<TSource, TSource, ValueTask<TResult>> resultSelector)
