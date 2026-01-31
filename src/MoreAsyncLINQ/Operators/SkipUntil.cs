@@ -103,7 +103,7 @@ static partial class MoreAsyncEnumerable
     /// <exception cref="ArgumentNullException"><paramref name="source"/> or <paramref name="predicate"/> is null</exception>
     [Obsolete($"Use an overload of {nameof(SkipUntil)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> SkipUntilAwait<TSource>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<bool>> predicate)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));

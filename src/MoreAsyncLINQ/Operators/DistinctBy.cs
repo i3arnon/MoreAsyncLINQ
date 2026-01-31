@@ -48,7 +48,7 @@ static partial class MoreAsyncEnumerable
     /// <typeparam name="TKey">Type of the projected element</typeparam>
     /// <param name="source">Source sequence</param>
     /// <param name="keySelector">Projection for determining "distinctness"</param>
-    /// <param name="comparer">The equality comparer to use to determine whether or not keys are equal.
+    /// <param name="comparer">The equality comparer to use to determine whether keys are equal.
     /// If null, the default equality comparer for <c>TSource</c> is used.</param>
     /// <returns>A sequence consisting of distinct elements from the source sequence,
     /// comparing them by the specified key projection.</returns>
@@ -98,7 +98,7 @@ static partial class MoreAsyncEnumerable
     /// comparing them by the specified key projection.</returns>
     [Obsolete($"Use an overload of {nameof(DistinctBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> DistinctByAwait<TSource, TKey>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TKey>> keySelector)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
@@ -120,13 +120,13 @@ static partial class MoreAsyncEnumerable
     /// <typeparam name="TKey">Type of the projected element</typeparam>
     /// <param name="source">Source sequence</param>
     /// <param name="keySelector">Projection for determining "distinctness"</param>
-    /// <param name="comparer">The equality comparer to use to determine whether or not keys are equal.
+    /// <param name="comparer">The equality comparer to use to determine whether keys are equal.
     /// If null, the default equality comparer for <c>TSource</c> is used.</param>
     /// <returns>A sequence consisting of distinct elements from the source sequence,
     /// comparing them by the specified key projection.</returns>
     [Obsolete($"Use an overload of {nameof(DistinctBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TSource> DistinctByAwait<TSource, TKey>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TKey>> keySelector,
         IEqualityComparer<TKey>? comparer)
     {

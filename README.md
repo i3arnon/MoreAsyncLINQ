@@ -35,12 +35,12 @@ Asserts that a source sequence contains a given count of elements.
 
 ### AtLeast
 
-Determines whether or not the number of elements in the sequence is greater
+Determines whether the number of elements in the sequence is greater
 than or equal to the given integer.
 
 ### AtMost
 
-Determines whether or not the number of elements in the sequence is lesser
+Determines whether the number of elements in the sequence is lesser
 than or equal to the given integer.
 
 ### Backsert
@@ -79,7 +79,7 @@ and doesn't store any data during execution
 
 ### CountBetween
 
-Determines whether or not the number of elements in the sequence is between an
+Determines whether the number of elements in the sequence is between an
 inclusive range of minimum and maximum integers.
 
 ### CountBy
@@ -121,7 +121,7 @@ Returns a sequence containing the values resulting from invoking (in order) each
 
 ### Exactly
 
-Determines whether or not the number of elements in the sequence is equals
+Determines whether the number of elements in the sequence is equals
 to the given integer.
 
 ### ExceptBy

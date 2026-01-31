@@ -44,7 +44,7 @@ static partial class MoreAsyncEnumerable
     /// <param name="keySelector">
     /// Function that projects the key given an element in the source sequence.</param>
     /// <param name="comparer">
-    /// The equality comparer to use to determine whether or not keys are
+    /// The equality comparer to use to determine whether keys are
     /// equal. If <c>null</c>, the default equality comparer for
     /// <typeparamref name="TSource"/> is used.</param>
     /// <returns>
@@ -82,13 +82,13 @@ static partial class MoreAsyncEnumerable
     /// </returns>
     [Obsolete($"Use an overload of {nameof(IndexBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<(int Index, TSource Element)> IndexByAwait<TSource, TKey>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TKey>> keySelector)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (keySelector is null) throw new ArgumentNullException(nameof(keySelector));
 
-        return source.IndexByAwait(keySelector, comparer: null);
+        return IndexByAwait(source, keySelector, comparer: null);
     }
 
     /// <summary>
@@ -104,7 +104,7 @@ static partial class MoreAsyncEnumerable
     /// <param name="keySelector">
     /// Function that projects the key given an element in the source sequence.</param>
     /// <param name="comparer">
-    /// The equality comparer to use to determine whether or not keys are
+    /// The equality comparer to use to determine whether keys are
     /// equal. If <c>null</c>, the default equality comparer for
     /// <typeparamref name="TSource"/> is used.</param>
     /// <returns>
@@ -112,15 +112,15 @@ static partial class MoreAsyncEnumerable
     /// </returns>
     [Obsolete($"Use an overload of {nameof(IndexBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<(int Index, TSource Element)> IndexByAwait<TSource, TKey>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TKey>> keySelector,
         IEqualityComparer<TKey>? comparer)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (keySelector is null) throw new ArgumentNullException(nameof(keySelector));
-            
-        return source.
-            ScanByAwait<TSource, TKey, (int index, TSource element)>(
+
+        return ScanByAwait<TSource, TKey, (int index, TSource element)>(
+                source,
                 keySelector,
                 _ => ValueTasks.FromResult((-1, default(TSource)!)),
                 (state, _, element) => ValueTasks.FromResult((state.index + 1, element)),

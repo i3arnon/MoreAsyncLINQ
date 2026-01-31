@@ -60,13 +60,14 @@ static partial class MoreAsyncEnumerable
     /// </remarks>
     [Obsolete($"Use an overload of {nameof(TagFirstLast)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<TResult> TagFirstLastAwait<TSource, TResult>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         Func<TSource, bool, bool, ValueTask<TResult>> resultSelector)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
 
-        return source.Index().CountDownAwait(
+        return CountDownAwait(
+            source.Index(),
             count: 1,
             (indexedElement, countDownCount) =>
                 resultSelector(

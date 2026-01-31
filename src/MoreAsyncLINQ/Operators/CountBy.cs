@@ -110,13 +110,13 @@ static partial class MoreAsyncEnumerable
     /// <returns>A sequence of unique keys and their number of occurrences in the original sequence.</returns>
     [Obsolete($"Use an overload of {nameof(CountBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<(TKey Key, int Count)> CountByAwait<TSource, TKey>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TKey>> keySelector)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (keySelector is null) throw new ArgumentNullException(nameof(keySelector));
 
-        return source.CountByAwait(keySelector, comparer: null);
+        return CountByAwait(source, keySelector, comparer: null);
     }
 
     /// <summary>
@@ -133,7 +133,7 @@ static partial class MoreAsyncEnumerable
     /// <returns>A sequence of unique keys and their number of occurrences in the original sequence.</returns>
     [Obsolete($"Use an overload of {nameof(CountBy)} that accepts an async delegate with a {nameof(CancellationToken)} parameter.")]
     public static IAsyncEnumerable<(TKey Key, int Count)> CountByAwait<TSource, TKey>(
-        this IAsyncEnumerable<TSource> source,
+        IAsyncEnumerable<TSource> source,
         Func<TSource, ValueTask<TKey>> keySelector,
         IEqualityComparer<TKey>? comparer)
     {
