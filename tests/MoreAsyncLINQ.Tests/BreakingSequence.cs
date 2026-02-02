@@ -6,3 +6,4 @@ public sealed class BreakingSequence<T> : IAsyncEnumerable<T>
         throw new InvalidOperationException("Sequence should not be enumerated.");
 }
 
+
