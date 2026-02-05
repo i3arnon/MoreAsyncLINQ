@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -77,26 +78,33 @@ static partial class MoreAsyncEnumerable
                 yield return enumerator.Current;
             }
 
-            var buffer = new TSource[bufferSize];
-            var length = 0;
-            for (; length < bufferSize && await MoveNextAsync(); length++)
+            var buffer = ArrayPool<TSource>.Shared.Rent(bufferSize);
+            try
             {
-                buffer[length] = enumerator.Current;
-            }
+                var length = 0;
+                for (; length < bufferSize && await MoveNextAsync(); length++)
+                {
+                    buffer[length] = enumerator.Current;
+                }
 
-            for (var index = 0; index < bufferYieldIndex && await MoveNextAsync(); index++)
-            {
-                yield return enumerator.Current;
-            }
+                for (var index = 0; index < bufferYieldIndex && await MoveNextAsync(); index++)
+                {
+                    yield return enumerator.Current;
+                }
 
-            for (var index = 0; index < length; index++)
-            {
-                yield return buffer[index];
-            }
+                for (var index = 0; index < length; index++)
+                {
+                    yield return buffer[index];
+                }
 
-            while (await MoveNextAsync())
+                while (await MoveNextAsync())
+                {
+                    yield return enumerator.Current;
+                }
+            }
+            finally
             {
-                yield return enumerator.Current;
+                ArrayPool<TSource>.Shared.Return(buffer, clearArray: true);
             }
 
             yield break;

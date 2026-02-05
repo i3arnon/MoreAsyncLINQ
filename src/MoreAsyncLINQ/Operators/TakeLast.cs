@@ -4,7 +4,6 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using static System.Linq.AsyncEnumerable;
-using static System.Math;
 
 namespace MoreAsyncLINQ;
 

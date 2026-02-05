@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Buffers;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -112,40 +112,47 @@ static partial class MoreAsyncEnumerable
         Func<int, TSource>? paddingSelector,
         [EnumeratorCancellation] CancellationToken cancellationToken)
     {
-        var window = new TSource[width];
-        var count = 0;
-        await using (var enumerator = source.WithCancellation(cancellationToken).GetAsyncEnumerator())
+        var window = ArrayPool<TSource>.Shared.Rent(width);
+        try
         {
-            for (; count < width && await enumerator.MoveNextAsync(); count++)
+            var count = 0;
+            await using (var enumerator = source.WithCancellation(cancellationToken).GetAsyncEnumerator())
             {
-                window[count] = enumerator.Current;
-            }
-
-            if (count == width)
-            {
-                for (var index = 0; index < count; index++)
+                for (; count < width && await enumerator.MoveNextAsync(); count++)
                 {
-                    yield return window[index];
+                    window[count] = enumerator.Current;
                 }
 
-                while (await enumerator.MoveNextAsync())
+                if (count == width)
                 {
-                    yield return enumerator.Current;
-                }
+                    for (var index = 0; index < count; index++)
+                    {
+                        yield return window[index];
+                    }
 
-                yield break;
+                    while (await enumerator.MoveNextAsync())
+                    {
+                        yield return enumerator.Current;
+                    }
+
+                    yield break;
+                }
+            }
+
+            var paddingLength = width - count;
+            for (var index = 0; index < paddingLength; index++)
+            {
+                yield return paddingSelector is null ? padding : paddingSelector(index);
+            }
+
+            for (var index = 0; index < count; index++)
+            {
+                yield return window[index];
             }
         }
-
-        var paddingLength = width - count;
-        for (var index = 0; index < paddingLength; index++)
+        finally
         {
-            yield return paddingSelector is null ? padding : paddingSelector(index);
-        }
-
-        for (var index = 0; index < count; index++)
-        {
-            yield return window[index];
+            ArrayPool<TSource>.Shared.Return(window, clearArray: true);
         }
     }
 
@@ -189,40 +196,47 @@ static partial class MoreAsyncEnumerable
         Func<int, CancellationToken, ValueTask<TSource>> paddingSelector,
         [EnumeratorCancellation] CancellationToken cancellationToken)
     {
-        var window = new TSource[width];
-        var count = 0;
-        await using (var enumerator = source.WithCancellation(cancellationToken).GetAsyncEnumerator())
+        var window = ArrayPool<TSource>.Shared.Rent(width);
+        try
         {
-            for (; count < width && await enumerator.MoveNextAsync(); count++)
+            var count = 0;
+            await using (var enumerator = source.WithCancellation(cancellationToken).GetAsyncEnumerator())
             {
-                window[count] = enumerator.Current;
-            }
-
-            if (count == width)
-            {
-                for (var index = 0; index < count; index++)
+                for (; count < width && await enumerator.MoveNextAsync(); count++)
                 {
-                    yield return window[index];
+                    window[count] = enumerator.Current;
                 }
 
-                while (await enumerator.MoveNextAsync())
+                if (count == width)
                 {
-                    yield return enumerator.Current;
-                }
+                    for (var index = 0; index < count; index++)
+                    {
+                        yield return window[index];
+                    }
 
-                yield break;
+                    while (await enumerator.MoveNextAsync())
+                    {
+                        yield return enumerator.Current;
+                    }
+
+                    yield break;
+                }
+            }
+
+            var paddingLength = width - count;
+            for (var index = 0; index < paddingLength; index++)
+            {
+                yield return await paddingSelector(index, cancellationToken);
+            }
+
+            for (var index = 0; index < count; index++)
+            {
+                yield return window[index];
             }
         }
-
-        var paddingLength = width - count;
-        for (var index = 0; index < paddingLength; index++)
+        finally
         {
-            yield return await paddingSelector(index, cancellationToken);
-        }
-
-        for (var index = 0; index < count; index++)
-        {
-            yield return window[index];
+            ArrayPool<TSource>.Shared.Return(window, clearArray: true);
         }
     }
 }
